@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.wraper{
+    min-height: 100vh;
+    width: 70%;
+    border: 3px solid;
+    position: relative;
+}
+.stroies{
+    height: 100px;
+    background-color: antiquewhite;
+    display: flex;
+    padding: 5px;
+}
+.story{
+    width: 100px;
+    aspect-ratio: 1;
+    background-color: brown;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 15px;
+}
+.post_container{
+    width: 100%;
+    min-height: 90%;
+    background-color: rgb(105, 152, 152);
+    position: relative;
+}
+.post{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+.post img {
+    max-width: 600px;
+}
+.post .caption {
+    max-width: 70%;
+}
+.reactions{
+    height: 50px;
+    width: 70%;
+    background-color: bisque;
+    display: flex;
+    align-items: center;
+}
+.react{
+    width: 70px;
+    height: 70%;
+    background-color: coral;
+    cursor: pointer;
+    margin: auto 30px;
+}
+.add_post {
+    min-width: 100px;
+    min-height: 30px;
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+}
+.add_post button {
+    width: 60px;
+    height: 25px;
+    margin: 5px;
+    align-self: center;
+}
+.new_post_inputes{
+    width: 400px;
+    aspect-ratio: 1;
+    position: relative;
+    background-color: rgb(153, 185, 175);
+}
+.new_post_inputes{
+    display: none;
+}
+.new_post_inputes form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
+}
+.new_post_inputes h4{
+    color: azure;
+    justify-self: left;
+    margin: 10px;
+}
+.new_post_inputes textarea{
+    min-height: 70px;
+    min-width: 330px;
+    margin: 0 10px;
+}
+#submit{
+    width: 70px;
+    height: 25px;
+    position: absolute;
+    right: 100px;
+    bottom: 80px;
+}
+.notifications{
+    background-color: aquamarine;
+    min-width: 300px;
+    height: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-30px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 5s ease;
+}

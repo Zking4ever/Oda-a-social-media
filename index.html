@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Increadiable future</title>
+    <style>
+        .wraper{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            width: fit-content;
+            min-height: 300px;
+        }
+        .one{
+            display: none;
+        }
+        form{
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        #log_in{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items:center;
+            gap: 15px;
+            border-radius: 10px;
+        }
+        input{
+            width: 600px;
+            height: 55px;
+            border-radius: 10px;
+        }
+        #submit{
+            width: 80px;
+            height: 35px;
+        }
+        #sign_up_btn{
+            width: 120px;
+        }
+        #password_lable{
+            transform: translateY(60px) translateX(-230px);
+            font-size: 26px;
+            cursor: pointer;
+        }
+        #email_lable{
+            transform: translateY(60px) translateX(-250px);
+            font-size: 26px;
+            cursor: pointer;
+        }
+        #sign_up{
+            display: block;
+            position: relative;
+        }
+        #sign_up input{
+            margin: 10px 0px;
+            height: 30px;
+        }
+        #sign_up label{
+            margin: 10px;
+            cursor: pointer;
+        }
+        .switch_pages{
+            text-align: center;
+        }
+        #sign_up h2{
+            left: 50%;
+            transform: translateX(-50%) translateY(-60px);
+            position: absolute;
+        }
+        button{
+            border: none;
+            background-color: transparent;
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="wraper">
+        <div class="container one">
+            <form action="sign_in_up.php" method="get" id="log_in">
+                    <h2>Log in</h2>
+                    <label for="email" id="email_lable">Email</label>
+                    <input type="email" name="email" id="email" required >
+                    <label for="password"  id="password_lable">Password</label>
+                    <input type="password" name="password" id="password" required>
+                    <input type="submit" id="submit">
+                    <br><br><br>
+                    <div class="switch_pages"><span>Don't have account? </span><button id="to_sign_up">Sign up</button></div>
+            </form>
+        </div>
+        <div class="container two">
+            <form action="sign_in_up.php" method="post" id="sign_up">
+                <h2>Sign Up</h2>
+                <label for="fname">First Name</label><br>
+                <input type="text" name="fname" id="fname" required ><br>
+                <label for="lname">Last Name</label><br>
+                <input type="text" name="lname" id="lname" required ><br>
+                <label for="email2">Email</label><br>
+                <input type="email" name="email" id="email2" required ><br>
+                <label for="password2">Password</label><br>
+                <input type="password" name="password" id="password2" required><br>
+                <input type="submit" id="sign_up_btn" value="Sign Up">
+                <br><br><br>
+                <div class="switch_pages"><span>Already have an account? </span><button id="to_log_in">Log in</button></div>
+            </form>
+
+        </div>
+    </div>
+    
+</body>
+<script src="assets/switch script.js"></script>
+</html>
