@@ -26,9 +26,11 @@ if(isset($_FILES) && !empty($_FILES)){
 if($caption!= '' || $destination != ''){
     $postid = createRand(25);
     $query = "INSERT into posts (postid,sender,caption,likes,source) values ('$postid','$sender','$caption','$like','$destination')";
-    $conn->query($query);
+    $post = $conn->query($query);
 
-    $info = "Posted";
+    if($post==true){
+       $info = "Posted";
+    }
 }
 else{
     $info = "No input detected";

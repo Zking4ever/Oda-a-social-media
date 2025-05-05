@@ -6,6 +6,7 @@ body{
     display: flex;
     width: 100%;
     justify-content: center;
+    background-color: black;
 }
 .wraper{
     min-height: 100vh;
@@ -42,31 +43,54 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 120px;
 }
 .loaded_post{
     width: 80%;
     position: relative;
 }
 .post{
-    max-width: 100%;
-    width: fit-content;
+    width: 600px;;
     height: fit-content;
-    margin-top: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(11, 12, 12);
-    border-radius: 50px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    border-top: 2px solid rgb(128, 124, 124);
+}
+.sender{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.sender img{
+    height: 30px;
+    width:30px;
+    border-radius: 50%;
+}
+.sender .detail{
+    width: 80%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    color: azure;
+    position: relative;
+}
+
+.img_container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(135, 128, 128, 0.705);
 }
 .post img {
     max-height: 700px;
-    max-width: 500px;
+    max-width: 600px;
     padding: 6px;
-    margin: 50px 10px;
 }
 .post .caption {
     height: 10%;
@@ -76,7 +100,7 @@ body{
 }
 .reactions{
     height: 50px;
-    width: 90%;
+    width: 100%;
     display: flex;
     align-items: center;
 }
@@ -106,6 +130,7 @@ body{
     aspect-ratio: 1;
     position: relative;
     background-color: rgb(153, 185, 175);
+    z-index: 100;
 }
 .new_post_inputes{
     display: none;

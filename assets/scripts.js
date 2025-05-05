@@ -137,7 +137,6 @@ async function handleResult(result,type){
 
 }
 
-
 function delay(ms){
     return new Promise(response => setTimeout(response,ms));
 }
