@@ -68,7 +68,7 @@ if($result->num_rows>0){
 $queryForStory = "SELECT * from stories";
 $stories = $conn->query($queryForStory);
 
-$stories = "";
+$loadedStories = "";
 if($stories->num_rows>0){
     while($story= $stories->fetch_assoc()){
         
@@ -78,11 +78,23 @@ if($stories->num_rows>0){
         $senders = $conn->query($queryForSenders);
 
         if($senders->num_rows>0){
-            
+
+            while($sender = $senders->fetch_assoc()){
+
+                if($sender['userid']==$story['sender']){
+                
+            $loadedStories .= "<div class='story'>
+                            <img src='backend/".$story['source']."'>
+                            <span>".$sender['firstname']."</span>
+                            </div>";
+                }
+                
+            }
+
         }
 
     }
-    $data['stories'] =$stories;
+    $data['stories'] = $loadedStories;
 }
 echo json_encode($data) ;
 

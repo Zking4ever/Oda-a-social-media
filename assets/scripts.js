@@ -88,6 +88,7 @@ logout_btn.onclick = function(){
 //to put userinfo
 var username = document.getElementById('username');
 var profile_image = document.getElementById('profile_image');
+var stroies = document.getElementsByClassName('stroies')[0];
 
 async function handleResult(result,type){
     switch(type){
@@ -97,6 +98,8 @@ async function handleResult(result,type){
             username.innerHTML = response['userinfo']['firstname'] + " " + response['userinfo']['lastname'];
             profile_image.src = "backend/"+ response['userinfo']['profile_source'];
 
+            //puting the stories
+            stroies.innerHTML += response['stories'];
             //puting the responded postes
             loaded_post.innerHTML = response['posts'];
             notifications.style.opacity ="0";
