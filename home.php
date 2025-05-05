@@ -11,7 +11,6 @@
         if($_SESSION['userid'] ==''){
             header("location: index.html");
         }
-        echo $_SESSION['userid'];
 ?>
 </head>
 <body>
