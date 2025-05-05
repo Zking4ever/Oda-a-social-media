@@ -1,9 +1,10 @@
 <?php
 require "conn.php";
+session_start();
 
 $caption = "";
 $destination = "";
-$sender = "unknown";
+$sender = $_SESSION['userid'];
 $like = 0;
 
 if(isset($_POST)){

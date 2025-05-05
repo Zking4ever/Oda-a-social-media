@@ -61,6 +61,7 @@
             </div>
             <div class="notifications"> <span>notifications</span></div>
         <div class="post">
+            <img src="backend/Profiles/ZIO09935.JPG" alt="">
             <span class="caption">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero at, animi corrupti quisquam assumenda temporibus similique voluptate nobis aperiam minima? Quia sequi distinctio atque, tempora iure at ut illo rem.</span>
             <div class="reactions"> 
                 <div class="react like"></div>

@@ -62,9 +62,27 @@ function change_profile(e){
         }
 
         myform.append('file',file);
+        myform.append('type','change_profile');
         ajax.open("POST","backend/change_profile.php");
         ajax.send(myform);
     }
+}
+
+//log out
+var logout_btn = document.getElementsByClassName("logout")[0];
+
+logout_btn.onclick = function(){
+        var myform = new FormData;
+        var ajax = new XMLHttpRequest;
+            ajax.onload = function(){
+                if(ajax.readyState==4){
+                    handleResult(ajax.response,"log out");
+                }
+            }
+            
+            myform.append('type','logout');
+            ajax.open("POST","backend/change_profile.php");
+            ajax.send(myform);
 }
 
 //to put userinfo
@@ -94,6 +112,20 @@ async function handleResult(result,type){
             notifications.style.opacity ="100";
             notifications.style.transform =" translateX(-50%) translateY(0px)";
             notifications.innerHTML = result;
+            
+            //refreshing the page everytime to see the changes
+            location.href = location.href;
+            break;
+        case "log out":
+            if(result=="loged out"){
+                notifications.style.opacity ="100";
+                notifications.style.transform =" translateX(-50%) translateY(0px)";
+                notifications.innerHTML = "Loging out...";
+                //then the refresh will take it out as the session is destroyed
+
+            //refreshing the page everytime to see the changes
+            location.href = location.href;
+            }
             break;
     }
 

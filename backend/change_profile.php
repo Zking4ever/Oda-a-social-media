@@ -3,26 +3,35 @@ require "conn.php";
 session_start();
 
 $userid = $_SESSION['userid'];
-$destination ="";
+$type = $_POST['type'];
 
-if(isset($_FILES) && !empty($_FILES)){
-    if($_FILES['file']['name'] != "" && $_FILES['file']['error'] == 0){
-        $folder = "Profiles/";
-        if(!file_exists($folder)){
-            mkdir($folder,0777,true);
+if($type=="change_profile"){
+            
+        $destination ="";
+
+        if(isset($_FILES) && !empty($_FILES)){
+            if($_FILES['file']['name'] != "" && $_FILES['file']['error'] == 0){
+                $folder = "Profiles/";
+                if(!file_exists($folder)){
+                    mkdir($folder,0777,true);
+                }
+                $destination = $folder. $_FILES['file']['name'];
+
+                move_uploaded_file($_FILES['file']['tmp_name'],$destination);
+            }
         }
-        $destination = $folder. $_FILES['file']['name'];
+        if($destination!=""){
 
-        move_uploaded_file($_FILES['file']['tmp_name'],$destination);
-    }
+            $query = "UPDATE users set profile_source = '$destination' where userid = '$userid'";
+            $update = $conn->query($query);
+            
+            if($update){
+                echo "Profile changed";
+            }
+        }
 }
-if($destination!=""){
-
-    $query = "UPDATE users set profile_source = '$destination' where userid = '$userid'";
-    $update = $conn->query($query);
-    
-    if($update){
-        echo "Profile changed";
-    }
+elseif($type=="logout"){
+    session_destroy();
+    echo "loged out";
 }
 ?>
