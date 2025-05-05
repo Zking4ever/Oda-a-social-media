@@ -127,6 +127,11 @@ async function handleResult(result,type){
             location.href = location.href;
             }
             break;
+        case "story":
+            notifications.style.opacity ="100";
+            notifications.style.transform =" translateX(-50%) translateY(0px)";
+            notifications.innerHTML = result;
+            break;
     }
 
 

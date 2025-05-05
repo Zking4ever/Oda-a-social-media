@@ -1,0 +1,111 @@
+.user_setting{
+    position: fixed;
+    height: 50px;
+    width: 66%;
+    z-index: 130;
+}
+.option_btn{
+    position: absolute;
+    top: 50%;
+    font-size: 40px;
+    transform: translateY(-70%);
+    right: 10px;
+    cursor: pointer;
+}
+.options{
+    width: 350px;
+    height: 250px;
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    background-color: azure;
+}
+.profile{
+    height: 80%;
+    text-align: center;
+    border: 3px solid rgb(118, 112, 112);
+}
+.profile_img{
+    height: 80%;
+    background-color: rgb(219, 210, 198);
+    position: relative;
+}
+.userdetail{
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+}
+.profile_img img{
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+.logout{
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: rgb(222, 208, 208);
+    background-color: rgb(179, 109, 91);
+    border: 3px solid white;
+    transition: all 2s ease;
+}
+.logout:hover{
+    color: rgb(248, 243, 243);
+    background-color: rgb(201, 52, 15);
+    border: 3px solid rgb(180, 8, 8);
+    cursor: pointer;
+}
+.close{
+    position: absolute;
+    right: 5px;
+    z-index: 40;
+    cursor: pointer;
+    color: red;
+}
+#change_profile_lable{
+    position: absolute;
+    right: 25%;
+    top: 70%;
+    cursor: pointer;
+}
+.manage_story{
+    width: 105%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 140;
+    backdrop-filter: blur(30px);
+}
+.preview{
+    position: fixed;
+    z-index: 150;
+}
+.preview input{
+    width: 80%;
+    aspect-ratio: 10;
+    border-radius: 9px;
+    border: none;
+    background-color: rgba(128, 128, 128, 0.417);
+    color: white;
+    padding: 0 5%;
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+}
+.preview button{
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    width: 10%;
+    aspect-ratio: 1.5;
+}
+.preview img{
+    max-width: 600px;
+}

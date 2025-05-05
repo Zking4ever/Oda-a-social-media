@@ -37,7 +37,7 @@ if($result->num_rows>0){
 
                     $post.="<div class='post'>
                         <div class='sender'>
-                            <img src='backend/Profiles/ZIO09935.JPG'>
+                            <img src='backend/".$sender['profile_source']."'>
                             <div class='detail'>
                                 <h3 style='position:absolute;transform: translateY(-7px);'>".$sender['firstname']." ".$sender['lastname']."</h3>
                                 <span style='font-size:12px;margin-left:7px;position:absolute;transform: translateY(10px);'>username</span>
@@ -61,6 +61,28 @@ if($result->num_rows>0){
             }
         }
         $data['posts']=$post;
+}
+
+
+#loading stories
+$queryForStory = "SELECT * from stories";
+$stories = $conn->query($queryForStory);
+
+$stories = "";
+if($stories->num_rows>0){
+    while($story= $stories->fetch_assoc()){
+        
+        #here another query to find out the sender
+        
+        $queryForSenders = "SELECT * from users";
+        $senders = $conn->query($queryForSenders);
+
+        if($senders->num_rows>0){
+            
+        }
+
+    }
+    $data['stories'] =$stories;
 }
 echo json_encode($data) ;
 

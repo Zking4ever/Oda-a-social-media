@@ -17,7 +17,7 @@ body{
 }
 .stroies{
     height: 100px;
-    max-width: 1333px;
+    max-width: 1330px;
     width: 70%;
     background-color: rgba(250, 235, 215, 0.377);
     display: flex;
@@ -108,16 +108,14 @@ body{
     width: 70px;
     height: 70%;
     cursor: pointer;
-    background-color: bisque;
     text-align: center;
 }
 .add_post {
-    min-width: 100px;
+    width: 100%;
     min-height: 30px;
-    position: absolute;
-    right: 0;
+    position: relative;
     display: flex;
-    flex-direction: column;
+    justify-content: end;
 }
 .add_post button {
     width: 60px;
@@ -128,7 +126,7 @@ body{
 .new_post_inputes{
     width: 400px;
     aspect-ratio: 1;
-    position: relative;
+    position: absolute;
     background-color: rgb(153, 185, 175);
     z-index: 100;
 }
