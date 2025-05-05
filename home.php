@@ -49,9 +49,6 @@
               </label>
              <input type="file" id="story_img" onchange="preveiw(event)" style="display:none"> 
         </div>
-        <div class="story"></div>
-        <div class="story">story</div>
-        <div class="story">story</div>
     </div>
     <div class="manage_story" style="display:none">
                  <div class="preview">

@@ -1,16 +1,26 @@
 <?php
 require "conn.php";
 session_start();
-/*
-if(isset($_POST) && $_POST['type']== "get_path"){
+
+
+if(isset($_POST) && $_POST['type'] == "get_path"){
+
   #to get file path to prview
-    $checkedResponse = $_FILES['file']['tmp_name'];
+    $checkedResponse = '';
+    
+    if($_FILES['file']['name']!='' && $_FILES['file']['error']==0){
+             $folder2 = "Previews/";
+             if(!file_exists($folder2)){
+                mkdir($folder2,0777,true);
+             }
+        $checkedResponse = $folder2. $_FILES['file']['name'];
+        move_uploaded_file($_FILES['file']['tmp_name'],$checkedResponse);
+    }
 
     echo $checkedResponse;
+    die;
     
 }
-die;
-*/
 
 $caption = "";
 $destination = "";
@@ -21,6 +31,7 @@ $seen =0;
 if(isset($_POST)){
     $caption = $_POST['caption'];
 }
+
 
 if(isset($_FILES) && !empty($_FILES)){
 
@@ -34,7 +45,7 @@ if(isset($_FILES) && !empty($_FILES)){
     }
 }
 
-if($caption!= '' || $destination != ''){
+if($destination != ''){
     $storyid = createRand(25);
     $query = "INSERT into stories (storyid,sender,caption,likes,seen,source) values ('$storyid','$sender','$caption','$like','$seen','$destination')";
     $post = $conn->query($query);

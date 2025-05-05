@@ -60,8 +60,8 @@ if($result->num_rows>0){
                 }
             }
         }
-        $data['posts']=$post;
 }
+$data['posts']=$post;
 
 
 #loading stories
@@ -94,8 +94,9 @@ if($stories->num_rows>0){
         }
 
     }
-    $data['stories'] = $loadedStories;
 }
+$data['stories'] = $loadedStories;
+
 echo json_encode($data) ;
 
 ?>

@@ -25,8 +25,20 @@ function preveiw(e){
             return;
         }
         //here change the preview img
+        var checkform = new FormData;
+        var xml = new XMLHttpRequest;
+            xml.onload = function(){
+                    if(xml.readyState==4){
+                        preview_img.src = 'backend/' + xml.response; 
+                    }
+            }
+        checkform.append('type','get_path');
+        checkform.append('file',e.target.files[0]);
+        xml.open("POST","backend/post_story.php");
+        xml.send(checkform);
+}
 
-    }
+
 //sharing story
 
 var share_story = document.getElementById('share_story');
@@ -34,7 +46,7 @@ var story_img = document.getElementById('story_img');
 var story_caption = document.getElementById('story_caption');
 
 share_story.onclick = function(){
-    var file = story_img.files[0];
+    var file = document.getElementById('story_img').files[0];
     var caption = story_caption.value;
     var myform = new FormData;
         var ajax = new XMLHttpRequest;
@@ -45,6 +57,7 @@ share_story.onclick = function(){
                     }
             }
         myform.append('caption',caption);
+        myform.append('type','share_story');
         myform.append('file',file);
         ajax.open("POST","backend/post_story.php");
         ajax.send(myform);
