@@ -65,30 +65,38 @@ $data['posts']=$post;
 
 
 #loading stories
-$queryForStory = "SELECT * from stories";
-$stories = $conn->query($queryForStory);
+$queryForSenders = "SELECT * from users";
+$senders = $conn->query($queryForSenders);
 
-$loadedStories = "";
-if($stories->num_rows>0){
-    while($story= $stories->fetch_assoc()){
+$loadedStories ="";
+if($senders->num_rows>0){
+    while($sender = $senders->fetch_assoc()){
         
-        #here another query to find out the sender
+        #here another query to find out the senders stories
         
-        $queryForSenders = "SELECT * from users";
-        $senders = $conn->query($queryForSenders);
+        $queryForStory = "SELECT * from stories";
+        $stories = $conn->query($queryForStory);
+            
+        $id = $sender['userid'];
+        $groupedStories = [];
 
-        if($senders->num_rows>0){
+        if($stories->num_rows>0){
+            //group them by id to specify the sender
+            while($story= $stories->fetch_assoc()){
+              if($sender['userid'] == $story['sender']){
 
-            while($sender = $senders->fetch_assoc()){
-
-                if($sender['userid']==$story['sender']){
-                
-            $loadedStories .= "<div class='story'>
-                            <img src='backend/".$story['source']."'>
-                            <span>".$sender['firstname']."</span>
-                            </div>";
+                    if(isset($groupedStories[$id])){
+                        $groupedStories[$id] .= "<img src='backend/".$story['source']."' class='".$story['sender']."'>";
+                    }else{
+                        $groupedStories[$id] = "<img src='backend/".$story['source']."' class='".$story['sender']."'>";
+                    }
                 }
-                
+            }
+            //stories of that user grouped now so send them
+            if(!empty($groupedStories[$id])){
+                    $loadedStories .= "<div class='story' onclick='see_story(event)' id=".$sender['userid'].">".$groupedStories[$id]."
+                                       <span>".$sender['firstname']."</span>
+                                     </div>";
             }
 
         }

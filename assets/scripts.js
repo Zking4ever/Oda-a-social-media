@@ -50,6 +50,16 @@ function load(){
 }
 //change_profile
 function change_profile(e){
+    
+    var filename = e.target.files[0].name;
+    var ex_start = filename.lastIndexOf('.');
+    var ex = filename.substr(ex_start+1,3);
+    if(!(ex=='jpg' || ex=='JPG')){
+        handleResult('File not supported','story');
+        manage_story.style.display ="none";
+        return;
+    }
+
     if(confirm('Do you want to change your profile picture?')){
         var file = e.target.files[0];
 
@@ -100,6 +110,7 @@ async function handleResult(result,type){
 
             //puting the stories
             stroies.innerHTML += response['stories'];
+
             //puting the responded postes
             loaded_post.innerHTML = response['posts'];
             notifications.style.opacity ="0";

@@ -38,6 +38,58 @@ function preveiw(e){
         xml.send(checkform);
 }
 
+var view_story = document.getElementsByClassName('view_story')[0];
+var view_story_div = document.getElementsByClassName('view_story_div')[0];
+var idInView;
+var members;
+let n ;
+function see_story(e){
+    view_story.style.display ="flex";
+    view_story_div.innerHTML = e.target.innerHTML;
+    idInView = e.target.id;
+    members = document.getElementsByClassName(idInView);
+    n = Math.floor(members.length/2);
+    switch_stories();
+}
+var btn1 = document.getElementById('btn1');
+var btn2 = document.getElementById('btn2');
+
+async function switch_stories(num){
+    if(idInView==null){
+        return;
+    }
+
+    if(num!=null){
+        change(num);
+    }
+    function change(num){
+        n +=num;
+    }
+    if(n<(members.length/2)){
+        n = members.length;
+    }
+
+    if(n>members.length){
+        n = Math.floor(members.length/2);
+    }
+
+    for(var i=members.length/2;i<members.length;i++){
+        members[i].style.display="none";
+    }
+
+    members[n].style.display="block";
+}
+
+btn2.onclick = function(){
+    switch_stories(1);
+}
+btn1.onclick = function(){
+    switch_stories(-1);
+}
+view_story.ondblclick = function(){
+    view_story.style.display = "none";
+}
+
 
 //sharing story
 

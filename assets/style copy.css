@@ -1,7 +1,7 @@
 .user_setting{
     position: fixed;
     height: 50px;
-    width: 66%;
+    right: 20%;
     z-index: 130;
 }
 .option_btn{
@@ -108,4 +108,29 @@
 }
 .preview img{
     max-width: 600px;
+}
+.view_story img{
+    max-width: 700px;;
+}
+.view_story{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    z-index: 150;
+    display: none;
+}
+.view_story button{
+    padding: 30px 6px;
+    position: absolute;
+}
+#btn1{
+    left: 20%;
+}
+#btn2{
+    right: 20%;
 }
