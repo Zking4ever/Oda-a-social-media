@@ -10,46 +10,111 @@ body{
 }
 .wraper{
     min-height: 100vh;
-    width: 70%;
-    border: 3px solid;
+    width: 100%;
     position:relative;
-    overflow: hidden;
+    border: solid thin #9073de;
 }
-.stroies{
-    height: 100px;
-    max-width: 1330px;
-    width: 70%;
-    background-color: rgba(250, 235, 215, 0.377);
+header{
+    min-height: 7vh;
+    width: 90%;
+    padding: 0 5%;
     display: flex;
-    padding: 5px;
-    position: fixed;
-    backdrop-filter: blur(10px);
-    z-index: 120;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border: solid thin #9073de;
+    color: #9073de;
 }
-.story{
-    width: 100px;
-    aspect-ratio: 1;
-    background-color: rgb(150, 139, 139);
+main{
+    min-height: 93vh;
+    display: flex;
+}
+#menu{
+    flex: 0.6;
+    border-right: solid thin #9073de;
+    background-color: white;
+    text-align: center;
+}
+.menuLists{
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    margin: 0 15px;
+    gap: 5px;
+}
+.menuLists label{
+    width: 50%;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 20px;
+    transition: all 1s ease;
+}
+.menuLists label:hover{
+    color: white;
+    background-color: #9073de;
+}
+#body{
+    flex: 2.5;
+    background-color: white;
     position: relative;
+}
+/*stories style is on a different file*/
+.controls{
+    background-color: #9073de;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+}
+.add_new_post,
+.logout{
+    height: 42px;
+    font-size: 30px;
     cursor: pointer;
+    transition: all 0.5s ease;
+}
+.add_new_post:hover{
+    background-color: lightgreen;
+    border: 1px solid rgb(180, 8, 8);
+}
+.logout{
+    background-color: rgb(179, 109, 91);
+}
+.logout:hover{
+    background-color: rgb(201, 52, 15);
+    border: 1px solid rgb(180, 8, 8);
+}
+.new_post_inputes{
+    width: 400px;
+    aspect-ratio: 1;
+    position: absolute;
+    background-color: rgb(153, 185, 175);
     z-index: 100;
 }
-.story img{
-    width: 70px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    position: absolute;
-    transform: translateY(-10px);
+.new_post_inputes{
+    display: none;
 }
-.story span{
+.new_post_inputes form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
+}
+.new_post_inputes h4{
+    color: azure;
+    justify-self: left;
+    margin: 10px;
+}
+.new_post_inputes textarea{
+    min-height: 70px;
+    min-width: 330px;
+    margin: 0 10px;
+}
+#submit{
+    width: 70px;
+    height: 25px;
     position: absolute;
-    font-size: 20px;
-    transform: translateY(35px);
+    right: 100px;
+    bottom: 80px;
 }
 .post_container{
     height: 100%;
@@ -126,52 +191,7 @@ body{
     cursor: pointer;
     text-align: center;
 }
-.add_post {
-    width: 100%;
-    min-height: 30px;
-    position: relative;
-    display: flex;
-    justify-content: end;
-}
-.add_post button {
-    width: 60px;
-    height: 25px;
-    margin: 5px;
-    align-self: center;
-}
-.new_post_inputes{
-    width: 400px;
-    aspect-ratio: 1;
-    position: absolute;
-    background-color: rgb(153, 185, 175);
-    z-index: 100;
-}
-.new_post_inputes{
-    display: none;
-}
-.new_post_inputes form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 20px;
-}
-.new_post_inputes h4{
-    color: azure;
-    justify-self: left;
-    margin: 10px;
-}
-.new_post_inputes textarea{
-    min-height: 70px;
-    min-width: 330px;
-    margin: 0 10px;
-}
-#submit{
-    width: 70px;
-    height: 25px;
-    position: absolute;
-    right: 100px;
-    bottom: 80px;
-}
+
 .notifications{
     background-color: rgba(130, 145, 140, 0.877);
     min-width: 300px;
