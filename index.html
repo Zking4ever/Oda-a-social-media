@@ -6,79 +6,56 @@
     <title>Increadiable future</title>
     <style>
         .wraper{
-            width: 100vw;
-            height: 100vh;
+            height: 96vh;
+            border:2px solid #9073de;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .part1{
+            flex: 1.5;
+            height: 100%;
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+         }
+        .part2{
+            flex: 2;
+            background-color: #9073de;
+            height: 100%;
+        }
+        .part3{
+            flex: 1.5;
+            height: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-        }
-        .container{
-            width: fit-content;
-            min-height: 300px;
-        }
-        .two{
             display: none;
         }
         form{
             width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        #log_in{
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items:center;
-            gap: 15px;
-            border-radius: 10px;
         }
         input{
-            width: 600px;
-            height: 55px;
             border-radius: 10px;
+            height: 25px;
+            width: 36%;
         }
+        #sign_up_btn,
         #submit{
-            width: 80px;
-            height: 35px;
+            width: 100px;
         }
-        #sign_up_btn{
-            width: 120px;
-        }
-        #password_lable{
-            transform: translateY(60px) translateX(-230px);
-            font-size: 26px;
-            cursor: pointer;
-            transition: all 1s ease;
-        }
-        #email_lable{
-            transform: translateY(60px) translateX(-250px);
-            font-size: 26px;
-            cursor: pointer;
-            transition: all 1s ease;
-        }
-        #sign_up{
-            display: block;
-            position: relative;
-        }
-        #sign_up input{
-            margin: 10px 0px;
-            height: 30px;
-        }
-        #sign_up label{
+        label{
             margin: 10px;
-            cursor: pointer;
+            cursor: pointer;color: rebeccapurple;
+            transform: translate(-80px,15px);
+            position: absolute;
         }
         .switch_pages{
             text-align: center;
-        }
-        #sign_up h2{
-            left: 50%;
-            transform: translateX(-50%) translateY(-60px);
-            position: absolute;
         }
         button{
             border: none;
@@ -90,19 +67,7 @@
 </head>
 <body>
     <div class="wraper">
-        <div class="container one">
-            <form action="sign_in_up.php" method="get" id="log_in">
-                    <h2>Log in</h2>
-                    <label for="email" id="email_lable">Email</label>
-                    <input type="email" name="email" id="email" required >
-                    <label for="password"  id="password_lable">Password</label>
-                    <input type="password" name="password" id="password" required>
-                    <input type="submit" id="submit">
-                    <br><br><br>
-                    <div class="switch_pages"><span>Don't have account? </span><button id="to_sign_up">Sign up</button></div>
-            </form>
-        </div>
-        <div class="container two">
+        <div class="part1">
             <form action="sign_in_up.php" method="post" id="sign_up">
                 <h2>Sign Up</h2>
                 <label for="fname">First Name</label><br>
@@ -112,12 +77,29 @@
                 <label for="email2">Email</label><br>
                 <input type="email" name="email" id="email2" required ><br>
                 <label for="password2">Password</label><br>
-                <input type="password" name="password" id="password2" required><br>
-                <input type="submit" id="sign_up_btn" value="Sign Up">
+                <input type="password" name="password" id="password2" required><br><br>
+                <input type="submit" id="sign_up_btn" value="Sign Up"> 
+            </form>
                 <br><br><br>
                 <div class="switch_pages"><span>Already have an account? </span><button id="to_log_in">Log in</button></div>
+           
+        </div>
+        
+        <div class="part2">
+            
+        </div>
+        
+        <div class="part3">
+            <form action="sign_in_up.php" method="get" id="log_in">
+                    <h2>Log in</h2>
+                    <label for="email" id="email_lable">Email</label><br>
+                    <input type="email" name="email" id="email" required ><br>
+                    <label for="password"  id="password_lable">Password</label><br>
+                    <input type="password" name="password" id="password" required><br><br>
+                    <input type="submit" id="submit">
             </form>
-
+            <br><br><br>
+            <div class="switch_pages"><span>Don't have account? </span><button id="to_sign_up">Sign up</button></div>
         </div>
     </div>
     

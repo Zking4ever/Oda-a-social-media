@@ -45,7 +45,7 @@ function load(){
             handleResult(xml.response,"load");
         }
     }
-    xml.open("POTS","backend/load.php",true);
+    xml.open("POST","backend/load.php",true);
     xml.send();
 }
 //change_profile

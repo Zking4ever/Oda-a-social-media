@@ -1,17 +1,17 @@
 var to_sign_up = document.getElementById("to_sign_up");
 var to_log_in = document.getElementById("to_log_in");
 
-var one = document.getElementsByClassName('one')[0];
-var two = document.getElementsByClassName('two')[0];
+var part1 = document.getElementsByClassName('part1')[0];
+var part3 = document.getElementsByClassName('part3')[0];
 
 to_log_in.onclick = function(){
-    one.style.display ="block";
-    two.style.display ="none";
+    part3.style.display ="flex";
+    part1.style.display ="none";
 }
 
 to_sign_up.onclick = function(){
-    one.style.display ="none";
-    two.style.display ="block";
+    part1.style.display ="flex";
+    part3.style.display ="none";
 }
 
 var email = document.getElementById("email");

@@ -8,6 +8,7 @@ if($_SESSION['userid'] ==''){
 $userid = $_SESSION['userid'];
 
 $data = [];
+
 #loading the profile
 $queryForUser= "SELECT * from users where userid= '$userid'";
 $lookUser = $conn->query($queryForUser);
@@ -15,6 +16,7 @@ if($lookUser){
     $userData = $lookUser->fetch_assoc();
     $data['userinfo']=$userData;
 }
+
 
 #loading the posts
 $query = "SELECT * from posts";
@@ -24,8 +26,8 @@ $post = "";
 if($result->num_rows>0){
     while($row = $result->fetch_assoc()){
         
-        #here another query to find out the sende
-        
+        #here another query to find out the sender
+                
         $queryForSenders = "SELECT * from users";
         $senders = $conn->query($queryForSenders);
 
@@ -104,6 +106,7 @@ if($senders->num_rows>0){
     }
 }
 $data['stories'] = $loadedStories;
+
 
 echo json_encode($data) ;
 

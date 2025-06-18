@@ -33,7 +33,7 @@
                     </label>
                     <input type="file" id="change_profile" style="display: none;" onchange="change_profile(event)">
                 </div>
-                <div class="userdetail">
+                <div class="userdetail">story
                     <span id="username">name username</span>
                 </div>
             </div>
