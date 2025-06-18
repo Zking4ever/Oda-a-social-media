@@ -15,27 +15,24 @@
         .part1{
             flex: 1;
             height: 100%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             transition: all 2s ease;
          }
         .part2{
             flex: 2;
-            background-color: #9073de;
             height: 100%;
+            background-color: #9073de;
             transition: all 2s ease;
         }
-        .part3{
-            flex: 1.5;
+        .section{
+            width: 100%;
             height: 100%;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+        .login{
             display: none;
         }
         form{
@@ -44,21 +41,18 @@
         input{
             border-radius: 10px;
             height: 25px;
-            width: 36%;
+            width: 45%;
         }
-        #sign_up_btn,
-        #submit{
+        input[type=submit]{
             width: 100px;
         }
         label{
             padding: 5px;
-            cursor: pointer;color: rebeccapurple;
-            transform: translate(-80px,19px);
+            cursor: pointer;
+            color: rebeccapurple;
+            transform: translate(-90px,19px);
             position: absolute;
-            transition: transform 2s ease;
-        }
-        .switch_pages{
-            text-align: center;
+            transition: all 1s ease;
         }
         button{
             border: none;
@@ -66,45 +60,49 @@
             color: blue;
             cursor: pointer;
         }
+        @media (max-width:760px) {
+            .part2{
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="wraper">
-        <div class="part1">
-            <form action="sign_in_up.php" method="post" id="sign_up">
-                <h2>Sign Up</h2>
-                <label for="fname">First Name</label><br>
-                <input type="text" name="fname" id="fname" required ><br>
-                <label for="lname">Last Name</label><br>
-                <input type="text" name="lname" id="lname" required ><br>
-                <label for="email2">Email</label><br>
-                <input type="email" name="email" id="email2" required ><br>
-                <label for="password2">Password</label><br>
-                <input type="password" name="password" id="password2" required><br><br>
-                <input type="submit" id="sign_up_btn" value="Sign Up"> 
-            </form>
+<div class="wraper">
+    <div class="part1"> 
+            <div class="section sign_up">
+                 <form action="sign_in_up.php" method="post" id="sign_up">
+                    <h2>Sign Up</h2>
+                    <label for="fname">First Name</label><br>
+                    <input type="text" name="fname" id="fname" required ><br>
+                    <label for="lname">Last Name</label><br>
+                    <input type="text" name="lname" id="lname" required ><br>
+                    <label for="email2">Email</label><br>
+                    <input type="email" name="email" id="email2" required ><br>
+                    <label for="password2">Password</label><br>
+                    <input type="password" name="password" id="password2" required><br><br>
+                    <input type="submit" id="sign_up_btn" value="Sign Up"> 
+                </form>
                 <br><br><br>
                 <div class="switch_pages"><span>Already have an account? </span><button id="to_log_in" onclick="logIn()">Log in</button></div>
-           
-        </div>
-        
-        <div class="part2">
-            
-        </div>
-        
-        <div class="part3">
-            <form action="sign_in_up.php" method="get" id="log_in">
+            </div> 
+            <div class="section login">
+                <form action="sign_in_up.php" method="get" id="log_in">
                     <h2>Log in</h2>
                     <label for="email" id="email_lable">Email</label><br>
                     <input type="email" name="email" id="email" required ><br>
                     <label for="password"  id="password_lable">Password</label><br>
                     <input type="password" name="password" id="password" required><br><br>
                     <input type="submit" id="submit">
-            </form>
-            <br><br><br>
-            <div class="switch_pages"><span>Don't have account? </span><button id="to_sign_up" onclick="signUp()">Sign up</button></div>
-        </div>
+                </form>
+                <br><br><br>
+                <div class="switch_pages"><span>Don't have account? </span><button id="to_sign_up" onclick="signUp()">Sign up</button></div>
+            </div>
     </div>
+        
+    <div class="part2"> </div>
+        
+</div>
     
 </body>
 <script src="assets/switch script.js"></script>
