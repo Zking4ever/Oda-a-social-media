@@ -20,11 +20,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            transition: all 2s ease;
          }
         .part2{
             flex: 2;
             background-color: #9073de;
             height: 100%;
+            transition: all 2s ease;
         }
         .part3{
             flex: 1.5;
@@ -51,8 +53,9 @@
         label{
             margin: 10px;
             cursor: pointer;color: rebeccapurple;
-            transform: translate(-80px,15px);
+            transform: translate(-100px,15px);
             position: absolute;
+            transition: all 2s ease;
         }
         .switch_pages{
             text-align: center;
@@ -81,7 +84,7 @@
                 <input type="submit" id="sign_up_btn" value="Sign Up"> 
             </form>
                 <br><br><br>
-                <div class="switch_pages"><span>Already have an account? </span><button id="to_log_in">Log in</button></div>
+                <div class="switch_pages"><span>Already have an account? </span><button id="to_log_in" onclick="logIn()">Log in</button></div>
            
         </div>
         
@@ -99,7 +102,7 @@
                     <input type="submit" id="submit">
             </form>
             <br><br><br>
-            <div class="switch_pages"><span>Don't have account? </span><button id="to_sign_up">Sign up</button></div>
+            <div class="switch_pages"><span>Don't have account? </span><button id="to_sign_up" onclick="signUp()">Sign up</button></div>
         </div>
     </div>
     
