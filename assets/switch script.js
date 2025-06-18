@@ -9,8 +9,8 @@ function delay(t){
     return new Promise(response=>setTimeout(response,t));
 }
 async function logIn(){
-    part1.style.transform ="translateX(133%)";
-    part2.style.transform ="translateX(-75%)";
+    part1.style.transform ="translateX(200%)";
+    part2.style.transform ="translateX(-50%)";
     await delay(500);
     temp = part1.innerHTML;
     part1.innerHTML = part3.innerHTML;
@@ -22,6 +22,27 @@ async function signUp(){
     await delay(500);
     part1.innerHTML = temp;
 };
+
+var childinput = part1.getElementsByTagName('input');
+var childlabel = part1.getElementsByTagName('label');
+
+for(var i=0;i<childinput.length;i++){
+    childinput[i].onfocus = function(){
+        var index = getIndexFromList(childinput,this);
+        childlabel[index].style.transform ="translateY(4.5px) translateX(-70px)";
+        childlabel[index].style.backgroundColor="white";
+        this.onfocus = false;
+    }
+}
+function getIndexFromList(list,element){
+    for(var i=0;i<list.length;i++){
+        if(list[i]==element){
+            return i;
+        }
+    }
+    return -1;
+}
+
 
 var email = document.getElementById("email");
 var email_lable = document.getElementById("email_lable");
