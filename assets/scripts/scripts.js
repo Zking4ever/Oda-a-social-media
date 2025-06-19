@@ -41,7 +41,7 @@ function load(){
         notifications.style.opacity ="100";
         notifications.style.transform =" translateX(-50%) translateY(0px)";
         notifications.innerHTML = "loading...";
-        if(xml.readyState==4){
+        if(xml.readyState==4 || xml.status==200){
             handleResult(xml.response,"load");
         }
     }
@@ -101,15 +101,16 @@ var profile_image = document.getElementById('profile_image');
 var stroies = document.getElementsByClassName('stroies')[0];
 
 async function handleResult(result,type){
+    
     switch(type){
         case "load":
             var response = JSON.parse(result);
             //puting users' info
-            username.innerHTML = response['userinfo']['firstname'] + " " + response['userinfo']['lastname'];
-            profile_image.src = "backend/"+ response['userinfo']['profile_source'];
+            //username.innerHTML = response['userinfo']['firstname'] + " " + response['userinfo']['lastname'];
+            //profile_image.src = "backend/"+ response['userinfo']['profile_source'];
 
             //puting the stories
-            stroies.innerHTML += response['stories'];
+           // stroies.innerHTML += response['stories'];
 
             //puting the responded postes
             loaded_post.innerHTML = response['posts'];

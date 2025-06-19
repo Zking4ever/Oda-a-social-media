@@ -1,0 +1,82 @@
+.post_container{
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.loaded_post{
+    width: 80%;
+    overflow-y: scroll;
+    border: solid thin gray;
+}
+.post{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: 2px solid rgb(128, 124, 124);
+}
+.sender{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.sender img{
+    height: 30px;
+    width:30px;
+    border-radius: 50%;
+}
+.sender .detail{
+    width: 80%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+}
+.img_container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.post img {
+    max-height: 500px;
+    max-width: 600px;
+    padding: 6px;
+}
+.post .caption {
+    height: 10%;
+    width: 90%;
+    color: aliceblue;
+    text-align: left;
+}
+.reactions{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.react{
+    width: 70px;
+    height: 70%;
+    cursor: pointer;
+    text-align: center;
+}
+
+.notifications{
+    background-color: rgba(130, 145, 140, 0.877);
+    min-width: 300px;
+    height: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-30px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 5s ease;
+    z-index: 100;
+}

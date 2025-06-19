@@ -1,4 +1,5 @@
 <?php
+
 require "conn.php";
 session_start();
 
@@ -10,13 +11,14 @@ $userid = $_SESSION['userid'];
 $data = [];
 
 #loading the profile
+/*
 $queryForUser= "SELECT * from users where userid= '$userid'";
 $lookUser = $conn->query($queryForUser);
 if($lookUser){
     $userData = $lookUser->fetch_assoc();
     $data['userinfo']=$userData;
 }
-
+*/
 
 #loading the posts
 $query = "SELECT * from posts";
@@ -39,7 +41,7 @@ if($result->num_rows>0){
 
                     $post.="<div class='post'>
                         <div class='sender'>
-                            <img src='backend/".$sender['profile_source']."'>
+                            <img src='backend/".$sender['source']."'>
                             <div class='detail'>
                                 <h3 style='position:absolute;transform: translateY(-7px);'>".$sender['firstname']." ".$sender['lastname']."</h3>
                                 <span style='font-size:12px;margin-left:7px;position:absolute;transform: translateY(10px);'>username</span>
@@ -63,10 +65,12 @@ if($result->num_rows>0){
             }
         }
 }
-$data['posts']=$post;
+
+$data['posts']= $post;
 
 
 #loading stories
+/*
 $queryForSenders = "SELECT * from users";
 $senders = $conn->query($queryForSenders);
 
@@ -106,7 +110,7 @@ if($senders->num_rows>0){
     }
 }
 $data['stories'] = $loadedStories;
-
+*/
 
 echo json_encode($data) ;
 
