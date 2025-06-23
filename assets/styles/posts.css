@@ -5,7 +5,7 @@
     align-items: center;
 }
 .loaded_post{
-    width: 80%;
+    width: 90%;
     overflow-y: scroll;
     border: solid thin gray;
 }
@@ -50,7 +50,6 @@
 .post .caption {
     height: 10%;
     width: 90%;
-    color: aliceblue;
     text-align: left;
 }
 .reactions{
@@ -79,4 +78,26 @@
     opacity: 0;
     transition: all 5s ease;
     z-index: 100;
+}
+@media (max-width:760px) {
+    .post{
+        width: 300px;
+    }
+    .img_container{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .post img {
+        max-height: 500px;
+        max-width: 310px;
+        padding: 6px;
+    }
+    .reactions{
+        font-size: 14px;
+    }
+    .react svg{
+        width: 20px;
+    }
 }

@@ -17,11 +17,15 @@
             height: 100%;
             transition: all 2s ease;
          }
+        .moved{
+            transform: translateX(-200%);
+        }
         .part2{
             flex: 2;
             height: 100%;
             background-color: #9073de;
             transition: all 2s ease;
+            z-index: 10;
         }
         .section{
             width: 100%;
@@ -32,7 +36,7 @@
             justify-content: center;
             align-items: center;
         }
-        .login{
+        .sign_up{
             display: none;
         }
         form{
@@ -54,6 +58,9 @@
             position: absolute;
             transition: all 1s ease;
         }
+        .activelable{
+            transform: translateY(-5px) translateX(-90px);
+        }
         button{
             border: none;
             background-color: transparent;
@@ -64,11 +71,27 @@
             .part2{
                 display: none;
             }
+          .activelable{
+            transform: translateY(-5px) translateX(-70px);
+            }
+            .sign_up{
+                transition: ;
+            }
+        label{
+            padding: 5px;
+            transform: translate(-70px,19px);
+            position: absolute;
+            transition: all 1s ease;
+            }
+        .moved{
+            transform: translateX(0);
+        }
         }
     </style>
 </head>
 <body>
 <div class="wraper">
+    <div class="part2"></div>
     <div class="part1"> 
             <div class="section sign_up">
                  <form action="sign_in_up.php" method="post" id="sign_up">
@@ -100,7 +123,6 @@
             </div>
     </div>
         
-    <div class="part2"> </div>
         
 </div>
     

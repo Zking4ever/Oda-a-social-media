@@ -17,7 +17,7 @@
 <body>
    <div class="wraper">
     <header>
-        <div class="logo">Incrediable Future</div>
+        <div class="logo">Incredible Future</div>
         <div class="quickReach"><input type="text" placeholder="search"></div>
     </header>
     <main>
@@ -50,7 +50,7 @@
                 <div class="add_new_post" id="add">➕</div>
                 <div class="logout">😡</div>
             </div>
-            <div class="contributers" style="display:none;">
+            <div class="contributers">
                 <div class="new_post_inputes">
                         <form>
                             <h4>post image</h4>
@@ -96,8 +96,6 @@
                         </div>
                     </div>
                 </div>
-    
-            </div>
         </div>
     </main>    
    </div>

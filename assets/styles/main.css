@@ -82,6 +82,17 @@ main{
     background-color: rgb(201, 52, 15);
     border: 1px solid rgb(180, 8, 8);
 }
+.contributers{
+        position:fixed;
+        width:100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        height:100vh;
+        top:0;
+        left:0;
+        display:none;
+}
 .new_post_inputes{
     width: 400px;
     aspect-ratio: 1;
@@ -114,4 +125,29 @@ main{
     position: absolute;
     right: 100px;
     bottom: 80px;
+}
+@media (max-width:760px) {
+    main{
+        display: block;
+    }
+    .menuLists{
+        margin-top: 10px;
+        flex-direction: row;
+        gap: 2px;
+        border-bottom: solid thin #9073de;
+    }
+    .menuLists label{
+        font-size: 12px;
+        }
+    .new_post_inputes{
+        width: 250px;
+    }
+    .new_post_inputes textarea{
+        min-height: 50px;
+        min-width: 30px;
+        width: 200px;
+    }
+    #submit{
+        bottom: 20px;
+    }
 }

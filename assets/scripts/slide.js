@@ -7,16 +7,16 @@ function delay(t){
     return new Promise(response=>setTimeout(response,t));
 }
 async function logIn(){
-    part1.style.transform ="translateX(200%)";
-    part2.style.transform ="translateX(-50%)";
+    part1.className="part1";
+    part2.style.transform ="translateX(0)";
     await delay(500);
     sign_up.style.display = "none";
     login.style.display = "flex";
 }
 
 async function signUp(){
-    part1.style.transform ="translateX(0)";
-    part2.style.transform ="translateX(0)";
+    part1.className="part1 moved";
+    part2.style.transform ="translateX(50%)";
     await delay(500);
     login.style.display = "none";
     sign_up.style.display = "flex";
@@ -30,7 +30,8 @@ var childlabelL = login.getElementsByTagName('label');
 for(var i=0;i<childinput.length;i++){
     childinput[i].onfocus = function(){
         var index = getIndexFromList(childinput,this);
-        childlabel[index].style.transform ="translateY(-5px) translateX(-90px)";
+        childlabel[index].className="activelable";
+        //childlabel[index].style.transform ="translateY(-5px) translateX(-90px)";
         //childlabel[index].style.backgroundColor="white";
         this.onfocus = false;
     }
@@ -38,7 +39,8 @@ for(var i=0;i<childinput.length;i++){
 for(var i=0;i<childinputL.length;i++){
     childinputL[i].onfocus = function(){
         var index = getIndexFromList(childinputL,this);
-        childlabelL[index].style.transform ="translateY(-5px) translateX(-90px)";
+        childlabelL[index].className="activelable";
+        //childlabelL[index].style.transform ="translateY(-5px) translateX(-90px)";
         //childlabel[index].style.backgroundColor="white";
         this.onfocus = false;
     }

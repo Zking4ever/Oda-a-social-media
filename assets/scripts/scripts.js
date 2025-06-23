@@ -2,11 +2,13 @@
 var add = document.getElementById('add');
 var submit = document.getElementById('submit');
 var inputs = document.getElementsByClassName('new_post_inputes')[0];
+var contributers = document.getElementsByClassName('contributers')[0];
 var notifications = document.getElementsByClassName('notifications')[0];
 var loaded_post = document.getElementsByClassName('loaded_post')[0];
 
 add.onclick = function(){
         inputs.style.display = "flex";
+        contributers.style.display = "flex";
         add.style.opacity = "0";     
 }
 //add a post
@@ -28,6 +30,7 @@ submit.onclick = function(){
 
 
     inputs.style.display ="none";
+    contributers.style.display ="none";
     add.style.opacity = "100";   
         
 }
