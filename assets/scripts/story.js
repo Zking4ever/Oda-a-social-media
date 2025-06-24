@@ -48,11 +48,13 @@ var members;
 let n ;
 function see_story(e){
     view_story.style.display ="flex";
+    alert("clicked"); 
+    contributers.style.display = "flex";
     view_story_div.innerHTML = e.target.innerHTML;
     idInView = e.target.id;
     members = document.getElementsByClassName(idInView);
     n = Math.floor(members.length/2);
-    switch_stories();
+    //switch_stories();
 }
 var btn1 = document.getElementById('btn1');
 var btn2 = document.getElementById('btn2');

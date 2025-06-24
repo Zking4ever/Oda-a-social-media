@@ -78,15 +78,16 @@
     justify-content: center;
     margin: 0 5px;
     position: relative;
+    border-radius: 10px;
     cursor: pointer;
 }
 .story label{
     cursor: pointer;
 }
 .story img{
-    width: 40px;
+    width: 35px;
     aspect-ratio: 1;
-    border-radius: 50%;
+    border-radius: 7px;
     position: absolute;
     transform: translateY(-5px);
 }

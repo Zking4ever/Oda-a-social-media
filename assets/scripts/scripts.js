@@ -85,7 +85,8 @@ function change_profile(e){
 var logout_btn = document.getElementsByClassName("logout")[0];
 
 logout_btn.onclick = function(){
-        var myform = new FormData;
+        if(confirm("Do you want to log out?")){
+            var myform = new FormData;
         var ajax = new XMLHttpRequest;
             ajax.onload = function(){
                 if(ajax.readyState==4){
@@ -96,6 +97,7 @@ logout_btn.onclick = function(){
             myform.append('type','logout');
             ajax.open("POST","backend/change_profile.php");
             ajax.send(myform);
+        }
 }
 
 //to put userinfo
