@@ -113,7 +113,7 @@ async function handleResult(result,type){
             //profile_image.src = "backend/"+ response['userinfo']['profile_source'];
 
             //puting the stories
-           // stroies.innerHTML += response['stories'];
+            stroies.innerHTML += response['stories'];
 
             //puting the responded postes
             loaded_post.innerHTML = response['posts'];

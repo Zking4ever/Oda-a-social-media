@@ -1,6 +1,7 @@
 var option_btn = document.getElementsByClassName('option_btn')[0];
 var options = document.getElementsByClassName('options')[0];
 var close_btn = document.getElementsByClassName('close')[0];
+var contributers = document.getElementsByClassName('contributers')[0];
 
 option_btn.onclick = function(){
     options.style.display = "block";
@@ -27,8 +28,10 @@ function preveiw(e){
         //here change the preview img
         var checkform = new FormData;
         var xml = new XMLHttpRequest;
-            xml.onload = function(){
+        xml.onload = function(){
                     if(xml.readyState==4){
+                        contributers.style.display = "flex";
+                        manage_story.style.display ="flex";
                         preview_img.src = 'backend/' + xml.response; 
                     }
             }

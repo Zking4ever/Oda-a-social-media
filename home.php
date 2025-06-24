@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
     <link rel="stylesheet" href="assets/styles/main.css">
-    <link rel="stylesheet" href="assets/styles/story.css">
+    <link rel="stylesheet" href="assets/styles/stories.css">
     <link rel="stylesheet" href="assets/styles/posts.css">
     <?php
         session_start();
@@ -62,17 +62,17 @@
                 </div>
                 <div class="manage_story" style="display:none">
                     <div class="preview">
-                        <img id="preview_img" src="backend/Profiles/ZIO00013.JPG">
+                        <img id="preview_img" src="">
                         <input id="story_caption" type="text" value="Add a caption..">
                         <button id='share_story'>Share</button>
                     </div>
                 </div>
-                <div class="view_story">
+                <div class="view_story" style="display:none">
                     <button id="btn1">left</button>
                     <button id="btn2">right</button>
                     <div class="view_story_div"></div>
                 </div>
-                <div class="user_setting">
+                <div class="user_setting" style="display:none">
                     <div class="option_btn"><h1>...</h1></div>
                     <div class="options" style="display: none;">
                         <div class="close">
@@ -102,5 +102,5 @@
    
 </body>
 <script src="assets/scripts/scripts.js"></script>
-<!--script src="assets/profile copy.js"></script-->
+<script src="assets/scripts/story.js"></script>
 </html>

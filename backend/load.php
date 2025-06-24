@@ -70,7 +70,7 @@ $data['posts']= $post;
 
 
 #loading stories
-/*
+
 $queryForSenders = "SELECT * from users";
 $senders = $conn->query($queryForSenders);
 
@@ -110,7 +110,7 @@ if($senders->num_rows>0){
     }
 }
 $data['stories'] = $loadedStories;
-*/
+
 
 echo json_encode($data) ;
 
