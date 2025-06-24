@@ -35,9 +35,49 @@ submit.onclick = function(){
         
 }
 
+differentiateStories();
 load();
 
 //load posts
+function differentiateStories(){
+
+    var xml = new XMLHttpRequest;
+    xml.onload = function(){
+        if(xml.readyState==4 || xml.status==200){
+                //manipulating the responded stories and separating active ones
+                    var respo = JSON.parse(xml.response);
+                    var activeStories = [];
+                    var i=0;
+                    respo.forEach(element => {
+                        var stories_Date = new Date(element.story_time);
+                        var next = new Date(element.story_time);
+                        next.setDate(stories_Date.getDate()+1)
+                        var now = new Date();
+                            if( next.getTime() > now.getTime()){
+                                activeStories[i] = element;
+                                i++;
+                            }
+                    });
+
+                    var form = new FormData;
+                    var xmlR = new XMLHttpRequest;
+                    xmlR.onload = function(){
+                    if(xmlR.readyState==4 || xmlR.status==200){
+                            if(JSON.parse(xmlR.response) != "done"){
+                                handleResult("There was an error while organizing active stories","story")
+                            }
+                    
+                        }
+                    }
+                    activeStories = JSON.stringify(activeStories);
+                    form.append('actives',activeStories)
+                    xmlR.open("POST","backend/differentiateStories.php",true);
+                    xmlR.send(form);
+            }
+        }
+    xml.open("POST","backend/getStories.php",true);
+    xml.send();
+}
 function load(){
     var xml = new XMLHttpRequest;
     xml.onload = function(){
@@ -106,7 +146,7 @@ var profile_image = document.getElementById('profile_image');
 var stroies = document.getElementsByClassName('stroies')[0];
 
 async function handleResult(result,type){
-    
+     
     switch(type){
         case "load":
             var response = JSON.parse(result);
@@ -116,7 +156,7 @@ async function handleResult(result,type){
 
             //puting the stories
             stroies.innerHTML += response['stories'];
-
+            
             //puting the responded postes
             loaded_post.innerHTML = response['posts'];
             notifications.style.opacity ="0";
