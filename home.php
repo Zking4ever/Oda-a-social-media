@@ -68,8 +68,8 @@
                     </div>
                 </div>
                 <div class="view_story" style="display:none">
-                    <button id="btn1">left</button>
-                    <button id="btn2">right</button>
+                    <button id="btn1" title="previous"><</button>
+                    <button id="btn2" title= "next">></button>
                     <div class="view_story_div"></div>
                 </div>
                 <div class="user_setting" style="display:none">

@@ -66,7 +66,6 @@ function differentiateStories(){
                             if(JSON.parse(xmlR.response) != "done"){
                                 handleResult("There was an error while organizing active stories","story")
                             }
-                    
                         }
                     }
                     activeStories = JSON.stringify(activeStories);

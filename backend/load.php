@@ -77,18 +77,26 @@ $loadedStories="";
 
 $queryForStory = "SELECT * from active_stories";
 $stories = $conn->query($queryForStory);
-  
+$groupedStories = [];
+
 if($stories->num_rows>0){
         while($story= $stories->fetch_assoc()){
-
+            
             $senderQuery = "SELECT * FROM users";
             $senders = $conn->query($senderQuery);
             if($senders->num_rows>0){
                 while($sender= $senders->fetch_assoc()){
-                    if($story['sender']==$sender['userid']){
-                        $loadedStories .= "<div class='story' onclick='see_story(event)' id=".$story['sender'].">
-                                       <span>".$sender['firstname']."</span>
-                                     </div>";
+                    $id = $sender['userid'];
+
+                    if($story['sender'] == $sender['userid']){
+
+                        if(!isset($groupedStories[$id])){
+                            $loadedStories .= "<div class='story' onclick='see_story(event)' id='".$story['sender']."'>
+                                                    <span>".$sender['firstname']."</span>
+                                                </div>";
+                            
+                            $groupedStories[$id] = $id;
+                        }
                     }
                 }
             }
@@ -111,8 +119,7 @@ if($stories->num_rows>0){
         
         
             
-        $id = $sender['userid'];
-        $groupedStories = [];
+        
 
         ...
               if($sender['userid'] == $story['sender']){

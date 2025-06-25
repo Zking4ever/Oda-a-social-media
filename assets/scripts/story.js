@@ -47,14 +47,30 @@ var idInView;
 var members;
 let n ;
 function see_story(e){
-    view_story.style.display ="flex";
-    alert("clicked"); 
-    contributers.style.display = "flex";
-    view_story_div.innerHTML = e.target.innerHTML;
     idInView = e.target.id;
-    members = document.getElementsByClassName(idInView);
-    n = Math.floor(members.length/2);
-    //switch_stories();
+    
+    var checkform = new FormData;
+    var xml = new XMLHttpRequest;
+    xml.onload = function(){
+            if(xml.readyState==4 || xml.status==200){
+                        var storyImages = JSON.parse(xml.response);
+                        view_story_div.innerHTML="";//cleaning everything for new views
+                        storyImages.forEach(element => {
+                            var img = document.createElement("img");
+                            img.src =  "backend/"+element;
+                            view_story_div.appendChild(img);
+                        });
+                        members = view_story_div.getElementsByTagName("img");
+                        n = Math.floor(members.length);
+                        switch_stories();
+                        contributers.style.display = "flex";
+                        view_story.style.display ="flex";
+                    }
+            }
+        checkform.append('type','see_story');
+        checkform.append('sendersid',idInView);
+        xml.open("POST","backend/differentiateStories.php");
+        xml.send(checkform);
 }
 var btn1 = document.getElementById('btn1');
 var btn2 = document.getElementById('btn2');
@@ -70,15 +86,15 @@ async function switch_stories(num){
     function change(num){
         n +=num;
     }
-    if(n<(members.length/2)){
-        n = members.length;
+    if(n<0){
+        n = members.length-1;
     }
 
-    if(n>members.length){
-        n = Math.floor(members.length/2);
+    if(n > members.length-1){
+        n = 0;
     }
 
-    for(var i=members.length/2;i<members.length;i++){
+    for(var i=0;i<members.length;i++){
         members[i].style.display="none";
     }
 
@@ -93,6 +109,7 @@ btn1.onclick = function(){
 }
 view_story.ondblclick = function(){
     view_story.style.display = "none";
+    contributers.style.display = "none";
 }
 
 

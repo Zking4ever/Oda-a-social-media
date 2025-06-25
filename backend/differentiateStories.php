@@ -1,37 +1,6 @@
 <?php
 #differentiating the active stories
 
-/*
-$queryForStory = "SELECT * from active_stories";
-$stories = $conn->query($queryForStory);
-
-    if($stories->num_rows>0){
-        while($story= $stories->fetch_assoc()){
-            $userid = $story['sender'];
-            $story_time = date_create_from_format("Y-m-d H:i:s",date($story['story_time']));
-            $now = date_add(date_create_from_format("Y-m-d H:i:s",date( "Y-m-d H:i:s")) , date_interval_format("H",24) ) ;
-            
-            if($story_time < $now){
-                $loadedStories .= " ".date($story['story_time'])." < ".date( "Y-m-d H:i:s");
-            }
-                   if(!isset($userWithStory['$userid'])){
-
-                        $userWithStory['$userid'] = $story['sender'];
-                        $query = "INSERT into active_story_users (sender,set_time) values ('$story[sender]','$story[story_time]')";
-                        $addToActive = $conn->query($query);
-                            if($addToActive){
-                                        $loadedStories="added successfuly";
-                                    }
-                    }
-               
-           
-        }
-    }
-
-        
-#}
- */
-
  require "conn.php";
 
  if(isset($_POST['actives'])){
@@ -45,6 +14,25 @@ $stories = $conn->query($queryForStory);
         $comput = $conn->query($queryInsert);
     }
         echo json_encode("done");
+}
+
+#seeing specific story after getting the user id
+
+if(isset($_POST['type']) && $_POST['type']=="see_story"){
+    $sendersid = $_POST['sendersid'];
+
+    $query = "SELECT * FROM active_stories where sender = '$sendersid' ";
+    $stories = $conn->query($query);
+    $response = [];
+    $i=0;
+    if($stories->num_rows>0){
+        while($story = $stories->fetch_assoc()){
+            $response[$i] = $story['source'];
+            $i++;
+        }
+            echo json_encode($response);
+    }
+
 }
 
 ?>
