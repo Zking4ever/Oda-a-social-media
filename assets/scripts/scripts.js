@@ -6,7 +6,65 @@ var contributers = document.getElementsByClassName('contributers')[0];
 var loadingDiv = document.getElementsByClassName("loadingGif")[0];
 var notifications = document.getElementsByClassName('notifications')[0];
 var loaded_post = document.getElementsByClassName('loaded_post')[0];
+var radiosParent = document.getElementById("myradios");
+var radios = radiosParent.getElementsByTagName("input");
 
+
+function loadPosts(){
+    
+}
+
+for(var i=0;i<radios.length;i++){
+    radios[i].addEventListener('change',function(){
+        let clickedIndex = getIndex(this);
+        let request_type = "";
+        //depending on the radio sending a request to api with different request type
+        switch(clickedIndex){
+            case 0: if(radios[0].checked){
+                        request_type= "loadHome";
+                    }
+                    break;
+            case 1: if(radios[1].checked){
+                         request_type= "loadFriends";
+                    }
+                    break;
+            case 2: if(radios[2].checked){
+                         request_type= "loadThoughts";
+                    }
+                    break;
+            case 3: if(radios[3].checked){
+                         request_type= "loadAsks";
+                    }
+                    break;
+            case 4: if(radios[4].checked){
+                        
+                         request_type= "loadCouncelor";
+                    }
+                    break;
+            case 5: if(radios[5].checked){
+                         request_type= "loadSettings";
+                    }
+                    break;
+        }
+        var xml = new XMLHttpRequest;
+        loading();     //function to show its loading
+        xml.onload = function(){ 
+            if(xml.readyState==4 || xml.status==200){
+                alert(xml.response);
+                handleResult(xml.response,request_type);
+            }
+        }
+        xml.open("GET","backend/api.php?request_type="+request_type,true);
+        xml.send();
+    });
+}
+function getIndex(obj){
+    for(var i=0;i<radios.length;i++){
+        if(radios[i]==obj){
+            return i;
+        }
+    }
+}
 //post inputs
 add.onclick = function(){
         inputs.style.display = "flex";
@@ -38,8 +96,7 @@ submit.onclick = function(){
         
 }
 
-differentiateStories();
-load();
+differentiateStories(); 
 
 //load posts
 function differentiateStories(){
@@ -78,17 +135,6 @@ function differentiateStories(){
             }
         }
     xml.open("POST","backend/getStories.php",true);
-    xml.send();
-}
-function load(){
-    var xml = new XMLHttpRequest;
-    loading();     //function to show its loading
-    xml.onload = function(){ 
-        if(xml.readyState==4 || xml.status==200){
-            handleResult(xml.response,"load");
-        }
-    }
-    xml.open("POST","backend/load.php",true);
     xml.send();
 }
 //change_profile
@@ -150,7 +196,7 @@ async function handleResult(result,type){
      
     finishedLoading();//since it is handling the response
     switch(type){
-        case "load":
+        case "loadHome":
             var response = JSON.parse(result);
             //puting users' info
             //username.innerHTML = response['userinfo']['firstname'] + " " + response['userinfo']['lastname'];

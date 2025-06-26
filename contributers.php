@@ -49,11 +49,13 @@
                 </div>
 
 
-<input type="radio" id="home_radio" name="catagory_radios">
-<input type="radio" id="friends_radio" name="catagory_radios">
-<input type="radio" id="thoughts_radio" name="catagory_radios">
-<input type="radio" id="ask_radio" name="catagory_radios">
-<input type="radio" id="councelor_radio" name="catagory_radios">
-<input type="radio" id="settings_radio" name="catagory_radios">
+            <div id="myradios" style="display:none">
+                <input type="radio" id="home_radio" name="catagory_radios">
+                <input type="radio" id="friends_radio" name="catagory_radios">
+                <input type="radio" id="thoughts_radio" name="catagory_radios">
+                <input type="radio" id="ask_radio" name="catagory_radios">
+                <input type="radio" id="councelor_radio" name="catagory_radios">
+                <input type="radio" id="settings_radio" name="catagory_radios">
+            </div>
 
 </div> 
