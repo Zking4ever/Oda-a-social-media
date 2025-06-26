@@ -38,8 +38,9 @@ function preveiw(e){
                     }
             }
         checkform.append('type','get_path');
+        checkform.append('request_type',"add_story");
         checkform.append('file',e.target.files[0]);
-        xml.open("POST","backend/post_story.php");
+        xml.open("POST","backend/api.php");
         xml.send(checkform);
 }
 
@@ -143,7 +144,9 @@ share_story.onclick = function(){
             }
         myform.append('caption',caption);
         myform.append('type','share_story');
+        myform.append('request_type',"add_story");
+        
         myform.append('file',file);
-        ajax.open("POST","backend/post_story.php");
+        ajax.open("POST","backend/api.php");
         ajax.send(myform);
 }

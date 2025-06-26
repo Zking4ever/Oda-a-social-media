@@ -32,3 +32,19 @@ elseif(isset($_GET['request_type']) && $_GET['request_type']=="loadSettings"){
 
     echo "setting";
 }
+elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="add_post"){
+    
+    include "includes/post.php";
+}
+elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="add_story"){
+    
+    include "includes/post_story.php";
+}
+elseif(isset($_GET['request_type']) && $_GET['request_type']=="get_stories"){
+    
+    include "includes/getStories.php";
+}
+elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="differentiate"){
+    
+    include "includes/differentiateStories.php";
+}

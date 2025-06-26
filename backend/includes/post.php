@@ -1,6 +1,5 @@
 <?php
-require "conn.php";
-session_start();
+
 
 $caption = "";
 $destination = "";

@@ -111,4 +111,17 @@
     .preview img{
         max-width: 300px;
     }
+    .view_story img{
+        max-width: 300px;;
+    }
+    .view_story button{
+        padding: 10px;
+        font-size:20px;
+    }
+    #btn1{
+        left: 13%;
+    }
+    #btn2{
+        right: 13%;
+    }
 }

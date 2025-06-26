@@ -85,7 +85,7 @@
 }
 @media (max-width:760px) {
     .post{
-        width: 300px;
+        max-width: 98%;
     }
     .img_container{
         width: 100%;

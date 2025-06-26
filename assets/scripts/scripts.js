@@ -10,10 +10,6 @@ var radiosParent = document.getElementById("myradios");
 var radios = radiosParent.getElementsByTagName("input");
 
 
-function loadPosts(){
-    
-}
-
 for(var i=0;i<radios.length;i++){
     radios[i].addEventListener('change',function(){
         let clickedIndex = getIndex(this);
@@ -76,7 +72,7 @@ submit.onclick = function(){
     var file = document.getElementById('file').files;
     var caption = document.getElementById('caption').value;
     var form = new FormData;
-    loading("Uploading your post... wait a momment..");
+    loading("Processing your post... wait a momment..");
     var ajaxrequest = new XMLHttpRequest;
         ajaxrequest.onload = function(){
             if(ajaxrequest.readyState == 4){
@@ -85,13 +81,13 @@ submit.onclick = function(){
         }
         form.append('file',file[0]);
         form.append('caption',caption);
+        form.append('request_type',"add_post");
     
-    ajaxrequest.open("POST","backend/post.php",true);
+    ajaxrequest.open("POST","backend/api.php",true);
     ajaxrequest.send(form);
 
 
     inputs.style.display ="none";
-    contributers.style.display ="none";
     add.style.opacity = "100";   
         
 }
@@ -129,12 +125,13 @@ function differentiateStories(){
                         }
                     }
                     activeStories = JSON.stringify(activeStories);
-                    form.append('actives',activeStories)
-                    xmlR.open("POST","backend/differentiateStories.php",true);
+                    form.append('actives',activeStories);
+                    form.append('request_type',"differentiate");
+                    xmlR.open("POST","backend/api.php",true);
                     xmlR.send(form);
             }
         }
-    xml.open("POST","backend/getStories.php",true);
+    xml.open("GET","backend/api.php?request_type=get_stories",true);
     xml.send();
 }
 //change_profile

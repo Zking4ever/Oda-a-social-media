@@ -1,6 +1,4 @@
 <?php
-require "conn.php";
-session_start();
 
 
 if(isset($_POST) && $_POST['type'] == "get_path"){
