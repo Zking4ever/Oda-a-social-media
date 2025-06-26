@@ -3,9 +3,11 @@ var add = document.getElementById('add');
 var submit = document.getElementById('submit');
 var inputs = document.getElementsByClassName('new_post_inputes')[0];
 var contributers = document.getElementsByClassName('contributers')[0];
+var loadingDiv = document.getElementsByClassName("loadingGif")[0];
 var notifications = document.getElementsByClassName('notifications')[0];
 var loaded_post = document.getElementsByClassName('loaded_post')[0];
 
+//post inputs
 add.onclick = function(){
         inputs.style.display = "flex";
         contributers.style.display = "flex";
@@ -16,6 +18,7 @@ submit.onclick = function(){
     var file = document.getElementById('file').files;
     var caption = document.getElementById('caption').value;
     var form = new FormData;
+    loading("Uploading your post... wait a momment..");
     var ajaxrequest = new XMLHttpRequest;
         ajaxrequest.onload = function(){
             if(ajaxrequest.readyState == 4){
@@ -79,10 +82,8 @@ function differentiateStories(){
 }
 function load(){
     var xml = new XMLHttpRequest;
-    xml.onload = function(){
-        notifications.style.opacity ="100";
-        notifications.style.transform =" translateX(-50%) translateY(0px)";
-        notifications.innerHTML = "loading...";
+    loading();     //function to show its loading
+    xml.onload = function(){ 
         if(xml.readyState==4 || xml.status==200){
             handleResult(xml.response,"load");
         }
@@ -126,7 +127,8 @@ var logout_btn = document.getElementsByClassName("logout")[0];
 logout_btn.onclick = function(){
         if(confirm("Do you want to log out?")){
             var myform = new FormData;
-        var ajax = new XMLHttpRequest;
+            loading("LOGING OUT...");
+            var ajax = new XMLHttpRequest;
             ajax.onload = function(){
                 if(ajax.readyState==4){
                     handleResult(ajax.response,"log out");
@@ -146,6 +148,7 @@ var stroies = document.getElementsByClassName('stroies')[0];
 
 async function handleResult(result,type){
      
+    finishedLoading();//since it is handling the response
     switch(type){
         case "load":
             var response = JSON.parse(result);
@@ -203,4 +206,17 @@ async function handleResult(result,type){
 
 function delay(ms){
     return new Promise(response => setTimeout(response,ms));
+}
+
+
+function loading(text){
+        contributers.style.display = "flex";
+        loadingDiv.style.display = "flex";
+        if(text!=null){
+            loadingDiv.textContent = text;
+        }
+}
+function finishedLoading(){
+        contributers.style.display = "none";
+        loadingDiv.style.display = "none";
 }

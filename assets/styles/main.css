@@ -92,6 +92,7 @@ main{
         top:0;
         left:0;
         display:none;
+        backdrop-filter: blur(8px);
 }
 .new_post_inputes{
     width: 400px;

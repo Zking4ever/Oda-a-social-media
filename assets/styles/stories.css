@@ -4,7 +4,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(10px);
 }
 .preview{
     position: fixed;
@@ -31,7 +30,7 @@
 }
 .preview img{
     max-width: 350px;
-    max-height: 90%;
+    max-height: 90vh;
 }
 .view_story img{
     max-width: 700px;;
@@ -44,7 +43,6 @@
     align-items: center;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(20px);
     z-index: 50;
     display: none;
 }
@@ -58,6 +56,15 @@
     font-size:28px;
     overflow:hidden;
     cursor:pointer;
+}
+.view_story_div span{
+    position: absolute;;
+    font-size: 20px;
+    padding: 10px;
+    bottom: 50px;
+    background-color: #dcdcdcd9;
+    width: 87%;
+    border-radius: 5px;
 }
 #btn1{
     left: 20%;

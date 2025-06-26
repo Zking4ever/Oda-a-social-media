@@ -27,7 +27,7 @@ if(isset($_POST['type']) && $_POST['type']=="see_story"){
     $i=0;
     if($stories->num_rows>0){
         while($story = $stories->fetch_assoc()){
-            $response[$i] = $story['source'];
+            $response[$i] = $story['source']."s9par@tor".$story['caption'];
             $i++;
         }
             echo json_encode($response);

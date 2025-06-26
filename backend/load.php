@@ -2,6 +2,7 @@
 
 require "conn.php";
 session_start();
+sleep(3);
 
 if($_SESSION['userid'] ==''){
     header("location: index.html");
