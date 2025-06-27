@@ -43,10 +43,9 @@ for(var i=0;i<radios.length;i++){
                     break;
         }
         var xml = new XMLHttpRequest;
-        loading();     //function to show its loading
+        loading("LOADING...");     //function to show its loading
         xml.onload = function(){ 
             if(xml.readyState==4 || xml.status==200){
-                alert(xml.response);
                 handleResult(xml.response,request_type);
             }
         }
@@ -208,6 +207,12 @@ async function handleResult(result,type){
             notifications.style.transform =" translateX(-50%) translateY(-30px)";
             notifications.innerHTML = "";
             break;
+        case "loadFriends":
+            var response = JSON.parse(result);
+                loaded_post.innerHTML = response['F_request'];
+                loaded_post.innerHTML += response['friends'];
+                loaded_post.innerHTML += response['F_suggestion'];
+            break;
         case "post":
             notifications.style.opacity ="100";
             notifications.style.transform =" translateX(-50%) translateY(0px)";
@@ -229,7 +234,7 @@ async function handleResult(result,type){
                 //then the refresh will take it out as the session is destroyed
 
             //refreshing the page everytime to see the changes
-            location.href = location.href;
+          	 window.location.assign("http://incrediblefuture.mywebcommunity.org/index.html");
             }
             break;
         case "story":

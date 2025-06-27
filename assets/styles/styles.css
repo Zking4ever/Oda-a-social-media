@@ -1,0 +1,105 @@
+.fieldset{
+    padding: 6px;
+    width: 96%;
+    border-radius: 10px;
+}
+.F_request{
+    gap: 5px;
+    max-width: 94%;
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.f_request,
+.friend{
+    height:60px;
+    gap:10px;
+    border:solid thin gray;
+    border-radius:10px;
+    padding:5px;
+    min-width:300px;
+    background-color: gainsboro;
+    display: flex;
+    align-items: center;
+}
+.f_request img,
+.F_suggestion img,
+.friend img{
+    height: 40px;
+    width:40px;
+    border-radius: 50%;
+}
+.f_request .detail{
+    width: 90%;
+    display: flex;
+    flex-direction:column;
+    position: relative;
+}
+.f_request .detail div{
+    position: absolute;
+    right: 14px;
+}
+.F_suggestion{
+    display: block;
+    margin-top: 10px;
+    display: flex;
+    gap: 7px;
+}
+.f_sug{
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    text-align: center;
+    justify-content: center;
+    width: 150px;
+    padding: 10px;
+    background-color: #9073de8f;
+    border-radius: 10px;
+}
+.f_sug .detail{
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+}
+.Freinds{
+    width: 80%;
+}
+.friend{
+    width: 80%;
+    position: relative;
+    background-color: beige;
+}
+.friend img{
+    margin-left: 23px;
+}
+.friend svg{
+    position: absolute;
+    right: 90px;
+    width: 30px;
+    height: 30px;
+    background-color: blueviolet;
+}
+@media (max-width:760px) {
+    .F_request{
+        max-width: 90%;
+    }
+    .f_request{
+        min-width: 200px;
+    }
+    .f_request .detail div{
+        position:unset;
+    }
+    .f_request .detail{
+        height: 90%;
+    }
+    .friend{
+        min-width: unset;
+        width: 230px;
+    }
+    .friend img{
+        margin-left: 10px;
+    }
+    .friend svg{
+        right: 10px;
+    }
+}

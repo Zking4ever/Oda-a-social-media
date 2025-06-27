@@ -54,6 +54,7 @@ main{
 }
 #body{
     flex: 2.5;
+    max-width: 1000px;
     background-color: white;
     position: relative;
 }
@@ -128,6 +129,9 @@ main{
     bottom: 80px;
 }
 @media (max-width:760px) {
+    #body{
+        max-width: 700px;
+    }
     main{
         display: block;
     }

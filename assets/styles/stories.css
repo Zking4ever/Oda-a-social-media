@@ -61,16 +61,19 @@
     position: absolute;;
     font-size: 20px;
     padding: 10px;
-    bottom: 50px;
+    bottom: 80px;
+    left: 3%;
     background-color: #dcdcdcd9;
     width: 87%;
     border-radius: 5px;
 }
 #btn1{
     left: 20%;
+    z-index:65;
 }
 #btn2{
     right: 20%;
+    z-index:65;
 }
 .stroies{
     height: 60px;
@@ -117,6 +120,9 @@
     .view_story button{
         padding: 10px;
         font-size:20px;
+    }
+    .view_story_div span{
+        bottom: 10px;
     }
     #btn1{
         left: 13%;

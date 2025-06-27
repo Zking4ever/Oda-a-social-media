@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="assets/styles/main.css">
     <link rel="stylesheet" href="assets/styles/stories.css">
     <link rel="stylesheet" href="assets/styles/posts.css">
+    <link rel="stylesheet" href="assets/styles/styles.css">
     <?php
-        session_start();
+        /*session_start();
         if($_SESSION['userid'] ==''){
             header("location: index.html");
         }
+            */
 ?>
 </head>
 <body>
@@ -58,5 +60,6 @@
    
 </body>
 <script src="assets/scripts/scripts.js"></script>
+<script src="assets/scripts/myscript.js"></script>
 <script src="assets/scripts/story.js"></script>
 </html>
