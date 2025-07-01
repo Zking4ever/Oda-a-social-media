@@ -1,7 +1,9 @@
 <?php
 require "backend/conn.php";
 
-if(isset($_POST) && !empty($_POST)){
+ $data;
+
+if(isset($_POST) && !empty($_POST) && $_POST['type']=="sign_up" ){
             
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
@@ -12,7 +14,10 @@ if(isset($_POST) && !empty($_POST)){
         $checkResponse = $conn->query($checkForEmail);
 
         if($checkResponse->num_rows >0){
-            echo "Email already exist";
+            $data['result'] = "Email already exist";
+            $data['status'] = "bad";
+
+            echo json_encode( $data );
             die;
         }
         
@@ -21,24 +26,33 @@ if(isset($_POST) && !empty($_POST)){
         $query = "INSERT into users(firstname,lastname,email,password,userid) values('$fname','$lname','$email','$password','$userid')";
         $response = $conn->query($query);
         if($response == true){
-            echo "sign up completed";
+            $data['result'] = "sign up completed";
+            $data['status'] = "great";
+
+            echo json_encode( $data );
         }
 }
-elseif(isset($_GET) && !empty($_GET)){
-    $email = $_GET['email'];
-    $password = $_GET['password'];
+elseif(isset($_POST) && !empty($_POST) && $_POST['type']=="log_in" ){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-    $checkForUser = "SELECT * from users where email = '$email' && password = '$password'";
+    $checkForUser = "SELECT userid from users where email = '$email' && password = '$password'";
     $checkUserResponse = $conn->query($checkForUser);
 
+    
     if($checkUserResponse->num_rows>0){
-        session_start();
         $userdata = $checkUserResponse->fetch_assoc();
-        $_SESSION['userid'] = $userdata['userid'];
-        header('location: home.php');
+        $data['userid'] = $userdata['userid'];
+        $data['result'] = "log in";
+        $data['status'] = "great";
+
+        echo json_encode( $data );
     }
     else{
-        echo "incorrect email or password";
+        $data['result'] = "incorrect email or password";
+        $data['status'] = "bad";
+
+        echo json_encode( $data );
     }
 
 }

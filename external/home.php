@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="assets/styles/posts.css">
     <link rel="stylesheet" href="assets/styles/styles.css">
     <?php
-        /*session_start();
+        session_start();
         if($_SESSION['userid'] ==''){
-            header("location: index.html");
+            header("location: loged out.php");
         }
-            */
+        
 ?>
 </head>
 <body>
