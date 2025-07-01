@@ -14,7 +14,7 @@
                 <div class="manage_story" style="display:none">
                     <div class="preview">
                         <img id="preview_img" src="">
-                        <input id="story_caption" type="text" value="Add a caption..">
+                        <input id="story_caption" type="text" placeholder="Add a caption..">
                         <button id='share_story'>Share</button>
                     </div>
                 </div>

@@ -59,7 +59,8 @@
     </main>
    
 </body>
-<script src="assets/scripts/scripts.js"></script>
+<script src="assets/scripts/script.js"></script>
 <script src="assets/scripts/myscript.js"></script>
 <script src="assets/scripts/story.js"></script>
+<script src='assets/scripts/setting.js'></script>
 </html>

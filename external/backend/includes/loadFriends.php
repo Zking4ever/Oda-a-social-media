@@ -2,7 +2,8 @@
 
 $data = [];
 
-        $query = "SELECT * from Friend_requests where receiver = '$userid' and status_ ='pending' ";
+
+        $query = "SELECT * from Friend_requests where receiver = '$userid' and status ='pending' ";
         $result = $conn->query($query);
 
         $friendsRequests = "";
@@ -30,13 +31,10 @@ $data = [];
                 }  
             $friendsRequests.="</div>
             </fieldset>";
-            }
-                    /*}
-                }
         }
-*/
-      #  return $post;
-        $data['F_request']= $friendsRequests;
+                    
+        $data['F_request']=  $friendsRequests;
+           
 
     $friendsquery = "SELECT * from friends where person1 = '$userid' or person2 = '$userid' ";
     $freindsResult = $conn->query($friendsquery);

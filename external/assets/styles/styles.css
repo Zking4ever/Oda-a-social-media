@@ -41,7 +41,7 @@
 }
 .F_suggestion{
     display: grid;
-    grid-template-columns: 1 1 1;
+    grid-template-columns: 30% 30% 30%;
     margin-top: 10px;
     gap: 7px;
 }
@@ -101,5 +101,12 @@
     }
     .friend svg{
         right: 10px;
+    }
+    .F_suggestion{
+        grid-template-columns: 50% 50%;
+    }
+    .f_sug{
+        width: 130px;
+        padding: 3px;
     }
 }

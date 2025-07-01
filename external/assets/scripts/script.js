@@ -213,6 +213,9 @@ async function handleResult(result,type){
                 loaded_post.innerHTML += response['friends'];
                 loaded_post.innerHTML += response['F_suggestion'];
             break;
+        case "loadSettings":
+                loaded_post.innerHTML = result;
+            break;
         case "post":
             notifications.style.opacity ="100";
             notifications.style.transform =" translateX(-50%) translateY(0px)";
