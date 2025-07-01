@@ -83,15 +83,36 @@
             color: blue;
             cursor: pointer;
         }
+        #passStrength{
+            font-size: 14px;
+            display: none;
+            grid-template-columns: 50% 50%;
+            background-color: rgb(217, 227, 234);
+            min-height: 5px;
+            width: 90%;
+            margin: 5px auto;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .criteria{
+            display: flex;
+            align-items: center;
+        }
+        .des{
+            color: red;
+        }
+        .criteria input:checked ~ .des{
+            color: green;
+        }
+        #passStrength input{
+            width: 12px;
+        }
         @media (max-width:760px) {
             .part2{
                 display: none;
             }
           .activelable{
             transform: translateY(-5px) translateX(-70px);
-            }
-            .sign_up{
-                transition: ;
             }
         label{
             padding: 5px;
@@ -133,8 +154,15 @@
                     <label for="email2">Email</label><br>
                     <input type="email" name="email" id="email2" required ><br>
                     <label for="password2">Password</label><br>
-                    <input type="password" name="password" id="password2" required><br><br>
-                    <input type="button" onclick="submitData(2)" value="Sign Up">
+                    <input type="password" name="password" id="password2" required><br>
+                        <div id="passStrength">
+                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Must be at least of 8 characters</div></div> 
+                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Uppercase Letters</div> </div>                       
+                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Lowercase Letters</div></div>                       
+                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Special characters</div></div>                  
+                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Numbers</div></div>              
+                        </div><br>
+                    <input type="button" onclick="submitData(2)" value="Sign Up" id="sign_up_btn">
                 </form>
                 <br><br><br>
                 <div class="switch_pages"><span>Already have an account? </span><button id="to_log_in" onclick="logIn()">Log in</button></div>

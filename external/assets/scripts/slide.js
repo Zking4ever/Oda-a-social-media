@@ -126,3 +126,94 @@ async function handleResponse(result,type){
     await new Promise(resp=>setTimeout(resp,2000));
     notification.style.top = "-10%";
 }
+
+//password strength test
+var password = document.getElementById("password2");
+var sign_up_btn = document.getElementById("sign_up_btn");
+var passStrength = document.getElementById("passStrength");
+
+password.addEventListener('focus',function(){
+        passStrength.style.display = "grid";
+});
+
+password.addEventListener("keyup",function(){
+        var input = password.value;
+        var radians = passStrength.getElementsByTagName("input");
+        passStrength.style.height = "90px";
+        
+            checkForLength(input,radians[0]);
+            checkForUpperCase(input,radians[1]);
+            checkForLowerCase(input,radians[2]);
+            checkForSpecialChar(input,radians[3]);
+            checkForNumber(input,radians[4]);
+
+        sign_up_btn.disabled = true;
+        if(radians[0].checked && radians[1].checked && radians[2].checked && radians[3].checked && radians[4].checked){
+             sign_up_btn.disabled = false;
+        }
+});
+
+function checkForLength(inputValue,element){
+    inputValue = inputValue.split("");
+    if(inputValue.length>=8){
+        element.checked=true;
+        return;
+    }
+    element.checked = false;
+}
+function checkForUpperCase(inputValue,element){
+    var alph = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+    for(let i=0;i<inputValue.length;i++){
+       for(let j=0;j<alph.length;j++){
+            if(inputValue[i]==alph[j]){
+                element.checked = true;
+                return;
+            }
+       }
+    }
+    
+    element.checked = false;
+}
+function checkForLowerCase(inputValue,element){
+    var alph =  ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+    for(let i=0;i<inputValue.length;i++){
+       for(let j=0;j<alph.length;j++){
+         if(inputValue[i]==alph[j]){
+            element.checked = true;
+            return;
+         }
+       }
+    }
+    
+    element.checked = false;
+}
+function checkForSpecialChar(inputValue,element){
+    var alph =  ['@', '$', '#', '%', '&', '^', '(', ')', '-', '+'];
+
+    for(let i=0;i<inputValue.length;i++){
+       for(let j=0;j<alph.length;j++){
+         if(inputValue[i]==alph[j]){
+            element.checked = true;
+            return;
+         }
+       }
+    }
+    
+    element.checked = false;
+}
+function checkForNumber(inputValue,element){
+    var alph =  ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    for(let i=0;i<inputValue.length;i++){
+       for(let j=0;j<alph.length;j++){
+         if(inputValue[i]==alph[j]){
+            element.checked = true;
+            return;
+         }
+       }
+    }
+    
+    element.checked = false;
+}
