@@ -19,7 +19,7 @@ elseif(isset($_GET['request_type']) && $_GET['request_type']=="loadFriends"){
 }
 elseif(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
 
-    echo "Thoughts";
+    include "includes/loadThoughts.php";
 }
 elseif(isset($_GET['request_type']) && $_GET['request_type']=="loadAsks"){
 
@@ -59,6 +59,9 @@ elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=
 }
 elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="change_profile_picture"){
     include "includes/change_setting.php";
+}
+elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="chat"){
+    include "includes/chat.php";
 }
 
 function createRand($size){

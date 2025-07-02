@@ -78,6 +78,7 @@
     width: 30px;
     height: 30px;
     background-color: blueviolet;
+    cursor: pointer;
 }
 @media (max-width:760px) {
     .F_request{

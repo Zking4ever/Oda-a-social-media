@@ -49,6 +49,7 @@ $data = [];
                                 <div class='Freinds'>";
         while($friend = $freindsResult->fetch_assoc()){
 
+            $relationid = $friend['relationid'];
             $friendid = $friend['person1'];
             if($userid == $friendid){
                 $friendid = $friend['person2'];
@@ -66,7 +67,7 @@ $data = [];
                                             <h3>".$friend['firstname']." ".$friend['lastname']."</h3>
                                             <span style='font-size:12px;margin-left:7px;'>".$friend['username']."</span>
                                         </div>
-                                        <svg></svg>
+                                        <svg id='$relationid' onclick='startChat(event)'></svg>
                                     </div>";
             }
         $friends.="</div>";

@@ -8,14 +8,24 @@
     <link rel="stylesheet" href="assets/styles/stories.css">
     <link rel="stylesheet" href="assets/styles/posts.css">
     <link rel="stylesheet" href="assets/styles/styles.css">
-    <?php
-        session_start();
-        if($_SESSION['userid'] ==''){
-            header("location: loged out.php");
-        }
-        
-?>
+    
 </head>
+<style>
+.inputs{
+    width:70%;
+    height:30px;
+    position:absolute;
+    bottom:2px;
+    border:solid thin gray;
+    border-radius:16px;
+    display:none;
+    overflow:hidden;
+}
+.inputs input{
+    height:90%;
+    width: 90%;
+}
+</style>
 <body>
    <div class="wraper">
     <header>
@@ -47,6 +57,7 @@
             <div class="post_container">
                 <div class="notifications"> <span>notifications</span></div>
                 <div class="loaded_post"></div>
+                <div class="inputs"><label>Attach File <input type="file" style="display:none;"></label><input type='text' placeholder="comment or thought chat input"> <button onclick="send(event)" style="padding:0px 10px">send</button></div>
             </div>
             <div class="controls">
                 <div class="add_new_post" id="add">➕</div>
@@ -63,4 +74,5 @@
 <script src="assets/scripts/myscript.js"></script>
 <script src="assets/scripts/story.js"></script>
 <script src='assets/scripts/setting.js'></script>
+<script src='assets/scripts/chat.js'></script>
 </html>

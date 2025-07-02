@@ -9,6 +9,7 @@ var loaded_post = document.getElementsByClassName('loaded_post')[0];
 var radiosParent = document.getElementById("myradios");
 var radios = radiosParent.getElementsByTagName("input");
 
+var type_inputes = document.getElementsByClassName("inputs")[0];
 
 for(var i=0;i<radios.length;i++){
     radios[i].addEventListener('change',function(){
@@ -18,14 +19,18 @@ for(var i=0;i<radios.length;i++){
         switch(clickedIndex){
             case 0: if(radios[0].checked){
                         request_type= "loadHome";
+                         type_inputes.style.display = "none";
                     }
                     break;
             case 1: if(radios[1].checked){
                          request_type= "loadFriends";
+                         type_inputes.style.display = "none";
                     }
                     break;
             case 2: if(radios[2].checked){
                          request_type= "loadThoughts";
+                         type_inputes.style.display = "flex";
+                         type_inputes.getElementsByTagName("input")[1].placeholder = "type what you are thinking";
                     }
                     break;
             case 3: if(radios[3].checked){
@@ -39,6 +44,7 @@ for(var i=0;i<radios.length;i++){
                     break;
             case 5: if(radios[5].checked){
                          request_type= "loadSettings";
+                         type_inputes.style.display = "none";
                     }
                     break;
         }
@@ -133,6 +139,7 @@ function differentiateStories(){
     xml.open("GET","backend/api.php?request_type=get_stories",true);
     xml.send();
 }
+/*
 //change_profile
 function change_profile(e){
     
@@ -162,6 +169,7 @@ function change_profile(e){
         ajax.send(myform);
     }
 }
+*/
 
 //log out
 var logout_btn = document.getElementsByClassName("logout")[0];
@@ -214,6 +222,7 @@ async function handleResult(result,type){
                 loaded_post.innerHTML += response['F_suggestion'];
             break;
         case "loadSettings":
+        case "loadThoughts":
                 loaded_post.innerHTML = result;
             break;
         case "post":
@@ -237,7 +246,7 @@ async function handleResult(result,type){
                 //then the refresh will take it out as the session is destroyed
 
             //refreshing the page everytime to see the changes
-          	 window.location.assign("http://incrediblefuture.mywebcommunity.org/index.html");
+          	 window.location.assign("http://incrediblefuture.mywebcommunity.org/");
             }
             break;
         case "story":
