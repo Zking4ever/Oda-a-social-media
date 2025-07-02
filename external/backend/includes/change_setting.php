@@ -18,7 +18,8 @@ if($_POST['request_type']=="change_profile_picture" && $_FILES['profile_image'][
         $excute = $conn->query($query);
 
         if($excute){
-            echo "Profile changed successfuly";
+            echo "done";
+            #echo "Profile changed successfuly";
         }
     }
    

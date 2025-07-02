@@ -38,7 +38,7 @@
                     border-radius:5px;
                 }
             </style>
-            <div class='box' style='display:flex; width:98%;padding:1%;background-color:#6b73b6;border-radius:10px;margin:10px auto'>
+            <div class='box' style='display:flex; width:98%;padding:1%;background-color:#6b73b6;border-radius:10px;margin:40px auto'>
                 <div class='one' style='flex:2.5;background-color:#3c6290; display:flex;flex-direction:column;align-items:center;border-radius:10px;'>
                     <br>
                     <h1>Setting</h1>

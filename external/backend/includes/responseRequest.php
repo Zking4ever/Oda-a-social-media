@@ -7,7 +7,7 @@ $status="";
 
 if($response == "send"){
     $relationid = createRand(25);
-    $query = "INSERT into friend_requests(relationid,sender,receiver,status_) value('$relationid','$userid','$friendid','pending')";
+    $query = "INSERT into friend_requests(relationid,sender,receiver,status) value('$relationid','$userid','$friendid','pending')";
     $excute = $conn->query($query);
 
     if($excute){
@@ -17,7 +17,7 @@ if($response == "send"){
 }
 elseif($response == "confirm"){
     $relationid = $_POST['relationid'];
-    $query1 = "UPDATE friend_requests set status_ = 'confirmed' where relationid = '$relationid' ";
+    $query1 = "UPDATE friend_requests set status = 'confirmed' where relationid = '$relationid' ";
     $query2 = "INSERT into friends(relationid,person1,person2) value('$relationid','$userid','$friendid')";
     $excute1 = $conn->query($query1);
     $excute2 = $conn->query($query2);

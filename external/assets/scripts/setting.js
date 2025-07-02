@@ -12,12 +12,15 @@ function change_profile_img(e){
         return;
     }
     var label = e.target.parentElement.getElementsByTagName("label")[0];
-    label.innerHTML = "Uploading your profile";
+    label.innerHTML = "Uploading your profile..";
     var form = new FormData;
     var ajax = new XMLHttpRequest;
     ajax.onload = function(){
         if(ajax.readyState==4 || ajax.status==200){
-            alert(ajax.response);
+           if(ajax.response == "done"){
+                handleResult("Profile changed successfuly","story");
+                label.innerHTML = "Change Profile";
+           }
         }
     }
     form.append('request_type',"change_profile_picture");

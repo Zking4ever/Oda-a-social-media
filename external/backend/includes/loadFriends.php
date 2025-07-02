@@ -35,11 +35,14 @@ $data = [];
                     
         $data['F_request']=  $friendsRequests;
            
+#---------------------------------------
 
     $friendsquery = "SELECT * from friends where person1 = '$userid' or person2 = '$userid' ";
     $freindsResult = $conn->query($friendsquery);
 
     $friends = "";
+    $fr_array = array();
+    $i=0;
 
     if($freindsResult->num_rows>0){
         $friends.="<legend style='margin:5px'>Freinds</legend>
@@ -50,6 +53,8 @@ $data = [];
             if($userid == $friendid){
                 $friendid = $friend['person2'];
             }
+            $fr_array[$i] = $friendid;
+            $i++;
                 #here another query to find out the freind sp to get the profile  
                 $queryForFriend = "SELECT * from users where userid='$friendid' ";
                 $friendArray = $conn->query($queryForFriend);
@@ -69,8 +74,21 @@ $data = [];
 
     
     $data['friends']= $friends;
+#--------------------------------------- suggestion ---------
+//lets get request the user already have sent to avoid dublication
+$sent_requests = array();
+$j=0;
 
-    
+$query = "SELECT * FROM Friend_requests where sender = '$userid' ";
+$execute = $conn->query($query);
+    if($execute->num_rows>0){
+        while($row = $execute->fetch_assoc()){
+            $sent_requests[$j] = $row['receiver'];
+            $j++;
+        }
+}
+
+//now the suggestion
     $query = "SELECT * from users where userid != '$userid'";
     $result = $conn->query($query);
         
@@ -81,23 +99,50 @@ $data = [];
                             <div class='F_suggestion'>";
             while($row = $result->fetch_assoc()){
 
-                $friendSuggestions.="
+                if(!isAfreind($fr_array,$row['userid']) && !AlreadySentRequestTo($row['userid'],$sent_requests)){
+
+                    $friendSuggestions.="
                                     <div class='f_sug'>
-                                        <img src='backend/".$row['source']."'>
+                                        <img src=backend/".$row['source'].">
                                         <div class='detail'>
                                             <h3>".$row['firstname']." ".$row['lastname']."</h3>
                                             <span style='font-size:12px;margin-left:7px;'>@".$row['username']."</span>
                                             <div style='transform:translateY(4px)'> <button onclick='request(`".$row['userid']."`,`1`)'>Send Request</button> <button onclick='remove(event)'>remove</button> </div>
                                         </div>
                                     </div>";
-                    }
+                    
+                
+                }
+            }
                 $friendSuggestions.="</div>";
         }
 
         $data['F_suggestion']= $friendSuggestions;
-/*
+    
+//freind suggestions filtering function
 
-*/
+#two things are here friends don't have to be suggested again and the one that are already sent the request should't do it twice
+function isAfreind($array,$userid){
+    
+    for ($i=0; $i < count($array) ; $i++) { 
+                    # code...
+            if($array[$i] == $userid){
+                return true;
+            }
+    }
+    return false;
+}
+
+function AlreadySentRequestTo($id,$array){
+        for ($i=0; $i < count($array); $i++) { 
+            # code...
+            if($array[$i]==$id){
+                return true;
+            }
+        }
+        return false;
+}
+
 echo json_encode($data) ;
 
 ?>
