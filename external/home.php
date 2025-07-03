@@ -15,15 +15,21 @@
     width:70%;
     height:30px;
     position:absolute;
-    bottom:2px;
+    bottom:25px;
     border:solid thin gray;
     border-radius:16px;
     display:none;
     overflow:hidden;
+    z-index:5;
 }
 .inputs input{
     height:90%;
     width: 90%;
+}
+@media (max-width:760px) {
+    .inputs{
+        width:90%;  
+    }
 }
 </style>
 <body>

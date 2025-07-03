@@ -13,7 +13,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
     }
     $chat = "<style>
                 .chat{
-                    height:400px;
+                    height:350px;
                     width:90%;
                     margin: 20px auto;
                     display:flex;
@@ -31,16 +31,17 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     padding:3px;
                     border:solid thin #9073de;
                     border-radius:5px;
+                    cursor:pointer;
                 }
                 .chatHolder{
                     flex:0.73;
                     overflow-Y:scroll;
-                    background-color:red;
+                    background-color: #efeaea;
                     display:flex;
                     flex-direction:column;
                 }
                 .chatHolder div{
-                    max-width:55%;
+                    max-width:75%;
                     width:fit-content;
                     min-height:40px;
                     display:flex;
@@ -49,7 +50,6 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     margin:7px;
                     padding:3px;
                 }
-                
                 .sent{
                     align-self:end;
                     justify-content:end;
@@ -63,6 +63,42 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     background-color:white;
                     border-radius:12px;
                 }
+                @media (max-width:760px){
+                .chat{
+                    height:320px;
+                    width:100%;
+                    margin: 5px auto;
+                }
+                .chat img{
+                    width:22px;
+                    height:22px;
+                    border:solid thin white;
+                }
+                .listHolder{
+                    flex:0.2;
+                }
+                .chatHolder{
+                    flex:0.8;
+                }
+                .listHolder div{
+                    flex-direction:column;
+                    gap:2px;
+                    margin:5px;
+                    padding:2px;
+                    font-size:small;
+                    text-align:center;
+                    border-radius:5px;
+                }
+            }
+            @media (max-width:460px){
+                .listHolder{
+                    display:none;
+                }
+                .chatHolder{
+                    flex:1;
+                    background-color: lightgray;
+                }
+            }
             </style>
                 
             <div class='chat'>
@@ -78,14 +114,19 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 $excute = $conn->query($query);
                     if($excute->num_rows>0){
                         while($row = $excute->fetch_assoc()){
-                            if($userid == $row['sender']){
+                            $sender = $row['sender'];
+                            if($userid == $sender){
+                                $queryForProfile = "SELECT * from users where userid = '$userid'";
+                                $profile = $conn->query($queryForProfile)->fetch_assoc();
                                 $chat .=" <div class='sent'>  
-                                    <div> <span>".$row['message']."</span></div> <img> 
-                                </div>";
+                                            <div> <span>".$row['message']."</span></div> <img src='backend/".$profile['source']."'> 
+                                        </div>";
                             }else{
+                                $queryForProfile = "SELECT * from users where userid = '$sender'";
+                                $profile = $conn->query($queryForProfile)->fetch_assoc();
                                 $chat .="<div class='recieved'>  
-                                    <img> <div> <span>".$row['message']."</span></div> 
-                                </div>";
+                                            <img src='backend/".$profile['source']."'> <div> <span>".$row['message']."</span></div> 
+                                        </div>";
                             }
                         }
                     }
