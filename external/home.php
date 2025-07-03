@@ -20,7 +20,7 @@
     border-radius:16px;
     display:none;
     overflow:hidden;
-    z-index:5;
+    z-index:1;
 }
 .inputs input{
     height:90%;
@@ -76,9 +76,9 @@
     </main>
    
 </body>
-<script src="assets/scripts/script.js"></script>
+<script src="assets/scripts/scripts.js"></script>
 <script src="assets/scripts/myscript.js"></script>
 <script src="assets/scripts/story.js"></script>
 <script src='assets/scripts/setting.js'></script>
-<script src='assets/scripts/chat.js'></script>
+<script src='assets/scripts/chats.js'></script>
 </html>

@@ -37,21 +37,17 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     flex:0.73;
                     overflow-Y:scroll;
                     background-color: #efeaea;
-                    display:flex;
-                    flex-direction:column;
                 }
                 .chatHolder div{
-                    max-width:75%;
-                    width:fit-content;
+                    width:97%;
                     min-height:40px;
                     display:flex;
                     gap:5px;
                     align-items:center;
-                    margin:7px;
+                    margin:1%;
                     padding:3px;
                 }
                 .sent{
-                    align-self:end;
                     justify-content:end;
                 }
                 .chat img{
@@ -62,6 +58,17 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 .chatHolder div div{
                     background-color:white;
                     border-radius:12px;
+                    max-width:70%;
+                    width:fit-content;
+                    overflow-wrap:break-word;
+                    padding:5px;
+                }
+                .chatHolder img{
+                    align-self:end;
+                    margin-bottom:8px;
+                }
+                .chatHolder div div span{
+                    width:100%;
                 }
                 @media (max-width:760px){
                 .chat{
@@ -118,20 +125,16 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                             if($userid == $sender){
                                 $queryForProfile = "SELECT * from users where userid = '$userid'";
                                 $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                $chat .=" <div class='sent'>  
-                                            <div> <span>".$row['message']."</span></div> <img src='backend/".$profile['source']."'> 
-                                        </div>";
+                                $chat .=" <div class='sent'><div> <span>".$row['message']."</span></div> <img src='backend/".$profile['source']."'></div>";
                             }else{
                                 $queryForProfile = "SELECT * from users where userid = '$sender'";
                                 $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                $chat .="<div class='recieved'>  
-                                            <img src='backend/".$profile['source']."'> <div> <span>".$row['message']."</span></div> 
-                                        </div>";
+                                $chat .="<div class='recieved'><img src='backend/".$profile['source']."'> <div> <span>".$row['message']."</span></div></div>";
                             }
                         }
                     }
                     
-    $chat .=" </div>
+    $chat .="</div>
     </div>";
 
     echo $chat;
@@ -146,4 +149,28 @@ if($relationid != "" && $_POST['data_type']=="send_message"){
     if($excute){
         echo "message sent";
     }
+}
+
+if(isset($_SESSION['relationid'])&& $_POST['data_type']=="read"){
+
+    
+    $chatHistory = "";
+            //query to get history messages
+                $query = "SELECT * from chats where relationid = '$relationid'";
+                $excute = $conn->query($query);
+                    if($excute->num_rows>0){
+                        while($row = $excute->fetch_assoc()){
+                            $sender = $row['sender'];
+                            if($userid == $sender){
+                                $queryForProfile = "SELECT * from users where userid = '$userid'";
+                                $profile = $conn->query($queryForProfile)->fetch_assoc();
+                                $chatHistory .=" <div class='sent'><div> <span>".$row['message']."</span></div> <img src='backend/".$profile['source']."'></div>";
+                            }else{
+                                $queryForProfile = "SELECT * from users where userid = '$sender'";
+                                $profile = $conn->query($queryForProfile)->fetch_assoc();
+                                $chatHistory .="<div class='recieved'><img src='backend/".$profile['source']."'> <div> <span>".$row['message']."</span></div></div>";
+                            }
+                        }
+                    }
+        echo $chatHistory;
 }

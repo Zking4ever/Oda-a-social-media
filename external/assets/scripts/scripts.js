@@ -10,6 +10,7 @@ var radiosParent = document.getElementById("myradios");
 var radios = radiosParent.getElementsByTagName("input");
 
 var type_inputes = document.getElementsByClassName("inputs")[0];
+var intervalId; 
 
 for(var i=0;i<radios.length;i++){
     radios[i].addEventListener('change',function(){
@@ -20,6 +21,7 @@ for(var i=0;i<radios.length;i++){
             case 0: if(radios[0].checked){
                         request_type= "loadHome";
                          type_inputes.style.display = "none";
+                         clearInterval(intervalId);
                     }
                     break;
             case 1: if(radios[1].checked){
@@ -31,20 +33,24 @@ for(var i=0;i<radios.length;i++){
                          request_type= "loadThoughts";
                          type_inputes.style.display = "flex";
                          type_inputes.getElementsByTagName("input")[1].placeholder = "type what you are thinking";
+                         clearInterval(intervalId);
                     }
                     break;
             case 3: if(radios[3].checked){
                          request_type= "loadAsks";
+                         clearInterval(intervalId);
                     }
                     break;
             case 4: if(radios[4].checked){
                         
                          request_type= "loadCouncelor";
+                         clearInterval(intervalId);
                     }
                     break;
             case 5: if(radios[5].checked){
                          request_type= "loadSettings";
                          type_inputes.style.display = "none";
+                         clearInterval(intervalId);
                     }
                     break;
         }
@@ -66,6 +72,7 @@ function getIndex(obj){
         }
     }
 }
+alert("")
 //post inputs
 add.onclick = function(){
         inputs.style.display = "flex";
