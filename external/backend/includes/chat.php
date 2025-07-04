@@ -33,6 +33,10 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     border-radius:5px;
                     cursor:pointer;
                 }
+                .active{
+                    background-color:#9073de;
+                    color:azure;
+                }
                 .chatHolder{
                     flex:0.73;
                     overflow-Y:scroll;
@@ -54,6 +58,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     width:40px;
                     height:40px;
                     border-radius:50%;
+                    border:solid white;
                 }
                 .chatHolder div div{
                     background-color:white;
@@ -121,8 +126,11 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                         $queryFriendProfiles = "SELECT * from users where userid='$friendid' ";
                         $friendProfileResponse = $conn->query($queryFriendProfiles);
                         $friendProfile = $friendProfileResponse->fetch_assoc();
-                        $chat.="
-                        <div id='".$friend['relationid']."' onclick='startChat(event)'> <img> <span>".$friendProfile['firstname']."</span></div>";
+
+                        $chat.="<div id='".$friend['relationid']."' onclick='startChat(event)' ".
+                            ($_SESSION['relationid'] == $friend['relationid'] ? "class = 'active' " : " ").">
+                                    <img src='backend/".$friendProfile['source']."'> <span>".$friendProfile['firstname']." ".$friendProfile['lastname']."</span>
+                            </div>";
                 }
             
                 $chat.="</div>

@@ -7,6 +7,20 @@
         $userdata = $excute->fetch_assoc();
         echo "
             <style>
+                .one{
+                    flex:2.5;
+                    background-color:#3c6290; 
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
+                    border-radius:10px;
+                }
+                .two{
+                    flex:1;
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
+                }
                 .one div{
                     width:50%;
                     display:flex;
@@ -36,21 +50,48 @@
                     padding:3px 10px;
                     background-color:lightgray;
                     border-radius:5px;
+                    cursor:pointer;
+                }
+                @media (max-width:760px){
+                .two div{
+                    background-color:red;
+                    width:70px;
+                    height:70px;
+                    border-radius:50%;
+                }
+                    .two img{
+                        width:96%;
+                    }
+                    .two label{
+                        text-align:center;
+                        width:50%;
+                        font-size:14px;
+                    }
+                    .one div{
+                        width:70%;
+                        font-size:14px;
+                        justify-content: space-between;
+                    }
+                    .one input{
+                        width:63%;
+                        padding: 2px;
+                        border-radius:5px;
+                    }
                 }
             </style>
             <div class='box' style='display:flex; width:98%;padding:1%;background-color:#6b73b6;border-radius:10px;margin:40px auto'>
-                <div class='one' style='flex:2.5;background-color:#3c6290; display:flex;flex-direction:column;align-items:center;border-radius:10px;'>
+                <div class='one'>
                     <br>
                     <h1>Setting</h1>
                     <br>
-                    <div>Username:<input placeholder='Username' value='$userdata[username]'></div><br>
-                    <div>First name:<input placeholder='First name' value='$userdata[firstname]'></div><br>
-                    <div>Last name:<input placeholder='Last name' value='$userdata[lastname]'></div><br>
-                    <div>Email:<input placeholder='Email' value='$userdata[email]' disabled></div><br>
-                    <div>Password:<input type='password' placeholder='Password' value='$userdata[password]'> <span style='position:absolute; right:10px;' onclick='passVisiblity(event)'>eye</span></div><br>
+                    <div>Username:<input placeholder='Username' value='$userdata[username]'></div>
+                    <div>First name:<input placeholder='First name' value='$userdata[firstname]'></div>
+                    <div>Last name:<input placeholder='Last name' value='$userdata[lastname]'></div>
+                    <div>Email:<input placeholder='Email' value='$userdata[email]' disabled></div>
+                    <div>Password:<input type='password' placeholder='Password' value='$userdata[password]'> <span style='position:absolute; right:10px; cursor:pointer;' onclick='passVisiblity(event)'>eye</span></div><br>
                     <button style='padding:3px 12px' onclick='saveSettings(event)'>Change</button><br>
                 </div>
-                <div class='two' style='flex:1;display:flex;flex-direction:column;align-items:center;'>
+                <div class='two'>
                     <div style=''><img src=backend/$userdata[source]></div><br>
                     <label for='getFile'>Change Profile</label>
                     <input type='file' id='getFile' onchange='change_profile_img(event)' style='display:none;'>

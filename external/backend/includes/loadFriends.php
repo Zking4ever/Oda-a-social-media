@@ -61,7 +61,7 @@ $data = [];
                 $friendArray = $conn->query($queryForFriend);
                 $friend=$friendArray->fetch_assoc();
                 
-                $friends.="<div class='friend'>
+                $friends.="<div class='friend' style='margin:5px'>
                                         <img src='backend/".$friend['source']."'>
                                         <div class='detail'>
                                             <h3>".$friend['firstname']." ".$friend['lastname']."</h3>

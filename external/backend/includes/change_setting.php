@@ -42,7 +42,7 @@ if(isset($_POST['data_type']) && $_POST['data_type']=="save_setting"){
         }
     }
 
-    $excute = $conn->query("UPDATE users set username = '$username',firstname= '$firstname',lastname = 'lastame',password='$password' where userid = '$userid' ");
+    $excute = $conn->query("UPDATE users set username = '$username',firstname= '$firstname',lastname = '$lastname',password='$password' where userid = '$userid' ");
     if($excute){
         echo "setting saved successfully";
         die;

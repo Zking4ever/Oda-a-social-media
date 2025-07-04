@@ -40,7 +40,7 @@ if($lookUser){
                                     <img src='backend/".$sender['source']."'>
                                     <div class='detail'>
                                         <h3 style='position:absolute;transform: translateY(-7px);'>".$sender['firstname']." ".$sender['lastname']."</h3>
-                                        <span style='font-size:12px;margin-left:7px;position:absolute;transform: translateY(10px);'>username</span>
+                                        <span style='font-size:12px;margin-left:7px;position:absolute;transform: translateY(10px);'>@".$sender['username']."</span>
                                     </div>
                                 </div>
                                 <div class='img_container'>

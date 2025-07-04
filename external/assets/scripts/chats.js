@@ -9,7 +9,7 @@ function startChat(e){
         if(ajax.readystate==4 || ajax.status ==200){
             handleResult(ajax.response,"loadThoughts");
             var chat_holder = document.getElementsByClassName("chatHolder")[0];
-            intervalId = setInterval( readChat, 3000);
+            intervalId = setInterval( readChat, 1000);
             chat_holder.scrollTo(0,chat_holder.scrollHeight);
         }
     }
@@ -39,7 +39,12 @@ function send(e){
         if(ajax.readystate==4 || ajax.status ==200){
             //handleResult(ajax.response,"loadThoughts");
             finishedLoading();
-            readChat();
+            if(data_type == "send_message"){
+                readChat();
+            }else if(data_type == "add_thought"){
+                alert(ajax.response);
+                //readThought();
+            }
             the_input_box.value = "";
         }
     }
