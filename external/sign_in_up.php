@@ -1,5 +1,6 @@
 <?php
 require "backend/conn.php";
+session_start();
 
  $data;
 
@@ -42,9 +43,9 @@ elseif(isset($_POST) && !empty($_POST) && $_POST['type']=="log_in" ){
     
     if($checkUserResponse->num_rows>0){
         $userdata = $checkUserResponse->fetch_assoc();
-        $data['userid'] = $userdata['userid'];
         $data['result'] = "log in";
         $data['status'] = "great";
+        $_SESSION['userid'] = $userdata['userid'];
 
         echo json_encode( $data );
     }

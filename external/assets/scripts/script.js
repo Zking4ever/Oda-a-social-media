@@ -72,7 +72,6 @@ function getIndex(obj){
         }
     }
 }
-alert("")
 //post inputs
 add.onclick = function(){
         inputs.style.display = "flex";

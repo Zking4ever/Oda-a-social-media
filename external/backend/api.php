@@ -57,7 +57,7 @@ elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=
     
     include "includes/responseRequest.php";
 }
-elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="change_profile_picture"){
+elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="setting"){
     include "includes/change_setting.php";
 }
 elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="chat"){

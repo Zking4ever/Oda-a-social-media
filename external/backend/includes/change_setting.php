@@ -2,7 +2,7 @@
 
 $destin ="";
 
-if($_POST['request_type']=="change_profile_picture" && $_FILES['profile_image']['name']!=""){
+if($_POST['data_type']=="change_profile_picture" && $_FILES['profile_image']['name']!=""){
     if($_FILES['profile_image']['error'] ==0){
         $folder = "Profiles";
         if(!file_exists($folder)){
@@ -23,5 +23,30 @@ if($_POST['request_type']=="change_profile_picture" && $_FILES['profile_image'][
         }
     }
    
+}
+
+if(isset($_POST['data_type']) && $_POST['data_type']=="save_setting"){
+    
+    $username = $_POST['username'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $password = $_POST['password'];
+
+    $result = $conn->query("SELECT username,userid from users");
+    if($result->num_rows>0){
+        while($row = $result->fetch_assoc()){
+            if($username == $row['username'] && $userid != $row['userid']){
+                echo "username already taken choose another one";
+                die;
+            }
+        }
+    }
+
+    $excute = $conn->query("UPDATE users set username = '$username',firstname= '$firstname',lastname = 'lastame',password='$password' where userid = '$userid' ");
+    if($excute){
+        echo "setting saved successfully";
+        die;
+    }
+    echo ("something went wrong..setting not saved");
 }
   

@@ -46,9 +46,9 @@
                     <div>Username:<input placeholder='Username' value='$userdata[username]'></div><br>
                     <div>First name:<input placeholder='First name' value='$userdata[firstname]'></div><br>
                     <div>Last name:<input placeholder='Last name' value='$userdata[lastname]'></div><br>
-                    <div>Email:<input placeholder='Email' value='$userdata[email]'></div><br>
+                    <div>Email:<input placeholder='Email' value='$userdata[email]' disabled></div><br>
                     <div>Password:<input type='password' placeholder='Password' value='$userdata[password]'> <span style='position:absolute; right:10px;' onclick='passVisiblity(event)'>eye</span></div><br>
-                    <button style='padding:3px 12px'>Change</button><br>
+                    <button style='padding:3px 12px' onclick='saveSettings(event)'>Change</button><br>
                 </div>
                 <div class='two' style='flex:1;display:flex;flex-direction:column;align-items:center;'>
                     <div style=''><img src=backend/$userdata[source]></div><br>

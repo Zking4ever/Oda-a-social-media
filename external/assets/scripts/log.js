@@ -102,8 +102,6 @@ function handleRequest(type){
             if(response['result']=="log in"){
                 var external = document.getElementById("external");
                 external.action ="external/check.php";
-                var you_id = document.getElementById("you_id");
-                you_id.value = response['userid'];
                 var check_btn = document.getElementById("check_btn");
                 check_btn.click();
                 return;

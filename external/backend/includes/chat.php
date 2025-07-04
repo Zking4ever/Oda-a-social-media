@@ -109,12 +109,23 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
             </style>
                 
             <div class='chat'>
-                <div class='listHolder'>  
-                    <div> <img> <span>User one</span></div>
-                    <div> <img> <span>User two</span></div>
-                    <div> <img> <span>User one</span></div>
-                    <div> <img> <span>User two</span></div>
-                </div>
+                <div class='listHolder'>";
+                $queryForFriend = "SELECT * FROM friends where person1 = '$userid' or person2 = '$userid' ";
+                $friendArray = $conn->query($queryForFriend);
+                
+                while($friend=$friendArray->fetch_assoc()){
+                    $friendid = $friend['person1'];
+                    if($userid == $friendid){
+                        $friendid =$friend['person2'];
+                    }
+                        $queryFriendProfiles = "SELECT * from users where userid='$friendid' ";
+                        $friendProfileResponse = $conn->query($queryFriendProfiles);
+                        $friendProfile = $friendProfileResponse->fetch_assoc();
+                        $chat.="
+                        <div id='".$friend['relationid']."' onclick='startChat(event)'> <img> <span>".$friendProfile['firstname']."</span></div>";
+                }
+            
+                $chat.="</div>
                 <div class='chatHolder'>";
             //query to get history messages
                 $query = "SELECT * from chats where relationid = '$relationid'";
