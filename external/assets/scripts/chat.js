@@ -24,6 +24,7 @@ function send(e){
     var request_type;
     var the_input_box = e.target.parentElement.getElementsByTagName("input")[1];
     var inputs_placeholder = the_input_box.placeholder;
+    var form = new FormData;
 
     if(inputs_placeholder == "type a message"){
         data_type = "send_message";
@@ -31,8 +32,11 @@ function send(e){
     }else if(inputs_placeholder == "type what you are thinking"){
         data_type = "add_thought";
         request_type = "thought";
+    }else if(inputs_placeholder == "comment"){
+        data_type = "add_comment";
+        request_type = "thought";
+        form.append('thoughtid',the_input_box.getAttribute('comment_this_thought'));
     }
-    var form = new FormData;
     var ajax =  new XMLHttpRequest;
     loading("Sending...");
     ajax.onload = function(){
@@ -44,6 +48,8 @@ function send(e){
             }else if(data_type == "add_thought"){
                 alert(ajax.response);
                 //readThought();
+            }else if(data_type == "add_comment"){
+                readComment(the_input_box.getAttribute('comment_this_thought'));
             }
             the_input_box.value = "";
         }

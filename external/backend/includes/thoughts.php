@@ -35,17 +35,77 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
         .reacted{
             background-color:#9073de;
         }
-            @media (max-width:760px){
+        .commentContainer{
+            width:68%;
+            height:200px;
+            background-color:rgb(34,45,65,0.4);
+            backdrop-filter:blur(3px);
+            border-radius:6px;
+            left:50%;
+            transform:translateX(-50%);
+            position:absolute;
+            bottom:60px;
+            padding:2px;
+            overflow-Y:scroll;
+            display:none;
+        }
+        .loader{
+            width:fit-content;
+            transform:translateY(96px);
+            font-size:35px;
+            margin:auto;
+        }
+        .cloth{
+            background-color:red;
+            width:13px;
+            height:13px;
+            position:absolute;
+            right:10px;
+            top:2px;
+        }
+          
+            .comment{
+                width:95%;
+                margin: 3px auto;
+                padding:4px;
+                border:solid thin;
+                border-radius:7px;
+                min-height:30px;
+                display:flex;
+                flex-direction:column;
+            }   
+            .comment div{
+                width:100%;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+            }
+            .comment span{
+                margin:0;
+                padding:2px;
+                width:86%;
+                background-color:rgb(224,229,231,0.75);
+                overflow-wrap:break-word;
+            }
+        @media (max-width:760px){
             .thoughts{
                 height:366px;
             }
             .thoughtBox{
                     width:87%
                 }
+            span{
+                font-size:small;
+                padding:1px 3px;
             }
+            .commentContainer{
+                width:88%;
+            }
+        }
         </style>
-        <div class = 'thoughts'>";
-        
+        <div class = 'thoughts'>
+           <div class='commentContainer'><div class='loader'>Loading..</div> </div>";
+
         $query = "SELECT * FROM thoughts";
         $excute = $conn->query($query);
         while($thought = $excute->fetch_assoc()){
@@ -125,4 +185,46 @@ if(isset($_POST['request_type']) && isset($_POST['data_type']) && $_POST['data_t
     if($excute){
         echo "done";
     }
+}
+
+if(isset($_POST['request_type']) && isset($_POST['data_type']) && $_POST['data_type']=="add_comment"){
+
+    
+    $comment = $_POST['message'];
+    $commentid = createRand(25);
+    $thoughtid = $_POST['thoughtid'];
+
+    $query = "INSERT into comments(commentid,thoughtid,userid,comment) values ('$commentid','$thoughtid','$userid','$comment') ";
+    $excute = $conn->query($query);
+    if($excute){
+        echo "commented";
+    }
+}
+
+if(isset($_POST['request_type']) && isset($_POST['data_type']) && $_POST['data_type']=="read_comment"){
+
+    $thoughtid = $_POST['thoughtid'];
+
+    $comments ="comments <svg class='cloth' onclick='clothComment(event)'>cloth</svg>";
+
+    $query = "SELECT * FROM comments where thoughtid = '$thoughtid' ";
+    $excute = $conn->query($query);
+    if($excute->num_rows>0){
+        while($com = $excute->fetch_assoc()){
+            $commenter = $conn->query("SELECT username from users where userid = '$com[userid]' ")->fetch_assoc();
+            $comments .= "<div class='comment'>
+                    <div>
+                        <span>".$com['comment']."</span>
+                        </svg>like</svg>
+                    </div>
+                    <div style='width:fit-content;align-self:flex-end;font-size:small;'>@".$commenter['username']."</div>
+                </div>
+           ";
+        }
+    }else{
+         $comments .="<div style='margin:auto;width:fit-content;'>No comment on this thought</div> ";
+    }
+         
+
+    echo $comments;
 }

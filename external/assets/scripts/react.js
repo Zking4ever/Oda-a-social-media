@@ -53,8 +53,12 @@ function reactThoght(e,n){
     var status;
     if(n==1) react_type="likes";else if(n==2) react_type ="dislikes";
     else {
-        alert("comment will be added soon");
-        return;
+        var commentContainer = document.getElementsByClassName("commentContainer")[0];
+            commentContainer.style.display = "block";
+            readComment(id);
+            type_inputes.getElementsByTagName("input")[1].placeholder = "comment";
+            type_inputes.getElementsByTagName("input")[1].setAttribute('comment_this_thought',id);
+            return;
     }
 
     if(element.className !="reacted"){
@@ -83,4 +87,27 @@ function reactThoght(e,n){
 
     xml.open("POST","backend/api.php",true);
     xml.send(form);
+}
+
+function clothComment(e){
+        e.target.parentElement.style.display = "none";
+        type_inputes.getElementsByTagName("input")[1].placeholder = "type what you are thinking";
+        type_inputes.getElementsByTagName("input")[1].removeAttribute('comment_this_thought');
+}
+
+function readComment(id){
+    var commentContainer = document.getElementsByClassName("commentContainer")[0];
+    var form = new FormData;
+    var ajax = new XMLHttpRequest;
+    ajax.onload = function(){
+        if(ajax.readyState==4 || ajax.status==200){
+            commentContainer.innerHTML = ajax.response;
+        }
+    }
+    form.append("request_type","thought");
+    form.append("data_type","read_comment");
+    form.append("thoughtid",id);
+
+    ajax.open("POST","backend/api.php",true);
+    ajax.send(form);
 }

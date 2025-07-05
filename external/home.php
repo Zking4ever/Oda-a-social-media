@@ -80,5 +80,5 @@
 <script src="assets/scripts/react.js"></script>
 <script src="assets/scripts/story.js"></script>
 <script src='assets/scripts/settings.js'></script>
-<script src='assets/scripts/chats.js'></script>
+<script src='assets/scripts/chat.js'></script>
 </html>

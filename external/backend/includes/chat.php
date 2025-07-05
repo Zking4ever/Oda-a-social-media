@@ -44,7 +44,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 }
                 .chatHolder div{
                     width:97%;
-                    min-height:40px;
+                    min-height:28px;
                     display:flex;
                     gap:5px;
                     align-items:center;
@@ -108,7 +108,9 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 }
                 .chatHolder{
                     flex:1;
-                    background-color: lightgray;
+                }
+                .chatHolder div{
+                    min-height:unset;
                 }
             }
             </style>
