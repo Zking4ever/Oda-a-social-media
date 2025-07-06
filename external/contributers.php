@@ -59,3 +59,26 @@
             </div>
 
 </div> 
+<style>
+    .commentContainer{
+            width:68%;
+            height:200px;
+            background-color:rgb(34,45,65,0.4);
+            backdrop-filter:blur(3px);
+            border-radius:6px;
+            left:50%;
+            transform:translateX(-50%);
+            position:absolute;
+            bottom:60px;
+            padding:2px;
+            overflow-Y:scroll;
+            display:none;
+        }
+        .loader{
+            width:fit-content;
+            transform:translateY(96px);
+            font-size:35px;
+            margin:auto;
+        }
+    </style>
+<div class='commentContainer'><div class='loader'>Loading..</div> </div>

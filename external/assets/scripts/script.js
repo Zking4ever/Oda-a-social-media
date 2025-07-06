@@ -32,7 +32,10 @@ for(var i=0;i<radios.length;i++){
             case 2: if(radios[2].checked){
                          request_type= "loadThoughts";
                          type_inputes.style.display = "flex";
-                         type_inputes.getElementsByTagName("input")[1].placeholder = "type what you are thinking";
+                         var commentContainer = document.getElementsByClassName("commentContainer")[0];
+                         if(window.getComputedStyle(commentContainer).display == "none"){
+                            type_inputes.getElementsByTagName("input")[1].placeholder = "type what you are thinking";
+                         }
                          clearInterval(intervalId);
                     }
                     break;
@@ -72,6 +75,7 @@ function getIndex(obj){
         }
     }
 }
+
 //post inputs
 add.onclick = function(){
         inputs.style.display = "flex";

@@ -36,7 +36,7 @@ function  response(id,relationid){
     ajax.open("POST","backend/api.php",true);
     ajax.send(form);
 }
-alert("rea")
+
 function reactThoght(e,n){
     var element = e.target;
     var id = element.parentElement.id;
@@ -52,15 +52,6 @@ function reactThoght(e,n){
     var react_type;
     var status;
     if(n==1) react_type="likes";else if(n==2) react_type ="dislikes";
-    else {
-        var commentContainer = document.getElementsByClassName("commentContainer")[0];
-            commentContainer.style.display = "block";
-            readComment(id);
-            type_inputes.getElementsByTagName("input")[0].style.display = "none";
-            type_inputes.getElementsByTagName("input")[1].placeholder = "comment";
-            type_inputes.getElementsByTagName("input")[1].setAttribute('comment_this_thought',id);
-            return;
-    }
 
     if(element.className !="reacted"){
         reaction_no++;
@@ -89,12 +80,26 @@ function reactThoght(e,n){
     xml.open("POST","backend/api.php",true);
     xml.send(form);
 }
+function seeComment(e){
+        var element = e.target;
+        var id = element.parentElement.id;
 
+        var previous_content = JSON.stringify(element.innerHTML).split(" ");
+        var reaction_no = previous_content[2];
+        
+        var commentContainer = document.getElementsByClassName("commentContainer")[0];
+        commentContainer.style.display = "block";
+        readComment(id);
+        //preparing for writing comment
+            type_inputes.getElementsByTagName("input")[1].placeholder = "comment";
+            type_inputes.getElementsByTagName("input")[1].setAttribute('prev_com_no',reaction_no);
+            type_inputes.getElementsByTagName("input")[1].setAttribute('comment_this_thought',id);
+}
 function clothComment(e){
         e.target.parentElement.style.display = "none";
-        type_inputes.getElementsByTagName("input")[0].style.display = "block";
         type_inputes.getElementsByTagName("input")[1].placeholder = "type what you are thinking";
         type_inputes.getElementsByTagName("input")[1].removeAttribute('comment_this_thought');
+        type_inputes.getElementsByTagName("input")[1].removeAttribute('prev_com_no');
 }
 
 function readComment(id){

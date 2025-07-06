@@ -36,6 +36,7 @@ function send(e){
         data_type = "add_comment";
         request_type = "thought";
         form.append('thoughtid',the_input_box.getAttribute('comment_this_thought'));
+        form.append('reaction_no',the_input_box.getAttribute('prev_com_no'));
     }
     var ajax =  new XMLHttpRequest;
     loading("Sending...");
@@ -46,9 +47,12 @@ function send(e){
             if(data_type == "send_message"){
                 readChat();
             }else if(data_type == "add_thought"){
-                alert(ajax.response);
+                thoughts_radio.checked =false;
+                thoughts_radio.click();
                 //readThought();
             }else if(data_type == "add_comment"){
+                thoughts_radio.checked =false;
+                thoughts_radio.click();
                 readComment(the_input_box.getAttribute('comment_this_thought'));
             }
             the_input_box.value = "";

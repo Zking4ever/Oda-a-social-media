@@ -35,26 +35,7 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
         .reacted{
             background-color:#9073de;
         }
-        .commentContainer{
-            width:68%;
-            height:200px;
-            background-color:rgb(34,45,65,0.4);
-            backdrop-filter:blur(3px);
-            border-radius:6px;
-            left:50%;
-            transform:translateX(-50%);
-            position:absolute;
-            bottom:60px;
-            padding:2px;
-            overflow-Y:scroll;
-            display:none;
-        }
-        .loader{
-            width:fit-content;
-            transform:translateY(96px);
-            font-size:35px;
-            margin:auto;
-        }
+        
         .cloth{
             background-color:red;
             width:13px;
@@ -103,8 +84,7 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
             }
         }
         </style>
-        <div class = 'thoughts'>
-           <div class='commentContainer'><div class='loader'>Loading..</div> </div>";
+        <div class = 'thoughts'>";
 
         $query = "SELECT * FROM thoughts";
         $excute = $conn->query($query);
@@ -118,7 +98,7 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
                                     <div style='margin-top:7px'  id='".$thought['thoughtid']."'>
                                         <span onclick='reactThoght(event,1)'".(!empty($reaction) && $reaction['liked']==1? "class='reacted'" : "")."> Like ".$thought['likes']." </span>  
                                         <span onclick='reactThoght(event,2)'".(!empty($reaction) && $reaction['disliked']==1? "class='reacted'" : "")."> dislikes ".$thought['dislikes']." </span> 
-                                        <span onclick='reactThoght(event,3)'".(!empty($reaction) && $reaction['commented']==1? "class='reacted'" : "")."> Comment ".$thought['comments']." </span> 
+                                        <span onclick='seeComment(event)'".(!empty($reaction) && $reaction['commented']==1? "class='reacted'" : "")."> Comment ".$thought['comments']." </span> 
                                     </div>
                             </div>";
         }
@@ -156,7 +136,7 @@ if(isset($_POST['request_type']) && isset($_POST['data_type']) && $_POST['data_t
         $reaction = $conn->query($reactionquery);
         if($reaction->num_rows==0){
 
-            $query = ($reaction_type=="likes" ? "INSERT into reaction(userid,thoughtid,liked) values('$userid','$thoughtid',1)" : ($reaction_type=="dislikes" ? "INSERT into reaction(userid,thoughtid,disliked) values('$userid','$thoughtid',1)" : "INSERT into reaction(userid,thoughtid,commented) values('$userid','$thoughtid',1)"));
+            $query = ($reaction_type=="likes" ? "INSERT into reaction(userid,thoughtid,liked) values('$userid','$thoughtid',1)" : ($reaction_type=="dislikes" ? "INSERT into reaction(userid,thoughtid,disliked) values('$userid','$thoughtid',1)" : ""));
             $excute = $conn->query($query);
             if(!$excute){
                 echo "error ocured";
@@ -193,7 +173,33 @@ if(isset($_POST['request_type']) && isset($_POST['data_type']) && $_POST['data_t
     $comment = $_POST['message'];
     $commentid = createRand(25);
     $thoughtid = $_POST['thoughtid'];
+    $reaction_no = $_POST['reaction_no']+1;
 
+    //already intracted or not?
+        $reactionquery = "SELECT * FROM reaction where thoughtid = '$thoughtid' and userid='$userid' ";
+        $reaction = $conn->query($reactionquery);
+        if($reaction->num_rows==0){
+            $queryforStatus = "INSERT into reaction(userid,thoughtid,commented) values('$userid','$thoughtid',1)";
+            $saveCommentStatus = $conn->query($queryforStatus);
+            if(!$saveCommentStatus){
+                echo "error occured";
+                die;
+            }
+        }else{
+            $queryforStatus = "UPDATE reaction set commented =1 where userid='$userid' and thoughtid='$thoughtid' ";
+            $saveCommentStatus = $conn->query($queryforStatus);
+            if(!$saveCommentStatus){
+                echo "error occured";
+                die;
+            }
+        }
+    
+    $increaseNoComment = "UPDATE thoughts set comments = '$reaction_no' where thoughtid = '$thoughtid' ";
+    $excute = $conn->query($increaseNoComment);
+    if(!$excute){
+        echo "error occured";
+        die;
+    }
     $query = "INSERT into comments(commentid,thoughtid,userid,comment) values ('$commentid','$thoughtid','$userid','$comment') ";
     $excute = $conn->query($query);
     if($excute){

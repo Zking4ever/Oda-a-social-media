@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <label for="radio">Lable</label>
+    <input type="radio" name="rad" id="radio">
+    <button onclick="remove()">click</button>
+</body>
+<script>
+async function remove(){
+        var label = document.getElementsByTagName("label");
+        var rad = document.getElementById("radio");
+        rad.checked =false;
+        await new Promise(res=>setTimeout(res,2000));
+        rad.click();
+}
+</script>
+</html>
