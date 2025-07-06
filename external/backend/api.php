@@ -66,6 +66,9 @@ elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=
 elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="thought"){
     include "includes/thoughts.php";
 }
+elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="post_reaction"){
+    include "includes/reactToPost.php";
+}
 elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="logout"){
 
     session_destroy();

@@ -35,40 +35,7 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
         .reacted{
             background-color:#9073de;
         }
-        
-        .cloth{
-            background-color:red;
-            width:13px;
-            height:13px;
-            position:absolute;
-            right:10px;
-            top:2px;
-        }
-          
-            .comment{
-                width:95%;
-                margin: 3px auto;
-                padding:4px;
-                border:solid thin;
-                border-radius:7px;
-                min-height:30px;
-                display:flex;
-                flex-direction:column;
-            }   
-            .comment div{
-                width:100%;
-                display:flex;
-                justify-content:space-between;
-                align-items:center;
-            }
-            .comment span{
-                margin:0;
-                padding:2px;
-                width:86%;
-                background-color:rgb(224,229,231,0.75);
-                overflow-wrap:break-word;
-            }
-        @media (max-width:760px){
+           @media (max-width:760px){
             .thoughts{
                 height:366px;
             }
@@ -78,9 +45,6 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
             span{
                 font-size:small;
                 padding:1px 3px;
-            }
-            .commentContainer{
-                width:88%;
             }
         }
         </style>
@@ -211,7 +175,10 @@ if(isset($_POST['request_type']) && isset($_POST['data_type']) && $_POST['data_t
 
     $thoughtid = $_POST['thoughtid'];
 
-    $comments ="comments <svg class='cloth' onclick='clothComment(event)'>cloth</svg>";
+    $comments ="comments <svg class='cloth' onclick='clothComment(event)' width='28' height='28' fill='red' class='bi bi-x-circle' viewBox='0 0 16 16'>
+                    <path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16'/>
+                    <path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708'/>
+                </svg> ";
 
     $query = "SELECT * FROM comments where thoughtid = '$thoughtid' ";
     $excute = $conn->query($query);
@@ -221,7 +188,9 @@ if(isset($_POST['request_type']) && isset($_POST['data_type']) && $_POST['data_t
             $comments .= "<div class='comment'>
                     <div>
                         <span>".$com['comment']."</span>
-                        </svg>like</svg>
+                        <svg xmlns='http://www.w3.org/2000/svg' width='13' height='13' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'>
+                                            <path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15'/>
+                        </svg>
                     </div>
                     <div style='width:fit-content;align-self:flex-end;font-size:small;'>@".$commenter['username']."</div>
                 </div>
