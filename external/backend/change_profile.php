@@ -32,6 +32,5 @@ if($type=="change_profile"){
 }
 elseif($type=="logout"){
     session_destroy();
-    echo "loged out";
 }
 ?>

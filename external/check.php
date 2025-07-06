@@ -14,7 +14,8 @@ if(isset($_SESSION['userid'])){
     }
 }
 else{
-    session_abort();
+    session_destroy();
+    header("location: loged out.php");
     die;
 }
  

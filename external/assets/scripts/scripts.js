@@ -191,8 +191,8 @@ logout_btn.onclick = function(){
                 }
             }
             
-            myform.append('type','logout');
-            ajax.open("POST","backend/change_profile.php");
+            myform.append('request_type','logout');
+            ajax.open("POST","backend/api.php");
             ajax.send(myform);
         }
 }
@@ -246,13 +246,9 @@ async function handleResult(result,type){
             break;
         case "log out":
             if(result=="loged out"){
-                notifications.style.opacity ="100";
-                notifications.style.transform =" translateX(-50%) translateY(0px)";
-                notifications.innerHTML = "Loging out...";
                 //then the refresh will take it out as the session is destroyed
-
-            //refreshing the page everytime to see the changes
-          	 window.location.assign("http://incrediblefuture.mywebcommunity.org/");
+                location.href = location.href;
+          	// window.location.assign("http://incrediblefuture.mywebcommunity.org/");
             }
             break;
         case "story":
