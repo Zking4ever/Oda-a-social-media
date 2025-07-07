@@ -3,7 +3,7 @@
 $data = [];
 
 
-        $query = "SELECT * from Friend_requests where receiver = '$userid' and status ='pending' ";
+        $query = "SELECT * from friend_requests where receiver = '$userid' and status ='pending' ";
         $result = $conn->query($query);
 
         $friendsRequests = "";
@@ -80,7 +80,7 @@ $data = [];
 $sent_requests = array();
 $j=0;
 
-$query = "SELECT * FROM Friend_requests where sender = '$userid' ";
+$query = "SELECT * FROM friend_requests where sender = '$userid' ";
 $execute = $conn->query($query);
     if($execute->num_rows>0){
         while($row = $execute->fetch_assoc()){

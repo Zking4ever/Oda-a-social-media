@@ -101,7 +101,7 @@ if(isset($_POST['data_type']) && $_POST['data_type']=="read_comment"){
     $query= "SELECT * from postcomments where postid = '$postid'";
     $result = $conn->query($query);
     if($result->num_rows==0){
-        $comments .= "<div class='comment'>No comments yet</div>";
+        $comments .= "<div style='margin:auto;width:fit-content;'>No comments yet</div>";
     }else{
         while($com = $result->fetch_assoc()){
             $sender = $conn->query("SELECT username from users where userid = '$com[userid]' ")->fetch_assoc();
