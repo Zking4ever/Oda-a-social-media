@@ -37,6 +37,23 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     background-color:#9073de;
                     color:azure;
                 }
+                .active .new{
+                    background-color:azure;
+                }
+                .new{
+                    background-color:azure;
+                    position:absolute;
+                    top:1px;
+                    left:2%;
+                    width:18px;
+                    aspect-ratio:1;
+                    font-size:12px;
+                    border:solid thin;
+                    border-radius:50%;
+                    color:black;
+                    text-align:center;
+                }
+                
                 .chatHolder{
                     flex:0.73;
                     overflow-Y:scroll;
@@ -53,6 +70,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 }
                 .sent{
                     justify-content:end;
+                    position:relative;
                 }
                 .chat img{
                     width:40px;
@@ -74,6 +92,15 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 }
                 .chatHolder div div span{
                     width:100%;
+                    position:relative;
+                }
+                .status{
+                    font-size:7px;
+                    position:absolute;
+                    padding:unset;
+                    background-color:transparent;
+                    right:-3px;
+                    bottom:-8px;
                 }
                 @media (max-width:760px){
                 .chat{
@@ -128,10 +155,14 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                         $queryFriendProfiles = "SELECT * from users where userid='$friendid' ";
                         $friendProfileResponse = $conn->query($queryFriendProfiles);
                         $friendProfile = $friendProfileResponse->fetch_assoc();
+                        //new message?
+                        $queryForNewMessage = "SELECT * from chats where relationid = '$friend[relationid]' and sender != '$userid' and status='sent' ";
+                        $result = $conn->query($queryForNewMessage);
 
                         $chat.="<div id='".$friend['relationid']."' onclick='startChat(event)' ".
-                            ($_SESSION['relationid'] == $friend['relationid'] ? "class = 'active' " : " ").">
-                                    <img src='backend/".$friendProfile['source']."'> <span>".$friendProfile['firstname']." ".$friendProfile['lastname']."</span>
+                            ($_SESSION['relationid'] == $friend['relationid'] ? "class = 'active' " : " ")." style='position:relative;'>".
+                                  (!empty($result)&&$result->num_rows>0 ? "<span class='new'>".$result->num_rows."</span>" : "")  
+                                    ."<img src='backend/".$friendProfile['source']."'> <span>".$friendProfile['firstname']." ".$friendProfile['lastname']."</span>
                             </div>";
                 }
             
@@ -146,7 +177,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                             if($userid == $sender){
                                 $queryForProfile = "SELECT * from users where userid = '$userid'";
                                 $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                $chat .=" <div class='sent'><div> <span>".$row['message']."</span></div> <img src='backend/".$profile['source']."'></div>";
+                                $chat .=" <div class='sent'><div> <span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img src='backend/".$profile['source']."'></div>";
                             }else{
                                 $queryForProfile = "SELECT * from users where userid = '$sender'";
                                 $profile = $conn->query($queryForProfile)->fetch_assoc();
@@ -165,7 +196,7 @@ if($relationid != "" && $_POST['data_type']=="send_message"){
 
     $message = $_POST['message'];
     $messageid = createRand(25);
-    $query = "INSERT into chats(messageid,relationid,sender,message) values ('$messageid','$relationid','$userid','$message')";
+    $query = "INSERT into chats(messageid,relationid,sender,message,status) values ('$messageid','$relationid','$userid','$message','sent')";
     $excute = $conn->query($query);
     if($excute){
         echo "message sent";
@@ -185,7 +216,7 @@ if(isset($_SESSION['relationid'])&& $_POST['data_type']=="read"){
                             if($userid == $sender){
                                 $queryForProfile = "SELECT * from users where userid = '$userid'";
                                 $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                $chatHistory .=" <div class='sent'><div> <span>".$row['message']."</span></div> <img src='backend/".$profile['source']."'></div>";
+                                $chatHistory .=" <div class='sent'><div> <span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img src='backend/".$profile['source']."'></div>";
                             }else{
                                 $queryForProfile = "SELECT * from users where userid = '$sender'";
                                 $profile = $conn->query($queryForProfile)->fetch_assoc();
@@ -193,5 +224,18 @@ if(isset($_SESSION['relationid'])&& $_POST['data_type']=="read"){
                             }
                         }
                     }
+        //change the status
+        $query = "SELECT messageid from chats where relationid = '$relationid' and sender != '$userid'";
+        $excute = $conn->query($query);
+        if($excute->num_rows>0){
+            while($row = $excute->fetch_assoc()){
+                $query1 = "UPDATE chats set status='seen' where relationid = '$relationid' and messageid = '$row[messageid]'";
+                $excute1 = $conn->query($query1);
+                if(!$excute1){
+                    echo "error occured";
+                    die;
+                }
+            }
+        }
         echo $chatHistory;
 }

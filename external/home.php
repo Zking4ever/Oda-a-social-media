@@ -20,7 +20,6 @@
     border-radius:16px;
     display:none;
     overflow:hidden;
-    z-index:1;
 }
 .inputs input{
     height:90%;

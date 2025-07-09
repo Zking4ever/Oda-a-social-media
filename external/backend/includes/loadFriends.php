@@ -48,7 +48,7 @@ $data = [];
         $friends.="<legend style='margin:5px'>Freinds</legend>
                                 <div class='Freinds'>";
         while($friend = $freindsResult->fetch_assoc()){
-
+            
             $relationid = $friend['relationid'];
             $friendid = $friend['person1'];
             if($userid == $friendid){
@@ -60,10 +60,14 @@ $data = [];
                 $queryForFriend = "SELECT * from users where userid='$friendid' ";
                 $friendArray = $conn->query($queryForFriend);
                 $friend=$friendArray->fetch_assoc();
-                
+                 //new message?
+                $queryForNewMessage = "SELECT * from chats where relationid = '$relationid' and sender != '$userid' and status='sent' ";
+                $result = $conn->query($queryForNewMessage);
+
                 $friends.="<div class='friend' style='margin:5px'>
-                                        <img src='backend/".$friend['source']."'>
-                                        <div class='detail'>
+                                        <img src='backend/".$friend['source']."'>".
+                                        (!empty($result)&&$result->num_rows>0 ? "<span style='position:absolute;left:4%;transform:translateY(-10px);font-size:small;width:17px;aspect-ratio:1;text-align:center;border:solid thin;border-radius:50%;background-color:azure;'>".$result->num_rows."</span>" : "")
+                                        ."<div class='detail'>
                                             <h3>".$friend['firstname']." ".$friend['lastname']."</h3>
                                             <span style='font-size:12px;margin-left:7px;'>".$friend['username']."</span>
                                         </div>
