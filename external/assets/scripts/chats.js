@@ -29,6 +29,14 @@ function send(e){
     if(inputs_placeholder == "type a message"){
         data_type = "send_message";
         request_type = "chat";
+        var fileInput = e.target.parentElement.getElementsByTagName("input")[0];
+        if(fileInput.value!=""){
+            form.append("filesNumber",fileInput.files.length);
+            for(let i=0;i<fileInput.files.length;i++){
+                form.append('file'+i,fileInput.files[i]);
+            }
+        }
+        
     }else if(inputs_placeholder == "type what you are thinking"){
         data_type = "add_thought";
         request_type = "thought";
@@ -51,6 +59,7 @@ function send(e){
             //handleResult(ajax.response,"loadThoughts");
             finishedLoading();
             if(data_type == "send_message"){
+                alert(ajax.response);
                 readChat();
             }else if(data_type == "add_thought"){
                 thoughts_radio.checked =false;

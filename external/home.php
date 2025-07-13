@@ -62,7 +62,7 @@
             <div class="post_container">
                 <div class="notifications"> <span>notifications</span></div>
                 <div class="loaded_post"></div>
-                <div class="inputs"><label>Attach File <input type="file" style="display:none;"></label><input type='text' placeholder="comment or thought chat input"> <button onclick="send(event)" id="send_btn" style="padding:0px 10px">send</button></div>
+                <div class="inputs"><label>Attach File <input type="file" multiple style="display:none;"></label><input type='text' placeholder="comment or thought chat input"> <button onclick="send(event)" id="send_btn" style="padding:0px 10px">send</button></div>
             </div>
             <div class="controls">
                 <div class="add_new_post" id="add">➕</div>

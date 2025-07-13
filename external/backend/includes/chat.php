@@ -59,7 +59,8 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     overflow-Y:scroll;
                     background-color: #efeaea;
                 }
-                .chatHolder div{
+                .chatHolder .sent,
+                .chatHolder .recieved{
                     width:97%;
                     min-height:28px;
                     display:flex;
@@ -72,21 +73,23 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     justify-content:end;
                     position:relative;
                 }
-                .chat img{
+                .profile{
                     width:40px;
                     height:40px;
                     border-radius:50%;
                     border:solid white;
                 }
-                .chatHolder div div{
+                .chatHolder div div:not(.files){
+                    flex-direction:column;
                     background-color:white;
                     border-radius:12px;
                     max-width:70%;
                     width:fit-content;
                     overflow-wrap:break-word;
                     padding:5px;
+                    text-align:right;
                 }
-                .chatHolder img{
+                .chatHolder .profile{
                     align-self:end;
                     margin-bottom:8px;
                 }
@@ -102,13 +105,28 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     right:-3px;
                     bottom:-8px;
                 }
+                .files{
+                    display:unset;
+                    width:100%;
+                    display:grid;
+                    grid-template-columns:50% 50%;
+                    gap:4px;
+                    max-width:unset;
+                    font-size:small;
+                }
+                .files img{
+                    width:98%;
+                }
+                .files a{
+                    width:200%;
+                }
                 @media (max-width:760px){
                 .chat{
                     height:320px;
                     width:100%;
                     margin: 5px auto;
                 }
-                .chat img{
+                .profile{
                     width:22px;
                     height:22px;
                     border:solid thin white;
@@ -162,7 +180,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                         $chat.="<div id='".$friend['relationid']."' onclick='startChat(event)' ".
                             ($_SESSION['relationid'] == $friend['relationid'] ? "class = 'active' " : " ")." style='position:relative;'>".
                                   (!empty($result)&&$result->num_rows>0 ? "<span class='new'>".$result->num_rows."</span>" : "")  
-                                    ."<img src='backend/".$friendProfile['source']."'> <span>".$friendProfile['firstname']." ".$friendProfile['lastname']."</span>
+                                    ."<img class='profile' src='backend/".$friendProfile['source']."'> <span>".$friendProfile['firstname']." ".$friendProfile['lastname']."</span>
                             </div>";
                 }
             
@@ -174,16 +192,52 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     if($excute->num_rows>0){
                         while($row = $excute->fetch_assoc()){
                             $sender = $row['sender'];
+                            //file checking
+                            $queryForfile = "SELECT * from chatfiles where messageid = '$row[messageid]'";
+                            $File = $conn->query($queryForfile);
                             if($userid == $sender){
-                                $queryForProfile = "SELECT * from users where userid = '$userid'";
-                                $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                $chat .=" <div class='sent'><div> <span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img src='backend/".$profile['source']."'></div>";
+                               if($File->num_rows==0){
+                                    $queryForProfile = "SELECT * from users where userid = '$userid'";
+                                    $profile = $conn->query($queryForProfile)->fetch_assoc();
+                                    $chat .=" <div class='sent'><div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' src='backend/".$profile['source']."'></div>";
+                                }else{
+                                    $queryForProfile = "SELECT * from users where userid = '$userid'";
+                                    $profile = $conn->query($queryForProfile)->fetch_assoc();
+                                    $chat .=" <div class='sent'><div> <div class='files'>";
+                                    while($file = $File->fetch_assoc()){
+                                        if($file["type"]=="image/gif"||$file["type"]=="image/png"||$file["type"]=="image/jpg" || $file["type"]=="image/jpeg"){
+                                            $chat.="<a target='_blank' href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
+                                        }else{
+                                            $chat.="<a target='_blank' href='backend/".$file['source']."'>Download file</a>";
+                                        }
+                                    }
+                                    
+                                    $chat .= "</div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' src='backend/".$profile['source']."'></div>";
+                                }
                             }else{
-                                $queryForProfile = "SELECT * from users where userid = '$sender'";
-                                $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                $chat .="<div class='recieved'><img src='backend/".$profile['source']."'> <div> <span>".$row['message']."</span></div></div>";
+                                if($File->num_rows==0){
+                                    $queryForProfile = "SELECT * from users where userid = '$sender'";
+                                    $profile = $conn->query($queryForProfile)->fetch_assoc();
+                                    $chat .="<div class='recieved'><img class='profile' src='backend/".$profile['source']."'> <div> <span>".$row['message']."</span></div></div>";
+                                }
+                                else{
+                                    $queryForProfile = "SELECT * from users where userid = '$sender'";
+                                    $profile = $conn->query($queryForProfile)->fetch_assoc();
+                                    $chat .="<div class='recieved'><img class='profile' src='backend/".$profile['source']."'> <div><div class='files'>";
+                                    while($file = $File->fetch_assoc()){
+                                        if($file["type"]=="image/gif"||$file["type"]=="image/png"||$file["type"]=="image/jpg" || $file["type"]=="image/jpeg"){
+                                            $chat.="<a target='_blank' href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
+                                        }else{
+                                            $chat.="<a target='_blank' href='backend/".$file['source']."'>Download file</a>";
+                                        }
+                                    }
+                                    
+                                    $chat.="</div><span>".$row['message']."</span></div></div>";
+                                }
                             }
                         }
+                    }else{
+                        $chat.="<center style='margin:20px auto;'> No message history found </center>";
                     }
                     
     $chat .="</div>
@@ -196,11 +250,39 @@ if($relationid != "" && $_POST['data_type']=="send_message"){
 
     $message = $_POST['message'];
     $messageid = createRand(25);
+   
+    if(isset($_FILES) ){
+        $fileNumber = $_POST['filesNumber'];
+        for($i=0;$i<$fileNumber;$i++){
+            //each file going to be processed here
+            $destination = "";
+            $fileid = createRand(25);
+            $type ="";
+            if($_FILES['file'.$i]['name']!="" && $_FILES['file'.$i]['error']==0){
+                
+                $folder = "ChatFiles/";
+                if(!file_exists($folder)){
+                    mkdir($folder,0777,true);
+                }
+                $destination = $folder.$_FILES['file'.$i]['name'];
+                $type = $_FILES['file'.$i]['type'];
+                move_uploaded_file($_FILES['file'.$i]['tmp_name'],$destination);
+            }
+            if($destination!=""){
+                $query = "INSERT into chatfiles(fileid,messageid,source,type) values('$fileid','$messageid','$destination','$type') ";
+                $excute = $conn->query($query);
+                if(!$excute){ 
+                    continue; 
+                } 
+            }
+        }
+    }
     $query = "INSERT into chats(messageid,relationid,sender,message,status) values ('$messageid','$relationid','$userid','$message','sent')";
     $excute = $conn->query($query);
     if($excute){
         echo "message sent";
     }
+
 }
 
 if(isset($_SESSION['relationid'])&& $_POST['data_type']=="read"){
@@ -211,18 +293,54 @@ if(isset($_SESSION['relationid'])&& $_POST['data_type']=="read"){
                 $query = "SELECT * from chats where relationid = '$relationid'";
                 $excute = $conn->query($query);
                     if($excute->num_rows>0){
-                        while($row = $excute->fetch_assoc()){
+                          while($row = $excute->fetch_assoc()){
                             $sender = $row['sender'];
+                            //file checking
+                            $queryForfile = "SELECT * from chatfiles where messageid = '$row[messageid]'";
+                            $File = $conn->query($queryForfile);
                             if($userid == $sender){
-                                $queryForProfile = "SELECT * from users where userid = '$userid'";
-                                $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                $chatHistory .=" <div class='sent'><div> <span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img src='backend/".$profile['source']."'></div>";
+                               if($File->num_rows==0){
+                                    $queryForProfile = "SELECT * from users where userid = '$userid'";
+                                    $profile = $conn->query($queryForProfile)->fetch_assoc();
+                                    $chatHistory .=" <div class='sent'><div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' src='backend/".$profile['source']."'></div>";
+                                }else{
+                                    $queryForProfile = "SELECT * from users where userid = '$userid'";
+                                    $profile = $conn->query($queryForProfile)->fetch_assoc();
+                                    $chatHistory .=" <div class='sent'><div> <div class='files'>";
+                                    while($file = $File->fetch_assoc()){
+                                        if($file["type"]=="image/gif"||$file["type"]=="image/png"||$file["type"]=="image/jpg" || $file["type"]=="image/jpeg"){
+                                            $chatHistory.="<a target='_blank' href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
+                                        }else{
+                                            $chatHistory.="<a target='_blank' href='backend/".$file['source']."'>Download file</a>";
+                                        }
+                                    }
+                                        
+                                    $chatHistory .= "</div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' src='backend/".$profile['source']."'></div>";
+                                }
                             }else{
-                                $queryForProfile = "SELECT * from users where userid = '$sender'";
-                                $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                $chatHistory .="<div class='recieved'><img src='backend/".$profile['source']."'> <div> <span>".$row['message']."</span></div></div>";
+                                if($File->num_rows==0){
+                                    $queryForProfile = "SELECT * from users where userid = '$sender'";
+                                    $profile = $conn->query($queryForProfile)->fetch_assoc();
+                                    $chatHistory .="<div class='recieved'><img class='profile' src='backend/".$profile['source']."'> <div> <span>".$row['message']."</span></div></div>";
+                                }
+                                else{
+                                    $queryForProfile = "SELECT * from users where userid = '$sender'";
+                                    $profile = $conn->query($queryForProfile)->fetch_assoc();
+                                    $chatHistory .="<div class='recieved'><img class='profile' src='backend/".$profile['source']."'> <div><div class='files'>";
+                                    while($file = $File->fetch_assoc()){
+                                        if($file["type"]=="image/gif"||$file["type"]=="image/png"||$file["type"]=="image/jpg" || $file["type"]=="image/jpeg"){
+                                            $chatHistory.="<a target='_blank' href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
+                                        }else{
+                                            $chatHistory.="<a target='_blank' href='backend/".$file['source']."'>Download file</a>";
+                                        }
+                                    }
+                                    
+                                    $chatHistory.="</div><span>".$row['message']."</span></div></div>";
+                                }
                             }
                         }
+                    }else{
+                        $chatHistory.="<center style='margin:20px auto;'> No message history found </center>";
                     }
         //change the status
         $query = "SELECT messageid from chats where relationid = '$relationid' and sender != '$userid'";
