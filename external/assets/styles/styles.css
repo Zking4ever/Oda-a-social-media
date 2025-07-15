@@ -71,6 +71,7 @@
 }
 .friend img{
     margin-left: 23px;
+    cursor: pointer;
 }
 .friend svg{
     position: absolute;

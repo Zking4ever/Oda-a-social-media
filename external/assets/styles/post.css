@@ -45,6 +45,7 @@
     height: 30px;
     width:30px;
     border-radius: 50%;
+    cursor: pointer;
 }
 .sender .detail{
     width: 80%;

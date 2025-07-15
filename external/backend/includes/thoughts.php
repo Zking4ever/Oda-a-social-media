@@ -57,7 +57,7 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
             $reactionquery = "SELECT * FROM reaction where thoughtid = '$thought[thoughtid]' and userid='$userid' ";
             $reaction = $conn->query($reactionquery)->fetch_assoc();
             $thoughtList .="<div class='thoughtBox'>
-                                @".$thought['sendersUsername']." thinks:
+                                <div style='display:flex'><div onclick='get_profile(event)' id='".$thought['sender']."' style='width:fit-content;cursor:pointer'>@".$thought['sendersUsername']."</div> &nbsp thinks:</div>
                                     <div class='thought'>".$thought['content']."</div>
                                     <div style='margin-top:7px'  id='".$thought['thoughtid']."'>
                                         <span onclick='reactThoght(event,1)'".(!empty($reaction) && $reaction['liked']==1? "class='reacted'" : "")."> Like ".$thought['likes']." </span>  

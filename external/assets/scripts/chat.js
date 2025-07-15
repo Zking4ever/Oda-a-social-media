@@ -1,6 +1,7 @@
 
 function startChat(e){
     type_inputes.style.display = "flex";
+    type_inputes.getElementsByTagName("label")[0].style,display = "block";
     type_inputes.getElementsByTagName("input")[1].placeholder = "type a message";
     var form = new FormData;
     var ajax =  new XMLHttpRequest;

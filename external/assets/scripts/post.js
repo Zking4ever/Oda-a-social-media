@@ -58,6 +58,7 @@ function postComments(e){
         readPostComment(postid);
         //preparing for writing comment
             type_inputes.style.display = "flex";
+            type_inputes.style.position = "absolute";
             type_inputes.getElementsByTagName("label")[0].style.display = "none";
             type_inputes.getElementsByTagName("input")[1].placeholder = "comment on this post";
             type_inputes.getElementsByTagName("input")[1].setAttribute('prev_com_no',number);

@@ -32,7 +32,7 @@ if($lookUser){
                 if($senders){
                     while($sender = $senders->fetch_assoc())
                             $post.="<div class='post'>
-                                <div class='sender'>
+                                <div class='sender' id=".$sender['userid']." onclick='get_profile(event)'>
                                     <img src='backend/".$sender['source']."'>
                                     <div class='detail'>
                                         <h3 style='position:absolute;transform: translateY(-7px);'>".$sender['firstname']." ".$sender['lastname']."</h3>

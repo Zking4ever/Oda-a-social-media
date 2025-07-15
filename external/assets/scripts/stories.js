@@ -4,12 +4,13 @@ var contributers = document.getElementsByClassName('contributers')[0];
 var manage_story = document.getElementsByClassName('manage_story')[0];
 var preview_img = document.getElementById('preview_img');
 
+
 function preveiw(e){
     //checking the file type
         var filename = e.target.files[0].name;
         var ex_start = filename.lastIndexOf('.');
         var ex = filename.substr(ex_start+1,3);
-        if(!(ex=='jpg' || ex=='JPG' || ex=='HEIC')){
+        if(!(ex=='jpg' || ex=='JPG' || ex=='HEIC' || ex=='PNG')){
             handleResult('File not supported','story');
             return;
         }

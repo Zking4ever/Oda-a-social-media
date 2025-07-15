@@ -17,6 +17,7 @@
     display:none;
     overflow:hidden;
     gap:3px;
+    bottom:25px;
 }
 .inputs input{
     height:65%;
@@ -81,9 +82,9 @@
     </main>
    
 </body>
-<script src="assets/scripts/scripts.js"></script>
+<script src="assets/scripts/script.js"></script>
 <script src="assets/scripts/react.js"></script>
-<script src="assets/scripts/story_.js"></script>
+<script src="assets/scripts/stories.js"></script>
 <script src='assets/scripts/settings.js'></script>
 <script src='assets/scripts/chat.js'></script>
 <script src='assets/scripts/post.js'></script>

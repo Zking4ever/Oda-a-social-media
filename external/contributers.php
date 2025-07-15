@@ -1,4 +1,4 @@
-<div class="contributers" style="display:flex;">
+<div class="contributers" >
                 <div class="loadingGif" style="display:none;align-items:center;justify-content:center;">
                         LOADING....
                 </div>
@@ -97,7 +97,7 @@
 
 <style>
     .user_profile{
-        width:max(320px,60%);
+        width:max(320px,45%);
         height:93%;
         margin:auto;
         background-color:azure;
@@ -105,10 +105,10 @@
         border-radius:10px;
         overflow:hidden;
     }
-    .profile{
+    .profile_pic{
         height:100px;
-        padding-top:6%;
-        padding-bottom:2%;
+        padding-top:2%;
+        padding-bottom:.3%;
         padding-left:10%;
         display:flex;
         align-items:center;
@@ -116,7 +116,7 @@
         background-color:#b19de5;
         position: relative;
     }
-    .profile .img{
+    .profile_pic .img{
         width:80px;
         aspect-ratio:1;
         border-radius:50%;
@@ -127,7 +127,7 @@
         width:80px;
         aspect-ratio:1;
     }
-    .profile .info{
+    .profile_pic .info{
         display:flex;
         flex-direction:column;
     }
@@ -146,19 +146,44 @@
     .user_profile .loaded_post{
         height:65%;
     }
+    .stroies{
+            height:50px;
+    }
+    .story{
+        width: 50px;
+        height:50px;
+    }
     .prof
     .post{
+        width:90%;
         border:2px solid rgb(207 207 207);
     }
+    @media (max-width:760px) {
+        .user_profile{
+            width: max(320px,85%);;
+        }
+        .profile_pic{
+            height:100px;
+            padding-top:6%;
+            padding-bottom:2%;
+        }
+        .stroies{
+            height:40px;
+        }
+        .story{
+            width: 40px;
+            height:40px;
+        }
+    }
     </style>
-<div class="contributers" style="display:flex;">
+<div class="contributers">
         <div class="user_profile" style="">
-                    <div class="profile">
+                    <div class="profile_pic">
                         <div class="img"><img src="backend\Profiles\GEL_1234.JPG"></div>
-                        <div class="info"> <span>First Name L.</span>   <span>username </span> <button onclick="get_profile()">send request</button></div>
+                        <div class="info"> <span>First Name L.</span>   <span>username </span> <button>send request</button></div>
                     </div>
-                    Stories
                     <div class="stroies">
+                        <div class="story"></div>
                     </div>
                     Posts
                     <div class="loaded_post prof" style="width:100%">

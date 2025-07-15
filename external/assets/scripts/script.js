@@ -154,16 +154,23 @@ function differentiateStories(){
     xml.send();
 }
 
+
+var contribut = document.getElementsByClassName('contributers')[1];
 //get user profile
 function get_profile(e){
-   
+        var element = e.target;
+        for(let i=0;i<3;i++){
+            if(!element.id && element.className!="sender"){
+                element = element.parentElement;
+            }
+        }
+        contribut.style.display = "flex";
         var myform = new FormData;
         var ajax = new XMLHttpRequest;
         ajax.onload = function(){
             if(ajax.readyState==4){
                 var Data = JSON.parse(ajax.response);
                 
-                var contribut = document.getElementsByClassName('contributers')[1];
                 var profile_img = contribut.getElementsByTagName("img")[0];
                 var infos = contribut.getElementsByTagName("span");
                 var btn = contribut.getElementsByTagName("button")[0];
@@ -171,25 +178,54 @@ function get_profile(e){
                 profile_img.src = "backend/"+Data['profile']['img_src'];
                 infos[0].innerHTML = Data['profile']['fullname'];
                 infos[1].innerHTML = "@"+Data['profile']['username'];
-                btn.innerHTML = Data['relationstatus'];
+                btn.innerHTML = Data['relationstatus'][0];
+                btn.id = Data['profile']['userid'];
+                if(Data['relationstatus'][1]){
+                    btn.id = Data['relationstatus'][1];
+                }
 
-                var stroies = contribut.getElementsByClassName('stroies')[0];
-                stroies.innerHTML = Data["stories"];
+                var stories = contribut.getElementsByClassName('stroies')[0];
+                if(Data["stories"]==""){
+                    stories.style.height = 0;
+                    stories.style.padding = 0;
+                }else{
+                    stories.style.padding = "0.5px";
+                }
+                stories.innerHTML = Data["stories"];
                 var loaded_post = contribut.getElementsByClassName('loaded_post')[0];
                 loaded_post.innerHTML = Data['posts'];
-                alert(loaded_post.innerHTML);
             }
         }
 
         myform.append('request_type',"profile");
-        myform.append('personid','hrp3vD5RMHrdWXOHfcDOWK');
+        myform.append('personid',element.id);
 
 
         ajax.open("POST","backend/api.php");
         ajax.send(myform);
     
 }
+contribut.addEventListener('dblclick',function(){
+    this.style.display = "none";
+});
 
+var btn = contribut.getElementsByTagName("button")[0];
+
+btn.onclick = function(e){
+    if(btn.innerHTML=="send request"){
+        alert("gonna send req");
+        request(this.id);
+        this.innerHTML = "request pending...";
+    }else if(btn.innerHTML=="message"){
+        this.addEventListener('click',(e)=>{
+            startChat(e);
+        });
+        this.click();
+        contribut.style.display = "none";
+    }else{
+        return;
+    }
+}
 //log out
 var logout_btn = document.getElementsByClassName("logout")[0];
 

@@ -28,7 +28,7 @@ $data = [];
                             </div>
                         </div>";
                             
-                }  
+                }
             $friendsRequests.="</div>
             </fieldset>";
         }
@@ -65,7 +65,7 @@ $data = [];
                 $result = $conn->query($queryForNewMessage);
 
                 $friends.="<div class='friend' style='margin:5px'>
-                                        <img src='backend/".$friend['source']."'>".
+                                        <img id='$friend[userid]' onclick='get_profile(event)' src='backend/".$friend['source']."'>".
                                         (!empty($result)&&$result->num_rows>0 ? "<span style='position:absolute;left:4%;transform:translateY(-10px);font-size:small;width:17px;aspect-ratio:1;text-align:center;border:solid thin;border-radius:50%;background-color:azure;'>".$result->num_rows."</span>" : "")
                                         ."<div class='detail'>
                                             <h3>".$friend['firstname']." ".$friend['lastname']."</h3>

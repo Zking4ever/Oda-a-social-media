@@ -4,21 +4,27 @@ $personid = $_POST['personid'];
 
 $DATA = [];
 
-$relationStatus ="send request";
-
-    $query = "SELECT * from friends where (person1='$personid' and person2='$userid') or (person1='$userid' and person2='$personid') ";
-    $result = $conn->query($query);
-
-    if($result->num_rows>0){
-        $relationStatus = "message";
+$relationStatus = [];
+$relationStatus[0] ="send request";
+    if($userid==$personid){
+        $relationStatus[0]="Your profile";
     }
 
     $query = "SELECT * from friend_requests where sender ='$userid' and receiver='$personid' limit 1";
     $result = $conn->query($query);
 
     if($result->num_rows>0){
-        $relationStatus = "request pending...";
+        $relationStatus[0] = "request pending...";
     }
+
+    $query = "SELECT * from friends where (person1='$personid' and person2='$userid') or (person1='$userid' and person2='$personid') ";
+    $result = $conn->query($query);
+
+    if($result->num_rows>0){
+        $relationStatus[0] = "message";
+        $relationStatus[1] = $result->fetch_assoc()['relationid'];
+    }
+
     $DATA['relationstatus'] = $relationStatus;
 
 $profile = "";

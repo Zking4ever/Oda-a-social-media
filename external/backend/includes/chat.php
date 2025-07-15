@@ -199,7 +199,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                                if($File->num_rows==0){
                                     $queryForProfile = "SELECT * from users where userid = '$userid'";
                                     $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                    $chat .=" <div class='sent'><div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' src='backend/".$profile['source']."'></div>";
+                                    $chat .=" <div class='sent'><div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' id='".$profile['userid']."' onclick='get_profile(event)' src='backend/".$profile['source']."' style='cursor:pointer'></div>";
                                 }else{
                                     $queryForProfile = "SELECT * from users where userid = '$userid'";
                                     $profile = $conn->query($queryForProfile)->fetch_assoc();
@@ -212,18 +212,18 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                                         }
                                     }
                                     
-                                    $chat .= "</div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' src='backend/".$profile['source']."'></div>";
+                                    $chat .= "</div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' id='".$profile['userid']."' onclick='get_profile(event)' src='backend/".$profile['source']."' style='cursor:pointer'></div>";
                                 }
                             }else{
                                 if($File->num_rows==0){
                                     $queryForProfile = "SELECT * from users where userid = '$sender'";
                                     $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                    $chat .="<div class='recieved'><img class='profile' src='backend/".$profile['source']."'> <div> <span>".$row['message']."</span></div></div>";
+                                    $chat .="<div class='recieved'><img class='profile' id='".$profile['userid']."' onclick='get_profile(event)' src='backend/".$profile['source']."' style='cursor:pointer'> <div> <span>".$row['message']."</span></div></div>";
                                 }
                                 else{
                                     $queryForProfile = "SELECT * from users where userid = '$sender'";
                                     $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                    $chat .="<div class='recieved'><img class='profile' src='backend/".$profile['source']."'> <div><div class='files'>";
+                                    $chat .="<div class='recieved'><img class='profile' id='".$profile['userid']."' onclick='get_profile(event)' src='backend/".$profile['source']."' style='cursor:pointer'> <div><div class='files'>";
                                     while($file = $File->fetch_assoc()){
                                         if($file["type"]=="image/gif"||$file["type"]=="image/png"||$file["type"]=="image/jpg" || $file["type"]=="image/jpeg"){
                                             $chat.="<a target='_blank' ".($File->num_rows==1 ? "class='grid_exception'" : "")."".($File->num_rows==1 ? "class='grid_exception'" : "")."href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
@@ -303,7 +303,7 @@ if(isset($_SESSION['relationid'])&& $_POST['data_type']=="read"){
                                if($File->num_rows==0){
                                     $queryForProfile = "SELECT * from users where userid = '$userid'";
                                     $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                    $chatHistory .=" <div class='sent'><div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' src='backend/".$profile['source']."'></div>";
+                                    $chatHistory .=" <div class='sent'><div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' id='".$profile['userid']."' onclick='get_profile(event)' src='backend/".$profile['source']."' style='cursor:pointer'></div>";
                                 }else{
                                     $queryForProfile = "SELECT * from users where userid = '$userid'";
                                     $profile = $conn->query($queryForProfile)->fetch_assoc();
@@ -316,18 +316,18 @@ if(isset($_SESSION['relationid'])&& $_POST['data_type']=="read"){
                                         }
                                     }
                                         
-                                    $chatHistory .= "</div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' src='backend/".$profile['source']."'></div>";
+                                    $chatHistory .= "</div><span>".$row['message']."<span class='status'>".($row['status']=='seen' ? "✔️✔️" : "✔️")."</span></span></div> <img class='profile' id='".$profile['userid']."' onclick='get_profile(event)' src='backend/".$profile['source']."' style='cursor:pointer'></div>";
                                 }
                             }else{
                                 if($File->num_rows==0){
                                     $queryForProfile = "SELECT * from users where userid = '$sender'";
                                     $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                    $chatHistory .="<div class='recieved'><img class='profile' src='backend/".$profile['source']."'> <div> <span>".$row['message']."</span></div></div>";
+                                    $chatHistory .="<div class='recieved'><img class='profile' id='".$profile['userid']."' onclick='get_profile(event)' src='backend/".$profile['source']."' style='cursor:pointer'> <div> <span>".$row['message']."</span></div></div>";
                                 }
                                 else{
                                     $queryForProfile = "SELECT * from users where userid = '$sender'";
                                     $profile = $conn->query($queryForProfile)->fetch_assoc();
-                                    $chatHistory .="<div class='recieved'><img class='profile' src='backend/".$profile['source']."'> <div><div class='files'>";
+                                    $chatHistory .="<div class='recieved'><img class='profile' id='".$profile['userid']."' onclick='get_profile(event)' src='backend/".$profile['source']."' style='cursor:pointer'> <div><div class='files'>";
                                     while($file = $File->fetch_assoc()){
                                         if($file["type"]=="image/gif"||$file["type"]=="image/png"||$file["type"]=="image/jpg" || $file["type"]=="image/jpeg"){
                                             $chatHistory.="<a target='_blank' ".($File->num_rows==1 ? "class='grid_exception'" : "")."href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
