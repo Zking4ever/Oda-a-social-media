@@ -117,7 +117,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 .files img{
                     width:98%;
                 }
-                .files a{
+                .files .grid_exception{
                     width:200%;
                 }
                 @media (max-width:760px){
@@ -206,9 +206,9 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                                     $chat .=" <div class='sent'><div> <div class='files'>";
                                     while($file = $File->fetch_assoc()){
                                         if($file["type"]=="image/gif"||$file["type"]=="image/png"||$file["type"]=="image/jpg" || $file["type"]=="image/jpeg"){
-                                            $chat.="<a target='_blank' href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
+                                            $chat.="<a target='_blank' ".($File->num_rows==1 ? "class='grid_exception'" : "")."href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
                                         }else{
-                                            $chat.="<a target='_blank' href='backend/".$file['source']."'>Download file</a>";
+                                            $chat.="<a target='_blank' class='grid_exception' href='backend/".$file['source']."'>".$file['filename']."</a>";
                                         }
                                     }
                                     
@@ -226,9 +226,9 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                                     $chat .="<div class='recieved'><img class='profile' src='backend/".$profile['source']."'> <div><div class='files'>";
                                     while($file = $File->fetch_assoc()){
                                         if($file["type"]=="image/gif"||$file["type"]=="image/png"||$file["type"]=="image/jpg" || $file["type"]=="image/jpeg"){
-                                            $chat.="<a target='_blank' href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
+                                            $chat.="<a target='_blank' ".($File->num_rows==1 ? "class='grid_exception'" : "")."".($File->num_rows==1 ? "class='grid_exception'" : "")."href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
                                         }else{
-                                            $chat.="<a target='_blank' href='backend/".$file['source']."'>Download file</a>";
+                                            $chat.="<a target='_blank' class='grid_exception' href='backend/".$file['source']."'>".$file['filename']."</a>";
                                         }
                                     }
                                     
@@ -256,6 +256,7 @@ if($relationid != "" && $_POST['data_type']=="send_message"){
         for($i=0;$i<$fileNumber;$i++){
             //each file going to be processed here
             $destination = "";
+            $filename = $_FILES['file'.$i]['name'];
             $fileid = createRand(25);
             $type ="";
             if($_FILES['file'.$i]['name']!="" && $_FILES['file'.$i]['error']==0){
@@ -269,7 +270,7 @@ if($relationid != "" && $_POST['data_type']=="send_message"){
                 move_uploaded_file($_FILES['file'.$i]['tmp_name'],$destination);
             }
             if($destination!=""){
-                $query = "INSERT into chatfiles(fileid,messageid,source,type) values('$fileid','$messageid','$destination','$type') ";
+                $query = "INSERT into chatfiles(fileid,messageid,filename,source,type) values('$fileid','$messageid','$filename','$destination','$type') ";
                 $excute = $conn->query($query);
                 if(!$excute){ 
                     continue; 
@@ -309,9 +310,9 @@ if(isset($_SESSION['relationid'])&& $_POST['data_type']=="read"){
                                     $chatHistory .=" <div class='sent'><div> <div class='files'>";
                                     while($file = $File->fetch_assoc()){
                                         if($file["type"]=="image/gif"||$file["type"]=="image/png"||$file["type"]=="image/jpg" || $file["type"]=="image/jpeg"){
-                                            $chatHistory.="<a target='_blank' href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
+                                            $chatHistory.="<a target='_blank' ".($File->num_rows==1 ? "class='grid_exception'" : "")."href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
                                         }else{
-                                            $chatHistory.="<a target='_blank' href='backend/".$file['source']."'>Download file</a>";
+                                            $chatHistory.="<a target='_blank' class='grid_exception' href='backend/".$file['source']."'>".$file['filename']."</a>";
                                         }
                                     }
                                         
@@ -329,9 +330,9 @@ if(isset($_SESSION['relationid'])&& $_POST['data_type']=="read"){
                                     $chatHistory .="<div class='recieved'><img class='profile' src='backend/".$profile['source']."'> <div><div class='files'>";
                                     while($file = $File->fetch_assoc()){
                                         if($file["type"]=="image/gif"||$file["type"]=="image/png"||$file["type"]=="image/jpg" || $file["type"]=="image/jpeg"){
-                                            $chatHistory.="<a target='_blank' href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
+                                            $chatHistory.="<a target='_blank' ".($File->num_rows==1 ? "class='grid_exception'" : "")."href='backend/".$file['source']."'><img src=backend/".$file['source']."> </a>";
                                         }else{
-                                            $chatHistory.="<a target='_blank' href='backend/".$file['source']."'>Download file</a>";
+                                            $chatHistory.="<a target='_blank' class='grid_exception' href='backend/".$file['source']."'>".$file['filename']."</a>";
                                         }
                                     }
                                     

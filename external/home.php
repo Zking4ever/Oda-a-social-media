@@ -14,16 +14,23 @@
 .inputs{
     width:70%;
     height:30px;
-    position:absolute;
-    bottom:25px;
-    border:solid thin gray;
-    border-radius:16px;
     display:none;
     overflow:hidden;
+    gap:3px;
 }
 .inputs input{
-    height:90%;
+    height:65%;
     width: 90%;
+    padding:3.25px 6px;
+    border-radius:12px;
+}
+.inputs label{
+    display:none;
+    border:solid thin buttonborder;
+    border-radius:12px;
+}
+.inputs button{
+    border-radius:12px;
 }
 @media (max-width:760px) {
     .inputs{
@@ -43,8 +50,7 @@
                 <label for="home_radio">Home</label>
                 <label for="friends_radio">Friends</label>
                 <label for="thoughts_radio">Thoughts</label>
-                <label for="ask_radio">Ask Me</label>
-                <label for="councelor_radio">Councelor</label>
+                <label for="ask_radio">Ask AI</label>
                 <label for="settings_radio">Setting</label>
             </div>
         </div>
@@ -75,10 +81,10 @@
     </main>
    
 </body>
-<script src="assets/scripts/script.js"></script>
+<script src="assets/scripts/scripts.js"></script>
 <script src="assets/scripts/react.js"></script>
 <script src="assets/scripts/story.js"></script>
 <script src='assets/scripts/settings.js'></script>
-<script src='assets/scripts/chats.js'></script>
+<script src='assets/scripts/chat.js'></script>
 <script src='assets/scripts/post.js'></script>
 </html>

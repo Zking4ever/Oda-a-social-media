@@ -1,4 +1,4 @@
-<div class="contributers">
+<div class="contributers" >
                 <div class="loadingGif" style="display:none;align-items:center;justify-content:center;">
                         LOADING....
                 </div>

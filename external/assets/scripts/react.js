@@ -91,14 +91,12 @@ function seeComment(e){
         commentContainer.style.display = "block";
         readComment(id);
         //preparing for writing comment
-            type_inputes.getElementsByTagName("label")[0].style.display = "none";
             type_inputes.getElementsByTagName("input")[1].placeholder = "comment";
             type_inputes.getElementsByTagName("input")[1].setAttribute('prev_com_no',reaction_no);
             type_inputes.getElementsByTagName("input")[1].setAttribute('comment_this_thought',id);
 }
 function clothComment(e){
-        e.target.parentElement.style.display = "none";
-        type_inputes.getElementsByTagName("label")[0].style.display = "block";
+        document.getElementsByClassName("commentContainer")[0].style.display = "none";
         type_inputes.getElementsByTagName("input")[1].placeholder = "type what you are thinking";
         type_inputes.getElementsByTagName("input")[1].removeAttribute('comment_this_thought');
         type_inputes.getElementsByTagName("input")[1].removeAttribute('prev_com_no');
