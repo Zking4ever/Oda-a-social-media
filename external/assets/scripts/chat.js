@@ -83,7 +83,7 @@ function send(e){
     ajax.open("POST","backend/api.php",true);
     ajax.send(form);
 }
-alert("chat..")
+
 function readChat(){
     var form = new FormData;
     var ajax = new XMLHttpRequest;

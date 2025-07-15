@@ -11,6 +11,13 @@ function change_profile_img(e){
     if(!confirm("Do you want to change your profile picture?")){
         return;
     }
+    var filename = e.target.files[0].name;
+    var ex_start = filename.lastIndexOf('.');
+    var ex = filename.substr(ex_start+1,3);
+    if(!(ex=='jpg' || ex=='JPG' || ex=='PNG' || ex=='HEIC')){
+        handleResult('File not supported','story');
+        return;
+    }
     var label = e.target.parentElement.getElementsByTagName("label")[0];
     label.innerHTML = "Uploading your profile..";
     var form = new FormData;

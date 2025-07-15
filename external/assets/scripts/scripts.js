@@ -153,37 +153,42 @@ function differentiateStories(){
     xml.open("GET","backend/api.php?request_type=get_stories",true);
     xml.send();
 }
-/*
-//change_profile
-function change_profile(e){
-    
-    var filename = e.target.files[0].name;
-    var ex_start = filename.lastIndexOf('.');
-    var ex = filename.substr(ex_start+1,3);
-    if(!(ex=='jpg' || ex=='JPG')){
-        handleResult('File not supported','story');
-        manage_story.style.display ="none";
-        return;
-    }
 
-    if(confirm('Do you want to change your profile picture?')){
-        var file = e.target.files[0];
-
+//get user profile
+function get_profile(e){
+   
         var myform = new FormData;
         var ajax = new XMLHttpRequest;
         ajax.onload = function(){
             if(ajax.readyState==4){
-                handleResult(ajax.response,"change_profile");
+                var Data = JSON.parse(ajax.response);
+                
+                var contribut = document.getElementsByClassName('contributers')[1];
+                var profile_img = contribut.getElementsByTagName("img")[0];
+                var infos = contribut.getElementsByTagName("span");
+                var btn = contribut.getElementsByTagName("button")[0];
+
+                profile_img.src = "backend/"+Data['profile']['img_src'];
+                infos[0].innerHTML = Data['profile']['fullname'];
+                infos[1].innerHTML = "@"+Data['profile']['username'];
+                btn.innerHTML = Data['relationstatus'];
+
+                var stroies = contribut.getElementsByClassName('stroies')[0];
+                stroies.innerHTML = Data["stories"];
+                var loaded_post = contribut.getElementsByClassName('loaded_post')[0];
+                loaded_post.innerHTML = Data['posts'];
+                alert(loaded_post.innerHTML);
             }
         }
 
-        myform.append('file',file);
-        myform.append('type','change_profile');
-        ajax.open("POST","backend/change_profile.php");
+        myform.append('request_type',"profile");
+        myform.append('personid','hrp3vD5RMHrdWXOHfcDOWK');
+
+
+        ajax.open("POST","backend/api.php");
         ajax.send(myform);
-    }
+    
 }
-*/
 
 //log out
 var logout_btn = document.getElementsByClassName("logout")[0];

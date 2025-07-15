@@ -83,7 +83,7 @@
 </body>
 <script src="assets/scripts/scripts.js"></script>
 <script src="assets/scripts/react.js"></script>
-<script src="assets/scripts/story.js"></script>
+<script src="assets/scripts/story_.js"></script>
 <script src='assets/scripts/settings.js'></script>
 <script src='assets/scripts/chat.js'></script>
 <script src='assets/scripts/post.js'></script>
