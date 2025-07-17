@@ -10,7 +10,8 @@
     overflow-x: hidden;
 }
 .post{
-    width: 600px;
+    width: 98%;
+    max-width: 490px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,12 +41,12 @@
     width: 100%;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .sender img{
     height: 30px;
     width:30px;
     border-radius: 50%;
-    cursor: pointer;
 }
 .sender .detail{
     width: 80%;
@@ -73,7 +74,7 @@
     background-color: rgba(220, 220, 220, 0.769);
 }
 .reactions{
-    height: 50px;
+    height: 40px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -85,7 +86,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 13px;
+    font-size: 10px;
 }
 .reacted svg{
     fill: #9073de;
@@ -113,9 +114,7 @@
     z-index: 100;
 }
 @media (max-width:760px) {
-    .post{
-        max-width: 98%;
-    }
+    
     .img_container{
         width: 100%;
         display: flex;

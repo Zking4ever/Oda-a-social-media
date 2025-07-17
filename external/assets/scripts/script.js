@@ -188,6 +188,7 @@ function get_profile(e){
                 if(Data["stories"]==""){
                     stories.style.height = 0;
                     stories.style.padding = 0;
+                    stories.style.height = "fit-content";
                 }else{
                     stories.style.padding = "0.5px";
                 }
