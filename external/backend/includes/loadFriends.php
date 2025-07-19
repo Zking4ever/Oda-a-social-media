@@ -2,7 +2,6 @@
 
 $data = [];
 
-
         $query = "SELECT * from friend_requests where receiver = '$userid' and status ='pending' ";
         $result = $conn->query($query);
 
@@ -15,14 +14,14 @@ $data = [];
                 
                 $senderid = $row['sender'];
                 #here another query to find out the sender  
-                $queryForSenders = "SELECT * from users where userid='$senderid' ";
+                $queryForSenders = "SELECT name,username,userid,source from users where userid='$senderid' ";
                 $senderArray = $conn->query($queryForSenders);
                 $sender=$senderArray->fetch_assoc();
                 $friendsRequests.="
                         <div class='f_request'>
                             <img src='backend/".$sender['source']."'>
                             <div class='detail'>
-                                <h3>".$sender['firstname']." ".$sender['lastname']."</h3>
+                                <h3>".$sender['name']."</h3>
                                 <span style='font-size:12px;margin-left:7px;'>".$sender['username']."</span>
                                 <div style='transform:translateY(4px)'> <button onclick='response(`".$sender['userid']."`,`".$row['relationid']."`)'>confirm</button> <button onclick='remove(event)'>remove</button> </div>
                             </div>
@@ -41,8 +40,6 @@ $data = [];
     $freindsResult = $conn->query($friendsquery);
 
     $friends = "";
-    $fr_array = array();
-    $i=0;
 
     if($freindsResult->num_rows>0){
         $friends.="<legend style='margin:5px'>Freinds</legend>
@@ -54,21 +51,20 @@ $data = [];
             if($userid == $friendid){
                 $friendid = $friend['person2'];
             }
-            $fr_array[$i] = $friendid;
-            $i++;
-                #here another query to find out the freind sp to get the profile  
-                $queryForFriend = "SELECT * from users where userid='$friendid' ";
+            
+                #here another query to find out the friend data to get the profile  
+                $queryForFriend = "SELECT name,username,userid,source from users where userid='$friendid' ";
                 $friendArray = $conn->query($queryForFriend);
                 $friend=$friendArray->fetch_assoc();
                  //new message?
-                $queryForNewMessage = "SELECT * from chats where relationid = '$relationid' and sender != '$userid' and status='sent' ";
+                $queryForNewMessage = "SELECT messageid from chats where relationid = '$relationid' and sender != '$userid' and status='sent' ";
                 $result = $conn->query($queryForNewMessage);
 
                 $friends.="<div class='friend' style='margin:5px'>
                                         <img id='$friend[userid]' onclick='get_profile(event)' src='backend/".$friend['source']."'>".
                                         (!empty($result)&&$result->num_rows>0 ? "<span style='position:absolute;left:4%;transform:translateY(-10px);font-size:small;width:17px;aspect-ratio:1;text-align:center;border:solid thin;border-radius:50%;background-color:azure;'>".$result->num_rows."</span>" : "")
                                         ."<div class='detail'>
-                                            <h3>".$friend['firstname']." ".$friend['lastname']."</h3>
+                                            <h3>".$friend['name']."</h3>
                                             <span style='font-size:12px;margin-left:7px;'>".$friend['username']."</span>
                                         </div>
                                         <svg id='$relationid' onclick='startChat(event)'></svg>
@@ -81,20 +77,24 @@ $data = [];
     $data['friends']= $friends;
 #--------------------------------------- suggestion ---------
 //lets get request the user already have sent to avoid dublication
-$sent_requests = array();
-$j=0;
+$Connections = array();
+$i=0;
 
-$query = "SELECT * FROM friend_requests where sender = '$userid' ";
+$query = "SELECT * FROM friend_requests where sender = '$userid' or receiver = '$userid' ";
 $execute = $conn->query($query);
     if($execute->num_rows>0){
         while($row = $execute->fetch_assoc()){
-            $sent_requests[$j] = $row['receiver'];
-            $j++;
+            $rowid = $row['sender'];
+            if($userid == $rowid){
+                $rowid = $row['receiver'];
+            }
+            $Connections[$i] = $rowid;
+            $i++;
         }
 }
 
 //now the suggestion
-    $query = "SELECT * from users where userid != '$userid'";
+    $query = "SELECT name,username,userid,source from users where userid != '$userid'";
     $result = $conn->query($query);
         
     $friendSuggestions = "";
@@ -103,20 +103,17 @@ $execute = $conn->query($query);
              $friendSuggestions.="<legend style='margin:5px'>Suggestions</legend>
                             <div class='F_suggestion'>";
             while($row = $result->fetch_assoc()){
-
-                if(!isAfreind($fr_array,$row['userid']) && !AlreadySentRequestTo($row['userid'],$sent_requests)){
+                if(!checkConnection($row['userid'],$Connections)){
 
                     $friendSuggestions.="
                                     <div class='f_sug'>
                                         <img src=backend/".$row['source'].">
                                         <div class='detail'>
-                                            <h3>".$row['firstname']." ".$row['lastname']."</h3>
+                                            <h3>".$row['name']."</h3>
                                             <span style='font-size:12px;margin-left:7px;'>@".$row['username']."</span>
                                             <div style='transform:translateY(4px)'> <button onclick='request(`".$row['userid']."`,`1`)'>Send Request</button> <button onclick='remove(event)'>remove</button> </div>
                                         </div>
                                     </div>";
-                    
-                
                 }
             }
                 $friendSuggestions.="</div>";
@@ -124,10 +121,10 @@ $execute = $conn->query($query);
 
         $data['F_suggestion']= $friendSuggestions;
     
-//freind suggestions filtering function
+//friend suggestions filtering function
 
 #two things are here friends don't have to be suggested again and the one that are already sent the request should't do it twice
-function isAfreind($array,$userid){
+function checkConnection($userid,$array){
     
     for ($i=0; $i < count($array) ; $i++) { 
                     # code...
@@ -136,16 +133,6 @@ function isAfreind($array,$userid){
             }
     }
     return false;
-}
-
-function AlreadySentRequestTo($id,$array){
-        for ($i=0; $i < count($array); $i++) { 
-            # code...
-            if($array[$i]==$id){
-                return true;
-            }
-        }
-        return false;
 }
 
 echo json_encode($data) ;
