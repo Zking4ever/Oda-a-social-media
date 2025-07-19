@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
     <link rel="stylesheet" href="assets/styles/main.css">
-    <link rel="stylesheet" href="assets/styles/stories.css">
+    <link rel="stylesheet" href="assets/styles/story.css">
     <link rel="stylesheet" href="assets/styles/post.css">
     <link rel="stylesheet" href="assets/styles/styles.css">
     
@@ -82,9 +82,9 @@
     </main>
    
 </body>
-<script src="assets/scripts/script.js"></script>
+<script src="assets/scripts/scripts.js"></script>
 <script src="assets/scripts/react.js"></script>
-<script src="assets/scripts/stories.js"></script>
+<script src="assets/scripts/story.js"></script>
 <script src='assets/scripts/settings.js'></script>
 <script src='assets/scripts/chat.js'></script>
 <script src='assets/scripts/post.js'></script>

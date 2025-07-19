@@ -35,4 +35,22 @@ if(isset($_POST['type']) && $_POST['type']=="see_story"){
 
 }
 
+if(isset($_POST['type']) && $_POST['type']=="userStory"){
+    
+    $sendersid = $_POST['sendersid'];
+
+    $query = "SELECT * FROM stories where sender = '$sendersid' ";
+    $stories = $conn->query($query);
+    
+    $response = [];
+    $i=0;
+    if($stories->num_rows>0){
+        while($story = $stories->fetch_assoc()){
+            $response[$i] = $story['source']."s9par@tor".$story['caption'];
+            $i++;
+        }
+            echo json_encode($response);
+    }
+}
+
 ?>

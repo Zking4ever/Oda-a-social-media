@@ -35,7 +35,7 @@ $profile_data = [];
 
     if($result->num_rows>0){
         $profile = $result->fetch_assoc();
-        $profile_data['fullname'] = $profile['firstname']." ".$profile['lastname'];
+        $profile_data['fullname'] = $profile['name'];
         $profile_data['username'] = $profile['username'];
         $profile_data['img_src'] = $profile['source'];
         $profile_data['userid'] = $profile['userid'];
@@ -49,7 +49,7 @@ $stories = "";
 
     if($result->num_rows>0){
         while($row = $result->fetch_assoc()){
-            $stories .= "<div class='story' onclick='see_story(event)' id='".$row['storyid']."'>
+            $stories .= "<div class='story' onclick='see_User_story(event)' id='".$personid."'>
                                                     <span>". date($row['story_time']) ."</span>
                                                 </div>";
         }

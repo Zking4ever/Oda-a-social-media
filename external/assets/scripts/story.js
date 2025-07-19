@@ -141,3 +141,60 @@ share_story.onclick = function(){
         ajax.open("POST","backend/api.php");
         ajax.send(myform);
 }
+
+
+// single person stories
+
+function see_User_story(e){
+    var view_story = document.getElementsByClassName('view_story')[1];
+    var view_story_div = document.getElementsByClassName('view_story_div')[1];
+    var btn1 = document.getElementById('btn1_');
+    var btn2 = document.getElementById('btn2_');
+
+    idInView = e.target.id;
+    
+    var form = new FormData;
+    var xml = new XMLHttpRequest;
+    loading("Processing...wait a momment..");
+    xml.onload = function(){
+            if(xml.readyState==4 || xml.status==200){
+                        alert(xml.response);
+                        var storyResponse = JSON.parse(xml.response);
+                        view_story_div.innerHTML="";//cleaning everything for new views
+                        storyResponse.forEach(element => {
+                            var components = element.split("s9par@tor");
+                            var div = document.createElement("div");
+                            var img = document.createElement("img");
+                            var caption = document.createElement("span");
+                            img.src =  "backend/"+components[0];
+                            caption.innerHTML = components[1];
+                            div.style.position = "relative";
+                            div.appendChild(img);
+                            div.appendChild(caption);
+                            view_story_div.appendChild(div);
+                        });
+                        members = view_story_div.getElementsByTagName("div");
+                        n = Math.floor(members.length);
+                        switch_stories();
+                        finishedLoading();//now display
+                        contributers.style.display = "flex";
+                        view_story.style.display ="flex";
+
+                        btn2.onclick = function(){
+                            switch_stories(1);
+                        }
+                        btn1.onclick = function(){
+                            switch_stories(-1);
+                        }
+                        view_story.ondblclick = function(){
+                            view_story.style.display = "none";
+                            contributers.style.display = "none";
+                        }
+                    }
+            }
+        form.append('type','userStory');
+        form.append('request_type','see_story');
+        form.append('sendersid',idInView);
+        xml.open("POST","backend/api.php");
+        xml.send(form);
+}

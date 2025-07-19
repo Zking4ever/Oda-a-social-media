@@ -206,8 +206,11 @@ function get_profile(e){
         ajax.send(myform);
     
 }
-contribut.addEventListener('dblclick',function(){
-    this.style.display = "none";
+
+var close = document.getElementById("close");
+
+close.addEventListener('click',function(){
+    contribut.style.display = "none";
 });
 
 var btn = contribut.getElementsByTagName("button")[0];

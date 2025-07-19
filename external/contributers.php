@@ -19,8 +19,8 @@
                     </div>
                 </div>
                 <div class="view_story" style="display:none">
-                    <button id="btn1" title="previous"><</button>
-                    <button id="btn2" title= "next">></button>
+                    <button id="btn1" class="btn1" title="previous"><</button>
+                    <button id="btn2" class="btn2" title= "next">></button>
                     <div class="view_story_div"></div>
                 </div>
                 
@@ -177,7 +177,12 @@
     }
     </style>
 <div class="contributers">
-        <div class="user_profile" style="">
+        <div class="user_profile" style="position:relative">
+                        <div style="width:30px;height:30px; position:absolute;top:5px;right:5px;z-index:1;cursor:pointer;" id="close">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </div>
                     <div class="profile_pic">
                         <div class="img"><img src="backend\Profiles\GEL_1234.JPG"></div>
                         <div class="info"> <span>First Name L.</span>   <span>username </span> <button>send request</button></div>
@@ -190,4 +195,10 @@
                             
                     </div>
         </div>
+         <div class="view_story" style="display:none;backdrop-filter:blur(10px);">
+                    <button id="btn1_" class='btn1' title="previous"><</button>
+                    <button id="btn2_" class='btn2' title= "next">></button>
+                    <div class="view_story_div"></div>
+        </div>
+
 </div>
