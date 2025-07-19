@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-$user;
+$userData;
 
 if (isset($_GET['code'])) {
     
@@ -18,15 +18,14 @@ if (isset($_GET['code'])) {
     $oauth2 = new Google_Service_Oauth2($client);
     $userinfo = $oauth2->userinfo->get();
     
-    $user = [
+    $userData = [
         'id' => $userinfo->id,
         'email' => $userinfo->email,
         'name' => $userinfo->name,
         'picture' => $userinfo->picture,
     ];
 
-    //here registration occurs and then sign in automatically
-    //before that let them create password and username
+    $_SESSION['userid']==$userData['id'];
 
 }
 if(isset($_SESSION['userid'])){
@@ -34,11 +33,18 @@ if(isset($_SESSION['userid'])){
     require "backend/conn.php";
     
     $userid = $_SESSION['userid'];
-    $validate = "SELECT * from users where userid = '$userid' ";
-    $checkUserValidation = $conn->query($validate);
+    $userExist = "SELECT id from users where userid = '$userid' ";
+    $checkUserExistance = $conn->query($userExist);
 
-    if($checkUserValidation->num_rows>0){
+    if($checkUserExistance->num_rows>0){
         include 'home.php';
+    }elseif(isset($userData['id'])){
+        
+        if($userid==$userData['id']){
+        //here registration occurs and then sign in automatically
+        //before that let them create password and username
+            echo "NEW USER";
+        }
     }
 }
 else{
