@@ -68,7 +68,7 @@ $post = "";
                                 <div class='sender'>
                                     <img src='backend/".$profile['source']."'>
                                     <div class='detail'>
-                                        <h3 style='position:absolute;transform: translateY(-7px);'>".$profile['firstname']." ".$profile['lastname']."</h3>
+                                        <h3 style='position:absolute;transform: translateY(-7px);'>".$profile['name']."</h3>
                                         <span style='font-size:12px;margin-left:7px;position:absolute;transform: translateY(10px);'>@".$profile['username']."</span>
                                     </div>
                                 </div>

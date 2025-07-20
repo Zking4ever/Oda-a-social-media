@@ -158,7 +158,6 @@ function see_User_story(e){
     loading("Processing...wait a momment..");
     xml.onload = function(){
             if(xml.readyState==4 || xml.status==200){
-                        alert(xml.response);
                         var storyResponse = JSON.parse(xml.response);
                         view_story_div.innerHTML="";//cleaning everything for new views
                         storyResponse.forEach(element => {

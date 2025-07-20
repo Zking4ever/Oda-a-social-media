@@ -53,7 +53,6 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     color:black;
                     text-align:center;
                 }
-                
                 .chatHolder{
                     flex:0.73;
                     overflow-Y:scroll;
@@ -81,13 +80,18 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 }
                 .chatHolder div div:not(.files){
                     flex-direction:column;
-                    background-color:white;
                     border-radius:12px;
                     max-width:70%;
                     width:fit-content;
                     overflow-wrap:break-word;
                     padding:5px;
                     text-align:right;
+                }
+                .recieved div{
+                    background-color:white;
+                }
+                .sent div{
+                    background-color:#dbcef8;
                 }
                 .chatHolder .profile{
                     align-self:end;
@@ -153,8 +157,12 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 }
             }
             @media (max-width:460px){
+                .chat{
+                    flex-direction:column;
+                }
                 .listHolder{
-                    display:none;
+                    display:flex;
+                    overflow-x:scroll;
                 }
                 .chatHolder{
                     flex:1;

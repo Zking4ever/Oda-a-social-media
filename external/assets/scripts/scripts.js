@@ -174,8 +174,10 @@ function get_profile(e){
                 var profile_img = contribut.getElementsByTagName("img")[0];
                 var infos = contribut.getElementsByTagName("span");
                 var btn = contribut.getElementsByTagName("button")[0];
+                var profile_link = contribut.getElementsByTagName("a")[0];
 
                 profile_img.src = "backend/"+Data['profile']['img_src'];
+                profile_link.href = "backend/"+Data['profile']['img_src'];
                 infos[0].innerHTML = Data['profile']['fullname'];
                 infos[1].innerHTML = "@"+Data['profile']['username'];
                 btn.innerHTML = Data['relationstatus'][0];

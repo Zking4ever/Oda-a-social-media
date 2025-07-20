@@ -184,7 +184,7 @@
                             </svg>
                         </div>
                     <div class="profile_pic">
-                        <div class="img"><img src="backend\Profiles\GEL_1234.JPG"></div>
+                        <a target="_blank"><div class="img"><img></div></a>
                         <div class="info"> <span>First Name L.</span>   <span>username </span> <button>send request</button></div>
                     </div>
                     <div class="stroies">

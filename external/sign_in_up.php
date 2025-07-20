@@ -47,6 +47,7 @@ elseif(isset($_POST) && !empty($_POST) && $_POST['type']=="log_in" ){
         $data['status'] = "great";
         $_SESSION['userid'] = $userdata['userid'];
 
+        //header("location : check.php");
         echo json_encode( $data );
     }
     else{

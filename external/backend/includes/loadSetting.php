@@ -85,8 +85,7 @@
                     <h1>Setting</h1>
                     <br>
                     <div>Username:<input placeholder='Username' value='$userdata[username]'></div>
-                    <div>First name:<input placeholder='First name' value='$userdata[firstname]'></div>
-                    <div>Last name:<input placeholder='Last name' value='$userdata[lastname]'></div>
+                    <div>Full name:<input placeholder='Full name' value='$userdata[name]'></div>
                     <div>Email:<input placeholder='Email' value='$userdata[email]' disabled></div>
                     <div>Password:<input type='password' placeholder='Password' value='$userdata[password]'> <span style='position:absolute; right:10px; cursor:pointer;' onclick='passVisiblity(event)'>eye</span></div><br>
                     <button style='padding:3px 12px' onclick='saveSettings(event)'>Change</button><br>
