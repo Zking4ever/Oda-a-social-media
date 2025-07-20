@@ -28,8 +28,7 @@ if($_POST['data_type']=="change_profile_picture" && $_FILES['profile_image']['na
 if(isset($_POST['data_type']) && $_POST['data_type']=="save_setting"){
     
     $username = $_POST['username'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
+    $name = $_POST['name'];
     $password = $_POST['password'];
 
     $result = $conn->query("SELECT username,userid from users");
@@ -42,7 +41,7 @@ if(isset($_POST['data_type']) && $_POST['data_type']=="save_setting"){
         }
     }
 
-    $excute = $conn->query("UPDATE users set username = '$username',firstname= '$firstname',lastname = '$lastname',password='$password' where userid = '$userid' ");
+    $excute = $conn->query("UPDATE users set username = '$username',name= '$name',password='$password' where userid = '$userid' ");
     if($excute){
         echo "setting saved successfully";
         die;

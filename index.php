@@ -1,11 +1,11 @@
 <?php
-    require_once 'vendor/autoload.php';
+    require_once 'external/vendor/autoload.php';
     require 'external/backend/config.php';
 
         $client = new Google_Client();
         $client->setClientId(CLIENT_ID);
         $client->setClientSecret(CLIENT_SECRET);
-        $client->setRedirectUri('http://localhost/auth%20practice/redirect.php');
+        $client->setRedirectUri('http://localhost/mywork/incredible%20future/external/check.php');
         $client->addScope(Google_Service_Drive::DRIVE); 
         $client->addScope("email");
         $client->addScope("profile");

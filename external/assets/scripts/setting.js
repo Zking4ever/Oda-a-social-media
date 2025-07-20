@@ -11,10 +11,11 @@ function change_profile_img(e){
     if(!confirm("Do you want to change your profile picture?")){
         return;
     }
-    var filename = e.target.files[0].name;
-    var ex_start = filename.lastIndexOf('.');
-    var ex = filename.substr(ex_start+1,3);
-    if(!(ex=='jpg' || ex=='JPG' || ex=='PNG' || ex=='HEIC')){
+    var filetype = e.target.files[0].type;
+    var file_type_desc = filetype.split('/');
+    var file_catagory = file_type_desc[0];
+    
+    if(file_catagory !="image"){
         handleResult('File not supported','story');
         return;
     }
@@ -22,11 +23,14 @@ function change_profile_img(e){
     label.innerHTML = "Uploading your profile..";
     var form = new FormData;
     var ajax = new XMLHttpRequest;
-    ajax.onload = function(){
+    ajax.onload = async function(){
         if(ajax.readyState==4 || ajax.status==200){
            if(ajax.response == "done"){
                 handleResult("Profile changed successfuly","story");
                 label.innerHTML = "Change Profile";
+                await new Promise(response=>setTimeout(response,2000));
+                radios[5].checked = false;
+                radios[5].click();
            }
         }
     }
@@ -42,18 +46,20 @@ function saveSettings(e){
     if(confirm("Are you sure about the changes?")){
         var form = new FormData;
         var ajax = new XMLHttpRequest;
-        ajax.onload = function(){
+        ajax.onload = async function(){
             if(ajax.readyState==4 || ajax.status==200){
                 handleResult(ajax.response,'story');//story cause just wanted to notify the result
+                await new Promise(response=>setTimeout(response,2000));
+                radios[5].checked = false;
+                radios[5].click();
             }
         } 
         form.append('request_type',"setting");
         form.append('data_type',"save_setting");
         inputs = e.target.parentElement.getElementsByTagName('input');
         form.append('username',inputs[0].value);
-        form.append('firstname',inputs[1].value);
-        form.append('lastname',inputs[2].value);
-        form.append('password',inputs[4].value);
+        form.append('name',inputs[1].value);
+        form.append('password',inputs[3].value);
 
         ajax.open("POST","backend/api.php",true);
         ajax.send(form);

@@ -272,6 +272,7 @@ async function handleResult(result,type){
             
             //puting the responded postes
             loaded_post.innerHTML = response['posts'];
+            notifications.style.display="none";
             notifications.style.opacity ="0";
             notifications.style.transform =" translateX(-50%) translateY(-30px)";
             notifications.innerHTML = "";
@@ -287,11 +288,13 @@ async function handleResult(result,type){
                 loaded_post.innerHTML = result;
             break;
         case "post":
+            notifications.style.display="flex";
             notifications.style.opacity ="100";
             notifications.style.transform =" translateX(-50%) translateY(0px)";
             notifications.innerHTML = result;
             break;
         case "change_profile":
+            notifications.style.display="flex";
             notifications.style.opacity ="100";
             notifications.style.transform =" translateX(-50%) translateY(0px)";
             notifications.innerHTML = result;
@@ -307,6 +310,7 @@ async function handleResult(result,type){
             }
             break;
         case "story":
+            notifications.style.display="flex";
             notifications.style.opacity ="100";
             notifications.style.transform =" translateX(-50%) translateY(0px)";
             notifications.innerHTML = result;
@@ -318,6 +322,7 @@ async function handleResult(result,type){
     notifications.style.transfrom ="translateX(-50%) translateY(-30px)";
     await delay(1000);
     notifications.style.opacity ="0";
+    notifications.style.display="none";
 
 }
 

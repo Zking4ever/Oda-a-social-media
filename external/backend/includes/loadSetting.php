@@ -54,7 +54,6 @@
                 }
                 @media (max-width:760px){
                 .two div{
-                    background-color:red;
                     width:70px;
                     height:70px;
                     border-radius:50%;
@@ -91,7 +90,7 @@
                     <button style='padding:3px 12px' onclick='saveSettings(event)'>Change</button><br>
                 </div>
                 <div class='two'>
-                    <div style=''><img src=backend/$userdata[source]></div><br>
+                    <div><a target='_blank' href='backend/$userdata[source]'><img src='backend/$userdata[source]'></a></div><br>
                     <label for='getFile'>Change Profile</label>
                     <input type='file' id='getFile' onchange='change_profile_img(event)' style='display:none;'>
                 </div>

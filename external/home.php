@@ -67,7 +67,7 @@
                     </div>
             </div>
             <div class="post_container">
-                <div class="notifications"> <span>notifications</span></div>
+                <div class="notifications" style="display:none"> <span>notifications</span></div>
                 <div class="loaded_post"></div>
                 <div class="inputs"><label>Attach File <input type="file" multiple style="display:none;"></label><input type='text' placeholder="comment or thought chat input"> <button onclick="send(event)" id="send_btn" style="padding:0px 10px">send</button></div>
             </div>
@@ -82,10 +82,10 @@
     </main>
    
 </body>
-<script src="assets/scripts/scripts.js"></script>
+<script src="assets/scripts/script.js"></script>
 <script src="assets/scripts/react.js"></script>
 <script src="assets/scripts/story.js"></script>
-<script src='assets/scripts/settings.js'></script>
+<script src='assets/scripts/setting.js'></script>
 <script src='assets/scripts/chat.js'></script>
 <script src='assets/scripts/post.js'></script>
 </html>

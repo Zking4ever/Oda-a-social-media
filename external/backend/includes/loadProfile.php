@@ -50,7 +50,7 @@ $stories = "";
     if($result->num_rows>0){
         while($row = $result->fetch_assoc()){
             $stories .= "<div class='story' onclick='see_User_story(event)' id='".$personid."'>
-                                                    <span>". date($row['story_time']) ."</span>
+                                                    <span style='text-align:center;'>".($row['story_time'])."</span>
                                                 </div>";
         }
         

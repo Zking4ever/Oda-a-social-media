@@ -43,6 +43,9 @@
     align-items: center;
     cursor: pointer;
 }
+.sender:hover{
+    background: linear-gradient(#e2d9fb, transparent, transparent, #dbd5ec);
+}
 .sender img{
     height: 30px;
     width:30px;

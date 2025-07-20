@@ -3,16 +3,21 @@
 session_start();
 $userData;
 
+if(isset($_SESSION['userData'])){
+   $userData = $_SESSION['userData'];
+}
+
 if (isset($_GET['code'])) {
     
+    require_once 'vendor/autoload.php';
     require "backend/config.php";
     $client = new Google_Client();
     $client->setClientId(CLIENT_ID);
     $client->setClientSecret(CLIENT_SECRET);
-    $client->setRedirectUri('http://localhost/auth%20practice/redirect.php');
+    $client->setRedirectUri('http://localhost/mywork/incredible%20future/external/check.php');
 
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-    $client->setAccessToken($token['access_token']);
+    $client->setAccessToken($token);
     
     // Get user profile
     $oauth2 = new Google_Service_Oauth2($client);
@@ -25,7 +30,8 @@ if (isset($_GET['code'])) {
         'picture' => $userinfo->picture,
     ];
 
-    $_SESSION['userid']==$userData['id'];
+    $_SESSION['userid'] =$userData['id'];
+    $_SESSION['userData'] = $userData;
 
 }
 if(isset($_SESSION['userid'])){
@@ -38,12 +44,24 @@ if(isset($_SESSION['userid'])){
 
     if($checkUserExistance->num_rows>0){
         include 'home.php';
-    }elseif(isset($userData['id'])){
+    }else{
         
         if($userid==$userData['id']){
         //here registration occurs and then sign in automatically
         //before that let them create password and username
-            echo "NEW USER";
+            if( !( isset($_GET['username']) || isset($_GET['password']) ) ) {
+                include "registration.php";
+                die;
+            }
+            
+            $username = $_GET['username'];
+            $password = $_GET['password'];
+            $query = "INSERT into users (userid,email,username,name,password) values('$userData[id]','$userData[email]','$username','$userData[name]','$password')";
+            $excute = $conn->query($query);
+            if($excute){
+                include 'home.php';
+            }
+
         }
     }
 }
