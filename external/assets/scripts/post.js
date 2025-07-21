@@ -4,6 +4,9 @@ function reactPost(event,num){
     var element = event.target;
     if(!element.id){
         element = element.parentElement;
+        if(!element.id){
+            element = element.parentElement;
+        }
     }
     var span = element.getElementsByTagName('span')[0];
     var postid  = element.id;
@@ -49,6 +52,9 @@ function postComments(e){
     var element = e.target;
     if(!element.id){
         element = element.parentElement;
+        if(!element.id){
+            element = element.parentElement;
+        }
     }
     var span = element.getElementsByTagName('span')[0];
     var postid  = element.id;

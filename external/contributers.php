@@ -122,10 +122,15 @@
         border-radius:50%;
         border:solid;
         overflow:hidden;
+        display:flex;
+        align-items:center;
+        transition:all .5s ease;
+    }
+    .img:hover{
+        border-radius:10px;
     }
     .img img{
         width:80px;
-        aspect-ratio:1;
     }
     .profile_pic .info{
         display:flex;
@@ -153,7 +158,6 @@
         width: 50px;
         height:50px;
     }
-    .prof
     .post{
         width:90%;
         border:2px solid rgb(207 207 207);

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/styles/main.css">
     <link rel="stylesheet" href="assets/styles/story.css">
     <link rel="stylesheet" href="assets/styles/post.css">
-    <link rel="stylesheet" href="assets/styles/styles.css">
+    <link rel="stylesheet" href="assets/styles/style.css">
     
 </head>
 <style>

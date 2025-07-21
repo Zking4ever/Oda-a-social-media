@@ -23,6 +23,7 @@ for(var i=0;i<radios.length;i++){
                          type_inputes.style.display = "none";
                          type_inputes.getElementsByTagName("label")[0].style.display = "none"; 
                          clearInterval(intervalId);
+                         intervalId = undefined;
                     }
                     break;
             case 1: if(radios[1].checked){
@@ -40,11 +41,13 @@ for(var i=0;i<radios.length;i++){
                             type_inputes.getElementsByTagName("input")[1].placeholder = "type what you are thinking";
                          }
                          clearInterval(intervalId);
+                         intervalId = undefined;
                     }
                     break;
             case 3: if(radios[3].checked){
                          request_type= "loadAsks";
                          clearInterval(intervalId);
+                         intervalId = undefined;
                     }
                     break;
            /* case 4: if(radios[4].checked){
@@ -58,6 +61,7 @@ for(var i=0;i<radios.length;i++){
                          request_type= "loadSettings";
                          type_inputes.style.display = "none";
                          clearInterval(intervalId);
+                         intervalId = undefined;
                     }
                     break;
         }

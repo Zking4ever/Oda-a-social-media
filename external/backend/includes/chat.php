@@ -13,12 +13,11 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
     }
     $chat = "<style>
                 .chat{
-                    height:350px;
+                    height:420px;
                     width:90%;
-                    margin: 20px auto;
+                    margin: 2px auto;
                     display:flex;
                 }
-                
                 .listHolder{
                     flex:0.27;
                     overflow-Y:scroll;
@@ -85,13 +84,13 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     width:fit-content;
                     overflow-wrap:break-word;
                     padding:5px;
-                    text-align:right;
                 }
                 .recieved div{
                     background-color:white;
                 }
                 .sent div{
                     background-color:#dbcef8;
+                    text-align:right;
                 }
                 .chatHolder .profile{
                     align-self:end;
@@ -131,13 +130,12 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 }
                 @media (max-width:760px){
                 .chat{
-                    height:320px;
                     width:100%;
                     margin: 5px auto;
                 }
                 .profile{
-                    width:22px;
-                    height:22px;
+                    width:30px;
+                    height:30px;
                     border:solid thin white;
                 }
                 .listHolder{
@@ -153,16 +151,17 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     padding:2px;
                     font-size:small;
                     text-align:center;
-                    border-radius:5px;
                 }
             }
             @media (max-width:460px){
                 .chat{
                     flex-direction:column;
+                    height:400px;
                 }
                 .listHolder{
                     display:flex;
                     overflow-x:scroll;
+                    flex:0.25;
                 }
                 .chatHolder{
                     flex:1;

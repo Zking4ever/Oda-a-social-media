@@ -107,7 +107,7 @@ $execute = $conn->query($query);
 
                     $friendSuggestions.="
                                     <div class='f_sug'>
-                                        <div style='width:100%;height:130px;display:flex;align-items:center;justify-contents:center;overflow:hidden;border-radius:10px;background-color:#c3dcef9c;' title='see profile'><img style='width:100%;cursor:pointer;border-radius:unset;' id='".$row['userid']."' onclick='get_profile(event)' src=backend/".$row['source']." alt='profile picture'></div>
+                                        <div style='width:100%;height:130px;display:flex;align-items:center;justify-contents:center;overflow:hidden;border-radius:10px;background-color:#c3dcef9c;' title='see profile'><img id='".$row['userid']."' onclick='get_profile(event)' src=backend/".$row['source']." alt='profile picture'></div>
                                         <div class='detail'>
                                             <h3>".$row['name']."</h3>
                                             <span style='font-size:12px;margin-left:7px;'>@".$row['username']."</span>

@@ -9,9 +9,12 @@ function remove(e){
 function request(id){
     var form = new FormData;
     var ajax = new XMLHttpRequest;
-    ajax.onload = function(){
+    ajax.onload = async function(){
         if(ajax.readyState==4 || ajax.status==200){
             handleResult(ajax.response,"story");
+            await new Promise(response=>setTimeout(response,1000));
+            radios[1].checked = false;
+            radios[1].click();
         }
     }
     form.append("request_type","resonse_to_suggestion");
@@ -24,9 +27,12 @@ function request(id){
 function  response(id,relationid){
     var form = new FormData;
     var ajax = new XMLHttpRequest;
-    ajax.onload = function(){
+    ajax.onload = async function(){
         if(ajax.readyState==4 || ajax.status==200){
             handleResult(ajax.response,"story");
+            await new Promise(response=>setTimeout(response,1000));
+            radios[1].checked = false;
+            radios[1].click();
         }
     }
     form.append("request_type","resonse_to_suggestion");

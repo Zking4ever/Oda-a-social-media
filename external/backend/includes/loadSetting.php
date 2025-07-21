@@ -9,7 +9,7 @@
             <style>
                 .one{
                     flex:2.5;
-                    background-color:#3c6290; 
+                    background-color:#eef6ff; 
                     display:flex;
                     flex-direction:column;
                     align-items:center;
@@ -41,6 +41,16 @@
                     display:flex;
                     align-items:center;
                     overflow:hidden;
+                    border-radius:10px;
+                    margin:0 5px;
+                    transition: all .4s ease;
+                }
+                .two div:hover{
+                    transform:scale(1.04);
+                    transform-origin:50% 50%;
+                }
+                .two a{
+                    display:flex;
                 }
                 .two img{
                     width:75%;
@@ -57,6 +67,10 @@
                     width:70px;
                     height:70px;
                     border-radius:50%;
+                }
+                .two div:hover{
+                    transform:scale(1.06);
+                    border:solid thin white;
                 }
                     .two img{
                         width:96%;

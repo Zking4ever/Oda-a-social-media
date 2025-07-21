@@ -1,7 +1,11 @@
 
 function startChat(e){
+    var element = e.target;
+    if(!element.id){
+        element = element.parentElement;
+    }
     type_inputes.style.display = "flex";
-    type_inputes.getElementsByTagName("label")[0].style,display = "block";
+    type_inputes.getElementsByTagName("label")[0].style.display = "block";
     type_inputes.getElementsByTagName("input")[1].placeholder = "type a message";
     var form = new FormData;
     var ajax =  new XMLHttpRequest;
@@ -10,12 +14,14 @@ function startChat(e){
         if(ajax.readystate==4 || ajax.status ==200){
             handleResult(ajax.response,"loadThoughts");
             var chat_holder = document.getElementsByClassName("chatHolder")[0];
-            intervalId = setInterval( readChat, 1000);
+            if(!intervalId){
+                intervalId = setInterval( readChat, 1000);
+            }
             chat_holder.scrollTo(0,chat_holder.scrollHeight);
         }
     }
     form.append("request_type","chat");
-    form.append("relationid",e.target.id);
+    form.append("relationid",element.id);
     form.append("data_type","start_chat");
     ajax.open("POST","backend/api.php",true);
     ajax.send(form);
