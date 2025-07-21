@@ -146,7 +146,7 @@ password.addEventListener("keyup",function(){
             checkForNumber(input,radians[4]);
 
         sign_up_btn.disabled = true;
-        if(radians[0].checked && radians[1].checked && radians[2].checked && radians[3].checked && radians[4].checked){
+        if(radians[0].checked && radians[1].checked && radians[2].checked && radians[3].checked && radians[4].checked && radians[5].checked){
              sign_up_btn.disabled = false;
         }
 });

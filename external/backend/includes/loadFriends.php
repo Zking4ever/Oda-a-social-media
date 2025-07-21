@@ -19,7 +19,7 @@ $data = [];
                 $sender=$senderArray->fetch_assoc();
                 $friendsRequests.="
                         <div class='f_request'>
-                            <img src='backend/".$sender['source']."'>
+                            <img id='".$sender['userid']."' onclick='get_profile(event)' src='backend/".$sender['source']."'>
                             <div class='detail'>
                                 <h3>".$sender['name']."</h3>
                                 <span style='font-size:12px;margin-left:7px;'>".$sender['username']."</span>
@@ -107,7 +107,7 @@ $execute = $conn->query($query);
 
                     $friendSuggestions.="
                                     <div class='f_sug'>
-                                        <img src=backend/".$row['source'].">
+                                        <div style='width:100%;height:130px;display:flex;align-items:center;justify-contents:center;overflow:hidden;border-radius:10px;background-color:#c3dcef9c;' title='see profile'><img style='width:100%;cursor:pointer;border-radius:unset;' id='".$row['userid']."' onclick='get_profile(event)' src=backend/".$row['source']." alt='profile picture'></div>
                                         <div class='detail'>
                                             <h3>".$row['name']."</h3>
                                             <span style='font-size:12px;margin-left:7px;'>@".$row['username']."</span>

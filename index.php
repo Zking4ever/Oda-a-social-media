@@ -188,7 +188,7 @@
                 <br>------------- Or -------------<br><br>
                 <a href='<?php echo $authUrl ?>' class="google">Sign in with Google</a>
                 
-                <!--div class="switch_pages"><span>Don't have account? </span><button id="to_sign_up" onclick="signUp()">Sign up</button></div-->
+                <div class="switch_pages"><span>Don't have account? </span><button id="to_sign_up" onclick="signUp()">Sign up</button></div>
             </div>
             <div style="display: none;"><form id="external"><input id="check_btn" type="submit"></form></div>
             <div class="section sign_up">

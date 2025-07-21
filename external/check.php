@@ -56,7 +56,7 @@ if(isset($_SESSION['userid'])){
             
             $username = $_GET['username'];
             $password = $_GET['password'];
-            $query = "INSERT into users (userid,email,username,name,password) values('$userData[id]','$userData[email]','$username','$userData[name]','$password')";
+            $query = "INSERT into users (userid,email,username,name,password,source) values('$userData[id]','$userData[email]','$username','$userData[name]','$password','$userData[picture]')";
             $excute = $conn->query($query);
             if($excute){
                 include 'home.php';
