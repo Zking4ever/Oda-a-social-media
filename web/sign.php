@@ -4,36 +4,7 @@ session_start();
 
  $data;
 
-if(isset($_POST) && !empty($_POST) && $_POST['type']=="sign_up" ){
-            
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $checkForEmail = "SELECT * from users where email = '$email'";
-        $checkResponse = $conn->query($checkForEmail);
-
-        if($checkResponse->num_rows >0){
-            $data['result'] = "Email already exist";
-            $data['status'] = "bad";
-
-            echo json_encode( $data );
-            die;
-        }
-        
-        $userid = createRand(25);
-
-        $query = "INSERT into users(firstname,lastname,email,password,userid) values('$fname','$lname','$email','$password','$userid')";
-        $response = $conn->query($query);
-        if($response == true){
-            $data['result'] = "sign up completed";
-            $data['status'] = "great";
-
-            echo json_encode( $data );
-        }
-}
-elseif(isset($_POST) && !empty($_POST) && $_POST['type']=="log_in" ){
+if(isset($_POST) && !empty($_POST) && $_POST['type']=="log_in" ){
     $email = $_POST['email'];
     $password = $_POST['password'];
 

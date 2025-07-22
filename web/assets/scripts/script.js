@@ -169,11 +169,13 @@ function get_profile(e){
                 element = element.parentElement;
             }
         }
-        contribut.style.display = "flex";
         var myform = new FormData;
         var ajax = new XMLHttpRequest;
+        loading();
         ajax.onload = function(){
             if(ajax.readyState==4){
+                finishedLoading();
+                contribut.style.display = "flex";
                 var Data = JSON.parse(ajax.response);
                 
                 var profile_img = contribut.getElementsByTagName("img")[0];

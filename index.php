@@ -1,16 +1,17 @@
 <?php
-    require_once 'external/vendor/autoload.php';
-    require 'external/backend/config.php';
+    require_once 'web/vendor/autoload.php';
+    require 'web/backend/config.php';
 
         $client = new Google_Client();
         $client->setClientId(CLIENT_ID);
         $client->setClientSecret(CLIENT_SECRET);
-        $client->setRedirectUri('http://localhost/mywork/incredible%20future/external/check.php');
+        $client->setRedirectUri('http://localhost/mywork/incredible%20future/web/main.php');
         $client->addScope(Google_Service_Drive::DRIVE); 
         $client->addScope("email");
         $client->addScope("profile");
         
         $authUrl = $client->createAuthUrl();
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,9 +51,6 @@
             border-radius: 5px;
             transition: all 1s ease;
         }
-        .moved{
-            transform: translateX(-200%);
-        }
         .part2{
             flex: 2;
             height: 100%;
@@ -68,9 +66,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-        }
-        .sign_up{
-            display: none;
         }
         form{
             width: 100%;
@@ -95,36 +90,7 @@
         .activelable{
             transform: translateY(-5px) translateX(-90px);
         }
-        .switch_pages button{
-            border: none;
-            background-color: transparent;
-            color: blue;
-            cursor: pointer;
-        }
-        #passStrength{
-            font-size: 14px;
-            display: none;
-            grid-template-columns: 50% 50%;
-            background-color: rgb(217, 227, 234);
-            min-height: 5px;
-            width: 90%;
-            margin: 5px auto;
-            padding: 5px;
-            border-radius: 5px;
-        }
-        .criteria{
-            display: flex;
-            align-items: center;
-        }
-        .des{
-            color: red;
-        }
-        .criteria input:checked ~ .des{
-            color: green;
-        }
-        #passStrength input{
-            width: 12px;
-        }
+       
         .google{
             display: flex;
             gap: 20px;
@@ -173,10 +139,10 @@
 <div class="wraper">
     <div class="part2"></div>
     <div class="part1"> 
-            <div class="notification">Lorepiente nam repellendus quaerat.</div>
+            <div class="notification">notifications</div>
             <div class="section login">
                 <form id="log_in">
-                    <p>Wlcome to</p>
+                    <p>Welcome to</p>
                     <h1>Incredible Future</h1>
                     <h2>Log in</h2>
                     <label for="email" id="email_lable">Email</label><br>
@@ -188,35 +154,12 @@
                 <br>------------- Or -------------<br><br>
                 <a href='<?php echo $authUrl ?>' class="google">Sign in with Google</a>
                 
-                <div class="switch_pages"><span>Don't have account? </span><button id="to_sign_up" onclick="signUp()">Sign up</button></div>
             </div>
             <div style="display: none;"><form id="external"><input id="check_btn" type="submit"></form></div>
-            <div class="section sign_up">
-                 <form id="sign_up">
-                    <h2>Sign Up</h2>
-                    <label for="fname">First Name</label><br>
-                    <input type="text" name="fname" id="fname" required ><br>
-                    <label for="lname">Last Name</label><br>
-                    <input type="text" name="lname" id="lname" required ><br>
-                    <label for="email2">Email</label><br>
-                    <input type="email" name="email" id="email2" required ><br>
-                    <label for="password2">Password</label><br>
-                    <input type="password" name="password" id="password2" required><br>
-                        <div id="passStrength">
-                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Must be at least of 8 characters</div></div> 
-                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Uppercase Letters</div> </div>                       
-                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Lowercase Letters</div></div>                       
-                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Special characters</div></div>                  
-                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Numbers</div></div>              
-                        </div><br>
-                    <input type="button" onclick="submitData(2)" value="Sign Up" id="sign_up_btn">
-                </form>
-                <br><br><br>
-                <div class="switch_pages"><span>Already have an account? </span><button id="to_log_in" onclick="logIn()">Log in</button></div>
-            </div> 
+             
     </div>
 </div>
     
 </body>
-<script src="external/assets/scripts/log.js"></script>
+<script src="web/assets/scripts/log_.js"></script>
 </html>

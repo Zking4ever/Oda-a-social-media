@@ -14,7 +14,7 @@ if (isset($_GET['code'])) {
     $client = new Google_Client();
     $client->setClientId(CLIENT_ID);
     $client->setClientSecret(CLIENT_SECRET);
-    $client->setRedirectUri('http://localhost/mywork/incredible%20future/external/check.php');
+    $client->setRedirectUri('http://localhost/mywork/incredible%20future/web/main.php');
 
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
     $client->setAccessToken($token);

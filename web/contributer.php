@@ -77,64 +77,7 @@
             </div>
 
 </div> 
-<style>
-    .commentContainer{
-            width:68%;
-            height:200px;
-            background-color:rgb(34,45,65,0.4);
-            backdrop-filter:blur(3px);
-            border-radius:6px;
-            left:50%;
-            transform:translateX(-50%);
-            position:absolute;
-            bottom:60px;
-            padding:2px;
-            overflow-Y:scroll;
-            display:none;
-        }
-        .loader{
-            width:fit-content;
-            transform:translateY(96px);
-            font-size:35px;
-            margin:auto;
-        }
-        .cloth{
-            position:absolute;
-            right:2px;
-            top:2px;
-            cursor:pointer;
-        }
-        .comment{
-                width:95%;
-                margin: 3px auto;
-                padding:4px;
-                border:solid thin;
-                border-radius:7px;
-                min-height:30px;
-                display:flex;
-                flex-direction:column;
-            }   
-            .comment div{
-                width:100%;
-                display:flex;
-                justify-content:space-between;
-                align-items:center;
-            }
-            .comment span{
-                margin:0;
-                padding:2px;
-                width:86%;
-                background-color:rgb(224,229,231,0.75);
-                overflow-wrap:break-word;
-                border-radius:6px;
-            }
-        @media (max-width:760px) {
-            .commentContainer{
-                width:98%;
-            }
-        }
-    </style>
-<div class='commentContainer'><div class='loader'>Loading..</div> </div>
+
 
 <style>
     .user_profile{
@@ -247,3 +190,62 @@
         </div>
 
 </div>
+<style>
+    .commentContainer{
+            width:68%;
+            height:200px;
+            background-color:rgb(34,45,65,0.4);
+            backdrop-filter:blur(3px);
+            border-radius:6px;
+            left:50%;
+            transform:translateX(-50%);
+            position:absolute;
+            bottom:60px;
+            padding:2px;
+            overflow-Y:scroll;
+            display:none;
+             z-index: 150;
+        }
+        .loader{
+            width:fit-content;
+            transform:translateY(96px);
+            font-size:35px;
+            margin:auto;
+        }
+        .cloth{
+            position:absolute;
+            right:2px;
+            top:2px;
+            cursor:pointer;
+        }
+        .comment{
+                width:95%;
+                margin: 3px auto;
+                padding:4px;
+                border:solid thin;
+                border-radius:7px;
+                min-height:30px;
+                display:flex;
+                flex-direction:column;
+            }   
+            .comment div{
+                width:100%;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+            }
+            .comment span{
+                margin:0;
+                padding:2px;
+                width:86%;
+                background-color:rgb(224,229,231,0.75);
+                overflow-wrap:break-word;
+                border-radius:6px;
+            }
+        @media (max-width:760px) {
+            .commentContainer{
+                width:98%;
+            }
+        }
+    </style>
+<div class='commentContainer'><div class='loader'>Loading..</div> </div>
