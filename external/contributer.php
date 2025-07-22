@@ -1,6 +1,47 @@
+<style>
+    .loadingGif{
+        display:none;
+        justify-content:center;
+        flex-direction:column;
+        gap:50px;
+        color: #9073de;
+        text-align:center;
+    }
+    .loading{
+		height:25px;
+		width:25px;
+		border:solid #9073de;
+		border-radius:5px;
+		transform-origin:100% 100%;
+		animation: load 2.4s ease infinite;
+	}
+	@keyframes load{
+		0%{
+
+			transform:rotateX(0deg) rotateY(0deg);
+		}
+		25%{
+			transform:rotateX(0deg) rotateY(180deg);
+		}
+		50%{
+
+			transform:rotateX(180deg) rotateY(180deg);
+		}
+		75%{
+
+			transform:rotateX(180deg) rotateY(0deg);
+		}
+		100%{
+			transform:rotateX(0deg) rotateY(0deg);
+		}
+	}
+  </style>
 <div class="contributers" >
-                <div class="loadingGif" style="display:none;align-items:center;justify-content:center;">
-                        LOADING....
+                <div class="loadingGif" style="">
+                    <div style='width: 50px;height:50px'> 
+                        <div class='loading'></div>
+                    </div>
+                    <div class = "loadingMessage"> LOADING....</div>
                 </div>
                 <div class="new_post_inputes">
                         <form>

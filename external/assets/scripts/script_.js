@@ -4,6 +4,7 @@ var submit = document.getElementById('submit');
 var inputs = document.getElementsByClassName('new_post_inputes')[0];
 var contributers = document.getElementsByClassName('contributers')[0];
 var loadingDiv = document.getElementsByClassName("loadingGif")[0];
+var loadingMessage = document.getElementsByClassName("loadingMessage")[0];
 var notifications = document.getElementsByClassName('notifications')[0];
 var loaded_post = document.getElementsByClassName('loaded_post')[0];
 var radiosParent = document.getElementById("myradios");
@@ -339,7 +340,7 @@ function loading(text){
         contributers.style.display = "flex";
         loadingDiv.style.display = "flex";
         if(text!=null){
-            loadingDiv.textContent = text;
+            loadingMessage.textContent = text;
         }
 }
 function finishedLoading(){
