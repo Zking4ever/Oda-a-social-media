@@ -1,7 +1,23 @@
 <?php
 
-sleep(3);
- $query = "SELECT * from posts";
+//already seen Posts?
+$seenPosts= [];
+$queryForSeenPosts = "SELECT seenPostData from seenposts where userid = '$userid' ";
+$excute = $conn->query($queryForSeenPosts);
+if($excute->num_rows>0){
+    $seenPostData = $excute->fetch_assoc()['seenPostData'];//get the data
+    $seenPosts = json_decode($seenPostData);//change back to array the returned data
+}
+
+    $valuesForQuery = '(';
+    foreach ($seenPosts as $key => $value) {
+        # code...
+            $valuesForQuery .= $value.',';
+    }
+    $valuesForQuery .= ')';
+
+
+$query = "SELECT * from posts";
 $result = $conn->query($query);
 
 $post = "";
@@ -12,7 +28,7 @@ if($result->num_rows>0){
         $queryForSenders = "SELECT userid,name,userid,username,source from users where userid = '$row[sender]' ";
         
         $sender = $conn->query($queryForSenders)->fetch_assoc();
-                    $post.="<div class='post'>
+                    $post.="<div class='post' >
                         <div class='sender' id=".$sender['userid']." onclick='get_profile(event)'>
                             <img src='backend/".$sender['source']."'>
                             <div class='detail'>
@@ -51,10 +67,13 @@ if($result->num_rows>0){
                         </div>
                         <span class='caption'>".$row['caption']."</span>
                     </div>";
-            }
         }
-            $post.="<center class='post' style='border:none;' id='postLOADER'> <div style='transform-origin:50% 50%;margin:10px;' class='loading'></div> </center>";
+}else{
+   $post.="<center class='post' style='border:none;'> <div> NO NEW POST..</div> </center>";
 
-        $data['posts']= $post;
+}
+$post.="<center class='post' style='border:none;' id='postLOADER'> <div style='transform-origin:50% 50%;margin:10px;' class='loading'></div> </center>";
 
-        echo json_encode($data);
+$data['posts']= $post;
+
+echo json_encode($data);

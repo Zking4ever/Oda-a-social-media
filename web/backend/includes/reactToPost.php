@@ -119,5 +119,38 @@ if(isset($_POST['data_type']) && $_POST['data_type']=="read_comment"){
     }
     
     echo $comments;
+}
 
+if(isset($_POST['data_type']) && $_POST['data_type']=="post_seen"){
+
+    $CommingPostId = $_POST['postid'];
+    $seenPosts = [];
+
+    $queryForSeenPosts = "SELECT seenPostData from seenposts where userid = '$userid' ";
+    $excute = $conn->query($queryForSeenPosts);
+    if($excute->num_rows>0){
+        $seenPostData = $excute->fetch_assoc()['seenPostData']; //get the data
+        $seenPosts = json_decode($seenPostData);//change back to array the returned data
+        $exist = array_search($CommingPostId,$seenPosts); //looking if it exist to avoid the unwanted doublication
+        
+       if($exist==""){
+            $seenPosts[] = $CommingPostId;//adding the new postid to save it ass seen
+            $seenPosts = json_encode($seenPosts); // change to string to store to db
+
+            $query = "UPDATE seenposts set seenPostData = '$seenPosts' where userid = '$userid' ";
+            $excute = $conn->query($query);
+            if($excute){
+                echo "seen";
+            }
+        }
+    }else{
+        $seenPosts[] = $CommingPostId;
+        $seenPosts = json_encode($seenPosts);
+        
+        $query = "INSERT into seenposts(userid,seenPostData) value ('$userid','$seenPosts') ";
+        $excute = $conn->query($query);
+        if($excute){
+            echo "seen";
+        }
+    }
 }

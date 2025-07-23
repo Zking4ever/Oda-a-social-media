@@ -15,7 +15,7 @@ $data = [];
                 $queryForSenders = "SELECT userid,name,userid,username,source from users where userid = '$row[sender]' ";
                 
                 $sender = $conn->query($queryForSenders)->fetch_assoc();
-                            $post.="<div class='post'>
+                        $post.="<div class='post' onmousewheel='Post_seen(event)'>
                                 <div class='sender' id=".$sender['userid']." onclick='get_profile(event)'>
                                     <img src='backend/".$sender['source']."'>
                                     <div class='detail'>
