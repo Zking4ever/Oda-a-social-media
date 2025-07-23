@@ -106,7 +106,7 @@
 		<div class="container">
 			<h1>Incredible Future</h1>
 			<p>Rigsteration</p>
-                <form action="check.php" class='box' id="form" method="GET">
+                <form action="main.php" class='box' id="form" method="GET">
 							Username<br>
 							<input type='text' name='username' placeholder =" Username" required>
                             Password<br>

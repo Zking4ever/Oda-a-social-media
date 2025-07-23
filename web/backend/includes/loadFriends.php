@@ -102,6 +102,8 @@ $execute = $conn->query($query);
         if($result->num_rows>0){
              $friendSuggestions.="<legend style='margin:5px'>Suggestions</legend>
                             <div class='F_suggestion'>";
+            $limit=0;
+
             while($row = $result->fetch_assoc()){
                 if(!checkConnection($row['userid'],$Connections)){
 
@@ -114,6 +116,10 @@ $execute = $conn->query($query);
                                             <div style='transform:translateY(4px)'> <button onclick='request(`".$row['userid']."`,`1`)'>Send Request</button> <button onclick='remove(event)'>remove</button> </div>
                                         </div>
                                     </div>";
+                            $limit++;
+                            if($limit==12){
+                                break;
+                            }
                 }
             }
                 $friendSuggestions.="</div>";

@@ -108,7 +108,7 @@
             display: block;
             width: 30px;
             height: 30px;
-            background-image: url(external/assets/svg/google.svg);
+            background-image: url(web/assets/svg/google.svg);
             background-color: white;
             background-size: cover;
         }

@@ -13,6 +13,7 @@ $data = [];
                 
                 #here another query to find out the sender
                 $queryForSenders = "SELECT userid,name,userid,username,source from users where userid = '$row[sender]' ";
+                
                 $sender = $conn->query($queryForSenders)->fetch_assoc();
                             $post.="<div class='post'>
                                 <div class='sender' id=".$sender['userid']." onclick='get_profile(event)'>
@@ -55,7 +56,7 @@ $data = [];
                             </div>";
                     }
                 }
-
+                 $post.="<center class='post' style='border:none;' id='postLOADER'> <div style='transform-origin:50% 50%;margin:10px;' class='loading'></div> </center>";
                 $data['posts']= $post;
 
 $loadedStories="";

@@ -1,5 +1,4 @@
 
-
 function reactPost(event,num){
     var element = event.target;
     if(!element.id){
@@ -99,3 +98,39 @@ function clothPostComment(e){
 
 radios[0].click();
 //everytime the page starts with home
+
+var isLoading=false;
+
+var post = document.getElementsByClassName('post');
+
+loaded_post.addEventListener('scroll',function(){
+    
+    Loader = post[post.length-1];
+    if(Loader.id != "postLOADER"){
+        return;
+    }
+    if(window.getComputedStyle(Loader).opacity !=1){
+        console.log("reached bottom");
+        if(!isLoading){
+            isLoading=true;
+            fetch_post();
+        }
+    }
+    
+
+});
+
+function fetch_post(){
+        Loader = post[post.length-1];
+        var xml = new XMLHttpRequest;
+        xml.onload = function(){ 
+            if(xml.readyState==4 || xml.status==200){
+                var response = JSON.parse(xml.response);
+                loaded_post.removeChild(Loader);
+                loaded_post.innerHTML += response['posts'];
+                isLoading=false;
+            }
+        }
+        xml.open("GET","backend/api.php?request_type=fetch_post",true);
+        xml.send();
+}
