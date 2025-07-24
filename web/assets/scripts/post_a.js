@@ -20,6 +20,7 @@ loaded_post.addEventListener('scroll',function(){
 });
 
 function fetch_post(){
+        console.log("fetching..");
         Loader = post[post.length-1];
         var xml = new XMLHttpRequest;
         xml.onload = function(){ 
@@ -35,13 +36,24 @@ function fetch_post(){
                 }else if(post[post.length-2].textContent == '  NO NEW POST.. '){
                     loaded_post.removeChild(post[post.length-2]);
                 }
-                console.log(post[post.length-2].textContent )
                 loaded_post.removeChild(Loader);
                 loaded_post.innerHTML += response['posts'];
                 isLoading=false;
             }
         }
-        xml.open("GET","backend/api.php?request_type=fetch_post",true);
+    //in case if posts on the server are already marked as seen(previously) but not visible now 'cause the server filters
+    //but what if the user wants to see again it or no new post found,the response will be to make those visible until there is no invisible
+    //so i need to send which are currently visible
+    var visiblePosts = [];
+    var posts = document.getElementsByClassName('post');
+    for(let i=0;i<posts.length;i++){
+        var react = posts[i].getElementsByClassName('react')[0];
+        if(react && !visiblePosts.includes(react.id)){
+            visiblePosts.push(react.id);
+        }
+    }
+        visiblePosts = JSON.stringify(visiblePosts);
+        xml.open("GET","backend/api.php?request_type=fetch_post&&visiblePosts="+visiblePosts,true);
         xml.send();
 }
 
