@@ -46,7 +46,7 @@ for(var i=0;i<radios.length;i++){
                     }
                     break;
             case 3: if(radios[3].checked){
-                         request_type= "loadAsks";
+                         request_type= "askAI";
                          clearInterval(intervalId);
                          intervalId = undefined;
                     }
@@ -289,6 +289,7 @@ async function handleResult(result,type){
             break;
         case "loadSettings":
         case "loadThoughts":
+        case "askAI":
                 loaded_post.innerHTML = result;
             break;
         case "post":

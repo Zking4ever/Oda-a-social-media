@@ -20,9 +20,9 @@ elseif(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
     
     include "includes/thoughts.php";
 }
-elseif(isset($_GET['request_type']) && $_GET['request_type']=="loadAsks"){
+elseif(isset($_GET['request_type']) && $_GET['request_type']=="askAI"){
 
-    echo "ask me page";
+    include "includes/askAI.php";
 }
 elseif(isset($_GET['request_type']) && $_GET['request_type']=="loadCouncelor"){
 
