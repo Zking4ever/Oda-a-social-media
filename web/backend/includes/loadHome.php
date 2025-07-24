@@ -33,7 +33,7 @@ if($result->num_rows>0){
     }
 }
 
-$response = array_diff_assoc($fetchedPost,$seenPosts);
+$response = subtractArray($fetchedPost,$seenPosts);
 
 $post = "";
 
@@ -100,7 +100,7 @@ if(count($response)>0){
     }
 }else{
     //not seen today
-    $filtered = array_diff_assoc($fetchedPost,$_SESSION['seen_today']);
+    $filtered = subtractArray($fetchedPost,$_SESSION['seen_today']);
     if(count($filtered)>0){
         $limit=0; //for efficency only 3 posts are going to be loadded at a times
         foreach ($filtered as $key => $value) {

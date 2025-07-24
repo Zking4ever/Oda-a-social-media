@@ -86,5 +86,5 @@
 <script src="assets/scripts/story.js"></script>
 <script src='assets/scripts/setting.js'></script>
 <script src='assets/scripts/chat.js'></script>
-<script src='assets/scripts/post_a.js'></script>
+<script src='assets/scripts/post_.js'></script>
 </html>

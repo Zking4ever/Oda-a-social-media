@@ -3,8 +3,8 @@
 require "conn.php";
 session_start();
 
-if($_SESSION['userid'] ==''){
-    header("location: index.php");
+if($_SESSION['userid'] =='' || !isset($_SESSION['userid'])){
+    header("location: loged out.php");
 }
 $userid = $_SESSION['userid'];
 
@@ -83,7 +83,7 @@ elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=
 }
 
 
-
+#-----------functions-----
 
 
 function createRand($size){
@@ -97,4 +97,22 @@ function createRand($size){
         $randWord .= $alphas[$r];
     }
     return $randWord;
+}
+
+
+
+function subtractArray($firstArray,$secondArray){
+    $answer = array();
+    foreach ($firstArray as $key => $f) {
+        $counter = 0;
+        foreach ($secondArray as $key => $s) {
+            if($s!=$f){
+                $counter++;
+            }
+        }
+        if($counter==count($secondArray)){
+                array_push($answer,$f);
+        }
+    }
+    return $answer;
 }

@@ -24,6 +24,7 @@ function fetch_post(){
         var xml = new XMLHttpRequest;
         xml.onload = function(){ 
             if(xml.readyState==4 || xml.status==200){
+                console.log(xml.response);
                 var response = JSON.parse(xml.response);
                 if( (response['posts'].split('NO NEW POST')).length ==2){ 
                     // the response is no new post 

@@ -2,6 +2,10 @@
 
 //already seen Posts?
 $seenPosts= [];
+if(!isset($_SESSION['seen_today'])){
+    $_SESSION['seen_today'] = [];
+}
+
 $queryForSeenPosts = "SELECT seenPostData from seenposts where userid = '$userid' ";
 $excute = $conn->query($queryForSeenPosts);
 if($excute->num_rows>0){
@@ -27,7 +31,7 @@ if($result->num_rows>0){
     }
 }
 
-$response = array_diff_assoc($fetchedPost,$seenPosts);
+$response = subtractArray($fetchedPost,$seenPosts);
 
 $post = "";
 
@@ -94,7 +98,8 @@ if(count($response)>0){
     }
 }else{
     //not seen today
-    $filtered = array_diff_assoc($fetchedPost,$_SESSION['seen_today']);
+    $filtered = subtractArray($fetchedPost,$_SESSION['seen_today']);
+
     if(count($filtered)>0){
         $limit=0; //for efficency only 3 posts are going to be loadded at a times
         foreach ($filtered as $key => $value) {
@@ -107,9 +112,9 @@ if(count($response)>0){
         $result = $conn->query($query);
         $row = $result->fetch_assoc();
         //to avoid doublication on session variable lets check before adding a new value
-            $search = array_search($row['postid'],$_SESSION['seen_today']);
+            $search = array_search($value,$_SESSION['seen_today']);
             if(!$search && $search !== 0){
-                $_SESSION['seen_today'][] = $row['postid'];
+                $_SESSION['seen_today'][] = $value;
             }
         #here another query to find out the sender
             $queryForSenders = "SELECT userid,name,userid,username,source from users where userid = '$row[sender]' ";
@@ -169,14 +174,12 @@ if(count($response)>0){
             $fetchedNow = array(); //to avoid doubling single post
                for ($i=0; $i<3 && $i<count($invisiblePosts); $i++){   //for efficency only 3 posts are going to be loadded at a times
                     $rand = rand(0,count($invisiblePosts)-1);
-                    $data["no"] = $rand;
                     $exist = array_search($rand,$fetchedNow);
                     while($exist || $exist ===0){
                         $rand = rand(0,count($invisiblePosts)-1);
                         $exist = array_search($rand,$fetchedNow);
                     }
                     $fetchedNow[] = $rand;
-                    $data["arr"] = $fetchedNow;
                 $postid = $invisiblePosts[$rand];
                    
                 $query = "SELECT * from posts where postid = '$postid'";
@@ -245,20 +248,3 @@ $data['posts']= $post;
 
 echo json_encode($data);
 
-
-
-function subtractArray($firstArray,$secondArray){
-    $answer = array();
-    foreach ($firstArray as $key => $f) {
-        $counter = 0;
-        foreach ($secondArray as $key => $s) {
-            if($s!=$f){
-                $counter++;
-            }
-        }
-        if($counter==count($secondArray)){
-                array_push($answer,$f);
-        }
-    }
-    return $answer;
-}
