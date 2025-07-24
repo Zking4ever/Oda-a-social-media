@@ -226,7 +226,6 @@ var btn = contribut.getElementsByTagName("button")[0];
 
 btn.onclick = function(e){
     if(btn.innerHTML=="send request"){
-        alert("gonna send req");
         request(this.id);
         this.innerHTML = "request pending...";
     }else if(btn.innerHTML=="message"){
@@ -240,9 +239,7 @@ btn.onclick = function(e){
     }
 }
 //log out
-var logout_btn = document.getElementsByClassName("logout")[0];
-
-logout_btn.onclick = function(){
+function LogOut(){
         if(confirm("Do you want to log out?")){
             var myform = new FormData;
             loading("LOGING OUT...");

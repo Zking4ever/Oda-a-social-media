@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
-    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/styles/main_.css">
     <link rel="stylesheet" href="assets/styles/story.css">
     <link rel="stylesheet" href="assets/styles/post.css">
     <link rel="stylesheet" href="assets/styles/style.css">
@@ -73,7 +73,6 @@
             </div>
             <div class="controls">
                 <div class="add_new_post" id="add">➕</div>
-                <div class="logout">😡</div>
             </div>
             <?php
                 include "contributer.php";
@@ -82,7 +81,7 @@
     </main>
    
 </body>
-<script src="assets/scripts/script.js"></script>
+<script src="assets/scripts/script_.js"></script>
 <script src="assets/scripts/react.js"></script>
 <script src="assets/scripts/story.js"></script>
 <script src='assets/scripts/setting.js'></script>

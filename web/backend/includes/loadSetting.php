@@ -20,6 +20,7 @@
                     display:flex;
                     flex-direction:column;
                     align-items:center;
+                    position:relative;
                 }
                 .one div{
                     width:50%;
@@ -34,7 +35,7 @@
                     padding:5px;
                     border-radius:10px;
                 }
-                .two div{
+                .two .profile{
                     width:200px;
                     height:200px;
                     background-color:azure;
@@ -45,7 +46,7 @@
                     margin:0 5px;
                     transition: all .4s ease;
                 }
-                .two div:hover{
+                .two .profile:hover{
                     transform:scale(1.04);
                     transform-origin:50% 50%;
                 }
@@ -63,12 +64,12 @@
                     cursor:pointer;
                 }
                 @media (max-width:760px){
-                .two div{
+                .two .profile{
                     width:70px;
                     height:70px;
                     border-radius:50%;
                 }
-                .two div:hover{
+                .two .profile:hover{
                     transform:scale(1.06);
                     border:solid thin white;
                 }
@@ -104,9 +105,10 @@
                     <button style='padding:3px 12px' onclick='saveSettings(event)'>Change</button><br>
                 </div>
                 <div class='two'>
-                    <div><a target='_blank' href='backend/$userdata[source]'><img src='backend/$userdata[source]'></a></div><br>
+                    <div class='profile'><a target='_blank' href='backend/$userdata[source]'><img src='backend/$userdata[source]'></a></div><br>
                     <label for='getFile'>Change Profile</label>
                     <input type='file' id='getFile' onchange='change_profile_img(event)' style='display:none;'>
+                    <div class='logout' onclick='LogOut()'>😡</div>
                 </div>
             </div>
 

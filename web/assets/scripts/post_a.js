@@ -20,7 +20,6 @@ loaded_post.addEventListener('scroll',function(){
 });
 
 function fetch_post(){
-        console.log("fetching..");
         Loader = post[post.length-1];
         var xml = new XMLHttpRequest;
         xml.onload = function(){ 

@@ -3,10 +3,8 @@
 require "conn.php";
 session_start();
 
-#sleep(1);
-
 if($_SESSION['userid'] ==''){
-    header("location: index.html");
+    header("location: index.php");
 }
 $userid = $_SESSION['userid'];
 

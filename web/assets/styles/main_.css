@@ -77,6 +77,10 @@ main{
     border: 1px solid rgb(180, 8, 8);
 }
 .logout{
+    position: relative;
+    right: -40%;
+    bottom: 0;
+    margin-top: 10px;
     background-color: rgb(179, 109, 91);
 }
 .logout:hover{
@@ -154,5 +158,9 @@ main{
     }
     #submit{
         bottom: 20px;
+    }
+    .logout{
+        right: -15%;
+        bottom: -22%;
     }
 }

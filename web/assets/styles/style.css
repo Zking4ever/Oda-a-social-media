@@ -121,3 +121,8 @@
         padding: 5px;
     }
 }
+@media(max-width:400px){
+    .F_request{
+        max-width:70%;
+    }
+}
