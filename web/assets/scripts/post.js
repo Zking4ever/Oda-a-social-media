@@ -7,8 +7,8 @@ var post = document.getElementsByClassName('post');
 
 loaded_post.addEventListener('scroll',function(){
     
-    Loader = post[post.length-1];
-    if(!Loader || Loader.id != "postLOADER"){
+    Loader = post[post.length-1]; //to fetch post
+    if(!Loader || Loader.id != "postLOADER"){ //this means there is no post loging gif here 
         return;
     }
     if(window.getComputedStyle(Loader).opacity !=1){
@@ -19,12 +19,25 @@ loaded_post.addEventListener('scroll',function(){
     }
 });
 
+function scrollThought() {
+    Loader = document.getElementById('thoughtLoader'); //checking if it is the thought loader
+        if(!Loader){
+            return;
+        }else{ 
+            if(window.getComputedStyle(Loader).opacity !=1){
+                if(!isLoading){ // to not request twise 
+                    isLoading=true;
+                    fetchThought();
+                }
+            }
+        }
+}
+
 function fetch_post(){
         Loader = post[post.length-1];
         var xml = new XMLHttpRequest;
         xml.onload = function(){ 
             if(xml.readyState==4 || xml.status==200){
-                console.log(xml.response);
                 var response = JSON.parse(xml.response);
                 if( (response['posts'].split('NO NEW POST')).length ==2){ 
                     // the response is no new post 
@@ -72,7 +85,9 @@ function Post_seen(e){
     var form = new FormData;
     var xml = new XMLHttpRequest;
     xml.onload = function (){
-        seenPost.push(postid);
+        if(xml.readyState==4){
+            seenPost.push(postid);
+        }
     }
     form.append("request_type","post_reaction");
     form.append("data_type","post_seen");
@@ -177,4 +192,61 @@ function clothPostComment(e){
         type_inputes.style.display = "none";
         type_inputes.getElementsByTagName("input")[1].removeAttribute('comment_this_post');
         type_inputes.getElementsByTagName("input")[1].removeAttribute('prev_com_no');
+}
+var seenThoughts = [];
+function seeThought(e){
+    var element = e.target;
+    var id = element.getElementsByTagName('div')[3].id;
+    if(seenThoughts.includes(id)){
+        return;
+    }
+    var form = new FormData;
+    var xml = new XMLHttpRequest;
+    xml.onload = function (){
+        if(xml.readyState==4){
+            seenThoughts.push(id);
+        }
+    }
+    
+    form.append("request_type","thought");
+    form.append("data_type","see");
+    form.append("thoughtid",id);
+
+    xml.open("POST","backend/api.php",true);
+    xml.send(form);
+}
+
+function fetchThought(){
+    var form = new FormData;
+    var xml = new XMLHttpRequest;
+    var all = document.getElementsByClassName("thoughtBox");
+    xml.onload = function (){
+        if(xml.readyState==4){
+            var container = document.getElementsByClassName('thoughts')[0];
+            if(all[all.length-2].textContent == "No new thought found.."){  //the last thought
+                if(xml.response.split('No new thought found..').length ==2){
+                    return;//the response is no new found and it was alredy displayed no need to do again
+                    //but if there is a new one it is going to be displayed
+                }else{
+                    container.removeChild(all[all.length-2]); // the notification--> no new message --< has to be removed since it found a new one
+                }
+            }
+            container.removeChild(all[all.length-1]);//this is the loader
+            container.innerHTML += xml.response;
+            isLoading=false; //for next time loading
+        }
+    }
+    var thoughtids = [];
+    for(let i=0;i<all.length-1;i++){
+        var ele = all[i].getElementsByTagName('div')[3];
+        if(ele){
+            thoughtids.push(ele.id);
+        }
+    }
+    thoughtids = JSON.stringify(thoughtids);
+    form.append("request_type","fetch_thought");
+    form.append("visibles",thoughtids);
+
+    xml.open("POST","backend/api.php",true);
+    xml.send(form);
 }

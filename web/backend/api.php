@@ -76,6 +76,10 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="fetch_post"){
 
     include "includes/fetch_posts.php";
 }
+elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="fetch_thought"){
+
+    include "includes/fetch_thoughts.php";
+}
 elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=="logout"){
 
     session_destroy();

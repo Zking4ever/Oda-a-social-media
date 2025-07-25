@@ -58,7 +58,7 @@ if(count($response)>0){
             $queryForSenders = "SELECT userid,name,userid,username,source from users where userid = '$row[sender]' ";
             
             $sender = $conn->query($queryForSenders)->fetch_assoc();
-                        $post.="<div class='post' onmousewheel='Post_seen(event)'>
+                        $post.="<div class='post' onpointerenter='Post_seen(event)' onmousewheel='Post_seen(event)'>
                             <div class='sender' id=".$sender['userid']." onclick='get_profile(event)'>
                                 <img src='backend/".$sender['source']."'>
                                 <div class='detail'>
@@ -121,7 +121,7 @@ if(count($response)>0){
             $queryForSenders = "SELECT userid,name,userid,username,source from users where userid = '$row[sender]' ";
             
             $sender = $conn->query($queryForSenders)->fetch_assoc();
-                        $post.="<div class='post' onmousewheel='Post_seen(event)'>
+                        $post.="<div class='post' onpointerenter='Post_seen(event)' onmousewheel='Post_seen(event)'>
                             <div class='sender' id=".$sender['userid']." onclick='get_profile(event)'>
                                 <img src='backend/".$sender['source']."'>
                                 <div class='detail'>
@@ -176,7 +176,7 @@ if(count($response)>0){
         #here another query to find out the sender
             $queryForSenders = "SELECT userid,name,userid,username,source from users where userid = '$row[sender]' ";
             $sender = $conn->query($queryForSenders)->fetch_assoc();
-                        $post.="<div class='post' onmousewheel='Post_seen(event)'>
+                        $post.="<div class='post' onpointerenter='Post_seen(event)' onmousewheel='Post_seen(event)'>
                             <div class='sender' id=".$sender['userid']." onclick='get_profile(event)'>
                                 <img src='backend/".$sender['source']."'>
                                 <div class='detail'>
@@ -217,7 +217,7 @@ if(count($response)>0){
         }
 }
 
-$post.="<center class='post' style='border:none;' id='postLOADER'> <div style='transform-origin:50% 50%;margin:10px;' class='loading'></div> </center>";
+$post.="<center class='post' style='border:none;padding-bottom:13px;' id='postLOADER'> <div style='width:30px;height:30px'><div style='width:15px;height:15px;' class='loading'><div></div> </center>";
 
 $data['posts']= $post;    
                 

@@ -1,5 +1,9 @@
 <?php
 
+if(!isset($_SESSION['seen_today_thoughts'])){
+    $_SESSION['seen_today_thoughts']=[];
+}
+
 if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
     $thoughtList = "<style>
         .thoughts{
@@ -10,14 +14,31 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
         }
         .thoughtBox{
             width: 70%;
-            min-height:fit-contents;
+            min-height:fit-content;
             margin:auto;
             padding:7px;
             border:solid thin;
             border-radius:7px;
             border:solid thin #9073de;
             margin-top:15px;
+            animation:appear2 3s ease;
+            animation-timeline:view();
+            animation-range:0% 40%;
         }
+        .thoughtBox:hover{
+            background-color:#fff8ff;
+        }
+            @keyframes appear2 {
+                0%{
+                    opacity:0;
+                    transform:translateY(20px);
+                }
+            }
+            @keyframes loaderapear {
+                0%{
+                    opacity:0;
+                }
+            }
         .thought{
             height:80%;
             margin:auto;
@@ -48,15 +69,34 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
             }
         }
         </style>
-        <div class = 'thoughts'>";
+        <div class='thoughts' onscroll='scrollThought()'>";
+$seen = [];
+$query = "SELECT seenThoughtData from seenthoughts where userid='$userid' ";
+$excute = $conn->query($query);
+if($excute->num_rows>0){
+    $seen = $excute->fetch_assoc()['seenThoughtData'];
+    $seen = json_decode($seen);
+}
+$allThoughts = [];
+$query = "SELECT thoughtid FROM thoughts";
+$excute = $conn->query($query);
+while($row = $excute->fetch_assoc()){
+    $allThoughts[] = $row['thoughtid'];
+}
 
-        $query = "SELECT * FROM thoughts";
-        $excute = $conn->query($query);
-        while($thought = $excute->fetch_assoc()){
-            #another query whether the user has reacted or not
+$new = subtractArray($allThoughts,$seen);
+    if(count($new)>0){
+        for($i=0;$i<4 && $i<count($new);$i++){
+            if(!isMember($new[$i],$_SESSION['seen_today_thoughts'])){
+                $_SESSION['seen_today_thoughts'][] = $new[$i];
+            }
+             $query = "SELECT * FROM thoughts where thoughtid = '$new[$i]'";
+             $excute = $conn->query($query);
+             $thought = $excute->fetch_assoc();
+             #another query whether the user has reacted or not
             $reactionquery = "SELECT * FROM reaction where thoughtid = '$thought[thoughtid]' and userid='$userid' ";
             $reaction = $conn->query($reactionquery)->fetch_assoc();
-            $thoughtList .="<div class='thoughtBox'>
+             $thoughtList .="<div class='thoughtBox' onmouseenter='seeThought(event)'>
                                 <div style='display:flex'><div onclick='get_profile(event)' id='".$thought['sender']."' style='width:fit-content;cursor:pointer'>@".$thought['sendersUsername']."</div> &nbsp thinks:</div>
                                     <div class='thought'>".$thought['content']."</div>
                                     <div style='margin-top:7px'  id='".$thought['thoughtid']."'>
@@ -67,7 +107,65 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
                             </div>";
         }
 
-        $thoughtList .=" </div>";
+    }else{
+        $filtered = subtractArray($allThoughts,$_SESSION['seen_today_thoughts']);
+        if(count($filtered)>0){
+            for($i=0;$i<4 && $i<count($filtered);$i++){
+                if(!isMember($filtered[$i],$_SESSION['seen_today_thoughts'])){
+                    $_SESSION['seen_today_thoughts'][] = $filtered[$i];
+                }
+                $query = "SELECT * FROM thoughts where thoughtid = '$filtered[$i]'";
+                $excute = $conn->query($query);
+                $thought = $excute->fetch_assoc();
+                #another query whether the user has reacted or not
+                $reactionquery = "SELECT * FROM reaction where thoughtid = '$thought[thoughtid]' and userid='$userid' ";
+                $reaction = $conn->query($reactionquery)->fetch_assoc();
+                $thoughtList .="<div class='thoughtBox' onmouseenter='seeThought(event)'>
+                                    <div style='display:flex'><div onclick='get_profile(event)' id='".$thought['sender']."' style='width:fit-content;cursor:pointer'>@".$thought['sendersUsername']."</div> &nbsp thinks:</div>
+                                        <div class='thought'>".$thought['content']."</div>
+                                        <div style='margin-top:7px'  id='".$thought['thoughtid']."'>
+                                            <span onclick='reactThoght(event,1)'".(!empty($reaction) && $reaction['liked']==1? "class='reacted'" : "")."> Like ".$thought['likes']." </span>  
+                                            <span onclick='reactThoght(event,2)'".(!empty($reaction) && $reaction['disliked']==1? "class='reacted'" : "")."> dislikes ".$thought['dislikes']." </span> 
+                                            <span onclick='seeComment(event)'".(!empty($reaction) && $reaction['commented']==1? "class='reacted'" : "")."> Comment ".$thought['comments']." </span> 
+                                        </div>
+                                </div>";
+            }
+        }else{
+            $fetchedNow = [];
+            for($i=0; $i<4 && $i<count($allThoughts);$i++){
+                
+                $rand = rand(0,count($allThoughts)-1);
+                while(isMember($rand,$fetchedNow)){
+                    $rand = rand(0,count($allThoughts)-1);
+                }
+                $thoughtID = $allThoughts[$rand];
+                if(!isMember($thoughtID,$_SESSION['seen_today_thoughts'])){
+                    $_SESSION['seen_today_thoughts'][] = $thoughtID;
+                }
+                $fetchedNow[] = $rand;
+                $query = "SELECT * FROM thoughts where thoughtid='$thoughtID'";
+                $excute = $conn->query($query);
+                $thought = $excute->fetch_assoc();
+                    #another query whether the user has reacted or not
+                    $reactionquery = "SELECT * FROM reaction where thoughtid = '$thought[thoughtid]' and userid='$userid' ";
+                    $reaction = $conn->query($reactionquery)->fetch_assoc();
+                    $thoughtList .="<div class='thoughtBox' onmouseenter='seeThought(event)'>
+                                        <div style='display:flex'><div onclick='get_profile(event)' id='".$thought['sender']."' style='width:fit-content;cursor:pointer'>@".$thought['sendersUsername']."</div> &nbsp thinks:</div>
+                                            <div class='thought'>".$thought['content']."</div>
+                                            <div style='margin-top:7px'  id='".$thought['thoughtid']."'>
+                                                <span onclick='reactThoght(event,1)'".(!empty($reaction) && $reaction['liked']==1? "class='reacted'" : "")."> Like ".$thought['likes']." </span>  
+                                                <span onclick='reactThoght(event,2)'".(!empty($reaction) && $reaction['disliked']==1? "class='reacted'" : "")."> dislikes ".$thought['dislikes']." </span> 
+                                                <span onclick='seeComment(event)'".(!empty($reaction) && $reaction['commented']==1? "class='reacted'" : "")."> Comment ".$thought['comments']." </span> 
+                                            </div>
+                                    </div>";
+
+            }
+        }
+    }
+
+        $thoughtList .="<center class='thoughtBox' style='margin-top:20px;animation:loaderapear 2s ease;animation-timeline:view();animation-range:0% 40%;height:40px;border:none;' id='thoughtLoader'>
+                        <div class='loading' style='width:15px;height:15px;margin:5px;'></div>
+                </center> </div>";
 
     echo $thoughtList;
 }
@@ -202,4 +300,45 @@ if(isset($_POST['request_type']) && isset($_POST['data_type']) && $_POST['data_t
          
 
     echo $comments;
+}
+
+elseif(isset($_POST['request_type']) && isset($_POST['data_type']) && $_POST['data_type']=="see"){
+    $thoughtid = $_POST['thoughtid'];
+    $seenThoughts = [];
+    $query = "SELECT seenThoughtData from seenthoughts where userid='$userid' ";
+    $excute = $conn->query($query);
+    if($excute->num_rows>0){
+        $seenThoughts = $excute->fetch_assoc()['seenThoughtData'];
+        $seenThoughts = json_decode($seenThoughts);
+        if(isMember($thoughtid,$seenThoughts)){
+            die;
+        }
+        $seenThoughts[]=$thoughtid;
+        $seenThoughts = json_encode($seenThoughts);
+        $updater = "UPDATE seenthoughts set seenThoughtData = '$seenThoughts' where userid = '$userid' ";
+        $update = $conn->query($updater);
+        if($update){
+            echo "seen";
+        }
+    }else{
+        $seenThoughts[]=$thoughtid;
+        $seenThoughts = json_encode($seenThoughts);
+        $inserter = "INSERT into seenthoughts(userid,seenThoughtData) value ('$userid','$seenThoughts') ";
+        $insert = $conn->query($inserter);
+        if($insert){
+            echo "seen";
+        }
+    }
+}
+
+
+
+function isMember($element,$array){
+    foreach ($array as $key => $value) {
+        # code...
+        if($element==$value){
+            return true;
+        }
+    }
+    return false;
 }

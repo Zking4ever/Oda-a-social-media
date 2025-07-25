@@ -75,9 +75,8 @@
 </head>
 <body>
         <div class="card">
-        <img src="assets/future.gif">
             You have Loged out.
-            <span style="font-size:50px;">😥</span>
+            <span onclick="goToIndex()" style="font-size:50px;">😥</span>
         <div> click<span onclick="goToIndex()"> here </span>to log in </div>
         </div>
 
