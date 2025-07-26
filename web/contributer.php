@@ -38,7 +38,7 @@
   </style>
 <div class="contributers" >
                 <div class="loadingGif" style="">
-                    <div style='width: 50px;height:50px'> 
+                    <div style='width: 50px;height:50px;align-self:center'> 
                         <div class='loading'></div>
                     </div>
                     <div class = "loadingMessage"> LOADING....</div>
