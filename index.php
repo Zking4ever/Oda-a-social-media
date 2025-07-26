@@ -6,7 +6,6 @@
         $client->setClientId(CLIENT_ID);
         $client->setClientSecret(CLIENT_SECRET);
         $client->setRedirectUri('http://localhost/mywork/incredible%20future/web/main.php');
-        $client->addScope(Google_Service_Drive::DRIVE); 
         $client->addScope("email");
         $client->addScope("profile");
         

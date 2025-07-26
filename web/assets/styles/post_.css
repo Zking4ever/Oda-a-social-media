@@ -1,0 +1,129 @@
+.post_container{
+    height: 81vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.loaded_post{
+    max-width: 468px;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.post{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    animation: appear 3s ease;
+    animation-timeline: view();
+    animation-range: 0%;
+    animation-range-end: 40%;
+}
+@keyframes appear {
+    from{
+        transform: translate(-50%,20px);
+        opacity: 0;
+    }
+    to{
+        transform: translate(-50%,0px);
+        opacity: 1;
+    }
+}
+.sender{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.sender:hover{
+    background: linear-gradient(#e2d9fb, transparent, transparent, #dbd5ec);
+}
+.sender img{
+    height: 30px;
+    width:30px;
+    border-radius: 50%;
+}
+.sender .detail{
+    width: 80%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+}
+.img_container{
+    width: 99%;
+    display: flex;
+    justify-content: center;
+    border: solid thin rgb(38,38,38);
+}
+.post img {
+    max-height: 500px;
+    max-width: 100%;
+}
+.reactions{
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.react{
+    width: 50px;
+    height: 97%;
+    padding-top: 2%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    transform: translateX(-10px);
+}
+.reacted svg{
+    fill: #9073de;
+}
+.filled{
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+.reacted .filled{
+    opacity:1;
+}
+.post .caption {
+    margin-top: 5px;
+    min-height: 35px;
+    width: 100%;
+    border-bottom: solid rgba(220, 220, 220, 0.769);
+    word-break: break-word;
+    margin-bottom: 2px;
+}
+
+.notifications{
+    background-color: rgba(130, 145, 140, 0.877);
+    min-width: 300px;
+    height: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-30px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 5s ease;
+    z-index: 100;
+}
+@media (max-width:760px) {
+    .post img{
+        max-width: 350px;
+    }
+    .react{
+        width: 40px;
+        transform: translateX(-4px);
+    }
+    .react svg{
+        width: 20px;
+    }
+}

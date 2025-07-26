@@ -64,8 +64,6 @@
                     <button id="btn2" class="btn2" title= "next">></button>
                     <div class="view_story_div"></div>
                 </div>
-                
-
 
             <div id="myradios" style="display:none">
                 <input type="radio" id="home_radio" name="catagory_radios">
@@ -143,8 +141,7 @@
         height:50px;
     }
     .post{
-        width:90%;
-        border:2px solid rgb(207 207 207);
+        width:100%;
     }
     @media (max-width:760px) {
         .user_profile{
