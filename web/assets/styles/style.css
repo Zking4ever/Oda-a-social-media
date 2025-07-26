@@ -60,6 +60,9 @@
     padding: 10px;
     background-color: #9073de8f;
     border-radius: 10px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .F_suggestion img{
     width: 100%;
@@ -115,6 +118,7 @@
     }
     .F_suggestion{
         grid-template-columns: 50% 50%;
+        gap: 4px;
     }
     .f_sug{
         width: 130px;

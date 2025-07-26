@@ -80,11 +80,8 @@
 <style>
     .user_profile{
         width: min(380px,100%);
-        height:98%;
-        margin:auto;
+        height:100%;
         background-color:azure;
-        border:solid thin #9073de;
-        border-radius:10px;
         overflow:hidden;
     }
     .profile_pic{
@@ -140,12 +137,15 @@
         width: 50px;
         height:50px;
     }
+    .user_profile .story span{
+            transform: translateY(0);
+     }
     .post{
         width:100%;
     }
     @media (max-width:760px) {
         .profile_pic{
-            height:100px;
+            height:17%;
             padding-top:6%;
             padding-bottom:2%;
         }

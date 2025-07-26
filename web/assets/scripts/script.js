@@ -200,15 +200,16 @@ function get_profile(e){
                 }
 
                 var stories = contribut.getElementsByClassName('stroies')[0];
+                var loaded_post = contribut.getElementsByClassName('loaded_post')[0];
                 if(Data["stories"]==""){
-                    stories.style.height = 0;
-                    stories.style.padding = 0;
-                    stories.style.height = "fit-content";
+                    stories.style.display = "none";
+                    loaded_post.style.height = "72%";
                 }else{
                     stories.style.padding = "0.5px";
+                    stories.style.display = "flex";
+                    loaded_post.style.height = "65%";
                 }
                 stories.innerHTML = Data["stories"];
-                var loaded_post = contribut.getElementsByClassName('loaded_post')[0];
                 loaded_post.innerHTML = Data['posts'];
             }
         }
