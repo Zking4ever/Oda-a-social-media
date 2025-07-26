@@ -46,7 +46,7 @@
 }
 .F_suggestion{
     display: grid;
-    grid-template-columns: 30% 30% 30%;
+    grid-template-columns: 20% 20% 20% 20% 20%;
     margin-top: 10px;
     gap: 7px;
 }

@@ -79,8 +79,8 @@
 
 <style>
     .user_profile{
-        width:max(320px,45%);
-        height:93%;
+        width: min(380px,100%);
+        height:98%;
         margin:auto;
         background-color:azure;
         border:solid thin #9073de;
@@ -144,9 +144,6 @@
         width:100%;
     }
     @media (max-width:760px) {
-        .user_profile{
-            width: max(320px,85%);;
-        }
         .profile_pic{
             height:100px;
             padding-top:6%;

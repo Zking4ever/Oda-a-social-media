@@ -17,6 +17,12 @@ for(var i=0;i<radios.length;i++){
     radios[i].addEventListener('change',function(){
         let clickedIndex = getIndex(this);
         let request_type = "";
+        //if its on home page the width has to be reduced
+        if(radios[0].checked){
+            loaded_post.className = "loaded_post home";
+        }else{
+            loaded_post.className = "loaded_post";
+        }
         //depending on the radio sending a request to api with different request type
         switch(clickedIndex){
             case 0: if(radios[0].checked){
