@@ -81,10 +81,10 @@
     </main>
    
 </body>
-<script src="assets/scripts/script.js"></script>
+<script src="assets/scripts/script_.js"></script>
 <script src="assets/scripts/react.js"></script>
 <script src="assets/scripts/story.js"></script>
 <script src='assets/scripts/setting.js'></script>
-<script src='assets/scripts/chat.js'></script>
+<script src='assets/scripts/chat_.js'></script>
 <script src='assets/scripts/post.js'></script>
 </html>
