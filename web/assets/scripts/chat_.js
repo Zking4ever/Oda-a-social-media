@@ -33,6 +33,9 @@ function send(e){
     var inputs_placeholder = the_input_box.placeholder;
     var form = new FormData;
 
+    if(the_input_box.value.trim()==""){
+        return; 
+    }
     if(inputs_placeholder == "type a message"){
         data_type = "send_message";
         request_type = "chat";
@@ -98,8 +101,13 @@ function send(e){
 }
 
 var firstTime = true;
+var isLoadingRequest = false;
 
 function askAi(input){
+    if(isLoadingRequest){
+        return handleResult("Please wait... I'm working on your previous request","story")
+    }
+    isLoadingRequest = true; //avoid requesting two things instantly while the server was doing on previous request
     var aiBox = document.getElementsByClassName('aiBox')[0];
     var box = document.createElement('div');
     var div = document.createElement('div');
@@ -120,7 +128,9 @@ function askAi(input){
         if(xml.readyState==4 || xml.status==200){
             var response = JSON.parse(xml.response);
             div.innerHTML = response;
+            aiBox.scroll(0,aiBox.scrollHeight);
             input.value = "";
+            isLoadingRequest = false;
         }
     }
     form.append("prompt",input.value);
