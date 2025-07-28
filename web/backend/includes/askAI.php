@@ -1,6 +1,6 @@
 <?php
 
-    if(!isset($_POST['data_type']) && $_GET['request_type']=="askAI"){
+if(!isset($_POST['data_type']) && $_GET['request_type']=="askAI"){
         echo "
             <style> 
                 .aiBox{
@@ -11,7 +11,7 @@
                     transform: translateX(-50%);
                     min-height:120px;
                     max-height: 380px;
-                    max-width:470px;
+                    max-width:580px;
                     width:100%;
                     border-radius:30px;
                     margin: 20px 0;
@@ -61,9 +61,10 @@
                     <h3>Hey, How can i help you today?</h3>
                     <small> Boost your knowledg; increase your conciusness; extend your scope </small> </div>";
 
-    }
-    elseif(isset($_POST['data_type']) && $_POST['data_type'] == "ask"){
-        sleep(3);
-        echo json_encode("respose from server after query being processed");
+}
+elseif(isset($_POST['data_type']) && $_POST['data_type'] == "ask"){
+        echo json_encode(($_POST));
+
+
     }
     

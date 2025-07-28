@@ -126,11 +126,10 @@ function askAi(input){
     var form = new FormData;
     xml.onload = function(){
         if(xml.readyState==4 || xml.status==200){
+            isLoadingRequest = false;
             var response = JSON.parse(xml.response);
             div.innerHTML = response;
             aiBox.scroll(0,aiBox.scrollHeight);
-            input.value = "";
-            isLoadingRequest = false;
         }
     }
     form.append("prompt",input.value);
@@ -138,6 +137,7 @@ function askAi(input){
 
     xml.open("POST","backend/api.php?request_type=askAI",true);
     xml.send(form);
+    input.value = "";
 }
 function readChat(){
     var form = new FormData;

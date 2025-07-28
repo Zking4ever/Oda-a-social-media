@@ -49,6 +49,7 @@
     grid-template-columns: 20% 20% 20% 20% 20%;
     margin-top: 10px;
     gap: 7px;
+    justify-content: space-between;
 }
 .f_sug{
     display: flex;
@@ -117,7 +118,7 @@
         right: 10px;
     }
     .F_suggestion{
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 30% 30% 30%;
         gap: 4px;
     }
     .f_sug{
@@ -128,5 +129,8 @@
 @media(max-width:400px){
     .F_request{
         max-width:70%;
+    }
+    .F_suggestion{
+        grid-template-columns: 50% 50%;
     }
 }
