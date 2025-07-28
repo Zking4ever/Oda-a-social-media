@@ -106,7 +106,7 @@ function askAi(input){
     box.className = "request";
     div.className = 'response';
     box.innerHTML = input.value;
-    div.innerHTML = `<div class='loading'></div>`;
+    div.innerHTML = `<div style='width:50px;height:50px;'><div class='loading' style='width:20px;height:20px;'></div></div>`;
     if(firstTime){
         aiBox.innerHTML = "";
         firstTime = false;
