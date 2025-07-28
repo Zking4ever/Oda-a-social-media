@@ -31,10 +31,11 @@ function send(e){
     var request_type;
     var the_input_box = e.target.parentElement.getElementsByTagName("input")[1];
     var inputs_placeholder = the_input_box.placeholder;
+    var the_file_input = e.target.parentElement.getElementsByTagName("input")[0];
     var form = new FormData;
 
-    if(the_input_box.value.trim()==""){
-        return; 
+    if(the_input_box.value.trim()=="" && the_file_input.value ==""){
+        return;
     }
     if(inputs_placeholder == "type a message"){
         data_type = "send_message";
@@ -71,7 +72,6 @@ function send(e){
             //handleResult(ajax.response,"loadThoughts");
             finishedLoading();
             if(data_type == "send_message"){
-                var the_file_input = e.target.parentElement.getElementsByTagName("input")[0];
                 the_file_input.value="";
                 readChat();
             }else if(data_type == "add_thought"){
@@ -163,12 +163,10 @@ function readChat(){
 }
 
 var send_btn = document.getElementById("send_btn");
-send_btn.onmouseenter = function(){
-    
-    var inps = type_inputes.getElementsByTagName("input");
-    if(inps[0].value.trim() == "" && inps[1].value.trim() == "" ){
-        this.disabled = true;
-    }else{
-        this.disabled = false;
+var inp = type_inputes.getElementsByTagName("input")[1];
+
+inp.addEventListener('keyup',function(e){
+    if(e.key == "Enter"){
+        send_btn.click();
     }
-}
+});
