@@ -141,27 +141,27 @@ function askAi(input){
                     div.appendChild(p);
                     continue;
                 }
-                //if there is some introduction text
-                if(subResponse[0].trim() != ""){
+                if(i==0){
                     var p = document.createElement('p');
                     p.innerHTML = subResponse[0];
                     div.appendChild(p);
-                }
-                if(!hasSubTitle){
-                    var h3 = document.createElement('h3');
-                    h3.innerHTML = subResponse[1];
-                    div.appendChild(h3);
+                    var h2 = document.createElement('h2');
+                    h2.innerHTML = subResponse[1];
+                    div.appendChild(h2);
+                    var p = document.createElement('p');
+                    p.innerHTML = subResponse[2];
+                    div.appendChild(p);
                 }else{
-                    var h4 = document.createElement('h4');
-                    h4.innerHTML = subResponse[1];
-                    div.appendChild(h4);
+                    var p = document.createElement('p');
+                    if(subResponse[0].trim() != ""){
+                        p.innerHTML = subResponse[0];
+                    }
+                    p.innerHTML += `<b>`+subResponse[1]+`</b>`; //bold
+                    p.innerHTML += subResponse[2];
+                    div.appendChild(p);
                 }
-
-                var p = document.createElement('p');
-                p.innerHTML = subResponse[2];
-                div.appendChild(p);
-
-                hasSubTitle = subResponse[2].split("/n/n").length > 1;
+                
+                hasSubTitle = ( subResponse[2].split(":").length > 1 ? !hasSubTitle : hasSubTitle );
                 
                 if(subResponse[3] && subResponse[3].trim() != ""){
                     var h2 = document.createElement('h2');

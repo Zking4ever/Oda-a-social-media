@@ -1,20 +1,53 @@
-The "***" symbol can have several meanings depending on the context. Here are some of the most common:
+response = response.split("*   ");
+            console.log(response);
+            for(let i=0;i<response.length;i++){
+                var subResponse = response[i].split('**');
+                if(subResponse.length === 1){
+                    var p = document.createElement('p');
+                    p.innerHTML = subResponse[0];
+                    div.appendChild(p);
+                    continue;
+                }
+                //if there is some introduction text
+                if(subResponse[0].trim() != ""){
+                    var p = document.createElement('p');
+                    p.innerHTML = subResponse[0];
+                    div.appendChild(p);
+                }
+                var box = document.createElement('div');
+                if(!hasSubTitle){
+                    var h3 = document.createElement('h3');
+                    h3.innerHTML = subResponse[1];
+                    box.appendChild(h3);
+                }else{
+                    var h4 = document.createElement('h4');
+                    h4.innerHTML = subResponse[1];
+                    box.appendChild(h4);
+                }
+                var p = document.createElement('p');
+                p.innerHTML = subResponse[2];
+                box.appendChild(p);
 
-*   **Censorship/Obscuring:** This is one of the most frequent uses. It's used to mask offensive language, sensitive information (like passwords or phone numbers), or details that shouldn't be revealed. For example, "He said, 'That's a load of ***.'"
+                div.appendChild(box);
 
-*   **Emphasis:** Similar to using bold or italics, asterisks can draw attention to a word or phrase. This usage is less common than censorship but can still occur. For instance, "It was ***incredibly*** important."
+                hasSubTitle = ( subResponse[2].split(":").length > 1 ? !hasSubTitle : hasSubTitle );
+                
+                if(subResponse[3] && subResponse[3].trim() != ""){
+                    var h2 = document.createElement('h2');
+                    h2.innerHTML = subResponse[3];
+                    div.appendChild(h2);
+                }
+                if(subResponse[4] && subResponse[4].trim() != ""){
+                    var p = document.createElement('p');
+                    p.innerHTML = subResponse[4];
+                    div.appendChild(p);
+                }
+                if(subResponse[5] && subResponse[5].trim() != ""){
+                    var h3 = document.createElement('h3');
+                    h3.innerHTML = subResponse[5];
+                    div.appendChild(h3);
+                }
 
-*   **Footnotes/References:** In academic or technical writing, a single asterisk (*) or multiple asterisks (**, ***, etc.) are often used to denote footnotes or endnotes. Each asterisk usually corresponds to a separate note.
-
-*   **Placeholder/Filler:** Sometimes, programmers or writers might use asterisks as temporary placeholders when they haven't yet decided what to put in a specific spot.
-
-*   **Formatting (Markdown, etc.):** In some text formatting systems like Markdown, asterisks have special meanings.
-    *   `*text*` or `_text_` often indicates *italics*.
-    *   `**text**` or `__text__` often indicates **bold**.
-    *   A line of three or more asterisks (`***`) can create a horizontal rule (a line separating sections).
-
-*   **Special Effects:** In informal online communication (chat, social media), a string of asterisks might be used for visual emphasis or as a substitute for other punctuation.
-
-*   **Representing an Actual Asterisk:** Of course, it might literally be an asterisk being shown or talked about.
-
-To understand what " *** " means in a specific situation, you need to consider the context of where you saw it. What was the surrounding text or situation?
+            };
+            aiBox.scroll(0,aiBox.scrollHeight);
+        }
