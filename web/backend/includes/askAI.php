@@ -24,6 +24,7 @@ if(!isset($_POST['data_type']) && $_GET['request_type']=="askAI"){
                     width:25px;
                     border:solid #9073de;
                     border-radius:5px;
+                    align-self:center;
                     transform-origin:100% 100%;
                     animation: load 2.4s ease infinite;
                 }
@@ -80,6 +81,8 @@ $response = json_decode($response, true);
 if(isset($response['candidates'][0]['content']['parts'][0]['text'])){
 
     $response_text = $response['candidates'][0]['content']['parts'][0]['text'];
+    $query = "INSERT into aiRequests(userid,prompt) value('$userid','$prompt')";
+    $excute = $conn->query($query);
 } else {
     $response_text = "Sorry, I couldn't process your request at the moment.";
 }

@@ -10,7 +10,7 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
             width:99%;
             height:400px;
             margin:auto;
-            overflow-Y:scroll;
+            overflow-Y:overlay;
         }
         .thoughtBox{
             width: 70%;
@@ -331,14 +331,3 @@ elseif(isset($_POST['request_type']) && isset($_POST['data_type']) && $_POST['da
     }
 }
 
-
-
-function isMember($element,$array){
-    foreach ($array as $key => $value) {
-        # code...
-        if($element==$value){
-            return true;
-        }
-    }
-    return false;
-}

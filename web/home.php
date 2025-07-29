@@ -6,7 +6,7 @@
     <title>home</title>
     <link rel="stylesheet" href="assets/styles/main_.css">
     <link rel="stylesheet" href="assets/styles/story.css">
-    <link rel="stylesheet" href="assets/styles/post_.css">
+    <link rel="stylesheet" href="assets/styles/post.css">
     <link rel="stylesheet" href="assets/styles/style.css">
     
 </head>

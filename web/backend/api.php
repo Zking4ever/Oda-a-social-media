@@ -103,7 +103,15 @@ function createRand($size){
     return $randWord;
 }
 
-
+function isMember($element,$array){
+    foreach ($array as $key => $value) {
+        # code...
+        if($element==$value){
+            return true;
+        }
+    }
+    return false;
+}
 
 function subtractArray($firstArray,$secondArray){
     $answer = array();

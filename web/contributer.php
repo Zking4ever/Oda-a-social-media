@@ -2,6 +2,7 @@
     .loadingGif{
         display:none;
         justify-content:center;
+        align-item: center;
         flex-direction:column;
         gap:50px;
         color: #9073de;

@@ -20,7 +20,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 }
                 .listHolder{
                     flex:0.27;
-                    overflow-Y:scroll;
+                    overflow-Y:overlay;
                 }
                 .listHolder div{
                     display:flex;
@@ -54,7 +54,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 }
                 .chatHolder{
                     flex:0.73;
-                    overflow-Y:scroll;
+                    overflow-Y:overlay;
                     background-color: #efeaea;
                 }
                 .chatHolder .sent,
@@ -160,7 +160,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 }
                 .listHolder{
                     display:flex;
-                    overflow-x:scroll;
+                    overflow-x:overlay;
                     flex:0.25;
                 }
                 .chatHolder{

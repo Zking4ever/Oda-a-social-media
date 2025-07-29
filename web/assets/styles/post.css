@@ -6,7 +6,7 @@
 }
 .loaded_post{
     width: 98%;
-    overflow-y: scroll;
+    overflow-y: overlay;
     overflow-x: hidden;
 }
 .home{
