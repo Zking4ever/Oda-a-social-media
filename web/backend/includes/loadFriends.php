@@ -67,7 +67,7 @@ $data = [];
                                             <h3>".$friend['name']."</h3>
                                             <span style='font-size:12px;margin-left:7px;'>".$friend['username']."</span>
                                         </div>
-                                        <svg id='$relationid' onclick='startChat(event)'></svg>
+                                        <i class='bi bi-chat-square-text' id='$relationid' onclick='startChat(event)'></i>
                                     </div>";
             }
         $friends.="</div>";

@@ -46,7 +46,7 @@
 }
 .F_suggestion{
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 25% 25% 25% 25%;
     margin-top: 10px;
     gap: 7px;
     justify-content: space-between;
@@ -86,12 +86,11 @@
     margin-left: 23px;
     cursor: pointer;
 }
-.friend svg{
+.friend i{
     position: absolute;
     right: 90px;
-    width: 30px;
-    height: 30px;
-    background-color: blueviolet;
+    transform: scale(2.0);
+    color: #664c7e;
     cursor: pointer;
 }
 @media (max-width:760px) {
@@ -114,8 +113,9 @@
     .friend img{
         margin-left: 10px;
     }
-    .friend svg{
+    .friend i{
         right: 10px;
+        transform: scale(1.7);
     }
     .F_suggestion{
         grid-template-columns: 30% 30% 30%;

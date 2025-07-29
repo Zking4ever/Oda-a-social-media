@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
-    <link rel="stylesheet" href="assets/styles/main_.css">
+    <link rel="stylesheet" href="assets/styles/main.css">
     <link rel="stylesheet" href="assets/styles/story.css">
     <link rel="stylesheet" href="assets/styles/post.css">
-    <link rel="stylesheet" href="assets/styles/style.css">
+    <link rel="stylesheet" href="assets/styles/style_.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     
 </head>
 <style>
@@ -48,11 +49,12 @@
     <main>
         <div id="menu">
             <div class="menuLists">
-                <label for="home_radio">Home</label>
-                <label for="friends_radio">Friends</label>
-                <label for="thoughts_radio">Thoughts</label>
-                <label for="ask_radio">Ask AI</label>
-                <label for="settings_radio">Setting</label>
+                <label for="home_radio"><i class="bi bi-house-door"></i>Home</label>
+                <label for="friends_radio"><i class="bi bi-people"></i>Friends</label>
+                <label for="thoughts_radio"><i class="bi bi-chat-left-quote"></i>Thoughts</label>
+                <label for="ask_radio"><i class="bi bi-robot"></i> &nbspAsk AI</label>
+                <label  id="add"><i class="bi bi-plus-square"></i>Create</label>
+                <label for="settings_radio"><i class="bi bi-gear"></i>Setting</label>
             </div>
         </div>
         <div id="body">
@@ -70,9 +72,6 @@
                 <div class="notifications" style="display:none"> <span>notifications</span></div>
                 <div class="loaded_post home"></div>
                 <div class="inputs"><label>Attach File <input type="file" multiple style="display:none;"></label><input type='text' placeholder="comment or thought chat input"> <button onclick="send(event)" id="send_btn" style="padding:0px 10px">send</button></div>
-            </div>
-            <div class="controls">
-                <div class="add_new_post" id="add">➕</div>
             </div>
             <?php
                 include "contributer.php";
