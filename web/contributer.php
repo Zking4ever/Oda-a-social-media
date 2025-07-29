@@ -45,8 +45,8 @@
                     <div class = "loadingMessage"> LOADING....</div>
                 </div>
                 <div class="new_post_inputes">
+                            <h1>Create new post</h1><hr>
                         <form>
-                            <h4>post image</h4>
                             <input type="file" name="file" id="file">
                             <h4>caption</h4>
                             <textarea name="caption" id="caption"></textarea>
