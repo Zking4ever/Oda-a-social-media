@@ -10,7 +10,7 @@ function preveiw(e){
         var filename = e.target.files[0].name;
         var ex_start = filename.lastIndexOf('.');
         var ex = filename.substr(ex_start+1,3);
-        if(!(ex=='jpg' || ex=='JPG' || ex=='HEIC' || ex=='PNG')){
+        if(!(ex=='jpg' || ex=='JPG' || ex=='HEIC' || ex=='PNG' || ex=='png')){
             handleResult('File not supported','story');
             return;
         }
@@ -40,6 +40,9 @@ var members;
 let n ;
 function see_story(e){
     idInView = e.target.id;
+    if(!idInView){
+        idInView = e.target.parentElement.id;
+    }
     
     var checkform = new FormData;
     var xml = new XMLHttpRequest;

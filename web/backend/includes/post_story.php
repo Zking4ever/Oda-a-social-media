@@ -39,7 +39,9 @@ if(isset($_FILES) && !empty($_FILES)){
                 mkdir($folder,0777,true);
              }
              $destination = $folder. $_FILES['file']['name'];
-             move_uploaded_file($_FILES['file']['tmp_name'],$destination);
+             if(!file_exists($destination)){    //avoid uploading existing file
+                move_uploaded_file($_FILES['file']['tmp_name'],$destination);
+             }
     }
 }
 

@@ -3,8 +3,10 @@ function passVisiblity(e){
                     pass = e.target.parentElement.getElementsByTagName('input')[0];
                     if(pass.type=="password"){
                         pass.type = "text";
+                        e.target.className = 'bi bi-eye-slash';
                     }else{
                         pass.type = "password";
+                        e.target.className = 'bi bi-eye';
                     }
                 }
 function change_profile_img(e){

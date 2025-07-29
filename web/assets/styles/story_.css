@@ -13,10 +13,8 @@
     width: 75%;
     aspect-ratio: 10;
     border-radius: 9px;
-    border: none;
-    background-color: rgba(128, 128, 128, 0.417);
-    color: white;
-    padding: 0 5%;
+    border: solid;
+    padding: 0 4%;
     position: absolute;
     bottom: 10px;
     left: 0px;
@@ -108,7 +106,7 @@
 .story span{
     font-size: 10px;
     position: absolute;
-    transform: translateY(20px);
+    text-align: center;
 }
 @media (max-width:760px) {
     .preview img{

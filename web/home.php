@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
     <link rel="stylesheet" href="assets/styles/main.css">
-    <link rel="stylesheet" href="assets/styles/story.css">
+    <link rel="stylesheet" href="assets/styles/story_.css">
     <link rel="stylesheet" href="assets/styles/post.css">
     <link rel="stylesheet" href="assets/styles/style_.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -52,7 +52,7 @@
                 <label for="home_radio"><i class="bi bi-house-door"></i>Home</label>
                 <label for="friends_radio"><i class="bi bi-people"></i>Friends</label>
                 <label for="thoughts_radio"><i class="bi bi-chat-left-quote"></i>Thoughts</label>
-                <label for="ask_radio"><i class="bi bi-robot"></i> &nbspAsk AI</label>
+                <label for="ask_radio"><i class="bi bi-robot"></i> Ask AI</label>
                 <label  id="add"><i class="bi bi-plus-square"></i>Create</label>
                 <label for="settings_radio"><i class="bi bi-gear"></i>Setting</label>
             </div>
@@ -80,10 +80,10 @@
     </main>
    
 </body>
-<script src="assets/scripts/script_.js"></script>
+<script src="assets/scripts/script.js"></script>
 <script src="assets/scripts/react.js"></script>
-<script src="assets/scripts/story.js"></script>
-<script src='assets/scripts/setting.js'></script>
+<script src="assets/scripts/story_.js"></script>
+<script src='assets/scripts/setting_.js'></script>
 <script src='assets/scripts/chat_.js'></script>
 <script src='assets/scripts/post.js'></script>
 </html>
