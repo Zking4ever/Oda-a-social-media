@@ -102,6 +102,7 @@ function send(e){
 
 var firstTime = true;
 var isLoadingRequest = false;
+var hasSubTitle = false;
 
 function askAi(input){
     if(isLoadingRequest){
@@ -128,7 +129,57 @@ function askAi(input){
         if(xml.readyState==4 || xml.status==200){
             isLoadingRequest = false;
             var response = JSON.parse(xml.response);
-            div.innerHTML = response;
+            div.innerHTML = "";
+            console.log(response);
+            response = response.split("*   ");
+            console.log(response);
+            for(let i=0;i<response.length;i++){
+                var subResponse = response[i].split('**');
+                if(subResponse.length === 1){
+                    var p = document.createElement('p');
+                    p.innerHTML = subResponse[0];
+                    div.appendChild(p);
+                    continue;
+                }
+                //if there is some introduction text
+                if(subResponse[0].trim() != ""){
+                    var p = document.createElement('p');
+                    p.innerHTML = subResponse[0];
+                    div.appendChild(p);
+                }
+                if(!hasSubTitle){
+                    var h3 = document.createElement('h3');
+                    h3.innerHTML = subResponse[1];
+                    div.appendChild(h3);
+                }else{
+                    var h4 = document.createElement('h4');
+                    h4.innerHTML = subResponse[1];
+                    div.appendChild(h4);
+                }
+
+                var p = document.createElement('p');
+                p.innerHTML = subResponse[2];
+                div.appendChild(p);
+
+                hasSubTitle = subResponse[2].split("/n/n").length > 1;
+                
+                if(subResponse[3] && subResponse[3].trim() != ""){
+                    var h2 = document.createElement('h2');
+                    h2.innerHTML = subResponse[3];
+                    div.appendChild(h2);
+                }
+                if(subResponse[4] && subResponse[4].trim() != ""){
+                    var p = document.createElement('p');
+                    p.innerHTML = subResponse[4];
+                    div.appendChild(p);
+                }
+                if(subResponse[5] && subResponse[5].trim() != ""){
+                    var h3 = document.createElement('h3');
+                    h3.innerHTML = subResponse[5];
+                    div.appendChild(h3);
+                }
+
+            };
             aiBox.scroll(0,aiBox.scrollHeight);
         }
     }

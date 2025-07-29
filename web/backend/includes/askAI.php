@@ -16,7 +16,7 @@ if(!isset($_POST['data_type']) && $_GET['request_type']=="askAI"){
                     border-radius:30px;
                     margin: 20px 0;
                     padding:5px;
-                    overflow-y:scroll;
+                    overflow-y:overlay;
                     text-align:center;
                 }
                 .loading{
@@ -44,17 +44,17 @@ if(!isset($_POST['data_type']) && $_GET['request_type']=="askAI"){
                 }
                 .response{
                     max-width:80%;
-                    min-height:100px;
+                    height:max-content;
                     min-width: 85px;
                     display:flex;
-                    align-items:center;
-                    justify-content:center;
+                    flex-direction:column;
                     background-color: #bec6ff91;
                     align-self:start;
                     margin-left:10px;
                     border:none;
                     border-radius:10px;
                     padding:5px;
+                    text-align:start;
                 }
                     </style>
             <div class='aiBox'><h1> Incree AI</h1>
@@ -63,8 +63,41 @@ if(!isset($_POST['data_type']) && $_GET['request_type']=="askAI"){
 
 }
 elseif(isset($_POST['data_type']) && $_POST['data_type'] == "ask"){
-        echo json_encode(($_POST));
+$API = "AIzaSyAyBkJGhAXdY_OIXRwDtIoNFgRIpJaxVq4";
+$url="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$API";
+        $prompt = trim($_POST['prompt']);
+    $prepared_request = '{
+            "contents": [{
+                    "parts":[{
+                        "text":"'.$prompt.'"
+                        }]
+                    }]
+                }';
 
+$response = run_curl($url,$prepared_request);
+$response = json_decode($response, true);
+
+if(isset($response['candidates'][0]['content']['parts'][0]['text'])){
+
+    $response_text = $response['candidates'][0]['content']['parts'][0]['text'];
+} else {
+    $response_text = "Sorry, I couldn't process your request at the moment.";
+}
+
+echo json_encode($response_text);
 
     }
+
+function run_curl($url, $data){
+  $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+   return $response;
+}
+
     
