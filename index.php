@@ -115,7 +115,60 @@
             background-color: #537bff;
             color: white;
         }
-        @media (max-width:760px) {
+    .container{
+		text-align:center;
+		max-width:350px;
+        width: 90%;
+		min-height:390px;
+		border-radius:30px;
+		border:solid thin lightgray;
+		padding:10px;
+		background-color:#c9e4ff5e;
+		backdrop-filter:blur(10px);
+        position: absolute;
+        top: 10%;
+        left:50%;
+        transform: translateX(-50%);
+        display: none;
+	}
+	.box{
+		text-align:left;
+		font-size:26px;
+		display:grid;
+	}
+	.box input{
+		height:30px;
+		width:90%;
+		margin:auto;
+		border:solid thin;
+		border-radius:10px;
+	}
+	#passStrength{
+            font-size: 14px;
+            display: none;
+            grid-template-columns: 50% 50%;
+            background-color: rgb(217, 227, 234);
+            min-height: 5px;
+            width: 90%;
+            margin: 5px auto;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .criteria{
+            display: flex;
+            align-items: center;
+        }
+        .des{
+            color: red;
+	    padding-left:5px;
+        }
+        .criteria input:checked ~ .des{
+            color: green;
+        }
+        #passStrength input{
+            width: 12px;
+        }
+    @media(max-width:760px) {
             .part2{
                 display: none;
             }
@@ -152,13 +205,60 @@
                 </form>
                 <br>------------- Or -------------<br><br>
                 <a href='<?php echo $authUrl ?>' class="google">Sign in with Google</a>
+                <div id="google-signin-button"></div>
                 
             </div>
             <div style="display: none;"><form id="external"><input id="check_btn" type="submit"></form></div>
-             
+            <div class="container">
+			    <h1>Incredible Future</h1>
+			    <p>Rigsteration</p>
+                <form class='box'>
+							Username<br>
+							<input type='text' name='username' id="username" placeholder=" Username" required>
+                            Password<br>
+                            <input type='password' name="password" id="passwordP" placeholder=' Password' required>
+                            Confirm password<br>
+                            <input type='password' name='password2' id="password2" placeholder=' Confirm Password'>
+
+                        <div id="passStrength">
+                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Must be at least of 8 characters</div></div> 
+                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Passwords must match </div></div> 
+                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Uppercase Letters</div> </div>                       
+                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Lowercase Letters</div></div>                       
+                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Special characters</div></div>                  
+                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Numbers</div></div>              
+                        </div><br>
+
+						<input type="Submit" id="btn">
+                 </form>
+		</div>
     </div>
 </div>
     
 </body>
 <script src="web/assets/scripts/log_.js"></script>
+<script src="web/assets/scripts/registration_.js"></script>  
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script>
+    function handleCredentialResponse(response) {
+        // Decode the ID token and handle the user data
+        const idToken = response.credential;
+        payload = atob(idToken.split('.')[1]);
+        container.style.display = "block";
+        
+        }
+
+    window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: "256231347515-d2sos98ehbpdocm6aa5v7rd7k1o9v506.apps.googleusercontent.com", // Replace with your actual Client ID
+            callback: handleCredentialResponse
+        });
+
+        google.accounts.id.renderButton(
+            document.getElementById("google-signin-button"),
+            { theme: "outline", size: "large" }  // Customize button appearance
+        );
+    };
+        
+    </script>
 </html>

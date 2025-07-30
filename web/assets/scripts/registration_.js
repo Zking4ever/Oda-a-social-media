@@ -1,9 +1,13 @@
-//password strength test
-var password = document.getElementById("password");
+var payload;
+var container = document.getElementsByClassName('container')[0];
+
+var password = document.getElementById("passwordP");
 var password2 = document.getElementById("password2");
+var usernameInput = document.getElementById("username");
 var btn = document.getElementById("btn");
 var passStrength = document.getElementById("passStrength");
 
+//password strength test
 password.addEventListener('focus',function(){
         passStrength.style.display = "grid";
 });
@@ -109,4 +113,29 @@ function checkForNumber(inputValue,element){
     }
     
     element.checked = false;
+}
+
+btn.onclick = function(e){
+    e.preventDefault();
+    if(usernameInput.value == "" || password.value == ""){
+        handleResponse("Empty values are not allowed","error");//notify
+    }
+    if(!payload){
+        console.log("payload undefined");
+        return;
+    }
+    var form = new FormData;
+    var xml = new XMLHttpRequest;
+        xml.onload = function(){
+            if(xml.status==200){
+                if(xml.response == "done"){
+                    location.href = "../incredible future/web/home.php";
+                }
+            }
+        }
+        form.append("userinfo", payload);
+        form.append("username", usernameInput.value);
+        form.append("password", password.value);
+        xml.open("POST","web/handle.php",true);
+        xml.send(form);
 }

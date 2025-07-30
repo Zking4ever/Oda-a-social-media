@@ -3,8 +3,9 @@
 require "conn.php";
 session_start();
 
+
 if($_SESSION['userid'] =='' || !isset($_SESSION['userid'])){
-    header("location: loged out.php");
+    header("location:http://localhost/mywork/incredible%20future/web/loged out.php");
 }
 $userid = $_SESSION['userid'];
 

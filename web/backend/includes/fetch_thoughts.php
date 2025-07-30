@@ -35,7 +35,7 @@ $new = subtractArray($allThoughts,$seen);
                                     <div class='thought'>".$thought['content']."</div>
                                     <div style='margin-top:7px'  id='".$thought['thoughtid']."'>
                                         <span onclick='reactThoght(event,1)'".(!empty($reaction) && $reaction['liked']==1? "class='reacted'" : "")."> Like ".$thought['likes']." </span>  
-                                        <span onclick='reactThoght(event,2)'".(!empty($reaction) && $reaction['disliked']==1? "class='reacted'" : "")."> dislikes ".$thought['dislikes']." </span> 
+                                        <span onclick='reactThoght(event,2)'".(!empty($reaction) && $reaction['disliked']==1? "class='reacted'" : "")."> Dislike ".$thought['dislikes']." </span> 
                                         <span onclick='seeComment(event)'".(!empty($reaction) && $reaction['commented']==1? "class='reacted'" : "")."> Comment ".$thought['comments']." </span> 
                                     </div>
                             </div>";
@@ -61,7 +61,7 @@ $new = subtractArray($allThoughts,$seen);
                                         <div class='thought'>".$thought['content']."</div>
                                         <div style='margin-top:7px'  id='".$thought['thoughtid']."'>
                                             <span onclick='reactThoght(event,1)'".(!empty($reaction) && $reaction['liked']==1? "class='reacted'" : "")."> Like ".$thought['likes']." </span>  
-                                            <span onclick='reactThoght(event,2)'".(!empty($reaction) && $reaction['disliked']==1? "class='reacted'" : "")."> dislikes ".$thought['dislikes']." </span> 
+                                            <span onclick='reactThoght(event,2)'".(!empty($reaction) && $reaction['disliked']==1? "class='reacted'" : "")."> Dislike ".$thought['dislikes']." </span> 
                                             <span onclick='seeComment(event)'".(!empty($reaction) && $reaction['commented']==1? "class='reacted'" : "")."> Comment ".$thought['comments']." </span> 
                                         </div>
                                 </div>";
@@ -95,7 +95,7 @@ $new = subtractArray($allThoughts,$seen);
                                                         <div class='thought'>".$thought['content']."</div>
                                                         <div style='margin-top:7px'  id='".$thought['thoughtid']."'>
                                                             <span onclick='reactThoght(event,1)'".(!empty($reaction) && $reaction['liked']==1? "class='reacted'" : "")."> Like ".$thought['likes']." </span>  
-                                                            <span onclick='reactThoght(event,2)'".(!empty($reaction) && $reaction['disliked']==1? "class='reacted'" : "")."> dislikes ".$thought['dislikes']." </span> 
+                                                            <span onclick='reactThoght(event,2)'".(!empty($reaction) && $reaction['disliked']==1? "class='reacted'" : "")."> Dislike ".$thought['dislikes']." </span> 
                                                             <span onclick='seeComment(event)'".(!empty($reaction) && $reaction['commented']==1? "class='reacted'" : "")."> Comment ".$thought['comments']." </span> 
                                                         </div>
                                                 </div>";
