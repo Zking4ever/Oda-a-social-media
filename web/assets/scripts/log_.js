@@ -59,8 +59,11 @@ function handleRequest(type){
             }
             if(response['result']=="log in"){
                 var external = document.getElementById("external");
-                external.action ="web/home.html";
+                var userid = document.getElementById("userid");
                 var check_btn = document.getElementById("check_btn");
+                external.method ="GET";
+                external.action ="web/home.html";
+                userid.value = response["userid"];
                 check_btn.click();
                 return;
             }

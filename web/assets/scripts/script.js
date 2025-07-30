@@ -2,6 +2,8 @@
 var add = document.getElementById('add');
 var submit = document.getElementById('submit');
 var inputs = document.getElementsByClassName('new_post_inputes')[0];
+var DIR = "http://incrediblefuture.atwebpages.com/web/";
+var userid = new URLSearchParams(window.location.search).get('userid');
 var contributers = document.getElementsByClassName('contributers')[0];
 var loadingDiv = document.getElementsByClassName("loadingGif")[0];
 var loadingMessage = document.getElementsByClassName("loadingMessage")[0];
@@ -82,8 +84,10 @@ for(var i=0;i<radios.length;i++){
                 handleResult(xml.response,request_type);
             }
         }
-        xml.open("GET","backend/api.php?request_type="+request_type,true);
-        xml.send();
+        var form = new FormData;
+        form.append('userid',userid);
+        xml.open("POST",DIR+"backend/api.php?request_type="+request_type,true);
+        xml.send(form);
     });
 }
 function getIndex(obj){
@@ -93,6 +97,8 @@ function getIndex(obj){
         }
     }
 }
+//
+
 
 //post inputs
 add.onclick = function(){
@@ -112,11 +118,12 @@ submit.onclick = function(){
                 handleResult(ajaxrequest.response,"post");
             }
         }
+        form.append('userid',userid);
         form.append('file',file[0]);
         form.append('caption',caption);
         form.append('request_type',"add_post");
     
-    ajaxrequest.open("POST","backend/api.php",true);
+    ajaxrequest.open("POST",DIR+"backend/api.php",true);
     ajaxrequest.send(form);
 
 
@@ -158,14 +165,17 @@ function differentiateStories(){
                         }
                     }
                     activeStories = JSON.stringify(activeStories);
+                    form.append('userid',userid);
                     form.append('actives',activeStories);
                     form.append('request_type',"differentiate");
-                    xmlR.open("POST","backend/api.php",true);
+                    xmlR.open("POST",DIR+"backend/api.php",true);
                     xmlR.send(form);
             }
         }
-    xml.open("GET","backend/api.php?request_type=get_stories",true);
-    xml.send();
+    var formData = new FormData;
+    formData.append('userid',userid);
+    xml.open("POST",DIR+"backend/api.php?request_type=get_stories",true);
+    xml.send(formData);
 }
 
 
@@ -217,11 +227,12 @@ function get_profile(e){
             }
         }
 
+
+        myform.append('userid',userid);
         myform.append('request_type',"profile");
         myform.append('personid',element.id);
 
-
-        ajax.open("POST","backend/api.php");
+        ajax.open("POST",DIR+"backend/api.php");
         ajax.send(myform);
     
 }
@@ -260,8 +271,9 @@ function LogOut(){
                 }
             }
             
+            myform.append('userid',userid);
             myform.append('request_type','logout');
-            ajax.open("POST","backend/api.php");
+            ajax.open("POST",DIR+"backend/api.php");
             ajax.send(myform);
         }
 }
@@ -272,7 +284,7 @@ var profile_image = document.getElementById('profile_image');
 var stroies = document.getElementsByClassName('stroies')[0];
 
 async function handleResult(result,type){
-     
+     alert(result);
     finishedLoading();//since it is handling the response
     switch(type){
         case "loadHome":
