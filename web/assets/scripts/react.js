@@ -17,10 +17,11 @@ function request(id){
             radios[1].click();
         }
     }
+    form.append("userid",userid);
     form.append("request_type","resonse_to_suggestion");
     form.append("friendid",id);
     form.append("response","send");
-    ajax.open("POST","backend/api.php",true);
+    ajax.open("POST",DIR+"backend/api.php",true);
     ajax.send(form);
 }
 //responding to request
@@ -35,11 +36,12 @@ function  response(id,relationid){
             radios[1].click();
         }
     }
+    form.append("userid",userid);
     form.append("request_type","resonse_to_suggestion");
     form.append("relationid",relationid);
     form.append("friendid",id);
     form.append("response","confirm");
-    ajax.open("POST","backend/api.php",true);
+    ajax.open("POST",DIR+"backend/api.php",true);
     ajax.send(form);
 }
 
@@ -76,6 +78,7 @@ function reactThoght(e,n){
             element.innerHTML = " "+previous_content[1]+" "+reaction_no+" ";
         }
     }
+    form.append("userid",userid);
     form.append("request_type","thought");
     form.append("data_type","react");
     form.append("id",id);
@@ -83,7 +86,7 @@ function reactThoght(e,n){
     form.append("status",status);
     form.append("reaction_no",reaction_no);
 
-    xml.open("POST","backend/api.php",true);
+    xml.open("POST",DIR+"backend/api.php",true);
     xml.send(form);
 }
 function seeComment(e){
@@ -119,10 +122,11 @@ function readComment(id){
             commentContainer.innerHTML = ajax.response;
         }
     }
+    form.append("userid",userid);
     form.append("request_type","thought");
     form.append("data_type","read_comment");
     form.append("thoughtid",id);
 
-    ajax.open("POST","backend/api.php",true);
+    ajax.open("POST",DIR+"backend/api.php",true);
     ajax.send(form);
 }

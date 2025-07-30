@@ -36,11 +36,12 @@ function change_profile_img(e){
            }
         }
     }
+    form.append('userid',userid);
     form.append('request_type',"setting");
     form.append('data_type',"change_profile_picture");
     form.append('profile_image',e.target.files[0]);
     
-    ajax.open("POST","backend/api.php",true);
+    ajax.open("POST",DIR+"backend/api.php",true);
     ajax.send(form);
 }
 
@@ -56,6 +57,7 @@ function saveSettings(e){
                 radios[5].click();
             }
         } 
+        form.append('userid',userid);
         form.append('request_type',"setting");
         form.append('data_type',"save_setting");
         inputs = e.target.parentElement.getElementsByTagName('input');
@@ -63,7 +65,7 @@ function saveSettings(e){
         form.append('name',inputs[1].value);
         form.append('password',inputs[3].value);
 
-        ajax.open("POST","backend/api.php",true);
+        ajax.open("POST",DIR+"backend/api.php",true);
         ajax.send(form);
     }
 }

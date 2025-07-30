@@ -66,8 +66,10 @@ function fetch_post(){
         }
     }
         visiblePosts = JSON.stringify(visiblePosts);
-        xml.open("GET","backend/api.php?request_type=fetch_post&&visiblePosts="+visiblePosts,true);
-        xml.send();
+        var form = new FormData;
+        form.append("userid",userid);
+        xml.open("POST",DIR+"backend/api.php?request_type=fetch_post&&visiblePosts="+visiblePosts,true);
+        xml.send(form);
 }
 
 var seenPost = [];
@@ -89,11 +91,12 @@ function Post_seen(e){
             seenPost.push(postid);
         }
     }
+    form.append("userid",userid);
     form.append("request_type","post_reaction");
     form.append("data_type","post_seen");
     form.append("postid",postid);
 
-    xml.open("POST","backend/api.php",true);
+    xml.open("POST",DIR+"backend/api.php",true);
     xml.send(form);
 }
 
@@ -133,6 +136,7 @@ function reactPost(event,num){
         }
     }
 
+    form.append("userid",userid);
     form.append("request_type","post_reaction");
     form.append("data_type","post_reaction");
     form.append("react_type",react_type);
@@ -140,7 +144,7 @@ function reactPost(event,num){
     form.append("number",number);
     form.append("status",status);
 
-    xml.open("POST","backend/api.php",true);
+    xml.open("POST",DIR+"backend/api.php",true);
     xml.send(form);
 
 }
@@ -179,11 +183,13 @@ function readPostComment(postid){
                 commentContainer.innerHTML = xml.response;
             }
         }
+        
+        form.append("userid",userid);
         form.append("request_type","post_reaction");
         form.append("data_type","read_comment");
         form.append("postid",postid);
 
-        xml.open("POST","backend/api.php",true);
+        xml.open("POST",DIR+"backend/api.php",true);
         xml.send(form);
 }
 function clothPostComment(e){
@@ -208,11 +214,12 @@ function seeThought(e){
         }
     }
     
+    form.append("userid",userid);
     form.append("request_type","thought");
     form.append("data_type","see");
     form.append("thoughtid",id);
 
-    xml.open("POST","backend/api.php",true);
+    xml.open("POST",DIR+"backend/api.php",true);
     xml.send(form);
 }
 
@@ -244,9 +251,11 @@ function fetchThought(){
         }
     }
     thoughtids = JSON.stringify(thoughtids);
+    
+    form.append("userid",userid);
     form.append("request_type","fetch_thought");
     form.append("visibles",thoughtids);
 
-    xml.open("POST","backend/api.php",true);
+    xml.open("POST",DIR+"backend/api.php",true);
     xml.send(form);
 }

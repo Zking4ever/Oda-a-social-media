@@ -284,7 +284,6 @@ var profile_image = document.getElementById('profile_image');
 var stroies = document.getElementsByClassName('stroies')[0];
 
 async function handleResult(result,type){
-     alert(result);
     finishedLoading();//since it is handling the response
     switch(type){
         case "loadHome":

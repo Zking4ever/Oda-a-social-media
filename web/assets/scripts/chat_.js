@@ -20,10 +20,12 @@ function startChat(e){
             chat_holder.scrollTo(0,chat_holder.scrollHeight);
         }
     }
+    
+    form.append("userid",userid);
     form.append("request_type","chat");
     form.append("relationid",element.id);
     form.append("data_type","start_chat");
-    ajax.open("POST","backend/api.php",true);
+    ajax.open("POST",DIR+"backend/api.php",true);
     ajax.send(form);
 }
 function send(e){
@@ -93,10 +95,11 @@ function send(e){
             the_input_box.value = "";
         }
     }
+    form.append("userid",userid);
     form.append("request_type",request_type);
     form.append("data_type",data_type);
     form.append("message",the_input_box.value);
-    ajax.open("POST","backend/api.php",true);
+    ajax.open("POST",DIR+"backend/api.php",true);
     ajax.send(form);
 }
 
@@ -129,9 +132,7 @@ function askAi(input){
             isLoadingRequest = false;
             var response = JSON.parse(xml.response);
             div.innerHTML = "";
-            console.log(response);
             response = response.split("*   ");
-            console.log(response);
             for(let i=0;i<response.length;i++){
                 var subResponse = response[i].split('**');
                 if(subResponse.length === 1){
@@ -180,10 +181,11 @@ function askAi(input){
             aiBox.scroll(0,aiBox.scrollHeight);
         }
     }
+    form.append("userid",userid);
     form.append("prompt",input.value);
     form.append("data_type","ask");
 
-    xml.open("POST","backend/api.php?request_type=askAI",true);
+    xml.open("POST",DIR+"backend/api.php?request_type=askAI",true);
     xml.send(form);
     input.value = "";
 }
@@ -204,6 +206,7 @@ function readChat(){
                     //console.log("have no new message");
         }
     }
+    form.append("userid",userid);
     form.append("request_type","chat");
     form.append("data_type","read");
     ajax.open("POST","backend/api.php",true);

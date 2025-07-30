@@ -26,10 +26,11 @@ function preveiw(e){
                         preview_img.src = 'backend/' + xml.response; 
                     }
             }
+        checkform.append('userid',userid);
         checkform.append('type','get_path');
         checkform.append('request_type',"add_story");
         checkform.append('file',e.target.files[0]);
-        xml.open("POST","backend/api.php");
+        xml.open("POST",DIR+"backend/api.php");
         xml.send(checkform);
 }
 
@@ -71,10 +72,11 @@ function see_story(e){
                         view_story.style.display ="flex";
                     }
             }
+        checkform.append('userid',userid);
         checkform.append('type','see_story');
         checkform.append('request_type','see_story');
         checkform.append('sendersid',idInView);
-        xml.open("POST","backend/api.php");
+        xml.open("POST",DIR+"backend/api.php");
         xml.send(checkform);
 }
 var btn1 = document.getElementById('btn1');
@@ -136,12 +138,13 @@ share_story.onclick = function(){
                         handleResult(ajax.response,'story');
                     }
             }
+        myform.append('userid',userid);
         myform.append('caption',caption);
         myform.append('type','share_story');
         myform.append('request_type',"add_story");
         
         myform.append('file',file);
-        ajax.open("POST","backend/api.php");
+        ajax.open("POST",DIR+"backend/api.php");
         ajax.send(myform);
 }
 
@@ -194,9 +197,10 @@ function see_User_story(e){
                         }
                     }
             }
+        form.append('userid',userid);
         form.append('type','userStory');
         form.append('request_type','see_story');
         form.append('sendersid',idInView);
-        xml.open("POST","backend/api.php");
+        xml.open("POST",DIR+"backend/api.php");
         xml.send(form);
 }
