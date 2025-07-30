@@ -7,33 +7,6 @@ if(isset($_SESSION['userData'])){
    $userData = $_SESSION['userData'];
 }
 
-if (isset($_GET['code'])) {
-    
-    require_once 'vendor/autoload.php';
-    require "backend/config.php";
-    $client = new Google_Client();
-    $client->setClientId(CLIENT_ID);
-    $client->setClientSecret(CLIENT_SECRET);
-    $client->setRedirectUri('http://localhost/mywork/incredible%20future/web/main.php');
-
-    $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-    $client->setAccessToken($token);
-    
-    // Get user profile
-    $oauth2 = new Google_Service_Oauth2($client);
-    $userinfo = $oauth2->userinfo->get();
-    
-    $userData = [
-        'id' => $userinfo->id,
-        'email' => $userinfo->email,
-        'name' => $userinfo->name,
-        'picture' => $userinfo->picture,
-    ];
-
-    $_SESSION['userid'] =$userData['id'];
-    $_SESSION['userData'] = $userData;
-
-}
 if(isset($_SESSION['userid'])){
     
     require "backend/conn.php";

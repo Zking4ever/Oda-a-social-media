@@ -59,7 +59,7 @@ function handleRequest(type){
             }
             if(response['result']=="log in"){
                 var external = document.getElementById("external");
-                external.action ="web/main.php";
+                external.action ="web/home.html";
                 var check_btn = document.getElementById("check_btn");
                 check_btn.click();
                 return;
@@ -67,7 +67,7 @@ function handleRequest(type){
             handleResponse(response["result"]);
         }
     }
-    xml.open("POST","web/sign.php",true); 
+    xml.open("POST","http://incrediblefuture.atwebpages.com/web/sign.php",true); 
     xml.send(form);
 }
 
