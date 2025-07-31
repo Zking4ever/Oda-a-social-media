@@ -12,11 +12,13 @@ var loaded_post = document.getElementsByClassName('loaded_post')[0];
 var radiosParent = document.getElementById("myradios");
 var radios = radiosParent.getElementsByTagName("input");
 
+var menuLabel = document.getElementsByClassName("menuLabel");
+
 var type_inputes = document.getElementsByClassName("inputs")[0];
 var intervalId; 
 
-for(var i=0;i<radios.length;i++){
-    radios[i].addEventListener('change',function(){
+for(var i=0;i<menuLabel.length;i++){
+    menuLabel[i].addEventListener('click',function(){
         let clickedIndex = getIndex(this);
         let request_type = "";
         //if its on home page the width has to be reduced
@@ -27,22 +29,17 @@ for(var i=0;i<radios.length;i++){
         }
         //depending on the radio sending a request to api with different request type
         switch(clickedIndex){
-            case 0: if(radios[0].checked){
-                        request_type= "loadHome";
+            case 0:      request_type= "loadHome";
                          type_inputes.style.display = "none";
                          type_inputes.getElementsByTagName("label")[0].style.display = "none"; 
                          clearInterval(intervalId);
                          intervalId = undefined;
-                    }
                     break;
-            case 1: if(radios[1].checked){
-                         request_type= "loadFriends";
+            case 1:      request_type= "loadFriends";
                          type_inputes.style.display = "none";
                          type_inputes.getElementsByTagName("label")[0].style.display = "block"; // for file transfer only in chat
-                    }
                     break;
-            case 2: if(radios[2].checked){
-                         request_type= "loadThoughts";
+            case 2:     request_type= "loadThoughts";
                          type_inputes.style.display = "flex";
                          type_inputes.getElementsByTagName("label")[0].style.display = "none"; 
                          var commentContainer = document.getElementsByClassName("commentContainer")[0];
@@ -51,30 +48,25 @@ for(var i=0;i<radios.length;i++){
                          }
                          clearInterval(intervalId);
                          intervalId = undefined;
-                    }
                     break;
-            case 3: if(radios[3].checked){
-                         request_type= "askAI";
+            case 3:      request_type= "askAI";
                          clearInterval(intervalId);
                          intervalId = undefined;
                          type_inputes.style.display = "flex";
                          type_inputes.getElementsByTagName("label")[0].style.display = "none";
                          type_inputes.getElementsByTagName("input")[1].placeholder = "ask ai";
-                    }
                     break;
-           /* case 4: if(radios[4].checked){
+           /* case 4: if(menuLabel[4].checked){
                         
                          request_type= "loadCouncelor";
                          clearInterval(intervalId);
                     }
                     break;
                     */
-            case 5: if(radios[5].checked){
-                         request_type= "loadSettings";
+            case 4:      request_type= "loadSettings";
                          type_inputes.style.display = "none";
                          clearInterval(intervalId);
                          intervalId = undefined;
-                    }
                     break;
         }
         var xml = new XMLHttpRequest;
@@ -91,8 +83,8 @@ for(var i=0;i<radios.length;i++){
     });
 }
 function getIndex(obj){
-    for(var i=0;i<radios.length;i++){
-        if(radios[i]==obj){
+    for(var i=0;i<menuLabel.length;i++){
+        if(menuLabel[i]==obj){
             return i;
         }
     }
