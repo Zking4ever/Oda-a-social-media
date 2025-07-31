@@ -99,7 +99,6 @@ function getIndex(obj){
 }
 //
 
-
 //post inputs
 add.onclick = function(){
         inputs.style.display = "flex";
