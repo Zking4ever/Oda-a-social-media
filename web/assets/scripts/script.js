@@ -36,6 +36,8 @@ for(var i=0;i<menuLabel.length;i++){
                          intervalId = undefined;
                     break;
             case 1:      request_type= "loadFriends";
+                         clearInterval(intervalId);
+                         intervalId = undefined;
                          type_inputes.style.display = "none";
                          type_inputes.getElementsByTagName("label")[0].style.display = "block"; // for file transfer only in chat
                     break;
@@ -294,7 +296,6 @@ async function handleResult(result,type){
             notifications.innerHTML = "";
             break;
         case "loadFriends":
-            alert(result);
             var response = JSON.parse(result);
                 loaded_post.innerHTML = response['F_request'];
                 loaded_post.innerHTML += response['friends'];

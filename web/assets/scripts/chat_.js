@@ -192,12 +192,10 @@ function askAi(input){
     input.value = "";
 }
 function readChat(){
-    console.log("reading chat");
     var form = new FormData;
     var ajax = new XMLHttpRequest;
     ajax.onload = function(){
         if(ajax.readyState==4 || ajax.status==200){
-    console.log(ajax.response);
             var chat_holder = document.getElementsByClassName("chatHolder")[0];
             var innerString = JSON.stringify(chat_holder.innerHTML);
             var responseString = JSON.stringify(ajax.response);
