@@ -9,6 +9,9 @@
 			<input type="file" name="photo" id="photo">
 			<input type="button" onclick='send()' value="submit">
 		</form>
+		<img src="https://drive.google.com/uc?export=view&id=1pA_ZwHuZSNHsTLpv9CAdOUHxc8_Yr8pr" id="image" alt="image will be shown here">
+		<img src="https://drive.google.com/uc?export=view&id=1a2b3c4d5e6f7g8h9" alt="My Image">
+
 </div>
 <script>
 	function send(){

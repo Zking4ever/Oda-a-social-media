@@ -1,4 +1,4 @@
-
+var relationid;
 function startChat(e){
     var element = e.target;
     if(!element.id){
@@ -24,8 +24,9 @@ function startChat(e){
     form.append("userid",userid);
     form.append("request_type","chat");
     form.append("relationid",element.id);
+    relationid = element.id;
     form.append("data_type","start_chat");
-    ajax.open("POST",DIR+"backend/api.php",true);
+    ajax.open("POST",DIR,true);
     ajax.send(form);
 }
 function send(e){
@@ -42,6 +43,7 @@ function send(e){
     if(inputs_placeholder == "type a message"){
         data_type = "send_message";
         request_type = "chat";
+        form.append("relationid",relationid);
         var fileInput = e.target.parentElement.getElementsByTagName("input")[0];
         if(fileInput.value!=""){
             form.append("filesNumber",fileInput.files.length);
@@ -99,7 +101,7 @@ function send(e){
     form.append("request_type",request_type);
     form.append("data_type",data_type);
     form.append("message",the_input_box.value);
-    ajax.open("POST",DIR+"backend/api.php",true);
+    ajax.open("POST",DIR,true);
     ajax.send(form);
 }
 
@@ -185,15 +187,17 @@ function askAi(input){
     form.append("prompt",input.value);
     form.append("data_type","ask");
 
-    xml.open("POST",DIR+"backend/api.php?request_type=askAI",true);
+    xml.open("POST",DIR+"?request_type=askAI",true);
     xml.send(form);
     input.value = "";
 }
 function readChat(){
+    console.log("reading chat");
     var form = new FormData;
     var ajax = new XMLHttpRequest;
     ajax.onload = function(){
         if(ajax.readyState==4 || ajax.status==200){
+    console.log(ajax.response);
             var chat_holder = document.getElementsByClassName("chatHolder")[0];
             var innerString = JSON.stringify(chat_holder.innerHTML);
             var responseString = JSON.stringify(ajax.response);
@@ -207,9 +211,10 @@ function readChat(){
         }
     }
     form.append("userid",userid);
+    form.append("relationid",relationid);
     form.append("request_type","chat");
     form.append("data_type","read");
-    ajax.open("POST","backend/api.php",true);
+    ajax.open("POST",DIR,true);
     ajax.send(form);
 }
 

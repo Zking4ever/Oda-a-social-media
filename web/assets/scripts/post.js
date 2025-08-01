@@ -68,7 +68,7 @@ function fetch_post(){
         visiblePosts = JSON.stringify(visiblePosts);
         var form = new FormData;
         form.append("userid",userid);
-        xml.open("POST",DIR+"backend/api.php?request_type=fetch_post&&visiblePosts="+visiblePosts,true);
+        xml.open("POST",DIR+"?request_type=fetch_post&&visiblePosts="+visiblePosts,true);
         xml.send(form);
 }
 
@@ -96,7 +96,7 @@ function Post_seen(e){
     form.append("data_type","post_seen");
     form.append("postid",postid);
 
-    xml.open("POST",DIR+"backend/api.php",true);
+    xml.open("POST",DIR,true);
     xml.send(form);
 }
 
@@ -144,7 +144,7 @@ function reactPost(event,num){
     form.append("number",number);
     form.append("status",status);
 
-    xml.open("POST",DIR+"backend/api.php",true);
+    xml.open("POST",DIR,true);
     xml.send(form);
 
 }
@@ -189,7 +189,7 @@ function readPostComment(postid){
         form.append("data_type","read_comment");
         form.append("postid",postid);
 
-        xml.open("POST",DIR+"backend/api.php",true);
+        xml.open("POST",DIR,true);
         xml.send(form);
 }
 function clothPostComment(e){
@@ -219,7 +219,7 @@ function seeThought(e){
     form.append("data_type","see");
     form.append("thoughtid",id);
 
-    xml.open("POST",DIR+"backend/api.php",true);
+    xml.open("POST",DIR,true);
     xml.send(form);
 }
 
@@ -256,6 +256,6 @@ function fetchThought(){
     form.append("request_type","fetch_thought");
     form.append("visibles",thoughtids);
 
-    xml.open("POST",DIR+"backend/api.php",true);
+    xml.open("POST",DIR,true);
     xml.send(form);
 }

@@ -2,7 +2,7 @@
 var add = document.getElementById('add');
 var submit = document.getElementById('submit');
 var inputs = document.getElementsByClassName('new_post_inputes')[0];
-var DIR = "http://incrediblefuture.atwebpages.com/web/";
+var DIR = "http://incrediblefuture.atwebpages.com/web/backend/api.php";
 var userid = new URLSearchParams(window.location.search).get('userid');
 var contributers = document.getElementsByClassName('contributers')[0];
 var loadingDiv = document.getElementsByClassName("loadingGif")[0];
@@ -78,7 +78,7 @@ for(var i=0;i<menuLabel.length;i++){
         }
         var form = new FormData;
         form.append('userid',userid);
-        xml.open("POST",DIR+"backend/api.php?request_type="+request_type,true);
+        xml.open("POST",DIR+"?request_type="+request_type,true);
         xml.send(form);
     });
 }
@@ -114,7 +114,7 @@ submit.onclick = function(){
         form.append('caption',caption);
         form.append('request_type',"add_post");
     
-    ajaxrequest.open("POST",DIR+"backend/api.php",true);
+    ajaxrequest.open("POST",DIR,true);
     ajaxrequest.send(form);
 
 
@@ -159,13 +159,13 @@ function differentiateStories(){
                     form.append('userid',userid);
                     form.append('actives',activeStories);
                     form.append('request_type',"differentiate");
-                    xmlR.open("POST",DIR+"backend/api.php",true);
+                    xmlR.open("POST",DIR,true);
                     xmlR.send(form);
             }
         }
     var formData = new FormData;
     formData.append('userid',userid);
-    xml.open("POST",DIR+"backend/api.php?request_type=get_stories",true);
+    xml.open("POST",DIR+"?request_type=get_stories",true);
     xml.send(formData);
 }
 
@@ -223,7 +223,7 @@ function get_profile(e){
         myform.append('request_type',"profile");
         myform.append('personid',element.id);
 
-        ajax.open("POST",DIR+"backend/api.php");
+        ajax.open("POST",DIR);
         ajax.send(myform);
     
 }
@@ -264,7 +264,7 @@ function LogOut(){
             
             myform.append('userid',userid);
             myform.append('request_type','logout');
-            ajax.open("POST",DIR+"backend/api.php");
+            ajax.open("POST",DIR);
             ajax.send(myform);
         }
 }
@@ -294,6 +294,7 @@ async function handleResult(result,type){
             notifications.innerHTML = "";
             break;
         case "loadFriends":
+            alert(result);
             var response = JSON.parse(result);
                 loaded_post.innerHTML = response['F_request'];
                 loaded_post.innerHTML += response['friends'];

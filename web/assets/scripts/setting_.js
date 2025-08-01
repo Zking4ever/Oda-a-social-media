@@ -41,7 +41,7 @@ function change_profile_img(e){
     form.append('data_type',"change_profile_picture");
     form.append('profile_image',e.target.files[0]);
     
-    ajax.open("POST",DIR+"backend/api.php",true);
+    ajax.open("POST",DIR,true);
     ajax.send(form);
 }
 
@@ -65,7 +65,7 @@ function saveSettings(e){
         form.append('name',inputs[1].value);
         form.append('password',inputs[3].value);
 
-        ajax.open("POST",DIR+"backend/api.php",true);
+        ajax.open("POST",DIR,true);
         ajax.send(form);
     }
 }

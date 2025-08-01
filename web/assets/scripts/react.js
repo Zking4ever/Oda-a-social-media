@@ -21,7 +21,7 @@ function request(id){
     form.append("request_type","resonse_to_suggestion");
     form.append("friendid",id);
     form.append("response","send");
-    ajax.open("POST",DIR+"backend/api.php",true);
+    ajax.open("POST",DIR,true);
     ajax.send(form);
 }
 //responding to request
@@ -41,7 +41,7 @@ function  response(id,relationid){
     form.append("relationid",relationid);
     form.append("friendid",id);
     form.append("response","confirm");
-    ajax.open("POST",DIR+"backend/api.php",true);
+    ajax.open("POST",DIR,true);
     ajax.send(form);
 }
 
@@ -86,7 +86,7 @@ function reactThoght(e,n){
     form.append("status",status);
     form.append("reaction_no",reaction_no);
 
-    xml.open("POST",DIR+"backend/api.php",true);
+    xml.open("POST",DIR,true);
     xml.send(form);
 }
 function seeComment(e){
@@ -127,6 +127,6 @@ function readComment(id){
     form.append("data_type","read_comment");
     form.append("thoughtid",id);
 
-    ajax.open("POST",DIR+"backend/api.php",true);
+    ajax.open("POST",DIR,true);
     ajax.send(form);
 }
