@@ -1,3 +1,23 @@
+.wraper{
+    --primary-background-color: black;
+    --primary-border-color: #ff9602;
+    --primary-text-color: azure;
+    --second-text-color: #ff6a00;
+    --hover-bg-color: #ff9602;
+    --hover-text-color: black;
+    --input-bg: #3c3c45;
+}
+
+/* light mode */
+#theme:checked ~ .wraper{
+    --primary-background-color: white;
+    --primary-border-color: #9073de;
+    --primary-text-color: black;
+    --second-text-color: #9073de;
+    --hover-bg-color: #9073de;
+    --hover-text-color: white;
+    --input-bg:rgb(154 128 217 / 28%);
+}
 *{
     margin: 0;
     padding: 0;
@@ -7,11 +27,17 @@ body{
     width: 100%;
     justify-content: center;
 }
+#theme{
+    display: none;
+}
 .wraper{
     min-height: 100vh;
     width: 100%;
     position:relative;
-    border: solid thin #9073de;
+    background-color: var(--primary-background-color);
+    border: solid 1px var(--primary-border-color);
+    color: var(--primary-text-color);
+    transition: all .4s ease;
 }
 header{
     min-height: 7vh;
@@ -20,18 +46,25 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: white;
-    border: solid thin #9073de;
-    color: #9073de;
+    border-bottom: solid 1px var(--primary-border-color);
+    color: var(--second-text-color);
 }
 main{
     min-height: 93vh;
     display: flex;
 }
+.quickReach{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 1px;
+}
+.quickReach label:last-of-type,
+#searchRad{
+    display: none;
+}
 #menu{
     flex: 0.6;
-    border-right: solid thin #9073de;
-    background-color: white;
+    border-right: solid thin var(--primary-border-color);
     text-align: center;
 }
 .menuLists{
@@ -56,13 +89,12 @@ main{
     vertical-align: -0.2em;
 }
 .menuLists label:hover{
-    color: white;
-    background-color: #9073de;
+    color: var(--hover-text-color);
+    background-color: var(--hover-bg-color);
 }
 #body{
     flex: 2.5;
     max-width: 1000px;
-    background-color: white;
     position: relative;
 }
 /*stories style is on a different file*/
@@ -98,7 +130,7 @@ main{
 .new_post_inputes{
     width: 350px;
     position: absolute;
-    background-color: rgb(154 128 217 / 28%);
+    background-color: var(--input-bg);
     text-align: center;
     flex-direction: column;
     z-index: 100;
@@ -136,11 +168,34 @@ main{
     main{
         display: block;
     }
+    .quickReach label:last-of-type{
+        display: block;
+    }
+    #searchRad{
+        display: flex;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+    }
+    #searchBar{
+        opacity: 0;
+        pointer-events: none;
+    }
+     #searchRad:focus ~  #searchBar{
+        opacity: 1;
+        pointer-events: all;
+    }
+    #searchBar:focus{
+        border-radius: 5px;
+        opacity: 1;
+        pointer-events: all;
+    }
     .menuLists{
-        margin-top: 10px;
+        margin-top: 5px;
+        padding-bottom: 5px;
         flex-direction: row;
         gap: 2px;
-        border-bottom: solid thin #9073de;
+        border-bottom: solid thin var(--primary-border-color);
     }
     .menuLists label{
         font-size: 12px;

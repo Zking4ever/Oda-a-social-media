@@ -41,10 +41,16 @@
 }
 </style>
 <body>
+    <input type="checkbox" id="theme">
    <div class="wraper">
     <header>
         <div class="logo">Incredible Future</div>
-        <div class="quickReach"><input type="text" placeholder="search"></div>
+        <div class="quickReach">
+            <label for="theme">theme</label>
+            <label for="searchRad">search</label>
+            <input type="radio" id="searchRad">
+            <input type="text" placeholder="search" id="searchBar">
+        </div>
     </header>
     <main>
         <div id="menu">

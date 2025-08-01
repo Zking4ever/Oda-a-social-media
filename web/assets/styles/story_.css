@@ -76,7 +76,7 @@
 .stroies{
     height: 60px;
     width: 99%;
-    border-bottom: solid 1px #9073de;
+    border-bottom: solid 1px var(--primary-border-color);
     display: flex;
     padding: .5%;
 }
