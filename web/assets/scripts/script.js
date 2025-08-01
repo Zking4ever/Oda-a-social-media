@@ -2,7 +2,7 @@
 var add = document.getElementById('add');
 var submit = document.getElementById('submit');
 var inputs = document.getElementsByClassName('new_post_inputes')[0];
-var DIR = "http://incrediblefuture.atwebpages.com/web/backend/api.php";
+var DIR = "https://cors-anywhere.herokuapp.com/http://incrediblefuture.atwebpages.com/web/backend/api.php";
 var userid = new URLSearchParams(window.location.search).get('userid');
 var contributers = document.getElementsByClassName('contributers')[0];
 var loadingDiv = document.getElementsByClassName("loadingGif")[0];
