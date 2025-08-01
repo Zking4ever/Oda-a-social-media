@@ -1,6 +1,3 @@
-document.getElementById('theam').addEventListener('click',function(){
-   console.log(window.getComputedStyle(document.getElementsByTagName('html')[0]));
-});
 function passVisiblity(e){
                     pass = e.target.parentElement.getElementsByTagName('input')[0];
                     if(pass.type=="password"){

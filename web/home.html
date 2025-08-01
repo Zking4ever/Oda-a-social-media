@@ -41,6 +41,7 @@
 }
 </style>
 <body>
+    <!-- to change theam easily using css only-->
     <input type="checkbox" id="theme">
    <div class="wraper">
     <header>
@@ -55,12 +56,21 @@
     <main>
         <div id="menu">
             <div class="menuLists">
+                <!--radios to manupulate based on choise-->
+                <div id="myradios" style="width: 100%;display: inherit;flex-direction: inherit;align-items: center;">
+                    <input type="radio" id="home_radio" name="catagory_radios" class="menuRadios" style="display:none" checked>
+                    <input type="radio" id="friends_radio" name="catagory_radios" class="menuRadios" style="display:none">
+                    <input type="radio" id="thoughts_radio" name="catagory_radios" class="menuRadios" style="display:none">
+                    <input type="radio" id="ask_radio" name="catagory_radios" class="menuRadios" style="display:none">
+                    <!--input type="radio" id="councelor_radio" name="catagory_radios" class="menuRadios"-->
+                    <input type="radio" id="settings_radio" name="catagory_radios" class="menuRadios" style="display:none">
                 <label class="menuLabel" for="home_radio"><i class="bi bi-house-door"></i>Home</label>
                 <label class="menuLabel" for="friends_radio"><i class="bi bi-people"></i>Friends</label>
                 <label class="menuLabel" for="thoughts_radio"><i class="bi bi-chat-left-quote"></i>Thoughts</label>
                 <label class="menuLabel" for="ask_radio"><i class="bi bi-robot"></i> Ask AI</label>
                 <label id="add"><i class="bi bi-plus-square"></i>Create</label>
                 <label class="menuLabel" for="settings_radio"><i class="bi bi-gear"></i>Setting</label>
+                </div>
             </div>
         </div>
         <div id="body">
@@ -145,14 +155,7 @@
                     <div class="view_story_div"></div>
                 </div>
 
-            <div id="myradios" style="display:none">
-                <input type="radio" id="home_radio" name="catagory_radios">
-                <input type="radio" id="friends_radio" name="catagory_radios">
-                <input type="radio" id="thoughts_radio" name="catagory_radios">
-                <input type="radio" id="ask_radio" name="catagory_radios">
-                <input type="radio" id="councelor_radio" name="catagory_radios">
-                <input type="radio" id="settings_radio" name="catagory_radios">
-            </div>
+            
 
 </div> 
 
