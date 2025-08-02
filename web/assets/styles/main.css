@@ -67,6 +67,19 @@ header{
     border-bottom: solid 1px var(--primary-border-color);
     color: var(--second-text-color);
 }
+.round_box{
+    width: 55px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 14px;
+    background-color: rgb(124, 118, 118);
+}
+.round_box svg:nth-child(2){
+    border-radius: 50%;
+    background-color: aliceblue;
+}
 main{
     min-height: 93vh;
     display: flex;
@@ -122,6 +135,7 @@ main{
 #create{
     opacity: 0;
     pointer-events: none;
+    position: fixed;
 }
 #create:checked ~ .createOptions{
     display: block;
@@ -221,7 +235,7 @@ main{
     position: absolute;
     right: 100px;
     bottom: 3%;
-    border: none;
+    border: solid thin;
     background-color: #c5c5c5a6;
     cursor: pointer;
 }
@@ -231,6 +245,16 @@ main{
     }
     main{
         display: block;
+    }
+    .round_box{
+        width: 30px;
+        height: 21px;
+        overflow: hidden;
+        border: solid thin var(--br-color);
+        border-radius: 14px;
+    }
+    .round_box svg{
+        transform: scale(0.9);
     }
     .quickReach label:last-of-type{
         display: block;
@@ -244,6 +268,7 @@ main{
     #searchBar{
         opacity: 0;
         pointer-events: none;
+        max-width: 120px;
     }
      #searchRad:focus ~  #searchBar{
         opacity: 1;
