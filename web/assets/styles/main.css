@@ -211,8 +211,19 @@ main{
     width: 70px;
     height: 25px;
     position: absolute;
+    right: 20px;
+    bottom: 3%;
+    cursor: pointer;
+}
+#cancel{
+    width: 70px;
+    height: 25px;
+    position: absolute;
     right: 100px;
     bottom: 3%;
+    border: none;
+    background-color: #c5c5c5a6;
+    cursor: pointer;
 }
 @media (max-width:760px) {
     #body{

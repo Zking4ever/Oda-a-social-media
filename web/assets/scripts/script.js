@@ -1,6 +1,7 @@
 //to add and load posts
 var add = document.getElementById('add');
 var submit = document.getElementById('submit');
+var cancel = document.getElementById('cancel');
 var inputs = document.getElementsByClassName('new_post_inputes')[0];
 var DIR = "http://incrediblefuture.atwebpages.com/web/backend/api.php";
 var userid = new URLSearchParams(window.location.search).get('userid');
@@ -101,6 +102,10 @@ add.onclick = function(){
         inputs.style.display = "flex";
         contributers.style.display = "flex";
 }
+cancel.onclick = function(){
+        inputs.style.display = "none";
+        contributers.style.display = "none";
+}
 //add a post
 submit.onclick = function(){
     var file = document.getElementById('file').files;
@@ -121,10 +126,7 @@ submit.onclick = function(){
     ajaxrequest.open("POST",DIR,true);
     ajaxrequest.send(form);
 
-
     inputs.style.display ="none";
-    add.style.opacity = "100";   
-        
 }
 
 differentiateStories(); 
