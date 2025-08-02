@@ -48,7 +48,7 @@
         <div class="logo">Incredible Future</div>
         <div class="quickReach">
             <label for="theme">theme</label>
-            <label for="searchRad">search</label>
+            <label for="searchRad"><i class="bi bi-search"></i></label>
             <input type="radio" id="searchRad">
             <input type="text" placeholder="search" id="searchBar">
         </div>
@@ -68,20 +68,22 @@
                 <label class="menuLabel" for="friends_radio"><i class="bi bi-people"></i>Friends</label>
                 <label class="menuLabel" for="thoughts_radio"><i class="bi bi-chat-left-quote"></i>Thoughts</label>
                 <label class="menuLabel" for="ask_radio"><i class="bi bi-robot"></i> Ask AI</label>
-                <label id="add"><i class="bi bi-plus-square"></i>Create</label>
+                <label for="create"><i class="bi bi-plus-square"></i>Create</label>
                 <label class="menuLabel" for="settings_radio"><i class="bi bi-gear"></i>Setting</label>
                 </div>
             </div>
+            <input type="checkbox" id="create">
+            <div class="createOptions">
+                <label for="create">
+                    <label for="addstory"><h3>Add story</h3></label>
+                    <h3 id="add">Create post</h3>
+                    <input type="file" id="addstory" onchange="preveiw(event)" style="display:none">
+                    <h3>Cancel</h3>
+                </label>
+            </div>
         </div>
         <div id="body">
-            <div class="stroies">
-                    <div class="story mystory">
-                        <label for="story_img">
-                                <i class="bi bi-plus-circle"></i>
-                        </label>
-                        <input type="file" id="story_img" onchange="preveiw(event)" style="display:none">
-                    </div>
-            </div>
+            <div class="stroies"></div>
             <div class="post_container">
                 <div class="notifications" style="display:none"> <span>notifications</span></div>
                 <div class="loaded_post home"></div>

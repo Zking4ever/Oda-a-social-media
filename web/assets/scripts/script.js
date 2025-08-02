@@ -100,7 +100,6 @@ function getIndex(obj){
 add.onclick = function(){
         inputs.style.display = "flex";
         contributers.style.display = "flex";
-        add.style.opacity = "0";     
 }
 //add a post
 submit.onclick = function(){
@@ -289,7 +288,7 @@ async function handleResult(result,type){
             //profile_image.src = "backend/"+ response['userinfo']['profile_source'];
 
             //puting the stories
-            stroies.innerHTML += response['stories'];
+            stroies.innerHTML = response['stories'];
             
             //puting the responded postes
             loaded_post.innerHTML = response['posts'];

@@ -10,8 +10,13 @@
     --setting-bg: #1b242a;
     --fr-sug: #4f3b188f;
     --fr-sug-bor: #ff96029e;
-    --chatHolder : #191b1d;
-    --thought-hover: #37220f;
+    --chat : black;
+    --bg: #0d1117;
+    --bg2: #151b23;
+    --bg3: #212830;
+    --br-color: #30363e;
+    --chat-br-color: #373c4173;
+    
 }
 
 /* light mode */
@@ -26,8 +31,11 @@
     --setting-one-bg: #dde1ff;
     --fr-sug: #9073de8f;
     --fr-sug-bor: white;
-    --chatHolder: #efeaea;
-    --thought-hover: #efe2ef8a;
+    --chat: #f6f8fa;
+    --bg: #ffffff;
+    --bg2: #f6f8fa;
+    --bg3: #f6f8fa;
+    --chat-br-color: #d1d9e0;
 }
 *{
     margin: 0;
@@ -52,8 +60,7 @@ body{
 }
 header{
     min-height: 7vh;
-    width: 90%;
-    padding: 0 5%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -67,7 +74,8 @@ main{
 .quickReach{
     display: flex;
     flex-direction: row-reverse;
-    gap: 1px;
+    align-items: center;
+    gap: 3px;
 }
 .quickReach label:last-of-type,
 #searchRad{
@@ -110,6 +118,32 @@ main{
 .menuRadios:nth-child(5):checked ~ .menuLabel:nth-of-type(6){
     color: var(--hover-text-color);
     background-color: var(--hover-bg-color);
+}
+#create{
+    opacity: 0;
+    pointer-events: none;
+}
+#create:checked ~ .createOptions{
+    display: block;
+}
+.createOptions{
+    width: 120px;
+    border: solid var(--chat-br-color);
+    border-radius: 5px;
+    background-color: var(--bg);
+    position: absolute;
+    top: 245px;
+    left: 36px;
+    z-index: 150;
+    display: none;
+}
+.createOptions h3{
+    padding: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+.createOptions h3:hover{
+    background-color: var(--chat-br-color);
 }
 #body{
     flex: 2.5;
@@ -222,6 +256,10 @@ main{
     }
     .menuLists label i::before{
         font-size: 12px;
+    }
+    .createOptions{
+        top: 85px;
+        left: 60%;
     }
     .new_post_inputes{
         width: 250px;

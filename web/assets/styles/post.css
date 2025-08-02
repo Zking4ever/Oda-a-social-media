@@ -72,6 +72,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    background-color: var(--bg);
 }
 .react{
     width: 50px;
@@ -85,7 +86,7 @@
     transform: translateX(-10px);
 }
 .reacted svg{
-    fill: #9073de;
+    fill: var(--hover-bg-color);
 }
 .filled{
     opacity: 0;
