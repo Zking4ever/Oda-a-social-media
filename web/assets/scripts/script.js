@@ -2,12 +2,13 @@
 var add = document.getElementById('add');
 var submit = document.getElementById('submit');
 var inputs = document.getElementsByClassName('new_post_inputes')[0];
-var DIR = "https://cors-anywhere.herokuapp.com/http://incrediblefuture.atwebpages.com/web/backend/api.php";
+var DIR = "http://incrediblefuture.atwebpages.com/web/backend/api.php";
 var userid = new URLSearchParams(window.location.search).get('userid');
 var contributers = document.getElementsByClassName('contributers')[0];
 var loadingDiv = document.getElementsByClassName("loadingGif")[0];
 var loadingMessage = document.getElementsByClassName("loadingMessage")[0];
 var notifications = document.getElementsByClassName('notifications')[0];
+var stroies = document.getElementsByClassName('stroies')[0];
 var loaded_post = document.getElementsByClassName('loaded_post')[0];
 var radiosParent = document.getElementById("myradios");
 var radios = radiosParent.getElementsByTagName("input");
@@ -22,10 +23,12 @@ for(var i=0;i<menuLabel.length;i++){
         let clickedIndex = getIndex(this);
         let request_type = "";
         //if its on home page the width has to be reduced
-        if(radios[0].checked){
+        if(clickedIndex==0){//for posts the box has to be smaller
             loaded_post.className = "loaded_post home";
+            stroies.style.display = "flex";
         }else{
             loaded_post.className = "loaded_post";
+            stroies.style.display = "none";
         }
         //depending on the radio sending a request to api with different request type
         switch(clickedIndex){

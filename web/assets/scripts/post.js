@@ -1,4 +1,4 @@
-radios[0].click();
+menuLabel[0].click();
 //everytime the page starts with home
 
 var isLoading=false;

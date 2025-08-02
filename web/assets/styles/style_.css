@@ -59,7 +59,8 @@
     justify-content: center;
     width: 150px;
     padding: 10px;
-    background-color: #9073de8f;
+    background-color: var(--fr-sug);
+    border: solid 2px var(--fr-sug-bor);
     border-radius: 10px;
     position: relative;
     left: 50%;
@@ -80,7 +81,7 @@
 .friend{
     width: 80%;
     position: relative;
-    background-color: #fbf0ff87;
+    background-color: var(--chatHolder);
 }
 .friend img{
     margin-left: 23px;

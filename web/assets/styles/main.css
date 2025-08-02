@@ -6,6 +6,12 @@
     --hover-bg-color: #ff9602;
     --hover-text-color: black;
     --input-bg: #3c3c45;
+    --setting-one-bg: #2c2d35;
+    --setting-bg: #1b242a;
+    --fr-sug: #4f3b188f;
+    --fr-sug-bor: #ff96029e;
+    --chatHolder : #191b1d;
+    --thought-hover: #37220f;
 }
 
 /* light mode */
@@ -17,6 +23,11 @@
     --hover-bg-color: #9073de;
     --hover-text-color: white;
     --input-bg:rgb(154 128 217 / 28%);
+    --setting-one-bg: #dde1ff;
+    --fr-sug: #9073de8f;
+    --fr-sug-bor: white;
+    --chatHolder: #efeaea;
+    --thought-hover: #efe2ef8a;
 }
 *{
     margin: 0;
@@ -96,7 +107,7 @@ main{
 .menuRadios:nth-child(2):checked ~ .menuLabel:nth-of-type(2),
 .menuRadios:nth-child(3):checked ~ .menuLabel:nth-of-type(3),
 .menuRadios:nth-child(4):checked ~ .menuLabel:nth-of-type(4),
-.menuRadios:nth-child(5):checked ~ .menuLabel:nth-of-type(5){
+.menuRadios:nth-child(5):checked ~ .menuLabel:nth-of-type(6){
     color: var(--hover-text-color);
     background-color: var(--hover-bg-color);
 }
@@ -116,7 +127,7 @@ main{
     bottom: 0;
     margin-top: 10px;
     color: rgb(222 18 58);
-    background-color: aliceblue;
+    background-color: var(--primary-background-color);
     border-radius: 6px;
 }
 .logout:hover{
