@@ -16,26 +16,11 @@ if(isset($_SESSION['userid'])){
     $checkUserExistance = $conn->query($userExist);
 
     if($checkUserExistance->num_rows>0){
-        include 'home.php';
+        header('loacation home.php');
     }else{
-        
-        if($userid==$userData['id']){
-        //here registration occurs and then sign in automatically
-        //before that let them create password and username
-            if( !( isset($_GET['username']) || isset($_GET['password']) ) ) {
-                include "registration.php";
-                die;
-            }
-            
-            $username = $_GET['username'];
-            $password = $_GET['password'];
-            $query = "INSERT into users (userid,email,username,name,password,source) values('$userData[id]','$userData[email]','$username','$userData[name]','$password','$userData[picture]')";
-            $excute = $conn->query($query);
-            if($excute){
-                include 'home.php';
-            }
-
-        }
+        session_destroy();
+        header("location: loged out.php");
+        die;
     }
 }
 else{

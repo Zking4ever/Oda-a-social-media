@@ -115,6 +115,27 @@ function checkForNumber(inputValue,element){
     element.checked = false;
 }
 
+function handleCredentialResponse(response) {
+    // Decode the ID token and handle the user data
+    const idToken = response.credential;
+    payload = atob(idToken.split('.')[1]);
+    container.style.display = "block";
+    
+    }
+
+window.onload = function () {
+    google.accounts.id.initialize({
+        client_id: "256231347515-d2sos98ehbpdocm6aa5v7rd7k1o9v506.apps.googleusercontent.com", // Replace with your actual Client ID
+        callback: handleCredentialResponse
+    });
+
+    google.accounts.id.renderButton(
+        document.getElementById("google-signin-button"),
+        { theme: "outline", size: "large" }  // Customize button appearance
+    );
+};
+    
+
 btn.onclick = function(e){
     e.preventDefault();
     if(usernameInput.value == "" || password.value == ""){
@@ -129,7 +150,7 @@ btn.onclick = function(e){
         xml.onload = function(){
             if(xml.status==200){
                 if(xml.response == "done"){
-                    location.href = "../incredible future/web/home.php";
+                    location.href = "https://strike.xo.je/web/home.html";
                 }
             }
         }

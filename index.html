@@ -194,29 +194,8 @@
 </div>
     
 </body>
-<script src="web/assets/scripts/log_.js"></script>
-<script src="web/assets/scripts/registration_.js"></script>  
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script>
-    function handleCredentialResponse(response) {
-        // Decode the ID token and handle the user data
-        const idToken = response.credential;
-        payload = atob(idToken.split('.')[1]);
-        container.style.display = "block";
-        
-        }
-
-    window.onload = function () {
-        google.accounts.id.initialize({
-            client_id: "256231347515-d2sos98ehbpdocm6aa5v7rd7k1o9v506.apps.googleusercontent.com", // Replace with your actual Client ID
-            callback: handleCredentialResponse
-        });
-
-        google.accounts.id.renderButton(
-            document.getElementById("google-signin-button"),
-            { theme: "outline", size: "large" }  // Customize button appearance
-        );
-    };
-        
-    </script>
+<script src="web/assets/scripts/log.js"></script>
+<script src="web/assets/scripts/register.js"></script>  
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+ 
 </html>

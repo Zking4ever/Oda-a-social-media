@@ -58,19 +58,12 @@ function handleRequest(type){
                 return;
             }
             if(response['result']=="log in"){
-                var external = document.getElementById("external");
-                var userid = document.getElementById("userid");
-                var check_btn = document.getElementById("check_btn");
-                external.method ="GET";
-                external.action ="web/home.html";
-                userid.value = response["userid"];
-                check_btn.click();
-                return;
+                    location.href = "https://strike.xo.je/web/home.html";
             }
             handleResponse(response["result"]);
         }
     }
-    xml.open("POST","http://incrediblefuture.atwebpages.com/web/sign.php",true); 
+    xml.open("POST","web/sign.php",true); 
     xml.send(form);
 }
 

@@ -5,7 +5,8 @@ session_start();
 
 
 if($_SESSION['userid'] =='' || !isset($_SESSION['userid'])){
-    header("location:http://localhost/mywork/incredible%20future/web/loged out.php");
+    session_destroy();
+    die;
 }
 $userid = $_SESSION['userid'];
 
