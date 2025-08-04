@@ -1,5 +1,6 @@
 <?php
 require "backend/conn.php";
+session_start();
     if(isset($_POST) && isset($_POST['userinfo'])){
         $userData = json_decode($_POST['userinfo']);
         $query = "SELECT id from users where userid = '$userData->sub'";
