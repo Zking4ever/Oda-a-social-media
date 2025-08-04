@@ -62,13 +62,6 @@ for(var i=0;i<menuLabel.length;i++){
                          type_inputes.getElementsByTagName("label")[0].style.display = "none";
                          type_inputes.getElementsByTagName("input")[1].placeholder = "ask ai";
                     break;
-           /* case 4: if(menuLabel[4].checked){
-                        
-                         request_type= "loadCouncelor";
-                         clearInterval(intervalId);
-                    }
-                    break;
-                    */
             case 4:      request_type= "loadSettings";
                          type_inputes.style.display = "none";
                          clearInterval(intervalId);
@@ -229,7 +222,7 @@ function get_profile(e){
         myform.append('request_type',"profile");
         myform.append('personid',element.id);
 
-        ajax.open("POST",DIR);
+        ajax.open("POST",DIR,true);
         ajax.send(myform);
     
 }
@@ -270,7 +263,7 @@ function LogOut(){
             
             myform.append('userid',userid);
             myform.append('request_type','logout');
-            ajax.open("POST",DIR);
+            ajax.open("POST",DIR,true);
             ajax.send(myform);
         }
 }

@@ -119,8 +119,21 @@ function handleCredentialResponse(response) {
     // Decode the ID token and handle the user data
     const idToken = response.credential;
     payload = atob(idToken.split('.')[1]);
-    container.style.display = "block";
-    
+    var form = new FormData;
+    var xml = new XMLHttpRequest;
+        xml.onload = function(){
+            if(xml.status==200){
+                if(xml.response == "done"){
+                    location.href = "https://strike.xo.je/web/home.html";
+                }else{
+                    container.style.display = "block";
+                    //for sign up
+                }
+            }
+        }
+        form.append("userinfo", payload);
+        xml.open("POST","web/handle.php",true);
+        xml.send(form);
     }
 
 window.onload = function () {
@@ -155,6 +168,7 @@ btn.onclick = function(e){
             }
         }
         form.append("userinfo", payload);
+        form.append("type", "sign_up");
         form.append("username", usernameInput.value);
         form.append("password", password.value);
         xml.open("POST","web/handle.php",true);

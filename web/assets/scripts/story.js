@@ -30,7 +30,7 @@ function preveiw(e){
         checkform.append('type','get_path');
         checkform.append('request_type',"add_story");
         checkform.append('file',e.target.files[0]);
-        xml.open("POST",DIR+"backend/api.php");
+        xml.open("POST",DIR+"backend/api.php",true);
         xml.send(checkform);
 }
 
@@ -76,7 +76,7 @@ function see_story(e){
         checkform.append('type','see_story');
         checkform.append('request_type','see_story');
         checkform.append('sendersid',idInView);
-        xml.open("POST",DIR+"backend/api.php");
+        xml.open("POST",DIR,true);
         xml.send(checkform);
 }
 var btn1 = document.getElementById('btn1');
@@ -144,7 +144,7 @@ share_story.onclick = function(){
         myform.append('request_type',"add_story");
         
         myform.append('file',file);
-        ajax.open("POST",DIR+"backend/api.php");
+        ajax.open("POST",DIR,true);
         ajax.send(myform);
 }
 
@@ -201,6 +201,6 @@ function see_User_story(e){
         form.append('type','userStory');
         form.append('request_type','see_story');
         form.append('sendersid',idInView);
-        xml.open("POST",DIR+"backend/api.php");
+        xml.open("POST",DIR,true);
         xml.send(form);
 }

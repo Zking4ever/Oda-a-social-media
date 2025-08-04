@@ -13,8 +13,7 @@ function request(id){
         if(ajax.readyState==4 || ajax.status==200){
             handleResult(ajax.response,"story");
             await new Promise(response=>setTimeout(response,1000));
-            radios[1].checked = false;
-            radios[1].click();
+            menuLabel[1].click();
         }
     }
     form.append("userid",userid);
@@ -32,8 +31,7 @@ function  response(id,relationid){
         if(ajax.readyState==4 || ajax.status==200){
             handleResult(ajax.response,"story");
             await new Promise(response=>setTimeout(response,1000));
-            radios[1].checked = false;
-            radios[1].click();
+            menuLabel[1].click();
         }
     }
     form.append("userid",userid);

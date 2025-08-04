@@ -30,8 +30,7 @@ function change_profile_img(e){
                 handleResult("Profile changed successfuly","story");
                 label.innerHTML = "Change Profile";
                 await new Promise(response=>setTimeout(response,2000));
-                radios[5].checked = false;
-                radios[5].click();
+                menuLabel[4].click();
            }
         }
     }
@@ -52,8 +51,7 @@ function saveSettings(e){
             if(ajax.readyState==4 || ajax.status==200){
                 handleResult(ajax.response,'story');//story cause just wanted to notify the result
                 await new Promise(response=>setTimeout(response,2000));
-                radios[5].checked = false;
-                radios[5].click();
+                menuLabel[4].click();
             }
         } 
         form.append('userid',userid);
