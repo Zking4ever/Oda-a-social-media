@@ -49,13 +49,16 @@ if(!isset($_POST['data_type']) && $_GET['request_type']=="askAI"){
                     min-width: 85px;
                     display:flex;
                     flex-direction:column;
-                    background-color: #bec6ff91;
+                    background-color: var(--bg3);
                     align-self:start;
                     margin-left:10px;
-                    border:none;
+                    border: solid var(--chat-br-color);
                     border-radius:10px;
                     padding:5px;
                     text-align:start;
+                }
+                b{
+                    margin-left:15px;
                 }
                     </style>
             <div class='aiBox'><h1> Incree AI</h1>
@@ -64,9 +67,10 @@ if(!isset($_POST['data_type']) && $_GET['request_type']=="askAI"){
 
 }
 elseif(isset($_POST['data_type']) && $_POST['data_type'] == "ask"){
-$API = "AIzaSyAyBkJGhAXdY_OIXRwDtIoNFgRIpJaxVq4";
+$API = "AIzaSyAyBkJGhAXdY_OIXRwDtIoNFgRIpJaxVq4";//going to destroy this key soon
 $url="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$API";
         $prompt = trim($_POST['prompt']);
+        
     $prepared_request = '{
             "contents": [{
                     "parts":[{
@@ -74,33 +78,40 @@ $url="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:g
                         }]
                     }]
                 }';
-
-$response = run_curl($url,$prepared_request);
-$response = json_decode($response, true);
-
-if(isset($response['candidates'][0]['content']['parts'][0]['text'])){
-
-    $response_text = $response['candidates'][0]['content']['parts'][0]['text'];
-    $query = "INSERT into aiRequests(userid,prompt) value('$userid','$prompt')";
-    $excute = $conn->query($query);
-} else {
-    $response_text = "Sorry, I couldn't process your request at the moment.";
+    //setting a limit for request
+    $checkLimit = "SELECT id FROM `airequests` where userid ='$userid' ";
+    $excute = $conn->query($checkLimit);
+    if($excute->num_rows>10){
+        $limited = [];
+        $limited['candidates'][0]['content']['parts'][0]['text'] = "Sorry you have reached your limit.<br>please contact the developer";
+        echo json_encode($limited);
+        die;
+    }
+$response = run_curl($url, $prepared_request);
+ echo $response;
+ die;
 }
 
-echo json_encode($response_text);
-
-    }
-
 function run_curl($url, $data){
+    global $conn;
+    global $prompt;
+    global $userid;
   $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     $response = curl_exec($ch);
-    curl_close($ch);
-
-   return $response;
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    if($http_code === 200){
+        $save = "INSERT INTO `airequests`(userid,prompt) values ('$userid','$prompt')";
+        $excute = $conn->query($save);
+        curl_close($ch);
+        return $response;
+    }else{
+        curl_close($ch);
+        return "error occured";
+    }
 }
 
-    
+
