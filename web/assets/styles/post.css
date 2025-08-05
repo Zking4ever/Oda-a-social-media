@@ -44,7 +44,7 @@
     cursor: pointer;
 }
 .sender:hover{
-    background: linear-gradient(#e2d9fb, transparent, transparent, #dbd5ec);
+    background: var(--input-bg);
 }
 .sender img{
     height: 30px;
