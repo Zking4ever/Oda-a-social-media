@@ -105,20 +105,29 @@
 .top:nth-of-type(2){
     gap: 2%;
 }
-.top:nth-of-type(2) div{
+.top:nth-of-type(2) .posts, .stories{
     width: 49%;
     height: 100%;
     border:solid var(--br);
     background-color: var(--bg2);
     border-radius: 10px;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-template-rows: 30% 30% 30%;
+    overflow-y: overlay;
+    justify-content: space-around;
+    row-gap: 9%;
 }
 .top .img{
     width: 55%;
     background-color: var(--img);
     border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .top img{
-    max-width: 100%;
+    max-width: 95%;
 }
 .disc{
     width: 45%;
@@ -132,6 +141,25 @@
 }
 .disc *{
     margin: 5px auto;
+}
+.post,.story{
+    width: 100%;
+    height: 80px;
+    margin: 9% auto;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    overflow: hidden;
+}
+.post{
+    background-color: rgb(90, 60, 60);
+}
+.story{
+    background-color: rgb(228, 160, 160);
+}
+.post img,.story img,
+.post h2,.story h2{
+    display: none;
 }
 .profile{
     height: 15%;
@@ -191,27 +219,93 @@ h3:hover{
         <div class="two">
             <div class="subone">
                 <div class="top">
-                    <div class="img"><img src="" alt=""></div>
+                    <div class="img"><img src="" id="img"></div>
                     <div class="disc">
-                        <p style="overflow-wrap: break-word;">some Lorem placeat natus, cumque, praesentium exercitationem sint nam laboriosam deserunt laudantium. Voluptatibus, distinctio?caption of post or story</p>
-                        <div style="text-align: left;">
-                            <div class="like">* likes 30</div>
-                            <div class="comments">* comments 20</div>
-                            <div class="repost">* reposts 20</div>
-                        </div>
+                        <p id='cap' style="overflow-wrap: break-word;">some Lorem placeat natus, cumque, praesentium exercitationem sint nam laboriosam deserunt laudantium. Voluptatibus, distinctio?caption of post or story</p>
+                        <div id="reactions" style="text-align: left;"></div>
                         <button style="background-color: red; padding: 5px 28px; border: none; border-radius: 10px;position: absolute; right: 5px; bottom: 5px;cursor: pointer;">Delete</button>
                     </div>
                 </div>
                 <div class="top">
-                    <div></div>
-                    <div></div>
+                    <div class="posts">
+                        <div class="post">
+                            <img src="assets/future.gif" alt="">
+                            <p>Logo of if first draft</p>
+                            <h2>likes 20 | comments 30 | reposts | 40</h2>
+                        </div>
+                        <div class="post">
+                            
+                            <img src="C:\Users\USER\Pictures\Astawus.png">
+                            <p>Astawus Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis eligendi sequi molestias molestiae voluptatibus necessitatibus dolores, voluptatem veniam sint dicta. dmnfmdnf mdn first draft</p>
+                            <h2>likes 10 | comments 20 | reposts | 0</h2>
+
+                        </div>
+                        <div class="post"></div>
+                        <div class="post"></div>
+                        <div class="post"></div>
+                        <div class="post"></div>
+                        <div class="post"></div>
+                        <div class="post"></div>
+                        <div class="post"></div>
+                        <div class="post"></div>
+                    </div>
+                    <div class="stories">
+                        <div class="story"></div>
+                        <div class="story"></div>
+                        <div class="story"></div>
+                        <div class="story"></div>
+                    </div>
                 </div>
             </div>
             <div class="subtwo">
                 <div class="profile"></div>
-                <div class="friends"></div>
+                <div class="friends">
+                    <h3>fr</h3>
+                    <h3>fr</h3>
+                    <h3>fr</h3>
+                </div>
             </div>
         </div>
     </div>
 </body>
+<script>
+    var post = document.getElementsByClassName("post");
+    var story = document.getElementsByClassName("story");
+    var bord = document.getElementById("img");
+    var cap = document.getElementById("cap");
+    var reactions = document.getElementById("reactions");
+
+
+for (let i = 0; i < post.length; i++) {
+    post[i].addEventListener('click',function(){
+        clicked(this);
+    });
+    
+}
+
+
+function clicked(e){
+        var element = e;
+        var x = 0;
+        while(element.className != "story" && element.className != "post"){
+            element = element.parentElement;
+            x++;
+            if(x==3){
+                break;
+            }
+        }
+        if(element.className != "story" && element.className != "post"){
+            return;
+        }
+        var img = element.getElementsByTagName("img")[0];
+        var caption = element.getElementsByTagName("p")[0];
+        var reac = element.getElementsByTagName("h2")[0];
+
+        bord.src = img.src;
+        cap.innerHTML = caption.innerHTML;
+        var numb = (reac.innerHTML).split('|');
+        reactions.innerHTML = numb[0]+`<br>` + numb[1] + `<br>` + numb[2];
+
+    }
+    </script>
 </html>
