@@ -53,7 +53,36 @@ if(isset($_POST) && isset($_POST['request']) && $_POST['request']=="admin"){
 
         }
         elseif(isset($_POST['info'])){
-            echo "deleted";
+            $info = json_decode($_POST['info']);
+            if($info[1]=="story"){
+                $storyinfo = $conn->query("SELECT*FROM stories where storyid= '$info[0]' ")->fetch_assoc();
+                $storyinfo = json_encode($storyinfo);
+                $query = "INSERT into deleted(type,info) values('story','$storyinfo' )";
+                $excute = $conn->query($query);
+                if($excute){
+                    $query = "DELETE FROM stories where storyid = '$info[0]' ";
+                    $excute = $conn->query($query);
+                    if($excute){
+                        echo "deleted";
+                         die;
+                     }
+                }
+                
+            }elseif($info[1]=="post"){
+
+                $postinfo = $conn->query("SELECT * FROM posts where postid ='$info[0]' ")->fetch_assoc();
+                $postinfo = json_encode($postinfo);
+                $queryD = "INSERT into deleted (type,info) values ('post','$postinfo' )";
+                $excuteD = $conn->query($queryD);
+                if($excuteD){
+                    $query = "DELETE FROM posts where postid = '$info[0]' ";
+                    $excute = $conn->query($query);
+                    if($excute){
+                        echo "deleted";
+                        die;
+                    }
+                }
+            }
         }
         else{
             $query = "SELECT userid,name from users";

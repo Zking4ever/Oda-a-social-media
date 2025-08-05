@@ -58,7 +58,7 @@ function handleRequest(type){
                 return;
             }
             if(response['result']=="log in"){
-                    location.href = "https://strike.xo.je/web/home.html";
+                    location.href = "http://localhost/mywork/incredible%20future/web/home.html";
             }
             handleResponse(response["result"]);
         }
