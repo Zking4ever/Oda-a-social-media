@@ -21,6 +21,7 @@
     --txt-color: white;
     --hover: #f2f2f2;
     --img:#a0d3cf;
+    --hover-br:#dde1ff;
 }
 #mybox{
     pointer-events: none;
@@ -35,6 +36,7 @@
     --txt-color: black;
     --hover:#7b8f8d;
     --img:#929494;
+    --hover-br: white;
 }
 .one{
     flex: 1;
@@ -42,6 +44,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow-y: overlay;
 }
 .users{
     align-self: center;
@@ -116,7 +119,7 @@
     grid-template-rows: 30% 30% 30%;
     overflow-y: overlay;
     justify-content: space-around;
-    row-gap: 9%;
+    row-gap: 4%;
 }
 .top .img{
     width: 55%;
@@ -131,13 +134,13 @@
 }
 .disc{
     width: 45%;
-    background-color: #424e4d;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: overlay;
     padding-left: 3px;
     position: relative;
+    color: var(--txt-color);
 }
 .disc *{
     margin: 5px auto;
@@ -150,12 +153,19 @@
     cursor: pointer;
     text-align: center;
     overflow: hidden;
+    transition: all 1s ease;
 }
 .post{
     background-color: rgb(90, 60, 60);
 }
 .story{
     background-color: rgb(228, 160, 160);
+}
+.post:hover,
+.story:hover{
+    color: var(--txt-color);
+    border: solid var(--hover-br);
+    transform: scale(1.15);
 }
 .post img,.story img,
 .post h2,.story h2{
@@ -184,6 +194,29 @@ h3:hover{
     background-color: var(--hover);
     color: var(--bg2);
 }
+.active{
+    background-color: var(--hover);
+    color: var(--bg2);
+}
+.notify{
+    position: absolute;
+    top: -90px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 70px;
+    text-align: center;
+    border: solid thin;
+    border-radius: 8px;
+    background-color: white;
+    animation: notify 3s ease;
+    display: none;
+}
+@keyframes notify {
+    50%{
+        top: 30px;
+    }
+}
+
 </style>
 <body>
     <input type="checkbox" id="mybox">
@@ -210,10 +243,6 @@ h3:hover{
             <div class="users">
                 <h3>USER1</h3>
                 <h3>USER2</h3>
-                <h3>USER3</h3>
-                <h3>USER4</h3>
-                <h3>USER5</h3>
-                <h3>USER1</h3>
             </div>
         </div>
         <div class="two">
@@ -221,68 +250,105 @@ h3:hover{
                 <div class="top">
                     <div class="img"><img src="" id="img"></div>
                     <div class="disc">
-                        <p id='cap' style="overflow-wrap: break-word;">some Lorem placeat natus, cumque, praesentium exercitationem sint nam laboriosam deserunt laudantium. Voluptatibus, distinctio?caption of post or story</p>
+                        <p id='cap' style="overflow-wrap: break-word;">posts description or story caption</p>
                         <div id="reactions" style="text-align: left;"></div>
-                        <button style="background-color: red; padding: 5px 28px; border: none; border-radius: 10px;position: absolute; right: 5px; bottom: 5px;cursor: pointer;">Delete</button>
+                        <button class="action" style="background-color: red; padding: 5px 28px; border: none; border-radius: 10px;position: absolute; right: 5px; bottom: 5px;cursor: pointer;">Delete</button>
                     </div>
                 </div>
                 <div class="top">
                     <div class="posts">
-                        <div class="post">
-                            <img src="assets/future.gif" alt="">
-                            <p>Logo of if first draft</p>
-                            <h2>likes 20 | comments 30 | reposts | 40</h2>
-                        </div>
-                        <div class="post">
-                            
-                            <img src="C:\Users\USER\Pictures\Astawus.png">
-                            <p>Astawus Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis eligendi sequi molestias molestiae voluptatibus necessitatibus dolores, voluptatem veniam sint dicta. dmnfmdnf mdn first draft</p>
-                            <h2>likes 10 | comments 20 | reposts | 0</h2>
-
-                        </div>
-                        <div class="post"></div>
-                        <div class="post"></div>
-                        <div class="post"></div>
-                        <div class="post"></div>
-                        <div class="post"></div>
-                        <div class="post"></div>
-                        <div class="post"></div>
-                        <div class="post"></div>
+                        User Posts                            
                     </div>
                     <div class="stories">
-                        <div class="story"></div>
-                        <div class="story"></div>
-                        <div class="story"></div>
-                        <div class="story"></div>
+                        User Stories
                     </div>
                 </div>
             </div>
             <div class="subtwo">
                 <div class="profile"></div>
                 <div class="friends">
-                    <h3>fr</h3>
-                    <h3>fr</h3>
-                    <h3>fr</h3>
+                    User Friends
                 </div>
             </div>
         </div>
     </div>
+    <div class="notify"></div>
 </body>
 <script>
-    var post = document.getElementsByClassName("post");
-    var story = document.getElementsByClassName("story");
+
+   
     var bord = document.getElementById("img");
     var cap = document.getElementById("cap");
     var reactions = document.getElementById("reactions");
-
-
-for (let i = 0; i < post.length; i++) {
-    post[i].addEventListener('click',function(){
-        clicked(this);
-    });
+    var action = document.getElementsByClassName("action")[0];
     
+    var postContainer = document.getElementsByClassName("posts")[0];
+    var storyContainer = document.getElementsByClassName("stories")[0];
+    var friendContainer = document.getElementsByClassName("friends")[0];
+
+
+loadUsers();
+
+function loadUsers(){
+    var xml =new XMLHttpRequest;
+    xml.onload = function(){
+        if(xml.readyState==4 || xml.status==200){
+            var usersContainer = document.getElementsByClassName('users')[0];
+            usersContainer.innerHTML = JSON.parse(xml.response);
+            var users = document.getElementsByTagName('h3');
+            for (let i = 0; i < users.length; i++) {
+                users[i].addEventListener('click',function(){
+                    userClicked(this);
+                })
+            }
+        }
+    }
+    var form = new FormData;
+    form.append('request',"admin");
+    xml.open("POST","backend/api.php",true);
+    xml.send(form);
 }
 
+function userClicked(e){
+    var element = e;
+    if(!e.id){
+        element = element.parentElement;
+    }
+    var xml = new XMLHttpRequest;
+    xml.onload = function(){
+        if(xml.readyState==4 || xml.status==200){
+
+            var response = JSON.parse(xml.response);
+            postContainer.innerHTML = response['posts'];
+            storyContainer.innerHTML = response['stories'];
+            friendContainer.innerHTML = response['friends'];
+            //adding eventlisteners
+             var post = document.getElementsByClassName("post");
+             var story = document.getElementsByClassName("story");
+            for (let i = 0; i < post.length; i++) {
+                post[i].addEventListener('click',function(){
+                    clicked(this);
+                });
+            }
+            for (let i = 0; i < story.length; i++) {
+                story[i].addEventListener('click',function(){
+                    clicked(this);
+                });
+            }
+            //marking the currect user as active
+            var active = document.getElementsByClassName("active")[0];
+            if(active){
+                active.className="";
+            }
+            element.className = "active";
+        }
+    }
+    var form = new FormData;
+    form.append('request',"admin");
+    form.append('id',element.id);
+    xml.open("POST","backend/api.php",true);
+    xml.send(form);
+}
 
 function clicked(e){
         var element = e;
@@ -305,7 +371,51 @@ function clicked(e){
         cap.innerHTML = caption.innerHTML;
         var numb = (reac.innerHTML).split('|');
         reactions.innerHTML = numb[0]+`<br>` + numb[1] + `<br>` + numb[2];
+        action.id = element.id+"|spliter|"+element.className;
 
     }
+
+action.addEventListener("click",function(e){
+    if(!e.target.id){
+        return;
+    }
+    var comp = (e.target.id).split("|spliter|");
+    if(confirm("Are you shure about deleteing this?")){
+        if(confirm("This action can't be undone!")){
+            var xml = new XMLHttpRequest;
+            xml.onload = function(){
+                if(xml.readyState==4 || xml.status==200){
+                    notify(xml.response);
+                    if(xml.response == "deleted"){
+                        var element = document.getElementById(comp[0]);
+                        element.style.display = "none";
+                        bord.src = "";
+                        cap.innerHTML = "posts description or story caption";
+                        reactions.innerHTML ="";
+                        action.id = undefined;
+                    }
+                }
+
+            }
+            var form = new FormData;
+            form.append('request',"admin");
+            form.append('info',JSON.stringify(comp));
+
+            xml.open("POST","backend/api.php",true);
+            xml.send(form);
+        }
+    }
+})
+var box = document.getElementsByClassName("notify")[0];
+
+box.addEventListener('animationend',function(){
+    this.style.display = "none";
+});
+
+function notify(text){
+    box.innerHTML = text;
+    box.style.display = "flex";
+
+}
     </script>
 </html>

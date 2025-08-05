@@ -144,7 +144,7 @@ window.onload = function () {
 
     google.accounts.id.renderButton(
         document.getElementById("google-signin-button"),
-        { theme: "outline", size: "large" }  // Customize button appearance
+        { theme: "outline", size: "large",text: "continue_with",type: "standard" }  // Customize button appearance
     );
 };
     

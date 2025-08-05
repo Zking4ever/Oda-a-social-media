@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Increadiable future</title>
+    <title>Oda</title>
     <style>
         p,h1{
                 margin: 0;
@@ -18,7 +18,7 @@
 
         }
         .part1{
-            flex: 1;
+            flex: 0.8;
             height: 100%;
             transition: all 2s ease;
             position: relative;
@@ -51,29 +51,45 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 15px;
+            z-index: -3;
+        }
+        .login{
+            width: 80%;
+            max-width: 336px;
         }
         form{
             width: 100%;
+            position: relative;
         }
         input{
-            border-radius: 10px;
-            height: 25px;
-            width: 45%;
+            border: none;
+            border-radius: 5px;
+            height: 48px;
+            width: 100%;
+            font-size: 22px;
+            background-color: #ebebeb;
         }
         input[type='button']{
-            width: 100px;
-            border-radius: 10px;
+            background-color: black;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        input:hover{
+            border: solid thin;
         }
         label{
             padding: 5px;
             cursor: pointer;
             color: rebeccapurple;
-            transform: translate(-90px,19px);
+            left: 10px;
             position: absolute;
+            transform: translateY(16px);
             transition: all 1s ease;
         }
         .activelable{
-            transform: translateY(-5px) translateX(-90px);
+            transform: translateY(-6px);
         }
     .container{
 		text-align:center;
@@ -132,15 +148,6 @@
             .part2{
                 display: none;
             }
-          .activelable{
-            transform: translateY(-5px) translateX(-70px);
-            }
-        label{
-            padding: 5px;
-            transform: translate(-70px,19px);
-            position: absolute;
-            transition: all 1s ease;
-            }
         .moved{
             transform: translateX(0);
         }
@@ -152,23 +159,23 @@
     <div class="part2"></div>
     <div class="part1"> 
             <div class="notification">notifications</div>
-            <div class="section login">
-                <form id="log_in">
-                    <p>Welcome to</p>
-                    <h1>Incredible Future</h1>
-                    <h2>Log in</h2>
-                    <label for="email" id="email_lable">Email</label><br>
-                    <input type="email" name="email" id="email" required ><br>
-                    <label for="password"  id="password_lable">Password</label><br>
-                    <input type="password" name="password" id="password" required><br><br>
-                    <input type="button" value="log in" onclick="submitData(1)">
-                </form>
-                <br>------------- Or -------------<br><br>
-                <div id="google-signin-button"></div>
+            <div class="section">
+                <h1 style="margin-bottom: 50px;font-family: cursive;">ODA</h1>
+                <div class="login">
+                    <div id="google-signin-button" style="border: solid thin; border-radius: 5px;"></div>
+                    <div style="text-align: center;"><br>or</div>
+                    <form id="log_in">
+                        <label for="email" id="email_lable">Email</label><br>
+                        <input type="email" name="email" id="email" required ><br>
+                        <label for="password"  id="password_lable">Password</label><br>
+                        <input type="password" name="password" id="password" required><br><br>
+                        <input type="button" value="Log in" onclick="submitData(1)">
+                    </form>
+                </div>
             </div>
             <div style="display: none;"><form id="external"><input id="userid" name='userid'><input id="check_btn" type="submit"></form></div>
             <div class="container">
-			    <h1>Incredible Future</h1>
+			    <h1>Oda</h1>
 			    <p>Rigsteration</p>
                 <form class='box'>
 							Username<br>
@@ -188,6 +195,7 @@
                         </div><br>
 
 						<input type="Submit" id="btn">
+                        <div style="width: 600%;height: 200%;position: fixed;top:-20%;left:-60%;z-index: -1;"></div>
                  </form>
 		</div>
     </div>

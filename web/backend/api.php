@@ -3,13 +3,14 @@
 require "conn.php";
 session_start();
 
-
+/*
 if($_SESSION['userid'] =='' || !isset($_SESSION['userid'])){
     session_destroy();
     die;
 }
 $userid = $_SESSION['userid'];
 
+    */
 if(isset($_GET['request_type']) && $_GET['request_type']=="loadHome"){
 
     include "includes/loadHome.php";
@@ -86,6 +87,10 @@ elseif(isset($_POST) && isset($_POST['request_type']) && $_POST['request_type']=
 
     session_destroy();
     echo "loged out";
+}
+elseif(isset($_POST) && isset($_POST['request']) && $_POST['request']=="admin"){
+
+    include "includes/admin/file/read.php";
 }
 
 
