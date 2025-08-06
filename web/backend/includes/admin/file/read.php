@@ -3,6 +3,7 @@
 if(isset($_POST) && isset($_POST['request']) && $_POST['request']=="admin"){
 
     if(isset($_POST['id'])){
+        //user related data
         $response = [];
             $personid =  $_POST['id'];
             $query = "SELECT postid,caption,source,likes,comments,reposts from posts where sender='$personid' ";
@@ -42,24 +43,28 @@ if(isset($_POST) && isset($_POST['request']) && $_POST['request']=="admin"){
                     if($friendid == $personid){
                         $friendid = $row['person2'];
                     }
-                    $info = $conn->query("SELECT name from users where userid = '$friendid' ")->fetch_assoc();
+                    $info = $conn->query("SELECT name from users where userid = '$friendid'")->fetch_assoc();
                     $friends .= "<h3 id=".$friendid.">".$info['name']."</h3>";
                 }
             }
         $response['friends'] = $friends;
+
+        $Profile = $conn->query("SELECT source from users where userid = '$personid' ")->fetch_assoc();
+        $response['profile'] = $Profile['source'];
 
             
         echo json_encode($response);
 
         }
         elseif(isset($_POST['info'])){
+            //dete post or story
             $info = json_decode($_POST['info']);
             if($info[1]=="story"){
                 $storyinfo = $conn->query("SELECT*FROM stories where storyid= '$info[0]' ")->fetch_assoc();
                 $storyinfo = json_encode($storyinfo);
-                $query = "INSERT into deleted(type,info) values('story','$storyinfo' )";
-                $excute = $conn->query($query);
-                if($excute){
+                $queryD = "INSERT into deleted(type,info) values('story','$storyinfo' )";
+                $excuteD = $conn->query($queryD);
+                if($excuteD){
                     $query = "DELETE FROM stories where storyid = '$info[0]' ";
                     $excute = $conn->query($query);
                     if($excute){
@@ -83,6 +88,20 @@ if(isset($_POST) && isset($_POST['request']) && $_POST['request']=="admin"){
                     }
                 }
             }
+        }elseif(isset($_POST['deleteUser'])){
+            //delete a user
+            $deleteUserid = $_POST['deleteUser'];
+            $userData = $conn->query("SELECT*FROM users where userid = '$deleteUserid' ")->fetch_assoc();
+            $userData = json_encode($userData);
+            $queryD = "INSERT into deleted(type,info) values('user','$userData' )";
+            $excuteD = $conn->query($queryD);
+                if($excuteD){
+                    $query = "DELETE from users where userid='$deleteUserid' ";
+                    $excute = $conn->query($query);
+                    if($excute){
+                        echo "deleted";
+                    }
+                }
         }
         else{
             $query = "SELECT userid,name from users";

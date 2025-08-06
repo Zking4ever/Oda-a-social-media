@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['user'])){
+    echo "don't have access to this";
+    die;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -265,7 +275,11 @@ h3:hover{
                 </div>
             </div>
             <div class="subtwo">
-                <div class="profile"></div>
+                <div class="profile" style="position: relative;">
+                    <img id="profile" src="" style="width: 75px;height:75px;border-radius: 50%;border: none;">
+                    <button style="position: absolute;top: 10px;right: 10px;background-color: rgb(213, 22, 22);color: white;border: 5px;border-radius:2px;cursor:pointer;padding: 2px 20px;">Log out</button>
+                    <button class="deleteUser" style="position: absolute;bottom: 10px;right: 10px;background-color: rgb(213, 22, 22);color: white;border: 5px;border-radius:2px;cursor:pointer;padding: 2px 20px;">DELETE USER</button>
+                </div>
                 <div class="friends">
                     User Friends
                 </div>
@@ -281,10 +295,12 @@ h3:hover{
     var cap = document.getElementById("cap");
     var reactions = document.getElementById("reactions");
     var action = document.getElementsByClassName("action")[0];
+    var profile = document.getElementById("profile");
     
     var postContainer = document.getElementsByClassName("posts")[0];
     var storyContainer = document.getElementsByClassName("stories")[0];
     var friendContainer = document.getElementsByClassName("friends")[0];
+    var deleteUser = document.getElementsByClassName("deleteUser")[0];
 
 
 loadUsers();
@@ -317,11 +333,13 @@ function userClicked(e){
     var xml = new XMLHttpRequest;
     xml.onload = function(){
         if(xml.readyState==4 || xml.status==200){
-
+            alert(xml.response)
             var response = JSON.parse(xml.response);
             postContainer.innerHTML = response['posts'];
             storyContainer.innerHTML = response['stories'];
+            profile.src = response['profile'];
             friendContainer.innerHTML = response['friends'];
+            deleteUser.id = element.id;
             //adding eventlisteners
              var post = document.getElementsByClassName("post");
              var story = document.getElementsByClassName("story");
@@ -380,7 +398,7 @@ action.addEventListener("click",function(e){
         return;
     }
     var comp = (e.target.id).split("|spliter|");
-    if(confirm("Are you shure about deleteing this?")){
+    if(confirm("Are you sure about deleteing this?")){
         if(confirm("This action can't be undone!")){
             var xml = new XMLHttpRequest;
             xml.onload = function(){
@@ -405,7 +423,33 @@ action.addEventListener("click",function(e){
             xml.send(form);
         }
     }
-})
+});
+
+deleteUser.addEventListener("click",function(e){
+    if(!e.target.id){
+        return;
+    }
+    if(confirm("Are you sure about deleteing this?")){
+        if(confirm("This action can't be undone!")){
+            var xml = new XMLHttpRequest;
+            xml.onload = function(){
+                if(xml.readyState==4 || xml.status==200){
+                    notify(xml.response);
+                    if(xml.response == "deleted"){
+                        location.href = location.href;
+                    }
+                }
+            }
+            var form = new FormData;
+            form.append('request',"admin");
+            form.append('deleteUser',e.target.id);
+
+            xml.open("POST","backend/api.php",true);
+            xml.send(form);
+        }
+    }
+});
+
 var box = document.getElementsByClassName("notify")[0];
 
 box.addEventListener('animationend',function(){
