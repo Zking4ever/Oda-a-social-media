@@ -30,7 +30,7 @@ function preveiw(e){
         checkform.append('type','get_path');
         checkform.append('request_type',"add_story");
         checkform.append('file',e.target.files[0]);
-        xml.open("POST",DIR+"backend/api.php",true);
+        xml.open("POST",DIR,true);
         xml.send(checkform);
 }
 
@@ -127,7 +127,6 @@ var story_img = document.getElementById('story_img');
 var story_caption = document.getElementById('story_caption');
 
 share_story.onclick = function(){
-    var file = document.getElementById('story_img').files[0];
     var caption = story_caption.value;
     manage_story.style.display ="none";
     loading("Uploading your stories...");
@@ -143,7 +142,6 @@ share_story.onclick = function(){
         myform.append('type','share_story');
         myform.append('request_type',"add_story");
         
-        myform.append('file',file);
         ajax.open("POST",DIR,true);
         ajax.send(myform);
 }

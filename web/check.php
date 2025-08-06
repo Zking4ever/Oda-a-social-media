@@ -14,7 +14,7 @@ $result = $stmt->get_result();
 if($row = $result->fetch_assoc()){
     if(password_verify($password, $row['password'])){
         session_start();
-        $_SESSION['user'] = $row['name'];
+        $_SESSION['userid'] = $row['name'];
         include "admin.php";
     }
 }

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['user'])){
+if(!isset($_SESSION['userid'])){
     echo "don't have access to this";
     die;
 }
@@ -309,6 +309,7 @@ function loadUsers(){
     var xml =new XMLHttpRequest;
     xml.onload = function(){
         if(xml.readyState==4 || xml.status==200){
+            alert(xml.response);
             var usersContainer = document.getElementsByClassName('users')[0];
             usersContainer.innerHTML = JSON.parse(xml.response);
             var users = document.getElementsByTagName('h3');
@@ -333,7 +334,7 @@ function userClicked(e){
     var xml = new XMLHttpRequest;
     xml.onload = function(){
         if(xml.readyState==4 || xml.status==200){
-            alert(xml.response)
+            
             var response = JSON.parse(xml.response);
             postContainer.innerHTML = response['posts'];
             storyContainer.innerHTML = response['stories'];
@@ -385,7 +386,7 @@ function clicked(e){
         var caption = element.getElementsByTagName("p")[0];
         var reac = element.getElementsByTagName("h2")[0];
 
-        bord.src = img.src;
+        bord.src = img.getAttribut('source');
         cap.innerHTML = caption.innerHTML;
         var numb = (reac.innerHTML).split('|');
         reactions.innerHTML = numb[0]+`<br>` + numb[1] + `<br>` + numb[2];

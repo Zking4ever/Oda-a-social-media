@@ -124,7 +124,7 @@ function handleCredentialResponse(response) {
         xml.onload = function(){
             if(xml.status==200){
                 if(xml.response == "done"){
-                    location.href = "https://strike.xo.je/web/home.html";
+                    location.href = "https://oda.social-networking.me/web/home.html";
                 }else{
                     container.style.display = "block";
                     //for sign up
@@ -135,35 +135,38 @@ function handleCredentialResponse(response) {
         xml.open("POST","web/handle.php",true);
         xml.send(form);
     }
-
 window.onload = function () {
     google.accounts.id.initialize({
-        client_id: "256231347515-d2sos98ehbpdocm6aa5v7rd7k1o9v506.apps.googleusercontent.com", // Replace with your actual Client ID
+        client_id: "866620799082-2masej40mt8jaldbh2urcf9hbtel9kef.apps.googleusercontent.com",
         callback: handleCredentialResponse
     });
 
     google.accounts.id.renderButton(
         document.getElementById("google-signin-button"),
-        { theme: "outline", size: "large",text: "continue_with",type: "standard" }  // Customize button appearance
+        { theme: "outline", size: "large",text: "continue_with",type: "standard",width:"100%" } 
     );
 };
     
 
 btn.onclick = function(e){
+    btn.disabled = true;
     e.preventDefault();
     if(usernameInput.value == "" || password.value == ""){
         handleResponse("Empty values are not allowed","error");//notify
     }
     if(!payload){
-        console.log("payload undefined");
+        handleResponse("unexpected google response","error");
         return;
     }
     var form = new FormData;
     var xml = new XMLHttpRequest;
         xml.onload = function(){
             if(xml.status==200){
+                    alert(xml.response)
                 if(xml.response == "done"){
-                    location.href = "https://strike.xo.je/web/home.html";
+                    location.href = "https://oda.social-networking.me/web/home.html";
+                }else{
+                    btn.disabled = false;
                 }
             }
         }

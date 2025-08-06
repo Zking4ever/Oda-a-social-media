@@ -149,6 +149,7 @@ function differentiateStories(){
                     var xmlR = new XMLHttpRequest;
                     xmlR.onload = function(){
                     if(xmlR.readyState==4 || xmlR.status==200){
+                            console.log(xmlR.response);
                             if(JSON.parse(xmlR.response) != "done"){
                                 handleResult("There was an error while organizing active stories","story")
                             }
@@ -321,7 +322,7 @@ async function handleResult(result,type){
         case "log out":
             if(result=="loged out"){
                 //then the refresh will take it out as the session is destroyed
-                location.href = location.href;
+                location.href = "https://oda.social-networking.me";
           	// window.location.assign("http://incrediblefuture.mywebcommunity.org/");
             }
             break;
@@ -491,7 +492,6 @@ function askAi(input){
     xml.onload = function(){
         if(xml.readyState==4 || xml.status==200){
             isLoadingRequest = false;
-            alert(xml.response);
             var Airesponse = JSON.parse(xml.response);
             if(!Airesponse['candidates']){
                 div.innerHTML = "Sorry, I couldn't process your request at the moment.";
