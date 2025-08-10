@@ -19,3 +19,6 @@ if($row = $result->fetch_assoc()){
     }
 }
 
+else{
+    echo "Incorrect email or password";
+}

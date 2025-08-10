@@ -67,7 +67,7 @@ if(!isset($_POST['data_type']) && $_GET['request_type']=="askAI"){
 
 }
 elseif(isset($_POST['data_type']) && $_POST['data_type'] == "ask"){
-$API = "AIzaSyAyBkJGhAXdY_OIXRwDtIoNFgRIpJaxVq4";//going to destroy this key soon
+$API = "AIzaSyAyBkJGhAXdY_OIXRwDtIoNFgRIpJaxVq4";//key destroyed and replaced
 $url="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$API";
         $prompt = trim($_POST['prompt']);
         

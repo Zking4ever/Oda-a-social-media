@@ -309,7 +309,6 @@ function loadUsers(){
     var xml =new XMLHttpRequest;
     xml.onload = function(){
         if(xml.readyState==4 || xml.status==200){
-            alert(xml.response);
             var usersContainer = document.getElementsByClassName('users')[0];
             usersContainer.innerHTML = JSON.parse(xml.response);
             var users = document.getElementsByTagName('h3');
@@ -386,7 +385,7 @@ function clicked(e){
         var caption = element.getElementsByTagName("p")[0];
         var reac = element.getElementsByTagName("h2")[0];
 
-        bord.src = img.getAttribut('source');
+        bord.src = img.getAttribute('source');
         cap.innerHTML = caption.innerHTML;
         var numb = (reac.innerHTML).split('|');
         reactions.innerHTML = numb[0]+`<br>` + numb[1] + `<br>` + numb[2];

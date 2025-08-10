@@ -6,11 +6,13 @@
 }
 .loaded_post{
     width: 98%;
+    height: 100%;
     overflow-y: overlay;
     overflow-x: hidden;
 }
 .home{
     max-width: 468px;
+    max-height: 81vh;
 }
 .post{
     width: 100%;

@@ -151,6 +151,9 @@
             cursor: pointer;
             border: solid thin;
             border-radius: 5px;
+            left:50%;
+            transform:translateX(-40%);
+            position:relative;
         }
     #slog{
         font-size: 34px;
@@ -176,6 +179,13 @@
             .part2{
                 display: none;
             }
+            .part1{
+                flex:1;
+            }
+            .container{
+                width:105%;
+                top:27%;
+            }
         .moved{
             transform: translateX(0);
         }
@@ -184,7 +194,7 @@
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             left: 50%;
             transform: translateX(-50%);
-            top: 21%;
+            top: 17%;
             color: #1b194dbf;
         }
         #slo,#slogan{
@@ -247,9 +257,7 @@
     
 </body>
 <script>
-    
     var slog = document.getElementById("slog");
-
     setInterval( typeWrite,4000);
 async function typeWrite(){
         var txt = "Meet tomorrow today!";
@@ -261,8 +269,8 @@ async function typeWrite(){
         slog.innerHTML = "";
     }
 </script>
-<script src="web/assets/scripts/log_.js"></script>
-<script src="web/assets/scripts/register.js"></script>  
+<script src="web/assets/scripts/loger.js"></script>
+<script src="web/assets/scripts/google-g.js"></script>  
 <script src="https://accounts.google.com/gsi/client" async defer></script>
  
 </html>
