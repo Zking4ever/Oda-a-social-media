@@ -84,7 +84,7 @@ Contributions are welcome! If you'd like to improve this project, follow the ste
 - Write or update tests when appropriate
 - Keep pull requests focused and minimal
 
-## Thank God a lot🙏
+## Thanks God a lot🙏
 - [watch demo video](https://youtu.be/Ldmhii3Jd1c?si=cxvo_CumMuyWKYhs)
 - [join community](https://t.me/astawus1)
 
