@@ -3,14 +3,13 @@
 require "conn.php";
 session_start();
 
-/*
 if($_SESSION['userid'] =='' || !isset($_SESSION['userid'])){
     session_destroy();
+    echo "you are not logged in. Please log in to access this page.";
     die;
 }
 $userid = $_SESSION['userid'];
 
-    */
 if(isset($_GET['request_type']) && $_GET['request_type']=="loadHome"){
 
     include "includes/loadHome.php";
