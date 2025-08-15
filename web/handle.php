@@ -7,8 +7,9 @@ session_start();
             $username = $_POST['username'];
             $password = $_POST['password'];
             $password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt =$conn->prepare('INSERT into users (userid,email,username,name,password) values(?,?,?,?,?)');
-        $stmt->bind_param('sssss',$userData->sub,$userData->email,$username,$userData->name,$password);
+            $profile = "Profiles/user.PNG"; //default user image
+        $stmt =$conn->prepare('INSERT into users (userid,email,username,name,password,source) values(?,?,?,?,?,?)');
+        $stmt->bind_param('ssssss',$userData->sub,$userData->email,$username,$userData->name,$password,$profile);
         $stmt->execute();
 
             if($stmt->affected_rows >0){
@@ -24,6 +25,27 @@ session_start();
                             echo "done";
                             die;
                         }
+                }
+            }
+    }elseif(isset($_POST['type']) && $_POST['type']=="telegramAuth"){
+        $userid = $_POST['id'];
+        $query = "SELECT id from users where userid = '$userid'";
+        $excute = $conn->query($query);
+            if($excute && $excute->num_rows>0){
+                $_SESSION['userid'] = $userid;
+                echo "done";
+                die;
+            }
+            elseif($excute){
+                $username = $_POST['username'];
+                $name = $_POST['name'];
+                $profile = "Profiles/user.PNG"; //default user image
+                $stmt = $conn->prepare("INSERT into users(userid,name,username,source) values(?,?,?,?)");
+                $stmt->bind_param("ssss",$userid,$name,$username,$profile);
+                $stmt->execute();
+                if($stmt->affected_rows >0){
+                    $_SESSION['userid'] =  $userid;
+                    echo "done";
                 }
             }
     }

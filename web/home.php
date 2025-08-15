@@ -1,4 +1,11 @@
 <!Doctype html>
+<?php 
+    if($_SESSION['userid'] =='' || !isset($_SESSION['userid'])){
+        session_destroy();
+        header("Location: loged out.php");
+        die;
+    }
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

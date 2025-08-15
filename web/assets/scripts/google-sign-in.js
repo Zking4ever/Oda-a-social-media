@@ -124,7 +124,7 @@ function handleCredentialResponse(response) {
         xml.onload = function(){
             if(xml.status==200){
                 if(xml.response == "done"){
-                    location.href = "https://oda.social-networking.me/web/home.html";
+                    location.href = "https://oda.social-networking.me/web/home.php";
                 }else{
                     container.style.display = "block";
                     //for sign up
@@ -164,7 +164,7 @@ btn.onclick = function(e){
             if(xml.status==200){
                     alert(xml.response)
                 if(xml.response == "done"){
-                    location.href = "https://oda.social-networking.me/web/home.html";
+                    location.href = "https://oda.social-networking.me/web/home.php";
                 }else{
                     btn.disabled = false;
                 }

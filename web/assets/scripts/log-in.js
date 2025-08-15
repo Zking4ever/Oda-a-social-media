@@ -58,7 +58,7 @@ function handleRequest(type){
                 return;
             }
             if(response['result']=="log in"){
-                    location.href = "https://oda.social-networking.me/web/home.html";
+                    location.href = "https://oda.social-networking.me/web/home.php";
             }
             handleResponse(response["result"]);
         }

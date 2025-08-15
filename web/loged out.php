@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+</head>
+<body>
+        <div class="card">
+            You have Loged out.
+            <span onclick="goToIndex()" style="font-size:50px;">😥</span>
+        <div> click<span onclick="goToIndex()"> here </span>to log in </div>
+        </div>
+
+</body>
+<script>
+    function goToIndex(){
+          	window.location.assign("https://oda.social-networking.me");
+    }
+</script>
 <style>
     body{
         height:100vh;
@@ -72,18 +87,4 @@
     }
 
 </style>
-</head>
-<body>
-        <div class="card">
-            You have Loged out.
-            <span onclick="goToIndex()" style="font-size:50px;">😥</span>
-        <div> click<span onclick="goToIndex()"> here </span>to log in </div>
-        </div>
-
-</body>
-<script>
-    function goToIndex(){
-          	window.location.assign("http://incrediblefuture.mywebcommunity.org/index.html");
-    }
-</script>
 </html>

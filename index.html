@@ -56,6 +56,10 @@
         .login{
             width: 80%;
             max-width: 336px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap:10px;
         }
         form{
             width: 100%;
@@ -151,8 +155,6 @@
             cursor: pointer;
             border: solid thin;
             border-radius: 5px;
-            left:50%;
-            transform:translateX(-40%);
             position:relative;
         }
     #slog{
@@ -212,7 +214,9 @@
             <div class="section">
                 <h1 style="margin-bottom: 50px;font-family: cursive;">ODA</h1>
                 <div class="login">
-                    <div id="google-signin-button"></div>
+                    <div id="google-signin-button" style="border: solid thin; border-radius: 5px;width:fit-content; min-width:219px"></div>
+                    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="odaSocialNetworkingbot" data-size="large" data-radius="5" data-userpic="false" data-onauth="onTelegramAuth(user)" data-request-access="write">
+                    </script>
                     <div style="text-align: center;"><br>or</div>
                     <form id="log_in">
                         <label for="email" id="email_lable">Email</label><br>
@@ -256,7 +260,7 @@
 </div>
     
 </body>
-<script>
+<script type="text/javascript">
     var slog = document.getElementById("slog");
     setInterval( typeWrite,4000);
 async function typeWrite(){
@@ -268,9 +272,28 @@ async function typeWrite(){
         }
         slog.innerHTML = "";
     }
+function onTelegramAuth(user) {
+    var form = new FormData;
+    form.append("type","telegramAuth");
+    form.append("id",user.id);
+    form.append('name',user.first_name+" "+(user.last_name ? user.last_name : ""));
+    form.append("username",user.username);
+    form.append("profile",user.photo_url);
+    form.append("hash",user.hash);
+    var xml = new XMLHttpRequest;
+        xml.onload = function(){
+            if(xml.status==200){
+                if(xml.response == "done"){
+                    location.href = "https://oda.social-networking.me/web/home.html";
+                }
+            }
+        }
+    xml.open("POST","web/handle.php",true);
+    xml.send(form);
+  }
 </script>
-<script src="web/assets/scripts/loger.js"></script>
-<script src="web/assets/scripts/google-g.js"></script>  
+<script src="web/assets/scripts/log-in.js"></script>
+<script src="web/assets/scripts/google-sign-in.js"></script>  
 <script src="https://accounts.google.com/gsi/client" async defer></script>
  
 </html>

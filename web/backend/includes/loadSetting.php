@@ -7,9 +7,17 @@
         $userdata = $excute->fetch_assoc();
         echo "
             <style>
+            	.box{
+                	display:flex; 
+                    width:93%;
+                    padding:1%;
+                    background-color:var(--setting-bg);
+                    border-radius:10px;
+                    margin:40px auto
+                  }
                 .one{
                     flex:2.5;
-                    background-color:#eef6ff; 
+                    background-color: var( --setting-one-bg); 
                     display:flex;
                     flex-direction:column;
                     align-items:center;
@@ -59,11 +67,15 @@
                 }
                 .two label{
                     padding:3px 10px;
-                    background-color:lightgray;
+                    background-color:var(--primary-background-color);
                     border-radius:5px;
                     cursor:pointer;
                 }
                 @media (max-width:760px){
+                .box{
+                	flex-direction: column;
+                    margin: 25px auto;
+                  }
                 .two .profile{
                     width:70px;
                     height:70px;
@@ -93,7 +105,7 @@
                     }
                 }
             </style>
-            <div class='box' style='display:flex; width:98%;padding:1%;background-color:#6b73b6;border-radius:10px;margin:40px auto'>
+            <div class='box' style=''>
                 <div class='one'>
                     <br>
                     <h1>Setting</h1>
@@ -101,7 +113,7 @@
                     <div>Username:<input placeholder='Username' value='$userdata[username]'></div>
                     <div>Full name:<input placeholder='Full name' value='$userdata[name]'></div>
                     <div>Email:<input placeholder='Email' value='$userdata[email]' disabled></div>
-                    <div>Password:<input type='password' placeholder='Password' value='$userdata[password]'> <i class='bi bi-eye' style='position:absolute; right:10px; cursor:pointer;' onclick='passVisiblity(event)'></i></div><br>
+                    <div>Password:<input type='password' placeholder='Password' value=''> <i class='bi bi-eye' style='position:absolute; right:10px; cursor:pointer;' onclick='passVisiblity(event)'></i></div><br>
                     <button style='padding:3px 12px' onclick='saveSettings(event)'>Change</button><br>
                 </div>
                 <div class='two'>
@@ -109,11 +121,11 @@
                     <label for='getFile'>Change Profile</label>
                     <input type='file' id='getFile' onchange='change_profile_img(event)' style='display:none;'>
                     <div class='logout' onclick='LogOut()' title='log out'><i class='bi bi-power'></i></div>
+                    <a href='mailto:yanosastawus@gmail.com'>contact dev</a>
+                    <a href='mailto:aschalumengistu@gmail.com'>send feedback or report bug</a>
                 </div>
+
             </div>
-
-            
-
         ";
         
     }
