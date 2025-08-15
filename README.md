@@ -57,7 +57,7 @@ Contributions are welcome! If you'd like to improve this project, follow the ste
 2. **Clone your forked repository**
 
    ```bash
-   git clone https://github.com/zking3ever/Oda-a-social-media.git
+   git clone https://github.com/zking4ever/Oda-a-social-media.git
    cd Oda-a-social-media
    ```
 3. **Create a new branch**
