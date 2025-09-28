@@ -46,12 +46,12 @@ if(count($response)>0){
                 $_SESSION['seen_today'][] = $row['postid'];
             }
         #here another query to find out the sender
-            $queryForSenders = "SELECT userid,name,userid,username,source from users where userid = '$row[sender]' ";
+            $queryForSenders = "SELECT userid,name,userid,username,source,setedProfile from users where userid = '$row[sender]' ";
             
             $sender = $conn->query($queryForSenders)->fetch_assoc();
                         $post.="<div class='post' onpointerenter='Post_seen(event)' onmousewheel='Post_seen(event)'>
                             <div class='sender' id=".$sender['userid']." onclick='get_profile(event)'>
-                                <img src='backend/".$sender['source']."'>
+                                <img src='".($sender['setedProfile']?'backend/'.$sender['source']:$sender['source'])."'>
                                 <div class='detail'>
                                     <h3 style='position:absolute;transform: translateY(-7px);'>".$sender['name']."</h3>
                                     <span style='font-size:12px;margin-left:7px;position:absolute;transform: translateY(10px);'>@".$sender['username']."</span>
@@ -110,12 +110,12 @@ if(count($response)>0){
                 $_SESSION['seen_today'][] = $value;
             }
         #here another query to find out the sender
-            $queryForSenders = "SELECT userid,name,userid,username,source from users where userid = '$row[sender]' ";
+            $queryForSenders = "SELECT userid,name,userid,username,source,setedProfile from users where userid = '$row[sender]' ";
             
             $sender = $conn->query($queryForSenders)->fetch_assoc();
                         $post.="<div class='post' onpointerenter='Post_seen(event)' onmousewheel='Post_seen(event)'>
                             <div class='sender' id=".$sender['userid']." onclick='get_profile(event)'>
-                                <img src='backend/".$sender['source']."'>
+                                <img src='".($sender['setedProfile']?'backend/'.$sender['source']:$sender['source'])."'>
                                 <div class='detail'>
                                     <h3 style='position:absolute;transform: translateY(-7px);'>".$sender['name']."</h3>
                                     <span style='font-size:12px;margin-left:7px;position:absolute;transform: translateY(10px);'>@".$sender['username']."</span>
@@ -185,12 +185,12 @@ if(count($response)>0){
                         $_SESSION['seen_today'][] = $row['postid'];
                     }
                 #here another query to find out the sender
-                    $queryForSenders = "SELECT userid,name,userid,username,source from users where userid = '$row[sender]' ";
+                    $queryForSenders = "SELECT userid,name,userid,username,source,setedProfile from users where userid = '$row[sender]' ";
                     
                     $sender = $conn->query($queryForSenders)->fetch_assoc();
                                 $post.="<div class='post' onpointerenter='Post_seen(event)' onmousewheel='Post_seen(event)'>
                                     <div class='sender' id=".$sender['userid']." onclick='get_profile(event)'>
-                                        <img src='backend/".$sender['source']."'>
+                                        <img src='".($sender['setedProfile']?'backend/'.$sender['source']:$sender['source'])."'>
                                         <div class='detail'>
                                             <h3 style='position:absolute;transform: translateY(-7px);'>".$sender['name']."</h3>
                                             <span style='font-size:12px;margin-left:7px;position:absolute;transform: translateY(10px);'>@".$sender['username']."</span>

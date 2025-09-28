@@ -14,12 +14,12 @@ $data = [];
                 
                 $senderid = $row['sender'];
                 #here another query to find out the sender  
-                $queryForSenders = "SELECT name,username,userid,source from users where userid='$senderid' ";
+                $queryForSenders = "SELECT name,username,userid,source,setedProfile from users where userid='$senderid' ";
                 $senderArray = $conn->query($queryForSenders);
                 $sender=$senderArray->fetch_assoc();
                 $friendsRequests.="
                         <div class='f_request'>
-                            <img id='".$sender['userid']."' onclick='get_profile(event)' src='backend/".$sender['source']."'>
+                            <img id='".$sender['userid']."' onclick='get_profile(event)' src='".($sender['setedProfile']?'backend/'.$sender['source']:$sender['source'])."'>
                             <div class='detail'>
                                 <h3>".$sender['name']."</h3>
                                 <span style='font-size:12px;margin-left:7px;'>".$sender['username']."</span>
@@ -53,7 +53,7 @@ $data = [];
             }
             
                 #here another query to find out the friend data to get the profile  
-                $queryForFriend = "SELECT name,username,userid,source from users where userid='$friendid' ";
+                $queryForFriend = "SELECT name,username,userid,source,setedProfile from users where userid='$friendid' ";
                 $friendArray = $conn->query($queryForFriend);
                 $friend=$friendArray->fetch_assoc();
                  //new message?
@@ -61,7 +61,7 @@ $data = [];
                 $result = $conn->query($queryForNewMessage);
 
                 $friends.="<div class='friend' style='margin:5px'>
-                                        <img id='$friend[userid]' onclick='get_profile(event)' src='backend/".$friend['source']."'>".
+                                        <img id='$friend[userid]' onclick='get_profile(event)' src='".($friend['setedProfile']?'backend/'.$friend['source']:$friend['source'])."'>".
                                         (!empty($result)&&$result->num_rows>0 ? "<span style='position:absolute;left:4%;transform:translateY(-10px);font-size:small;width:17px;aspect-ratio:1;text-align:center;border:solid thin;border-radius:50%;background-color:azure;'>".$result->num_rows."</span>" : "")
                                         ."<div class='detail'>
                                             <h3>".$friend['name']."</h3>
@@ -94,7 +94,7 @@ $execute = $conn->query($query);
 }
 
 //now the suggestion
-    $query = "SELECT name,username,userid,source from users where userid != '$userid'";
+    $query = "SELECT name,username,userid,source,setedProfile from users where userid != '$userid'";
     $result = $conn->query($query);
         
     $friendSuggestions = "";
@@ -107,9 +107,10 @@ $execute = $conn->query($query);
             while($row = $result->fetch_assoc()){
                 if(!checkConnection($row['userid'],$Connections)){
 
+                    //here if the user has seted profile it will be displayed from the web otherwise the random avatar placeholder takes the place
                     $friendSuggestions.="
                                     <div class='f_sug'>
-                                        <div style='width:100%;height:130px;display:flex;align-items:center;justify-contents:center;overflow:hidden;border-radius:10px;background-color:#c3dcef9c;' title='see profile'><img id='".$row['userid']."' onclick='get_profile(event)' src=backend/".$row['source']." alt='profile picture'></div>
+                                        <div style='width:100%;height:130px;display:flex;align-items:center;justify-contents:center;overflow:hidden;border-radius:10px;background-color:#c3dcef9c;' title='see profile'><img id='".$row['userid']."' onclick='get_profile(event)' src=".($row['setedProfile']?'backend/'.$row['source']:$row['source'])." alt='profile picture'></div>
                                         <div class='detail'>
                                             <h3>".$row['name']."</h3>
                                             <span style='font-size:12px;margin-left:7px;'>@".$row['username']."</span>

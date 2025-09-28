@@ -192,9 +192,8 @@ function get_profile(e){
                 var infos = contribut.getElementsByTagName("span");
                 var btn = contribut.getElementsByTagName("button")[0];
                 var profile_link = contribut.getElementsByTagName("a")[0];
-
-                profile_img.src = "backend/"+Data['profile']['img_src'];
-                profile_link.href = "backend/"+Data['profile']['img_src'];
+                profile_img.src = (Data['profile']['setedProfile']==1? "backend/"+Data['profile']['img_src']: Data['profile']['img_src']);
+                profile_link.href = (Data['profile']['setedProfile']==1? "backend/"+Data['profile']['img_src']: Data['profile']['img_src']);
                 infos[0].innerHTML = Data['profile']['fullname'];
                 infos[1].innerHTML = "@"+Data['profile']['username'];
                 btn.innerHTML = Data['relationstatus'][0];

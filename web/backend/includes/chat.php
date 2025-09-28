@@ -1,22 +1,18 @@
 <?php
 
-$relationid="";
-if(isset($_SESSION['relationid'])){
-    $relationid = $_SESSION['relationid'];
-}
+$relationid= $_POST['relationid'];
+
 $chat ="";
 
 if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
 
-    if(!isset($_SESSION['relationid']) || ($_SESSION['relationid'] != $_POST['relationid'])){
-        $_SESSION['relationid'] = $_POST['relationid'];
-    }
     $chat = "<style>
                 .chat{
-                    height:420px;
+                    height:98%;
                     width:90%;
                     margin: 2px auto;
                     display:flex;
+                    background-color: var(--chat);
                 }
                 .listHolder{
                     flex:0.27;
@@ -33,8 +29,8 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     cursor:pointer;
                 }
                 .active{
-                    background-color:#9073de;
-                    color:azure;
+                    background-color: var(--input-bg);
+                    color:var(--primary-text-color);
                 }
                 .active .new{
                     background-color:azure;
@@ -55,7 +51,10 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 .chatHolder{
                     flex:0.73;
                     overflow-Y:overlay;
-                    background-color: #efeaea;
+                    overflow-X:clip;
+                    border:solid var(--chat-br-color);
+                    border-radius:10px;
+                    background-color: var(--bg3);
                 }
                 .chatHolder .sent,
                 .chatHolder .recieved{
@@ -86,10 +85,10 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                     padding:5px;
                 }
                 .recieved div{
-                    background-color:white;
+                    background-color: var(--input-bg);
                 }
                 .sent div{
-                    background-color:#dbcef8;
+                    background-color: var(--fr-sug);
                     text-align:right;
                 }
                 .chatHolder .profile{
@@ -156,12 +155,12 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
             @media (max-width:460px){
                 .chat{
                     flex-direction:column;
-                    height:400px;
                 }
                 .listHolder{
                     display:flex;
                     overflow-x:overlay;
                     flex:0.25;
+                    max-height: 70px;
                 }
                 .chatHolder{
                     flex:1;
@@ -174,6 +173,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                 
             <div class='chat'>
                 <div class='listHolder'>";
+           
                 $queryForFriend = "SELECT * FROM friends where person1 = '$userid' or person2 = '$userid' ";
                 $friendArray = $conn->query($queryForFriend);
                 
@@ -190,7 +190,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                         $result = $conn->query($queryForNewMessage);
 
                         $chat.="<div id='".$friend['relationid']."' onclick='startChat(event)' ".
-                            ($_SESSION['relationid'] == $friend['relationid'] ? "class = 'active' " : " ")." style='position:relative;'>".
+                            ($_POST['relationid'] == $friend['relationid'] ? "class = 'active' " : " ")." style='position:relative;'>".
                                   (!empty($result)&&$result->num_rows>0 ? "<span class='new'>".$result->num_rows."</span>" : "")  
                                     ."<img class='profile' src='backend/".$friendProfile['source']."'> <span>".$friendProfile['name']."</span>
                             </div>";
@@ -205,7 +205,7 @@ if(isset($_POST['relationid']) && $_POST['data_type'] == "start_chat"){
                         while($row = $excute->fetch_assoc()){
                             $sender = $row['sender'];
                             //file checking
-                            $queryForfile = "SELECT * from chatfiles where messageid = '$row[messageid]'";
+                            $queryForfile = "SELECT * from chatFiles where messageid = '$row[messageid]'";
                             $File = $conn->query($queryForfile);
                             if($userid == $sender){
                                if($File->num_rows==0){
@@ -279,7 +279,7 @@ if($relationid != "" && $_POST['data_type']=="send_message"){
                 move_uploaded_file($_FILES['file'.$i]['tmp_name'],$destination);
             }
             if($destination!=""){
-                $query = "INSERT into chatfiles(fileid,messageid,filename,source,type) values('$fileid','$messageid','$filename','$destination','$type') ";
+                $query = "INSERT into chatFiles(fileid,messageid,filename,source,type) values('$fileid','$messageid','$filename','$destination','$type') ";
                 $excute = $conn->query($query);
                 if(!$excute){ 
                     continue; 
@@ -295,8 +295,8 @@ if($relationid != "" && $_POST['data_type']=="send_message"){
 
 }
 
-if(isset($_SESSION['relationid'])&& $_POST['data_type']=="read"){
-
+if(isset($_POST['relationid'])&& $_POST['data_type']=="read"){
+		
     
     $chatHistory = "";
             //query to get history messages
@@ -306,7 +306,7 @@ if(isset($_SESSION['relationid'])&& $_POST['data_type']=="read"){
                           while($row = $excute->fetch_assoc()){
                             $sender = $row['sender'];
                             //file checking
-                            $queryForfile = "SELECT * from chatfiles where messageid = '$row[messageid]'";
+                            $queryForfile = "SELECT * from chatFiles where messageid = '$row[messageid]'";
                             $File = $conn->query($queryForfile);
                             if($userid == $sender){
                                if($File->num_rows==0){

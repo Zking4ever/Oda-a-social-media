@@ -1,299 +1,352 @@
-<!DOCTYPE html>
+<!Doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oda</title>
-    <style>
-        p,h1{
-                margin: 0;
-                padding: 0;
-        }
-        .wraper{
-            height: 96vh;
-            border:2px solid #9073de;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    <title>home</title>
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/styles/story_.css">
+    <link rel="stylesheet" href="assets/styles/posts.css">
+    <link rel="stylesheet" href="assets/styles/style_.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    
+</head>
+<style>
+.inputs{
+    width:70%;
+    height:30px;
+    display:none;
+    overflow:hidden;
+    gap:3px;
+    bottom:25px;
+}
+.inputs input{
+    height:65%;
+    width: 90%;
+    padding:3.25px 6px;
+    border-radius:12px;
+}
+.inputs label{
+    display:none;
+    border:solid thin buttonborder;
+    border-radius:12px;
+}
+.inputs button{
+    border-radius:12px;
+}
+@media (max-width:760px) {
+    .inputs{
+        width:90%;  
+    }
+}
+</style>
+<body>
+    <!-- to change theam easily using css only-->
+    <input type="checkbox" id="theme">
+   <div class="wraper">
+    <header>
+        <div class="logo" style="margin-left:5%">ODA</div>
+        <div class="quickReach">
+            <label for="theme">
+                <div class="round_box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15 4C15.292 4 15.438 4 15.5781 4.04183C16.192 4.22522 16.4775 4.93111 16.1637 5.48976C16.0921 5.61719 15.8744 5.82779 15.4389 6.249C13.935 7.70352 13 9.74257 13 12C13 14.2574 13.935 16.2965 15.4389 17.751C15.8744 18.1722 16.0921 18.3828 16.1637 18.5102C16.4775 19.0689 16.192 19.7748 15.5781 19.9582C15.438 20 15.292 20 15 20V20C10.5817 20 7 16.4183 7 12C7 7.58172 10.5817 4 15 4V4Z" fill="#F2F9FE"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="4" fill="#223344"/>
+                            <path d="M12 5V3" stroke="#223344" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M12 21V19" stroke="#223344" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M16.95 7.04996L18.3643 5.63574" stroke="#223344" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M5.63608 18.3644L7.05029 16.9502" stroke="#223344" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M19 12L21 12" stroke="#223344" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M3 12L5 12" stroke="#223344" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M16.95 16.95L18.3643 18.3643" stroke="#223344" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M5.63608 5.63559L7.05029 7.0498" stroke="#223344" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                </div>
+            </label>
+            <label for="searchRad"><i class="bi bi-search"></i></label>
+            <input type="radio" id="searchRad">
+            <input type="text" placeholder="search" id="searchBar">
+        </div>
+    </header>
+    <main>
+        <div id="menu">
+            <div class="menuLists">
+                <!--radios to manupulate based on choise-->
+                <div id="myradios" style="width: 100%;display: inherit;flex-direction: inherit;align-items: center;">
+                    <input type="radio" id="home_radio" name="catagory_radios" class="menuRadios" style="display:none">
+                    <input type="radio" id="friends_radio" name="catagory_radios" class="menuRadios" style="display:none">
+                    <input type="radio" id="thoughts_radio" name="catagory_radios" class="menuRadios" style="display:none">
+                    <input type="radio" id="ask_radio" name="catagory_radios" class="menuRadios" style="display:none">
+                    <!--input type="radio" id="councelor_radio" name="catagory_radios" class="menuRadios"-->
+                    <input type="radio" id="settings_radio" name="catagory_radios" class="menuRadios" style="display:none">
+                <label class="menuLabel" for="home_radio"><i class="bi bi-house-door"></i>Home</label>
+                <label class="menuLabel" for="friends_radio"><i class="bi bi-people"></i>Friends</label>
+                <label class="menuLabel" for="thoughts_radio"><i class="bi bi-chat-left-quote"></i>Thoughts</label>
+                <label class="menuLabel" for="ask_radio"><i class="bi bi-robot"></i> Ask AI</label>
+                <label for="create"><i class="bi bi-plus-square"></i>Create</label>
+                <label class="menuLabel" for="settings_radio"><i class="bi bi-gear"></i>Setting</label>
+                </div>
+            </div>
+            <input type="checkbox" id="create">
+            <div class="createOptions">
+                <label for="create">
+                    <label for="addstory"><h3>Add story</h3></label>
+                    <h3 id="add">Create post</h3>
+                    <input type="file" id="addstory" onchange="preveiw(event)" style="display:none">
+                    <h3>Cancel</h3>
+                </label>
+            </div>
+        </div>
+        <div id="body">
+            <div class="stroies"></div>
+            <div class="post_container">
+                <div class="notifications" style="display:none"> <span>notifications</span></div>
+                <div class="loaded_post home"></div>
+                <div class="inputs"><label>Attach File <input type="file" multiple style="display:none;"></label><input type='text' placeholder="comment or thought chat input"> <button onclick="send(event)" id="send_btn" style="padding:0px 10px">send</button></div>
+            </div>
+            <style>
+    .loadingGif{
+        display:none;
+        justify-content:center;
+        align-items: center;
+        flex-direction:column;
+        gap:50px;
+        color: #9073de;
+        text-align:center;
+    }
+    .loading{
+		height:25px;
+		width:25px;
+		border:solid #9073de;
+		border-radius:5px;
+		transform-origin:100% 100%;
+		animation: load 2.4s ease infinite;
+	}
+	@keyframes load{
+		0%{
 
-        }
-        .part1{
-            flex: 0.8;
-            height: 100%;
-            transition: all 2s ease;
-            position: relative;
-            overflow: hidden;
-         }
-        .notification{
-            width: 80%;
-            aspect-ratio: 8;
-            padding: 5px 12px;
-            text-align: center;
-            position: absolute;
-            left: 10%;
-            top: -10%;
-            color: white;
-            border-radius: 5px;
-            transition: all 1s ease;
-        }
-        .part2{
-            flex: 2;
-            height: 100%;
-            background: linear-gradient(90deg,#9073de,white);
-            transition: all 2s ease;
-        }
-        .section{
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            z-index: -3;
-        }
-        .login{
-            width: 80%;
-            max-width: 336px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap:10px;
-        }
-        form{
-            width: 100%;
-            position: relative;
-        }
-        input{
-            border: none;
-            border-radius: 5px;
-            height: 48px;
-            width: 100%;
-            font-size: 22px;
-            background-color: #ebebeb;
-        }
-        input[type='button']{
-            background-color: black;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        input:hover{
-            border: solid thin;
-        }
-        label{
-            padding: 5px;
-            cursor: pointer;
-            color: rebeccapurple;
-            left: 10px;
-            position: absolute;
-            transform: translateY(16px);
-            transition: all 1s ease;
-        }
-        .activelable{
-            transform: translateY(-6px);
-        }
-    .container{
-		text-align:center;
-		max-width:350px;
-        width: 90%;
-		min-height:390px;
-		border-radius:30px;
-		border:solid thin lightgray;
-		padding:10px;
-		background-color:#c9e4ff5e;
-		backdrop-filter:blur(10px);
-        position: absolute;
-        top: 10%;
-        left:50%;
-        transform: translateX(-50%);
-        display: none;
+			transform:rotateX(0deg) rotateY(0deg);
+		}
+		25%{
+			transform:rotateX(0deg) rotateY(180deg);
+		}
+		50%{
+
+			transform:rotateX(180deg) rotateY(180deg);
+		}
+		75%{
+
+			transform:rotateX(180deg) rotateY(0deg);
+		}
+		100%{
+			transform:rotateX(0deg) rotateY(0deg);
+		}
 	}
-	.box{
-		text-align:left;
-		font-size:26px;
-		display:grid;
-	}
-	.box input{
-		height:30px;
-		width:90%;
-		margin:auto;
-		border:solid thin;
-		border-radius:10px;
-	}
-	#passStrength{
-            font-size: 14px;
-            display: none;
-            grid-template-columns: 50% 50%;
-            background-color: rgb(217, 227, 234);
-            min-height: 5px;
-            width: 90%;
-            margin: 5px auto;
-            padding: 5px;
-            border-radius: 5px;
-        }
-        .criteria{
-            display: flex;
-            align-items: center;
-        }
-        .des{
-            color: red;
-	    padding-left:5px;
-        }
-        .criteria input:checked ~ .des{
-            color: green;
-        }
-        #passStrength input{
-            width: 12px;
-        }
-    #google-signin-button{
-            width: 100%;
-            height: 48px;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            border: solid thin;
-            border-radius: 5px;
-            position:relative;
-        }
-    #slog{
-        font-size: 34px;
-        position: absolute;
-        left: 50px;
-        top: 65%;
-        color: white;
+  </style>
+<div class="contributers">
+                <div class="loadingGif">
+                    <div style='width: 50px;height:50px;align-self:center'> 
+                        <div class='loading'></div>
+                    </div>
+                    <div class = "loadingMessage"> LOADING....</div>
+                </div>
+                <div class="new_post_inputes">
+                            <h1>Create new post</h1><hr>
+                        <form>
+                            <input type="file" name="file" id="file">
+                            <h4>caption</h4>
+                            <textarea name="caption" id="caption"></textarea>
+                            <input type="button" id="cancel" value="cancel">
+                            <input type="button" id="submit" value="post">
+                        </form>
+                </div>
+                <div class="manage_story" style="display:none">
+                    <div class="preview">
+                        <img id="preview_img" src="">
+                        <input id="story_caption" type="text" placeholder="Add a caption..">
+                        <button id='share_story'>Share</button>
+                    </div>
+                </div>
+                <div class="view_story" style="display:none">
+                    <button id="btn1" class="btn1" title="previous"><</button>
+                    <button id="btn2" class="btn2" title= "next">></button>
+                    <div class="view_story_div"></div>
+                </div>
+
+</div> 
+
+<style>
+    .user_profile{
+        width: min(380px,100%);
+        height:100%;
+        background-color:var(--primary-background-color);
+        overflow:hidden;
     }
-    #slogan{
-        font-size: 30px;
-        position: absolute;
-        left: 50px;
-        color: white;
-        top: 60%;
+    .profile_pic{
+        height:100px;
+        padding-top:2%;
+        padding-bottom:.3%;
+        padding-left:10%;
+        display:flex;
+        align-items:center;
+        gap:16px;
+        background-color:var(--setting-one-bg);
+        position: relative;
     }
-    #slo{
-        position: absolute;
-        font-family: cursive;
-        left: 50px;
-        bottom: 19%;
+    .profile_pic .img{
+        width:80px;
+        aspect-ratio:1;
+        border-radius:50%;
+        border:solid;
+        overflow:hidden;
+        display:flex;
+        align-items:center;
+        transition:all .5s ease;
     }
-    @media(max-width:760px) {
-            .part2{
-                display: none;
-            }
-            .part1{
-                flex:1;
-            }
-            .container{
-                width:105%;
-                top:27%;
-            }
-        .moved{
-            transform: translateX(0);
+    .img:hover{
+        border-radius:10px;
+    }
+    .img img{
+        width:80px;
+    }
+    .profile_pic .info{
+        display:flex;
+        flex-direction:column;
+    }
+    .info span:nth-child(2){
+        font-size:10px;
+        margin-left:5px;
+        color:#e7e7e7;
+    }
+    .info button{
+        margin:auto;
+        position: absolute;
+        bottom:15px;
+        font-size:8px;
+        cursor:pointer;
+    }
+    .user_profile .loaded_post{
+        height:65%;
+    }
+    .stroies{
+            height:50px;
+    }
+    .story{
+        width: 50px;
+        height:50px;
+    }
+    .user_profile .story span{
+            transform: translateY(0);
+     }
+    .post{
+        width:100%;
+    }
+    @media (max-width:760px) {
+        .profile_pic{
+            height:17%;
+            padding-top:6%;
+            padding-bottom:2%;
         }
-        #slog{
-            font-size: 14px;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 10%;
-            color: #1b194dbf;
+        .stroies{
+            height:40px;
         }
-        #slo,#slogan{
-            display: none;
+        .story{
+            width: 40px;
+            height:40px;
         }
     }
     </style>
-</head>
-<body>
-<div class="wraper">
-    <div class="part2">
-    </div>
-    <div class="part1"> 
-            <div class="notification">notifications</div>
-            <div class="section">
-                <h1 style="margin-bottom: 50px;font-family: cursive;">ODA</h1>
-                <div class="login">
-                    <div id="google-signin-button" style="border: solid thin; border-radius: 5px;width:fit-content; min-width:219px"></div>
-                    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="odaSocialNetworkingbot" data-size="large" data-radius="5" data-userpic="false" data-onauth="onTelegramAuth(user)" data-request-access="write">
-                    </script>
-                    <div style="text-align: center;"><br>or</div>
-                    <form id="log_in">
-                        <label for="email" id="email_lable">Email</label><br>
-                        <input type="email" name="email" id="email" required ><br>
-                        <label for="password"  id="password_lable">Password</label><br>
-                        <input type="password" name="password" id="password" required><br><br>
-                        <input type="button" value="Log in" onclick="submitData(1)">
-                    </form>
-                </div>
-            </div>
-            <div style="display: none;"><form id="external"><input id="userid" name='userid'><input id="check_btn" type="submit"></form></div>
-            <div class="container">
-			    <h1>Oda</h1>
-			    <p>Rigsteration</p>
-                <form class='box'>
-							Username<br>
-							<input type='text' name='username' id="username" placeholder=" Username" required>
-                            Password<br>
-                            <input type='password' name="password" id="passwordP" placeholder=' Password' required>
-                            Confirm password<br>
-                            <input type='password' name='password2' id="password2" placeholder=' Confirm Password'>
+<div class="contributers">
+        <div class="user_profile" style="position:relative">
+                        <div style="width:30px;height:30px; position:absolute;top:5px;right:5px;z-index:1;cursor:pointer;" id="close">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </div>
+                    <div class="profile_pic">
+                        <a target="_blank"><div class="img"><img></div></a>
+                        <div class="info"> <span>First Name L.</span>   <span>username </span> <button>send request</button></div>
+                    </div>
+                    <div class="stroies"></div>
+                    Posts
+                    <div class="loaded_post prof" style="width:100%">
+                    </div>
+        </div>
+         <div class="view_story" style="display:none;backdrop-filter:blur(10px);">
+                    <button id="btn1_" class='btn1' title="previous"><</button>
+                    <button id="btn2_" class='btn2' title= "next">></button>
+                    <div class="view_story_div"></div>
+        </div>
 
-                        <div id="passStrength">
-                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Must be at least of 8 characters</div></div> 
-                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Passwords must match </div></div> 
-                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Uppercase Letters</div> </div>                       
-                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Lowercase Letters</div></div>                       
-                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Special characters</div></div>                  
-                           <div class="criteria"><input type="checkbox" disabled> <div class="des"> Contains Numbers</div></div>              
-                        </div><br>
-
-						<input type="Submit" id="btn">
-                        <div style="width: 600%;height: 200%;position: fixed;top:-20%;left:-60%;z-index: -1;"></div>
-                 </form>
-		</div>
-    </div>
-        
-        <h2 id="slogan">Join Oda <br></h2>
-        <h2 id="slog"></h2>
-        <p id="slo">create your own space, connect with others, and share your ideas.</p>
 </div>
-    
-</body>
-<script type="text/javascript">
-    var slog = document.getElementById("slog");
-    setInterval( typeWrite,4000);
-async function typeWrite(){
-        var txt = "Meet tomorrow today!";
-        for (let i = 0; i < txt.length; i++) {
-            setTimeout(() => {
-                slog.innerHTML += txt[i];
-            }, 100 * i);
+<style>
+    .commentContainer{
+            width:68%;
+            height:200px;
+            background-color:rgb(34,45,65,0.4);
+            backdrop-filter:blur(3px);
+            border-radius:6px;
+            left:50%;
+            transform:translateX(-50%);
+            position:absolute;
+            bottom:60px;
+            padding:2px;
+            overflow-Y:scroll;
+            display:none;
+             z-index: 150;
         }
-        slog.innerHTML = "";
-    }
-function onTelegramAuth(user) {
-    var form = new FormData;
-    form.append("type","telegramAuth");
-    form.append("id",user.id);
-    form.append('name',user.first_name+" "+(user.last_name ? user.last_name : ""));
-    form.append("username",user.username);
-    form.append("profile",user.photo_url);
-    form.append("hash",user.hash);
-    var xml = new XMLHttpRequest;
-        xml.onload = function(){
-            if(xml.status==200){
-                if(xml.response == "done"){
-                    location.href = "https://oda.social-networking.me/web/home.html";
-                }
+        .loader{
+            width:fit-content;
+            transform:translateY(96px);
+            font-size:35px;
+            margin:auto;
+        }
+        .cloth{
+            position:absolute;
+            right:2px;
+            top:2px;
+            cursor:pointer;
+        }
+        .comment{
+                width:95%;
+                margin: 3px auto;
+                padding:4px;
+                border:solid thin;
+                border-radius:7px;
+                min-height:30px;
+                display:flex;
+                flex-direction:column;
+            }   
+            .comment div{
+                width:100%;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+            }
+            .comment span{
+                margin:0;
+                padding:2px;
+                width:86%;
+                background-color:rgb(224,229,231,0.75);
+                overflow-wrap:break-word;
+                border-radius:6px;
+            }
+        @media (max-width:760px) {
+            .commentContainer{
+                width:98%;
             }
         }
-    xml.open("POST","web/handle.php",true);
-    xml.send(form);
-  }
-</script>
-<script src="web/assets/scripts/log-in.js"></script>
-<script src="web/assets/scripts/google-sign-in.js"></script>  
-<script src="https://accounts.google.com/gsi/client" async defer></script>
- 
+    </style>
+        <div class='commentContainer'><div class='loader'>Loading..</div> </div>
+</div>
+</main>
+</div>
+<script src="assets/scripts/mainScript.js"></script>
+<script src="assets/scripts/reaction.js"></script>
+<script src="assets/scripts/stories_script.js"></script>
+<script src='assets/scripts/settings.js'></script>
+<script src='assets/scripts/posts.js'></script>
+</body>
 </html>

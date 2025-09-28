@@ -30,6 +30,15 @@ if(isset($_POST['data_type']) && $_POST['data_type']=="save_setting"){
     $username = $_POST['username'];
     $name = $_POST['name'];
     $password = $_POST['password'];
+    if($password==''){ 
+        //if empty then save the old one
+        $query = "SELECT password from users where userid = '$userid' limit 1";
+        $excute = $conn->query($query);
+        $row = $excute->fetch_assoc();
+        $password = $row['password'];
+    }else{
+        $password = password_hash($password, PASSWORD_DEFAULT);
+    }
 
     $result = $conn->query("SELECT username,userid from users");
     if($result->num_rows>0){

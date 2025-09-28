@@ -10,7 +10,7 @@ if(!isset($_POST['data_type']) && $_GET['request_type']=="askAI"){
                     left:50%;
                     transform: translateX(-50%);
                     min-height:120px;
-                    max-height: 380px;
+                    max-height: 85%;
                     max-width:580px;
                     width:100%;
                     border-radius:30px;
@@ -67,7 +67,7 @@ if(!isset($_POST['data_type']) && $_GET['request_type']=="askAI"){
 
 }
 elseif(isset($_POST['data_type']) && $_POST['data_type'] == "ask"){
-$API = "AIzaSyAyBkJGhAXdY_OIXRwDtIoNFgRIpJaxVq4";//key destroyed and replaced
+$API = "AIzaSyAyBkJGhAXdY_OIXRwDtIoNFgRIpJaxVq4";
 $url="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$API";
         $prompt = trim($_POST['prompt']);
         

@@ -12,7 +12,7 @@ if(isset($_POST) && isset($_POST['request']) && $_POST['request']=="admin"){
             if($excute){
                 while($row = $excute->fetch_assoc()){
                     $posts .= "<div class='post' id=".$row['postid'].">
-                            <img src='".$row['source']."'>
+                            <img source='backend/".$row['source']."'>
                             <p>".$row['caption']."</p>
                             <h2>likes ".$row['likes']." | comments ".$row['comments']." | reposts  ".$row['reposts']."</h2>
                         </div>";
@@ -26,7 +26,7 @@ if(isset($_POST) && isset($_POST['request']) && $_POST['request']=="admin"){
             if($excute){
                 while($row = $excute->fetch_assoc()){
                     $stories .= "<div class='story' id=".$row['storyid'].">
-                            <img src='".$row['source']."'>
+                            <img source='backend/".$row['source']."'>
                             <p>".$row['caption']."</p>
                             <h2>likes ".$row['likes']." | seen ".$row['seen']."</h2>
                         </div>";
@@ -50,7 +50,7 @@ if(isset($_POST) && isset($_POST['request']) && $_POST['request']=="admin"){
         $response['friends'] = $friends;
 
         $Profile = $conn->query("SELECT source from users where userid = '$personid' ")->fetch_assoc();
-        $response['profile'] = $Profile['source'];
+        $response['profile'] = 'backend/'.$Profile['source'];
 
             
         echo json_encode($response);

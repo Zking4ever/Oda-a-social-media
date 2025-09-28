@@ -8,7 +8,7 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
     $thoughtList = "<style>
         .thoughts{
             width:99%;
-            height:400px;
+            height:95%;
             margin:auto;
             overflow-Y:overlay;
         }
@@ -17,16 +17,14 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
             min-height:fit-content;
             margin:auto;
             padding:7px;
+            background-color: var(--bg);
             border:solid thin;
             border-radius:7px;
-            border:solid thin #9073de;
+            border:solid thin var(--br-color);
             margin-top:15px;
             animation:appear2 3s ease;
             animation-timeline:view();
             animation-range:0% 40%;
-        }
-        .thoughtBox:hover{
-            background-color:#fff8ff;
         }
             @keyframes appear2 {
                 0%{
@@ -40,14 +38,14 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
                 }
             }
         .thought{
-            height:80%;
             margin:auto;
-            background-color:azure;
+            background-color: var(--bg2);
             padding:5px 10px;
             border-radius:7px;
         }
         span{
-            background-color:gray;
+            background-color: var(--bg3);
+            border:solid thin var(--br-color);
             padding:1px 7px;
             border-radius:6px;
             margin-left:10px;
@@ -57,9 +55,6 @@ if(isset($_GET['request_type']) && $_GET['request_type']=="loadThoughts"){
             background-color:#9073de;
         }
            @media (max-width:760px){
-            .thoughts{
-                height:366px;
-            }
             .thoughtBox{
                     width:87%
                 }
@@ -158,12 +153,11 @@ $new = subtractArray($allThoughts,$seen);
                                                 <span onclick='seeComment(event)'".(!empty($reaction) && $reaction['commented']==1? "class='reacted'" : "")."> Comment ".$thought['comments']." </span> 
                                             </div>
                                     </div>";
-
             }
         }
     }
 
-        $thoughtList .="<center class='thoughtBox' style='margin-top:20px;animation:loaderapear 2s ease;animation-timeline:view();animation-range:0% 40%;height:40px;border:none;' id='thoughtLoader'>
+        $thoughtList .="<center class='thoughtBox' style='margin-top:20px;animation:loaderapear 2s ease;animation-timeline:view();animation-range:0% 40%;height:40px;border:none;' id='thoughtLoader' onpointerenter='scrollThought()'>
                         <div class='loading' style='width:15px;height:15px;margin:5px;'></div>
                 </center> </div>";
 

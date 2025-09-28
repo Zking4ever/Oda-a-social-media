@@ -38,6 +38,7 @@ $profile_data = [];
         $profile_data['fullname'] = $profile['name'];
         $profile_data['username'] = $profile['username'];
         $profile_data['img_src'] = $profile['source'];
+        $profile_data['setedProfile'] = $profile['setedProfile'];
         $profile_data['userid'] = $profile['userid'];
     }
 
@@ -66,7 +67,7 @@ $post = "";
         while($row = $result->fetch_assoc()){
             $post.="<div class='post'>
                                 <div class='sender'>
-                                    <img src='backend/".$profile['source']."'>
+                                    <img src='".($profile['setedProfile']?'backend/'.$profile['source']:$profile['source'])."'>
                                     <div class='detail'>
                                         <h3 style='position:absolute;transform: translateY(-7px);'>".$profile['name']."</h3>
                                         <span style='font-size:12px;margin-left:7px;position:absolute;transform: translateY(10px);'>@".$profile['username']."</span>

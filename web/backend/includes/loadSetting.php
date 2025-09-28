@@ -117,7 +117,7 @@
                     <button style='padding:3px 12px' onclick='saveSettings(event)'>Change</button><br>
                 </div>
                 <div class='two'>
-                    <div class='profile'><a target='_blank' href='backend/$userdata[source]'><img src='backend/$userdata[source]'></a></div><br>
+                    <div class='profile'><a target='_blank' href='".($userdata['setedProfile']? 'backend/'.$userdata['source']: $userdata['source'])."'><img src='".($userdata['setedProfile']? 'backend/'.$userdata['source']: $userdata['source'])."'></a></div><br>
                     <label for='getFile'>Change Profile</label>
                     <input type='file' id='getFile' onchange='change_profile_img(event)' style='display:none;'>
                     <div class='logout' onclick='LogOut()' title='log out'><i class='bi bi-power'></i></div>
@@ -126,6 +126,9 @@
                 </div>
 
             </div>
+
+            
+
         ";
         
     }

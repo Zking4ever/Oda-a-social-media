@@ -7,7 +7,14 @@ session_start();
             $username = $_POST['username'];
             $password = $_POST['password'];
             $password = password_hash($password, PASSWORD_DEFAULT);
-            $profile = "Profiles/user.PNG"; //default user image
+            $gender = $_POST['gender'];
+            //default random user profile
+            $profile;
+            if($gender=='male'){
+                $profile = "https://avatar.iran.liara.run/public/boy?username=".$username; 
+            }elseif($gender=='female'){
+                $profile = "https://avatar.iran.liara.run/public/girl?username=".$username;
+            }
         $stmt =$conn->prepare('INSERT into users (userid,email,username,name,password,source) values(?,?,?,?,?,?)');
         $stmt->bind_param('ssssss',$userData->sub,$userData->email,$username,$userData->name,$password,$profile);
         $stmt->execute();
@@ -39,7 +46,7 @@ session_start();
             elseif($excute){
                 $username = $_POST['username'];
                 $name = $_POST['name'];
-                $profile = "Profiles/user.PNG"; //default user image
+                $profile = "https://avatar.iran.liara.run/username?username=".$name."&length=2"; //default user image
                 $stmt = $conn->prepare("INSERT into users(userid,name,username,source) values(?,?,?,?)");
                 $stmt->bind_param("ssss",$userid,$name,$username,$profile);
                 $stmt->execute();

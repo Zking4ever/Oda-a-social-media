@@ -1,5 +1,6 @@
 var payload;
 var container = document.getElementsByClassName('container')[0];
+var gender = document.getElementsByClassName('gender');
 
 var password = document.getElementById("passwordP");
 var password2 = document.getElementById("password2");
@@ -158,6 +159,7 @@ btn.onclick = function(e){
         handleResponse("unexpected google response","error");
         return;
     }
+    let genderValue = (gender[0].checked? 'male' : (gender[1].checked? 'female' : ''));
     var form = new FormData;
     var xml = new XMLHttpRequest;
         xml.onload = function(){
@@ -174,6 +176,7 @@ btn.onclick = function(e){
         form.append("type", "sign_up");
         form.append("username", usernameInput.value);
         form.append("password", password.value);
+        form.append("gender",genderValue);
         xml.open("POST","web/handle.php",true);
         xml.send(form);
 }

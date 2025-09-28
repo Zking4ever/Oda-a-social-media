@@ -196,7 +196,7 @@
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             left: 50%;
             transform: translateX(-50%);
-            top: 17%;
+            top: 10%;
             color: #1b194dbf;
         }
         #slo,#slogan{
@@ -234,6 +234,10 @@
                 <form class='box'>
 							Username<br>
 							<input type='text' name='username' id="username" placeholder=" Username" required>
+                            Gender <div style="display:flex;font-size:14px;width:50%;align-items:center">
+                                        <input style="width:40px;margin-left:15px;" class="gender" type='radio' name="gender" value="Male">Male
+                                        <input style="width:40px;margin-left:15px;" class="gender" type='radio' name="gender" value="Female">Female 
+                                </div>
                             Password<br>
                             <input type='password' name="password" id="passwordP" placeholder=' Password' required>
                             Confirm password<br>
@@ -284,7 +288,7 @@ function onTelegramAuth(user) {
         xml.onload = function(){
             if(xml.status==200){
                 if(xml.response == "done"){
-                    location.href = "https://oda.social-networking.me/web/home.html";
+                    location.href = "https://oda.social-networking.me/web/home.html?i";
                 }
             }
         }
@@ -292,8 +296,8 @@ function onTelegramAuth(user) {
     xml.send(form);
   }
 </script>
-<script src="web/assets/scripts/log-in.js"></script>
-<script src="web/assets/scripts/google-sign-in.js"></script>  
+<script src="web/assets/scripts/log_in.js"></script>
+<script src="web/assets/scripts/google-sign.js"></script>  
 <script src="https://accounts.google.com/gsi/client" async defer></script>
  
 </html>
